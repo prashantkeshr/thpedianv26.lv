@@ -1,0 +1,62 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DeviceCard from '../../../components/cards/DeviceCard';
+import { getAllDevices, getAllCategories } from '../../../services/deviceService';
+
+const BASE = '/thpedianv26.lv';
+const devices = getAllDevices();
+const categories = getAllCategories();
+
+const categoryLabel: Record<string, string> = {
+  smartphone: 'स्मार्टफोन', laptop: 'लैपटॉप', desktop: 'डेस्कटॉप',
+  tablet: 'टैबलेट', monitor: 'मॉनिटर', tv: 'टीवी',
+  gpu: 'GPU', router: 'राउटर', storage: 'स्टोरेज', other: 'अन्य',
+};
+---
+
+<BaseLayout
+  title="डिवाइस विश्वकोश — Techpedia"
+  description="Techpedia डेटाबेस में सभी डिवाइस ब्राउज़ करें। स्मार्टफोन, लैपटॉप, टैबलेट और GPU के लिए विस्तृत विशिष्टताएँ।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span class="text-slate-600">/</span>
+      <span class="text-slate-200">डिवाइस</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/devices/`} class="hover:text-slate-300 transition-colors">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">डिवाइस विश्वकोश</h1>
+      <p class="text-slate-400">{devices.length} डिवाइस — सत्यापित तकनीकी विशिष्टताओं के साथ</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <a href={`${BASE}/hi/devices/`} class="tp-btn-secondary text-sm px-3 py-1.5">
+        सभी ({devices.length})
+      </a>
+      {categories.map(cat => (
+        <a href={`${BASE}/hi/devices/?category=${cat}`} class="tp-btn-ghost text-sm px-3 py-1.5">
+          {categoryLabel[cat] ?? cat} ({devices.filter(d => d.category === cat).length})
+        </a>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {devices.map(device => (
+        <DeviceCard device={device} lang="hi" client:visible />
+      ))}
+    </div>
+
+    {devices.length === 0 && (
+      <div class="text-center py-20 text-slate-400">
+        <div class="text-5xl mb-4">📭</div>
+        <p class="text-lg font-medium">कोई डिवाइस नहीं मिला</p>
+        <p class="text-sm mt-1">और डिवाइस जल्द जोड़े जाएंगे।</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

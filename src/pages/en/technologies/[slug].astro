@@ -1,0 +1,343 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const BASE = '/thpedianv26.lv';
+
+type TechSlug = 'usb-standards' | 'wifi-generations' | 'display-technologies' | 'semiconductor-nodes' | 'ram-technologies' | 'bluetooth-standards';
+
+const technologies: Record<TechSlug, {
+  title: string;
+  subtitle: string;
+  icon: string;
+  category: string;
+  intro: string;
+  sections: { heading: string; content: string; table?: { headers: string[]; rows: string[][] } }[];
+  tags: string[];
+}> = {
+  'usb-standards': {
+    title: 'USB Standards',
+    subtitle: 'From 1.5 Mbps to 120 Gbps',
+    icon: '🔌',
+    category: 'Interface',
+    intro: 'Universal Serial Bus (USB) is the dominant wired interface for data transfer, power delivery and device connectivity. Since 1996 it has evolved from 1.5 Mbps to 120 Gbps (USB4 v2.0), while also becoming the universal charging standard through USB Power Delivery (USB-PD).',
+    sections: [
+      {
+        heading: 'USB Generations at a Glance',
+        content: 'Each USB generation roughly doubled the theoretical bandwidth of its predecessor. USB 3.x introduced multiple naming revisions, which caused significant branding confusion resolved partly by USB4.',
+        table: {
+          headers: ['Standard', 'Marketing Name', 'Speed', 'Connector', 'Year'],
+          rows: [
+            ['USB 1.0', 'USB Low Speed / Full Speed', '1.5 Mbps / 12 Mbps', 'USB-A / USB-B', '1996'],
+            ['USB 2.0', 'Hi-Speed USB', '480 Mbps', 'USB-A, USB-B, Micro-USB', '2000'],
+            ['USB 3.0', 'USB 3.2 Gen 1', '5 Gbps', 'USB-A, USB-B, USB-C', '2008'],
+            ['USB 3.1', 'USB 3.2 Gen 2', '10 Gbps', 'USB-A, USB-C', '2013'],
+            ['USB 3.2', 'USB 3.2 Gen 2×2', '20 Gbps', 'USB-C only', '2017'],
+            ['USB4 Gen 2×2', 'USB4 20', '20 Gbps', 'USB-C only', '2019'],
+            ['USB4 Gen 3×2', 'USB4 40', '40 Gbps', 'USB-C only', '2019'],
+            ['USB4 v2.0', 'USB4 80 / 120 Gbps', '80 Gbps (sym) / 120 Gbps (asym)', 'USB-C only', '2022'],
+          ]
+        }
+      },
+      {
+        heading: 'USB Power Delivery (USB-PD)',
+        content: 'USB-PD (originally released in 2012, revised 3.1 in 2021) allows up to 240 W over a USB-C cable. At its core, PD uses a 300 kHz BMC-encoded negotiation protocol over the CC pin to agree on voltage (5/9/12/15/20 V in PD 3.0, up to 48 V in PD 3.1 EPR mode) and current. Proprietary fast-charge protocols such as Qualcomm Quick Charge, Apple Fast Charge and Xiaomi HyperCharge use their own signalling and are incompatible with standard USB-PD chargers at their peak power.'
+      },
+      {
+        heading: 'USB4 and Thunderbolt',
+        content: 'USB4 is based on the Thunderbolt 3 specification which Intel donated to the USB-IF. USB4 Gen 3×2 (40 Gbps) is electrically equivalent to Thunderbolt 3/4. Thunderbolt 5 (2023) extends the standard to 120 Gbps asymmetric mode and mandatory 240 W USB-PD. All Thunderbolt 4+ cables and ports are compatible with USB4, but not all USB4 ports support Thunderbolt.'
+      },
+      {
+        heading: 'Connector Types',
+        content: 'USB-A: the original rectangular host-side connector. USB-B: the square device-side connector for printers. Mini-USB: a smaller version for early mobile devices. Micro-USB: superseded Mini-USB and dominated Android phones 2010–2019. USB-C: a reversible, oval connector introduced in 2014 that is now mandated by EU regulation for portable electronics sold in the EU from December 2024.'
+      }
+    ],
+    tags: ['usb', 'usb-c', 'thunderbolt', 'usb-pd', 'interface', 'connectivity']
+  },
+
+  'wifi-generations': {
+    title: 'Wi-Fi Generations',
+    subtitle: '802.11a to Wi-Fi 7 (802.11be)',
+    icon: '📶',
+    category: 'Wireless',
+    intro: 'Wi-Fi is the trade name for IEEE 802.11 wireless LAN standards. Since its consumer launch in 1999 (Wi-Fi 1 / 802.11b), it has grown from 11 Mbps on a single 2.4 GHz channel to 46 Gbps theoretical on seven 320 MHz channels in Wi-Fi 7. Each generation adds bandwidth, improved spectrum use, better congestion handling and new features such as OFDMA, MU-MIMO and Multi-Link Operation.',
+    sections: [
+      {
+        heading: 'Wi-Fi Generation Comparison',
+        content: 'Practical throughput is typically 50–60% of theoretical PHY rate due to protocol overhead, retransmissions and channel contention.',
+        table: {
+          headers: ['Generation', 'IEEE Std', 'Bands', 'Max PHY Rate', 'Key Feature', 'Year'],
+          rows: [
+            ['Wi-Fi 1', '802.11b', '2.4 GHz', '11 Mbps', 'First mass-market Wi-Fi', '1999'],
+            ['Wi-Fi 2', '802.11a', '5 GHz', '54 Mbps', 'Less interference at 5 GHz', '1999'],
+            ['Wi-Fi 3', '802.11g', '2.4 GHz', '54 Mbps', 'Backward compatible with 802.11b', '2003'],
+            ['Wi-Fi 4', '802.11n', '2.4 / 5 GHz', '600 Mbps', 'MIMO, 40 MHz channels', '2009'],
+            ['Wi-Fi 5', '802.11ac', '5 GHz', '3.5 Gbps', 'MU-MIMO (DL), 160 MHz, 256-QAM', '2013'],
+            ['Wi-Fi 6', '802.11ax', '2.4 / 5 GHz', '9.6 Gbps', 'OFDMA, BSS Coloring, TWT', '2019'],
+            ['Wi-Fi 6E', '802.11ax', '2.4 / 5 / 6 GHz', '9.6 Gbps', '6 GHz band (1200 MHz spectrum)', '2020'],
+            ['Wi-Fi 7', '802.11be', '2.4 / 5 / 6 GHz', '46 Gbps', 'MLO, 320 MHz, 4096-QAM, Multi-RU', '2024'],
+          ]
+        }
+      },
+      {
+        heading: 'OFDMA: The Key Efficiency Innovation',
+        content: 'Orthogonal Frequency-Division Multiple Access (introduced in Wi-Fi 6) allows a single router to split a channel into Resource Units (RUs) and serve multiple clients simultaneously — unlike older OFDM where each transmission occupies the full channel. Wi-Fi 7 adds Multi-RU, allowing a client to combine non-contiguous RUs for higher throughput.'
+      },
+      {
+        heading: 'Multi-Link Operation (Wi-Fi 7)',
+        content: 'MLO is Wi-Fi 7\'s most significant new capability. A device can maintain simultaneous connections on 2.4 GHz, 5 GHz and 6 GHz bands at the same time — not just roam between them. The router can dynamically select which links to use per packet, achieving higher aggregate throughput, lower latency and automatic failover if one band is congested.'
+      },
+      {
+        heading: 'The 6 GHz Band',
+        content: 'Wi-Fi 6E and Wi-Fi 7 access the 6 GHz band (5.925–7.125 GHz in the US, country-dependent). This band offers up to 1200 MHz of additional spectrum — seven 160 MHz channels or 14 × 80 MHz channels — with no legacy devices to cause interference, since only Wi-Fi 6E/7-capable devices can use it. Penetration through walls is weaker than 5 GHz.'
+      }
+    ],
+    tags: ['wifi', '802.11', 'wireless', 'ofdma', 'mu-mimo', 'wi-fi-7', 'mlo']
+  },
+
+  'display-technologies': {
+    title: 'Display Technologies',
+    subtitle: 'LCD, OLED, Mini-LED, Micro-LED and beyond',
+    icon: '🖥️',
+    category: 'Display',
+    intro: 'Display technology determines image quality, power consumption, response time and form factor. The two dominant technologies today are LCD-based (IPS, VA, TN, Mini-LED) and OLED-based (AMOLED, LTPO, QD-OLED) panels. MicroLED is an emerging premium technology that promises the best of both worlds.',
+    sections: [
+      {
+        heading: 'Technology Comparison',
+        content: 'No single technology excels in every metric. The choice depends on the use case: gaming (high refresh + response time), color-critical work (accuracy + brightness), or battery life (efficiency).',
+        table: {
+          headers: ['Technology', 'Black Level', 'Peak Brightness', 'Refresh Rate', 'Response Time', 'Main Use'],
+          rows: [
+            ['TN LCD', 'High (backlight bleed)', '400–500 nits', 'Up to 360 Hz', '1 ms (GtG)', 'Budget/esports gaming'],
+            ['IPS LCD', 'High (backlight bleed)', '600–1200 nits', 'Up to 240 Hz', '4–8 ms (GtG)', 'Accurate color work'],
+            ['VA LCD', 'Medium (decent contrast)', '600–800 nits', 'Up to 200 Hz', '8–15 ms (GtG)', 'General consumer / TV'],
+            ['Mini-LED LCD', 'Low (local dimming)', '1000–4000 nits HDR', 'Up to 165 Hz', '4–8 ms', 'HDR monitors and TVs'],
+            ['OLED', 'True black (pixels off)', '400–800 nits (SDR)', 'Up to 165 Hz', '0.1–0.2 ms', 'Premium phones and TVs'],
+            ['AMOLED / LTPO', 'True black', '1000–4500 nits', '1–144 Hz (adaptive)', '0.1 ms', 'Smartphones, smartwatches'],
+            ['QD-OLED', 'True black', '1000–2000 nits', 'Up to 165 Hz', '0.1 ms', 'Premium monitors and TVs'],
+            ['MicroLED', 'True black (pixels off)', '1000–10000+ nits', 'Flexible', '<0.1 ms', 'Ultra-premium, not yet mainstream'],
+          ]
+        }
+      },
+      {
+        heading: 'OLED Burn-in and Mitigation',
+        content: 'OLED pixels degrade over time and can suffer permanent burn-in from static content (UI elements, navigation bars). Modern OLED displays combat this with pixel shifting (subtle movement of static UI elements), brightness limits on static regions, screen savers, always-on display dimming, and subpixel-level dimming. Modern OLEDs are significantly more resistant to burn-in than first-generation panels; typical smartphone OLED can last 5–8 years of normal use without visible burn-in.'
+      },
+      {
+        heading: 'LTPO Adaptive Refresh Rate',
+        content: 'Low-Temperature Polycrystalline Oxide (LTPO) is a backplane technology that enables true variable refresh rate from 1 Hz to 120+ Hz. When displaying a still image, the refresh rate drops to 1–10 Hz, dramatically reducing power consumption. The display raises back to 120 Hz instantly when motion is detected. LTPO2 (2021) improved transition speed, and LTPO4 (2023, Snapdragon 8 Gen 3 era) allows finer granularity.'
+      },
+      {
+        heading: 'HDR Standards',
+        content: 'HDR10 is the baseline open standard (10-bit, static metadata, up to 1000 nits target). HDR10+ and Dolby Vision add dynamic metadata that adjusts tone-mapping scene-by-scene. DisplayHDR is VESA\'s certification tier system: DisplayHDR 400 (monitors), DisplayHDR 1000, DisplayHDR 1400 (high-end monitors and TVs). True HDR requires both a high-peak-brightness display and a source with HDR content.'
+      }
+    ],
+    tags: ['display', 'oled', 'amoled', 'lcd', 'ips', 'mini-led', 'micro-led', 'ltpo', 'hdr']
+  },
+
+  'semiconductor-nodes': {
+    title: 'Semiconductor Nodes',
+    subtitle: 'From 10nm to 2nm and beyond',
+    icon: '⚙️',
+    category: 'Semiconductor',
+    intro: 'A semiconductor "node" or "process" describes the manufacturing technology used to fabricate a chip. Node names (10nm, 7nm, 3nm) no longer reflect actual transistor gate lengths — they are marketing labels. What matters for real-world performance is transistor density (MTr/mm²), gate-all-around vs FinFET architecture, and power efficiency gains per generation.',
+    sections: [
+      {
+        heading: 'Key Foundry Nodes Comparison',
+        content: 'Transistor density is the most reliable cross-foundry metric. Intel\'s node naming convention historically lagged TSMC/Samsung by ~2 generations, then caught up with Intel 4.',
+        table: {
+          headers: ['Foundry', 'Node Name', 'Approx. Density', 'Architecture', 'Year (HVM)', 'Key Chips'],
+          rows: [
+            ['TSMC', 'N7 (7nm)', '91 MTr/mm²', 'FinFET', '2018', 'Ryzen 3000, A12 Bionic'],
+            ['TSMC', 'N5 (5nm)', '171 MTr/mm²', 'FinFET', '2020', 'A14, M1, Kirin 9000'],
+            ['TSMC', 'N4P (4nm enhanced)', '188 MTr/mm²', 'FinFET', '2022', 'A16, Snapdragon 8 Gen 2'],
+            ['TSMC', 'N3B (3nm)', '292 MTr/mm²', 'FinFET', '2022', 'A17 Pro, M3'],
+            ['TSMC', 'N3E (3nm enhanced)', '283 MTr/mm²', 'FinFET', '2023', 'M3 Pro, A18 Pro'],
+            ['TSMC', 'N2 (2nm)', '~380+ MTr/mm²', 'GAA (MBCFET)', '2025', 'A19 (expected)'],
+            ['Samsung', '4nm (SF4)', '~140 MTr/mm²', 'FinFET', '2021', 'Snapdragon 8 Gen 1, Exynos 2200'],
+            ['Samsung', '3nm (SF3)', 'Classified', 'GAA (MBCFET)', '2022', 'Exynos 2500'],
+            ['Intel', 'Intel 4', '~150 MTr/mm²', 'FinFET (High-NA EUV)', '2023', 'Core Ultra 100 (Meteor Lake)'],
+            ['Intel', 'Intel 3', '~200 MTr/mm²', 'FinFET enhanced', '2024', 'Server chips'],
+            ['Intel', 'Intel 20A / 18A', '~300+ MTr/mm²', 'GAA (RibbonFET)', '2025', 'Panther Lake'],
+          ]
+        }
+      },
+      {
+        heading: 'Why Node Names Are Misleading',
+        content: 'In 2020, analysts and engineers began referring to nodes by density rather than name because Intel\'s "10nm" (released 2019) had similar density to TSMC\'s "7nm". The node name originated as the half-pitch of the first-metal layer in the DRAM era. As feature sizes shrank below 10nm, physical gate lengths no longer tracked the node name — it became a competitive marketing label. TSMC\'s "3nm" has a ~16nm physical gate length. Despite this, the marketing names persist because they signal generational positioning and manufacturing recency.'
+      },
+      {
+        heading: 'Gate-All-Around (GAA) Transition',
+        content: 'FinFET transistors (the dominant design from 22nm onward) form a fin-shaped channel with the gate on three sides. Beyond ~3nm, electrostatic control degrades. GAA transistors (also called Nanosheet FETs, MBCFET, or RibbonFET by different vendors) wrap the gate on all four sides of a horizontal nanosheet, improving electrostatic control at extreme dimensions. Samsung is first to GAA in mass production (3nm, 2022). TSMC transitions with N2 (2025). Intel\'s RibbonFET (Intel 20A/18A) is sampling in 2025.'
+      },
+      {
+        heading: 'EUV and High-NA EUV Lithography',
+        content: 'Extreme Ultraviolet lithography (EUV, 13.5 nm wavelength) replaced deep-UV (193 nm ArF) for critical layers from TSMC 7nm onward. EUV\'s shorter wavelength enables single-exposure patterning of features that required multi-patterning with 193i, reducing cost and defects. High-NA EUV (numerical aperture 0.55 vs 0.33) is ASML\'s next system (EXE:5000, EXE:5200), enabling features below ~8nm half-pitch. Intel is the first customer (Intel 14A node).'
+      }
+    ],
+    tags: ['semiconductor', 'tsmc', 'samsung', 'intel', '3nm', 'gaafet', 'finfet', 'euv', 'transistor']
+  },
+
+  'ram-technologies': {
+    title: 'RAM Technologies',
+    subtitle: 'DDR4, DDR5, LPDDR5X, GDDR6X and HBM3',
+    icon: '💾',
+    category: 'Memory',
+    intro: 'RAM (Random Access Memory) is the working memory of a computer. The dominant interfaces are DDR (desktop/laptop system memory), LPDDR (mobile/low-power), GDDR (graphics cards) and HBM (high-bandwidth memory for AI and professional GPUs). Each generation doubles bandwidth over its predecessor through higher bus clock, wider prefetch, or stacked-die architecture.',
+    sections: [
+      {
+        heading: 'DDR Generation Comparison',
+        content: 'All DDR standards are double data rate — data is transferred on both the rising and falling edges of the clock signal. DDR5 added per-channel ECC, on-die voltage regulator, and dual 32-bit sub-channels (vs one 64-bit channel in DDR4).',
+        table: {
+          headers: ['Standard', 'Voltage', 'Min Speed', 'Max Speed', 'Prefetch', 'Year'],
+          rows: [
+            ['DDR3', '1.5V (1.35V LP)', '800 MT/s', '2133 MT/s', '8n', '2007'],
+            ['DDR4', '1.2V (1.1V LP)', '1600 MT/s', '3200 MT/s+', '8n', '2014'],
+            ['DDR5', '1.1V', '3200 MT/s', '8800 MT/s+ (OC)', '16n', '2020'],
+            ['LPDDR4', '1.1V', '3200 Mbps', '4267 Mbps', '8n', '2014'],
+            ['LPDDR5', '1.05V', '5500 Mbps', '6400 Mbps', '16n', '2019'],
+            ['LPDDR5X', '1.05V', '6400 Mbps', '8533 Mbps', '16n', '2021'],
+            ['GDDR6', '1.35V', '12 Gbps/pin', '21 Gbps/pin', '16n', '2018'],
+            ['GDDR6X', '1.35V', '19 Gbps/pin', '24 Gbps/pin', 'PAM4 signaling', '2020'],
+            ['HBM2E', 'Various', '3.6 Gbps/pin', '460 GB/s (4-Hi)', '8n (1024-bit bus)', '2019'],
+            ['HBM3', 'Various', '6.4 Gbps/pin', '819 GB/s (8-Hi)', 'On-die ECC', '2022'],
+          ]
+        }
+      },
+      {
+        heading: 'DDR5 vs DDR4: What Changed',
+        content: 'DDR5 offers roughly 2× bandwidth over DDR4 at equivalent clock speeds because of the dual 32-bit sub-channel architecture. Each sub-channel operates independently, providing better burst efficiency. DDR5 also moves the voltage regulator on-die (from the motherboard) for better voltage stability and tighter timing tolerances. On-die ECC corrects single-bit errors within each burst — this is not the same as server ECC (which corrects errors across the full 64-bit bus). DDR5 launched at higher latency (CL40+) than DDR4 (CL14–CL16), but high-performance DDR5-6000 kits now match DDR4-3600 latency.'
+      },
+      {
+        heading: 'Unified Memory Architecture',
+        content: 'Apple Silicon (M1 and later), Snapdragon X Elite, and AMD Strix Halo use a unified memory architecture (UMA) where CPU, GPU and NPU share the same physical LPDDR5X pool. This eliminates the latency and bandwidth overhead of copying data between CPU and discrete GPU memory, which is a major performance advantage for memory-bandwidth-limited workloads like large language model inference and video editing. The tradeoff is that the GPU cannot access more memory than the total installed pool, unlike a discrete GPU with dedicated VRAM.'
+      }
+    ],
+    tags: ['ddr5', 'ddr4', 'lpddr5', 'gddr6', 'hbm', 'memory', 'ram', 'unified-memory']
+  },
+
+  'bluetooth-standards': {
+    title: 'Bluetooth Standards',
+    subtitle: 'Classic, BLE, 5.x and Bluetooth 6.0',
+    icon: '📡',
+    category: 'Wireless',
+    intro: 'Bluetooth is a short-range wireless standard for data, audio and control. It operates in the 2.4 GHz ISM band. The two main modes are Bluetooth Classic (BR/EDR — Basic Rate / Enhanced Data Rate) for high-bandwidth audio and legacy devices, and Bluetooth Low Energy (BLE, introduced in 4.0) for IoT, beacons, fitness trackers and anything that needs to run on a coin cell battery for years.',
+    sections: [
+      {
+        heading: 'Bluetooth Version Comparison',
+        content: 'Bluetooth 5.0+ focuses primarily on BLE improvements. The "Classic" profile has been unchanged since Bluetooth 3.0 and is essentially carried along for backward compatibility.',
+        table: {
+          headers: ['Version', 'Year', 'BLE Range', 'BLE Throughput', 'Key Addition'],
+          rows: [
+            ['Bluetooth 1.2', '2003', 'N/A (no BLE)', '1 Mbps Classic', 'AFH (Adaptive Frequency Hopping)'],
+            ['Bluetooth 2.1 + EDR', '2007', 'N/A', '3 Mbps Classic', 'Secure Simple Pairing'],
+            ['Bluetooth 4.0', '2010', '50–150 m (LE)', '0.27 Mbps BLE', 'BLE introduced'],
+            ['Bluetooth 4.2', '2014', '50–150 m', '0.27 Mbps BLE', 'IPv6/6LoWPAN support'],
+            ['Bluetooth 5.0', '2016', '300 m (LE Long Range)', '2 Mbps BLE', '4× range, 2× speed, 8× ad capacity'],
+            ['Bluetooth 5.1', '2019', '300 m', '2 Mbps BLE', 'Direction finding (AoA/AoD)'],
+            ['Bluetooth 5.2', '2020', '300 m', '2 Mbps BLE', 'LE Audio, Auracast, LC3 codec'],
+            ['Bluetooth 5.3', '2021', '300 m', '2 Mbps BLE', 'Enhanced Connection Subrating (power saving)'],
+            ['Bluetooth 5.4', '2023', '300 m', '2 Mbps BLE', 'PAwR (Periodic Advertising with Responses)'],
+            ['Bluetooth 6.0', '2024', '300 m+', '2 Mbps BLE', 'Channel Sounding (sub-metre ranging), Decision-Based Advertising'],
+          ]
+        }
+      },
+      {
+        heading: 'LE Audio and Auracast',
+        content: 'Bluetooth LE Audio (standardised in Bluetooth 5.2) replaces the Classic audio (A2DP, SCO) profiles with a new LC3 codec and new profiles. LC3 (Low Complexity Communication Codec) achieves similar audio quality to SBC at half the bitrate, extending wireless earbud battery life. Auracast is the broadcast audio feature built on LE Audio that allows one transmitter (a TV, PA system, cinema screen) to broadcast to unlimited receivers simultaneously — enabling hearing loop replacement, multi-language audio in airports, and silent disco.'
+      },
+      {
+        heading: 'Bluetooth Channel Sounding (Bluetooth 6.0)',
+        content: 'Channel Sounding uses Phase-Based Ranging (PBR) and Round-Trip Time (RTT) measurements across multiple channels to estimate distance between two Bluetooth devices with sub-metre accuracy. This enables use cases like digital car keys (precise enough to know if you\'re inside or outside the car), indoor positioning without deploying Wi-Fi or UWB infrastructure, and anti-theft distance alerts. Apple AirTags use UWB for precision finding; Channel Sounding achieves comparable accuracy in Bluetooth 6.0.'
+      },
+      {
+        heading: 'Audio Codecs: SBC, AAC, aptX, LDAC, LC3',
+        content: 'SBC (Sub-Band Coding) is the mandatory Bluetooth A2DP codec — universally supported, up to 328 kbps. AAC is mandatory on Apple devices (192 kbps). aptX (Qualcomm) offers 352 kbps CD-quality; aptX HD reaches 576 kbps at 24-bit/48 kHz. aptX Adaptive is variable-bitrate (280–860 kbps) with low-latency mode for gaming. LDAC (Sony) achieves 990 kbps at 24-bit/96 kHz — the highest bitrate among Classic BT codecs. LC3 (LE Audio) achieves better perceptual quality than SBC at half the bitrate (160 kbps).'
+      }
+    ],
+    tags: ['bluetooth', 'ble', 'le-audio', 'auracast', 'channel-sounding', 'bt5', 'bluetooth6', 'codec']
+  }
+};
+
+export async function getStaticPaths() {
+  const slugs = ['usb-standards', 'wifi-generations', 'display-technologies', 'semiconductor-nodes', 'ram-technologies', 'bluetooth-standards'];
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+const tech = technologies[slug as TechSlug];
+if (!tech) return Astro.redirect(`${BASE}/en/technologies/`);
+---
+
+<BaseLayout
+  title={`${tech.title} — Technology Deep Dive — Techpedia`}
+  description={tech.intro.slice(0, 160)}
+  lang="en"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <a href={`${BASE}/en/technologies/`} class="hover:text-slate-200">Technologies</a>
+      <span>/</span>
+      <span class="text-slate-200">{tech.title}</span>
+    </nav>
+
+    <!-- Hero -->
+    <div class="mb-10">
+      <div class="flex items-center gap-4 mb-4">
+        <div class="w-14 h-14 rounded-xl bg-navy-700 flex items-center justify-center text-3xl">{tech.icon}</div>
+        <div>
+          <span class="tp-badge-cyan text-xs mb-1 inline-block">{tech.category}</span>
+          <h1 class="text-3xl font-bold text-slate-100">{tech.title}</h1>
+          <p class="text-slate-400 text-sm">{tech.subtitle}</p>
+        </div>
+      </div>
+      <p class="text-slate-300 leading-relaxed">{tech.intro}</p>
+    </div>
+
+    <!-- Sections -->
+    {tech.sections.map(section => (
+      <div class="mb-10">
+        <h2 class="text-xl font-bold text-slate-100 mb-4 pb-2 border-b border-tp-border">{section.heading}</h2>
+        <p class="text-slate-400 leading-relaxed mb-4">{section.content}</p>
+
+        {section.table && (
+          <div class="overflow-x-auto rounded-xl border border-tp-border mt-4">
+            <table class="w-full text-sm">
+              <thead>
+                <tr class="bg-navy-800/60">
+                  {section.table.headers.map(h => (
+                    <th class="text-left px-4 py-3 text-xs font-semibold text-slate-300 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {section.table.rows.map((row, i) => (
+                  <tr class={i % 2 === 0 ? 'bg-navy-800/20' : 'bg-navy-800/5'}>
+                    {row.map((cell, j) => (
+                      <td class={`px-4 py-3 ${j === 0 ? 'font-semibold text-slate-200 font-mono text-xs' : 'text-slate-400'} whitespace-nowrap`}>{cell}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    ))}
+
+    <!-- Tags -->
+    <div class="mt-8 pt-6 border-t border-tp-border">
+      <div class="flex flex-wrap gap-2">
+        {tech.tags.map(t => (
+          <span class="tp-badge text-xs bg-navy-700/60 text-slate-400 border-slate-600/20">{t}</span>
+        ))}
+      </div>
+    </div>
+
+    <!-- Back link -->
+    <div class="mt-8">
+      <a href={`${BASE}/en/technologies/`} class="text-sm text-tp-blue hover:underline">← Back to Technology Explorer</a>
+    </div>
+  </div>
+</BaseLayout>

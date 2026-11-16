@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DeviceCard from '../../../components/cards/DeviceCard';
+import { getAllBrands, getBrandBySlug } from '../../../services/brandService';
+import { getDevicesByBrand } from '../../../services/deviceService';
+
+export async function getStaticPaths() {
+  return getAllBrands().map(b => ({ params: { slug: b.slug } }));
+}
+
+const { slug } = Astro.params;
+const BASE = '/thpedianv26.lv';
+const brand = getBrandBySlug(slug!)!;
+if (!brand) return Astro.redirect(`${BASE}/hi/brands/`);
+const brandDevices = getDevicesByBrand(brand.id);
+---
+
+<BaseLayout
+  title={`${brand.name} — ब्रांड — Techpedia`}
+  description={`${brand.name}: ${brand.description.slice(0, 150)}`}
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200">होम</a>
+      <span>/</span>
+      <a href={`${BASE}/hi/brands/`} class="hover:text-slate-200">ब्रांड</a>
+      <span>/</span>
+      <span class="text-slate-200">{brand.name}</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/brands/${brand.slug}/`} class="hover:text-slate-300">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="flex items-start gap-6 mb-10">
+      <div class="w-16 h-16 rounded-xl bg-navy-700 flex items-center justify-center text-3xl font-bold text-tp-blue shrink-0">
+        {brand.name[0]}
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold text-slate-100 mb-1">{brand.name}</h1>
+        <p class="text-sm text-slate-400">{brand.headquarters} · स्थापना {brand.founded ?? 'अज्ञात'}</p>
+        <p class="text-slate-400 mt-3 max-w-2xl">{brand.description}</p>
+      </div>
+    </div>
+
+    {brandDevices.length > 0 && (
+      <div>
+        <h2 class="text-xl font-bold text-slate-100 mb-6">{brandDevices.length} डिवाइस</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+          {brandDevices.map(d => <DeviceCard device={d} lang="hi" client:visible />)}
+        </div>
+      </div>
+    )}
+
+    {brandDevices.length === 0 && (
+      <div class="text-center py-16 text-slate-400">
+        <div class="text-5xl mb-4">📦</div>
+        <p class="text-lg font-medium">इस ब्रांड के लिए कोई डिवाइस सूचीबद्ध नहीं है।</p>
+        <p class="text-sm mt-1">जल्द जोड़ा जाएगा।</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

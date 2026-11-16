@@ -29,26 +29,21 @@ const technologies = [
       <p class="text-slate-400">Standards, generations, timelines and deep technical explanations</p>
     </div>
 
-    <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 mb-8 text-sm text-amber-300 flex items-center gap-2">
-      <span>🔄</span>
-      <span>Technology detail pages are in active development. The categories below are available now.</span>
-    </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {technologies.map(tech => (
-        <div class="tp-card p-5 flex flex-col gap-3">
+        <a href={`${BASE}/en/technologies/${tech.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-tp-blue/40 transition-colors group">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-lg bg-navy-700 flex items-center justify-center text-xl">{tech.icon}</div>
             <div>
-              <h3 class="font-semibold text-slate-100">{tech.name}</h3>
+              <h3 class="font-semibold text-slate-100 group-hover:text-tp-blue transition-colors">{tech.name}</h3>
               <span class="tp-badge-blue text-xs">{tech.category}</span>
             </div>
           </div>
           <p class="text-sm text-slate-400">{tech.desc}</p>
           <div class="mt-auto">
-            <span class="text-xs text-slate-500 italic">Coming soon</span>
+            <span class="text-xs text-tp-cyan group-hover:underline">Read deep dive →</span>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>

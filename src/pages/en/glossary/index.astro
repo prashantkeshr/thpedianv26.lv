@@ -1,0 +1,101 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const BASE = '/thpedianv26.lv';
+
+const terms = [
+  { letter: 'A', term: 'AMOLED', def: 'Active-Matrix Organic Light-Emitting Diode. A display technology where each pixel produces its own light and the backplane uses an active-matrix TFT to control individual pixels. Delivers true blacks, wide color gamut and high contrast.' },
+  { letter: 'A', term: 'APU', def: 'Accelerated Processing Unit. A processor that integrates both a CPU and a GPU on a single die, sharing memory bandwidth. AMD popularized the term; examples include AMD Ryzen 7 7840U and Intel Core Ultra with Arc graphics.' },
+  { letter: 'A', term: 'ARM', def: 'Advanced RISC Machine. A RISC processor architecture designed by ARM Holdings. Almost all smartphones, tablets and embedded systems use ARM cores due to their power efficiency. Apple Silicon, Snapdragon, Tensor and Dimensity are all ARM-based.' },
+  { letter: 'B', term: 'Bandwidth (Memory)', def: 'The maximum rate at which data can be read from or written to memory, measured in GB/s. Calculated as: (memory clock × bus width × transfers per clock) / 8. RTX 4090\'s GDDR6X delivers 1 TB/s; DDR5-6000 gives ~96 GB/s.' },
+  { letter: 'B', term: 'BLE', def: 'Bluetooth Low Energy (also called Bluetooth Smart). The low-power mode of Bluetooth 4.0+, designed for IoT, fitness trackers, beacons and sensors that run on small batteries for months or years. Operates at 1 Mbps (BT5: up to 2 Mbps with LE 2M PHY).' },
+  { letter: 'C', term: 'CAN Bus', def: 'Controller Area Network. A serial communication protocol developed by Bosch (1986) for microcontrollers to communicate without a host computer. Widely used in automotive (OBD-II), industrial and robotics systems. STM32, Arduino and Raspberry Pi support CAN via transceivers.' },
+  { letter: 'C', term: 'Cache', def: 'Fast SRAM memory embedded on a processor die to hold recently accessed data and instructions, reducing main-memory latency. L1 (fastest, smallest, 32–128 KB), L2 (middle tier, 0.5–4 MB per core), L3 (shared, 8–192 MB). Cache miss forces a slower DRAM access.' },
+  { letter: 'C', term: 'CUDA Core', def: 'NVIDIA\'s name for a stream processor in its GPU architecture. Each CUDA core handles one floating-point or integer operation per clock. RTX 4090 has 16,384 CUDA cores at 2.52 GHz boost. AMD equivalents are called Stream Processors.' },
+  { letter: 'D', term: 'DDR5', def: 'Double Data Rate 5 SDRAM. The fifth generation of DDR DRAM, standardised by JEDEC in 2020. Key improvements over DDR4: dual 32-bit sub-channels (vs single 64-bit), on-die ECC, up to 8800 MT/s (JEDEC), on-die voltage regulator. Base modules start at 3200 MT/s, with enthusiast kits reaching 7200+ MT/s.' },
+  { letter: 'D', term: 'DMA', def: 'Direct Memory Access. A feature that allows a peripheral (GPU, NIC, NVMe SSD) to read from or write to main memory independently of the CPU. DMA controllers are embedded in modern MCUs and SoCs and enable high-throughput I/O without CPU overhead.' },
+  { letter: 'E', term: 'ECC Memory', def: 'Error-Correcting Code Memory. DRAM with extra data bits and logic to detect and correct single-bit errors (SECDED) in real time. Used in servers, workstations and mission-critical systems where data integrity is paramount. Consumer DDR4/5 does not include full bus-level ECC (though DDR5 has on-die ECC for internal errors).' },
+  { letter: 'E', term: 'eSIM', def: 'Embedded SIM. A programmable SIM soldered directly to a device\'s circuit board. It can be provisioned and switched between carriers over-the-air (OTA) without swapping a physical card. Supported by most flagship smartphones since 2019 and Apple Watch since Series 3.' },
+  { letter: 'F', term: 'FinFET', def: 'Fin Field-Effect Transistor. A multi-gate transistor design that wraps the gate around a vertical fin-shaped channel on three sides, providing better electrostatic control at sub-20nm nodes than planar FETs. Used in all major chips from 22nm to current 3nm. Replaced by GAA at ~2nm.' },
+  { letter: 'F', term: 'FPS (Gaming)', def: 'Frames Per Second. The rate at which a GPU renders frames to the display. Human perception of smooth motion generally requires ≥30 FPS (film standard) to ≥60 FPS (gaming) to 120+ FPS (competitive gaming). Higher FPS requires a matching high-refresh-rate display (144 Hz, 165 Hz, 240 Hz, 360 Hz).' },
+  { letter: 'G', term: 'GAA (Gate-All-Around)', def: 'A transistor architecture where the gate electrode surrounds the channel on all four sides using horizontal nanosheets or nanowires. Offers better electrostatic control than FinFET at sub-3nm dimensions. Samsung entered mass production first (3GAE, 2022); TSMC follows with N2 (2025); Intel\'s variant is called RibbonFET.' },
+  { letter: 'G', term: 'GPIO', def: 'General Purpose Input/Output. Configurable digital pins on a microcontroller or SBC that can be set as input or output under software control. Used to interface with LEDs, buttons, sensors, motors and other peripherals. Raspberry Pi has 40 GPIO pins; Arduino Uno has 14 digital + 6 analog.' },
+  { letter: 'G', term: 'GPU', def: 'Graphics Processing Unit. A processor with thousands of small parallel cores optimised for floating-point operations across large datasets. Originally for graphics rendering, now also used for AI/ML training (CUDA), scientific simulation and crypto mining.' },
+  { letter: 'H', term: 'HDR', def: 'High Dynamic Range. A content and display standard that expands the range between the darkest shadows and the brightest highlights. HDR10 (10-bit, static metadata), HDR10+ and Dolby Vision (dynamic metadata) are the main standards. DisplayHDR 1000 and 1400 are VESA\'s monitor certifications.' },
+  { letter: 'H', term: 'HBM', def: 'High Bandwidth Memory. A 3D-stacked DRAM technology where multiple DRAM dies are stacked vertically and connected with Through-Silicon Vias (TSVs), placed adjacent to the GPU die on an interposer. HBM3 (2022) achieves >3 TB/s bandwidth for AI accelerators and professional GPUs.' },
+  { letter: 'I', term: 'ISP', def: 'Image Signal Processor. Dedicated silicon within a smartphone SoC that handles camera sensor data processing: demosaicing (Bayer filter to RGB), noise reduction, HDR tone mapping, autofocus and face detection. Apple\'s ISP drives Photonic Engine; Qualcomm\'s is called Spectra.' },
+  { letter: 'I', term: 'I²C', def: 'Inter-Integrated Circuit (IIC). A synchronous, multi-controller, multi-peripheral serial protocol developed by Philips (1982). Uses two wires: SCL (clock) and SDA (data). Common speeds: 100 kHz (standard), 400 kHz (fast), 3.4 MHz (high-speed). Used for sensors, EEPROMs, displays and RTC chips.' },
+  { letter: 'L', term: 'LC3', def: 'Low Complexity Communication Codec. The mandatory audio codec for Bluetooth LE Audio (Bluetooth 5.2+). Achieves similar or better perceptual quality than SBC at approximately half the bitrate, reducing power consumption and extending wireless earbud battery life. Supports up to 48 kHz sampling, 32-bit depth.' },
+  { letter: 'L', term: 'LPDDR5X', def: 'Low Power Double Data Rate 5X. The highest-speed variant of LPDDR5 mobile DRAM (2021), reaching up to 8533 Mbps per pin. Used in flagship smartphones (Snapdragon 8 Gen 2+, A17 Pro+), premium laptops and Apple Silicon Macs. Provides ~20–30% higher bandwidth than LPDDR5.' },
+  { letter: 'L', term: 'LTPO', def: 'Low Temperature Polycrystalline Oxide. An OLED backplane technology enabling variable refresh rate (1–120+ Hz). The display can drop to 1 Hz for static content, dramatically reducing power use. LTPO2 (Apple A15/S7) improved transition speed; LTPO4 (2023) enables finer granularity.' },
+  { letter: 'M', term: 'MagSafe', def: 'Apple\'s proprietary wireless charging and accessory attachment system (iPhone 12+). Uses a ring of magnets to precisely align a Qi2-compatible charging coil at up to 25 W. Also enables snap-on accessories (wallets, cases, mounts). Qi2 is an open standard based on the same magnetic alignment specification.' },
+  { letter: 'M', term: 'MCU', def: 'Microcontroller Unit. A compact integrated circuit containing a processor core, flash memory, SRAM and programmable I/O peripherals on a single chip. Examples: STM32F103 (ARM Cortex-M3), ATmega328P (Arduino Uno), RP2040 (Raspberry Pi Pico). Distinct from an MPU (Microprocessor Unit) which requires external memory.' },
+  { letter: 'N', term: 'NFC', def: 'Near Field Communication. A short-range (< 4 cm) radio technology operating at 13.56 MHz. Uses ISO/IEC 14443 and 18092 standards. Applications: contactless payments (Apple Pay, Google Pay), transit cards, device pairing (Android Beam), digital keys, and reading NFC tags.' },
+  { letter: 'N', term: 'NPU', def: 'Neural Processing Unit. A dedicated AI accelerator integrated into an SoC alongside the CPU and GPU. Optimised for matrix multiplication, convolution and tensor operations common in ML inference. Apple\'s Neural Engine (38 TOPS on A17 Pro), Qualcomm\'s Hexagon (45 TOPS on 8 Elite) and Google\'s TPU (Edge) are NPUs.' },
+  { letter: 'O', term: 'OFDMA', def: 'Orthogonal Frequency-Division Multiple Access. A multiple-access extension of OFDM (used in LTE and Wi-Fi) that divides a channel\'s subcarriers among multiple users simultaneously. Introduced in Wi-Fi 6 (802.11ax), it increases spectral efficiency in dense environments (offices, stadiums) over older OFDM (one user per channel at a time).' },
+  { letter: 'P', term: 'PCIe', def: 'Peripheral Component Interconnect Express. The dominant high-speed serial expansion bus for GPUs, NVMe SSDs and other add-in cards. Each lane provides ~2 GB/s (PCIe 4.0) or ~4 GB/s (PCIe 5.0) bidirectional bandwidth. x16 (16 lanes, used for GPUs) = up to 64 GB/s in PCIe 5.0.' },
+  { letter: 'P', term: 'ProRes', def: 'Apple\'s family of high-quality, visually lossless video codecs, designed for professional post-production workflows. ProRes 422 and 4444 target editing; ProRes RAW captures sensor raw data with minimal in-camera processing. iPhone 15 Pro and later can record ProRes at 4K 60fps to external storage.' },
+  { letter: 'R', term: 'Ray Tracing', def: 'A rendering technique that traces the path of light rays from the virtual camera through each pixel and simulates their interactions with scene geometry. Produces physically accurate reflections, shadows and global illumination. Modern GPU hardware RT cores (NVIDIA RTX, AMD RDNA2+) accelerate the BVH (Bounding Volume Hierarchy) traversal step.' },
+  { letter: 'S', term: 'SoC', def: 'System on a Chip. An integrated circuit that combines all components of a computer or electronic system onto a single die: CPU, GPU, NPU, memory controller, ISP, modem, DSP and I/O peripherals. Mobile SoCs include Apple A18 Pro, Snapdragon 8 Elite, MediaTek Dimensity 9400 and Samsung Exynos 2500.' },
+  { letter: 'S', term: 'SPI', def: 'Serial Peripheral Interface. A synchronous, full-duplex serial bus protocol using 4 wires: SCLK (clock), MOSI (controller→peripheral), MISO (peripheral→controller), CS (chip select). Faster than I²C (up to tens of MHz) but requires one CS line per device. Common for displays, SD cards, ADCs and Flash memory.' },
+  { letter: 'T', term: 'TDP', def: 'Thermal Design Power. The maximum amount of heat a chip is expected to generate under realistic workloads, used to spec the cooler. Desktop CPUs (Core i9-14900K: 253 W MTP), laptop CPUs (15–28 W U-class), and phone SoCs (5–8 W sustained). TDP ≠ peak power; MTP (Maximum Turbo Power) or PBP/MTP in Intel\'s newer naming is the peak.' },
+  { letter: 'U', term: 'UMA', def: 'Unified Memory Architecture. A design where the CPU and GPU share a single physical memory pool, eliminating separate CPU and GPU DRAM. Used in Apple Silicon, AMD Strix Halo, Snapdragon X Elite and older integrated graphics. Removes copy overhead between CPU and GPU memory, beneficial for AI inference and video editing.' },
+  { letter: 'U', term: 'USB-C', def: 'The reversible USB connector standardised in 2014. USB-C is a connector shape only — it can carry USB 2.0 (480 Mbps) all the way up to USB4 Gen 3×2 (40 Gbps) or Thunderbolt 5 (120 Gbps), plus DisplayPort alt-mode and USB-PD up to 240 W. Speed depends on the host/device controller, not just the connector.' },
+  { letter: 'V', term: 'VRAM', def: 'Video RAM. Dedicated high-bandwidth memory on a discrete GPU, used to store framebuffers, textures, models and intermediate compute data. RTX 4090 has 24 GB GDDR6X; RX 7900 XTX has 24 GB GDDR6. Insufficient VRAM causes texture pop-in or crashes in games and OOM errors in AI inference.' },
+  { letter: 'W', term: 'Wi-Fi 7', def: 'The IEEE 802.11be standard (2024). Key features: Multi-Link Operation (simultaneous connections on 2.4/5/6 GHz), 320 MHz channel width (double Wi-Fi 6E), 4096-QAM, Multi-RU (combining non-contiguous resource units). Theoretical max PHY rate: 46 Gbps. Practical improvement over Wi-Fi 6E is ~2–3× in real dense-environment throughput.' },
+  { letter: 'Z', term: 'Zero-Trust Architecture', def: 'A security model that assumes no user, device or network segment is inherently trusted — even inside a corporate perimeter. Every access request is explicitly verified (identity + device posture + least privilege) before being granted. Popularised by Google\'s BeyondCorp and now mandated for US Federal agencies by CISA.' },
+];
+
+// Group by letter
+const grouped = terms.reduce<Record<string, typeof terms>>((acc, t) => {
+  if (!acc[t.letter]) acc[t.letter] = [];
+  acc[t.letter].push(t);
+  return acc;
+}, {});
+const letters = Object.keys(grouped).sort();
+---
+
+<BaseLayout
+  title="Technology Glossary — Techpedia"
+  description="Comprehensive glossary of technology terms: CPUs, GPUs, displays, wireless standards, semiconductor nodes and electronics."
+  lang="en"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200 transition-colors">Home</a>
+      <span class="text-slate-600">/</span>
+      <span class="text-slate-200">Glossary</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Technology Glossary</h1>
+      <p class="text-slate-400">{terms.length} terms covering processors, displays, wireless, memory and electronics.</p>
+    </div>
+
+    <!-- Letter jump -->
+    <div class="flex flex-wrap gap-1.5 mb-10">
+      {letters.map(l => (
+        <a href={`#letter-${l}`} class="w-8 h-8 flex items-center justify-center rounded-lg text-sm font-mono font-semibold text-slate-400 hover:text-tp-blue hover:bg-navy-800 transition-colors border border-tp-border">
+          {l}
+        </a>
+      ))}
+    </div>
+
+    <!-- Terms -->
+    <div class="space-y-10">
+      {letters.map(letter => (
+        <div id={`letter-${letter}`}>
+          <h2 class="text-2xl font-bold text-tp-blue mb-4 font-mono">{letter}</h2>
+          <div class="space-y-4">
+            {grouped[letter].map(t => (
+              <div class="tp-card p-5">
+                <h3 class="font-bold text-slate-100 mb-1">{t.term}</h3>
+                <p class="text-sm text-slate-400 leading-relaxed">{t.def}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

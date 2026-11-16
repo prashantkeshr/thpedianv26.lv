@@ -138,5 +138,61 @@
     "sources": [{ "provider": "ASUS official", "url": "https://www.asus.com/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
+  },
+  {
+    "id": "brd-000011",
+    "slug": "oneplus",
+    "name": "OnePlus",
+    "aliases": ["OnePlus Technology"],
+    "website": "https://www.oneplus.com",
+    "headquarters": "Shenzhen, China",
+    "description": "OnePlus creates premium Android smartphones known for fast charging technology, clean OxygenOS software and high-refresh-rate displays at competitive prices.",
+    "productCategories": ["smartphone", "tablet", "earbuds", "tv"],
+    "founded": "2013",
+    "sources": [{ "provider": "OnePlus official", "url": "https://www.oneplus.com/", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "brd-000012",
+    "slug": "xiaomi",
+    "name": "Xiaomi",
+    "aliases": ["Xiaomi Corporation", "Xiaomi Inc."],
+    "website": "https://www.mi.com",
+    "headquarters": "Beijing, China",
+    "description": "Xiaomi is a leading consumer electronics company producing smartphones, smart home devices, laptops and wearables. Known for high-spec devices at aggressive pricing globally.",
+    "productCategories": ["smartphone", "laptop", "tablet", "smartwatch", "tv", "earbuds"],
+    "founded": "2010",
+    "sources": [{ "provider": "Xiaomi official", "url": "https://www.mi.com/global/", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "brd-000013",
+    "slug": "hp",
+    "name": "HP",
+    "aliases": ["Hewlett-Packard", "HP Inc."],
+    "website": "https://www.hp.com",
+    "headquarters": "Palo Alto, California, USA",
+    "description": "HP Inc. designs and sells personal computers, printers, monitors and accessories. The Spectre and Envy laptop lines target the premium consumer segment.",
+    "productCategories": ["laptop", "desktop", "monitor", "printer", "workstation"],
+    "founded": "1939",
+    "sources": [{ "provider": "HP official", "url": "https://www.hp.com/us-en/shop/pdp/hp-spectre-x360", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "brd-000014",
+    "slug": "microsoft",
+    "name": "Microsoft",
+    "aliases": ["Microsoft Corporation"],
+    "website": "https://www.microsoft.com",
+    "headquarters": "Redmond, Washington, USA",
+    "description": "Microsoft makes the Surface line of tablets, laptops and 2-in-1 PCs, alongside Windows OS, Xbox gaming consoles and cloud services.",
+    "productCategories": ["laptop", "tablet", "desktop", "gaming"],
+    "founded": "1975",
+    "sources": [{ "provider": "Microsoft official", "url": "https://www.microsoft.com/en-us/surface", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
   }
 ]

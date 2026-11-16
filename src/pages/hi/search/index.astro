@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import SearchBar from '../../../components/search/SearchBar';
+
+const BASE = '/thpedianv26.lv';
+const url = Astro.url;
+const query = url.searchParams.get('q') ?? '';
+---
+
+<BaseLayout
+  title={query ? `"${query}" — खोज परिणाम — Techpedia` : 'खोज — Techpedia'}
+  description="Techpedia पर डिवाइस, घटक और ब्रांड खोजें।"
+  lang="hi"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200">होम</a>
+      <span>/</span>
+      <span class="text-slate-200">खोज</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/search/${query ? '?q=' + encodeURIComponent(query) : ''}`} class="hover:text-slate-300">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="mb-8">
+      <h1 class="text-2xl font-bold text-slate-100 mb-4">तकनीक खोजें</h1>
+      <SearchBar variant="hero" initialQuery={query} lang="hi" client:load />
+    </div>
+
+    {query && (
+      <div id="hi-search-results" class="mt-6">
+        <p class="text-slate-400 text-sm">
+          "<span class="text-slate-200">{query}</span>" के लिए परिणाम लोड हो रहे हैं…
+        </p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

@@ -11,7 +11,7 @@ export const GET: APIRoute = () => {
     partNumber: c.partNumber,
     category: c.category,
     description: c.description,
-    images: c.images.slice(0, 1),
+    images: (c.images ?? []).slice(0, 1),
     specs: c.specs,
     packageType: c.packageType,
   }));

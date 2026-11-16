@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ComparisonEngine from '../../../components/comparison/ComparisonEngine';
+import { getAllDevices, getDevicesByIds } from '../../../services/deviceService';
+
+const BASE = '/thpedianv26.lv';
+const devices = getAllDevices();
+const url = Astro.url;
+const idsParam = url.searchParams.get('ids') ?? '';
+const selectedIds = idsParam ? idsParam.split(',').filter(Boolean) : [];
+const selectedDevices = selectedIds.length >= 2 ? getDevicesByIds(selectedIds) : [];
+---
+
+<BaseLayout
+  title="डिवाइस तुलना — Techpedia"
+  description="डिवाइस और घटकों की तकनीकी विशिष्टताओं की साथ-साथ तुलना करें।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200">होम</a>
+      <span>/</span>
+      <span class="text-slate-200">तुलना</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/compare/`} class="hover:text-slate-300">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">तुलना इंजन</h1>
+      <p class="text-slate-400">एक साथ 5 डिवाइस या घटकों की तुलना करें</p>
+    </div>
+
+    <div class="mb-8 rounded-xl bg-navy-800/40 border border-tp-border p-6">
+      <h2 class="text-sm font-semibold text-slate-300 mb-4">तुलना के लिए डिवाइस चुनें</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-80 overflow-y-auto">
+        {devices.map(d => (
+          <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-navy-700 transition-colors">
+            <input
+              type="checkbox"
+              value={d.id}
+              checked={selectedIds.includes(d.id)}
+              class="w-4 h-4 accent-tp-blue"
+              data-compare-checkbox
+            />
+            <div>
+              <p class="text-sm text-slate-200">{d.name}</p>
+              <p class="text-xs text-slate-500 capitalize">{d.brandName} · {d.category}</p>
+            </div>
+          </label>
+        ))}
+      </div>
+      <div class="mt-4 flex gap-3">
+        <button id="hi-compare-btn" class="tp-btn-primary text-sm">तुलना करें</button>
+        <a href={`${BASE}/hi/compare/`} class="tp-btn-secondary text-sm">साफ़ करें</a>
+      </div>
+    </div>
+
+    {selectedDevices.length >= 2 && (
+      <ComparisonEngine items={selectedDevices} client:load />
+    )}
+
+    {selectedDevices.length < 2 && selectedIds.length > 0 && (
+      <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 text-amber-300 text-sm">
+        तुलना के लिए कम से कम 2 डिवाइस चुनें।
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<script define:vars={{ BASE }}>
+  const btn = document.getElementById('hi-compare-btn');
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const checked = [...document.querySelectorAll('[data-compare-checkbox]:checked')].map(el => el.value);
+      if (checked.length < 2) { alert('कम से कम 2 डिवाइस चुनें'); return; }
+      window.location.href = `${BASE}/hi/compare/?ids=${checked.join(',')}`;
+    });
+  }
+</script>

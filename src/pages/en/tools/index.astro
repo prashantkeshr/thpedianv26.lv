@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TechCalculators from '../../../components/tools/TechCalculators';
+
+const BASE = '/thpedianv26.lv';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebApplication',
+  name: 'Techpedia Tools & Calculators',
+  description: 'Interactive technology calculators: PPI, Ohm\'s Law, Aspect Ratio, Data Storage and Power Consumption.',
+  url: `https://prashantkeshr.github.io/thpedianv26.lv/en/tools/`,
+  applicationCategory: 'UtilitiesApplication',
+};
+---
+
+<BaseLayout
+  title="Tech Tools & Calculators — Techpedia"
+  description="Free interactive technology calculators: PPI (pixels per inch), Ohm's Law, Aspect Ratio, Data Storage unit converter and Power Consumption estimator."
+  lang="en"
+>
+  <slot name="head" slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </slot>
+
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200 transition-colors">Home</a>
+      <span class="text-slate-600">/</span>
+      <span class="text-slate-200">Tools & Calculators</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Tech Tools & Calculators</h1>
+      <p class="text-slate-400">Interactive calculators for display, electronics and power calculations.</p>
+    </div>
+
+    <TechCalculators client:load />
+
+    <!-- Reference cards -->
+    <div class="mt-12 pt-8 border-t border-tp-border">
+      <h2 class="text-xl font-bold text-slate-100 mb-4">Quick Reference</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="tp-card p-4">
+          <h3 class="font-semibold text-slate-200 mb-2">Common Resolutions</h3>
+          <div class="text-xs text-slate-400 space-y-1">
+            <div class="flex justify-between"><span>720p HD</span><span class="font-mono">1280×720</span></div>
+            <div class="flex justify-between"><span>1080p Full HD</span><span class="font-mono">1920×1080</span></div>
+            <div class="flex justify-between"><span>1440p QHD</span><span class="font-mono">2560×1440</span></div>
+            <div class="flex justify-between"><span>4K UHD</span><span class="font-mono">3840×2160</span></div>
+            <div class="flex justify-between"><span>8K FUHD</span><span class="font-mono">7680×4320</span></div>
+          </div>
+        </div>
+        <div class="tp-card p-4">
+          <h3 class="font-semibold text-slate-200 mb-2">Ohm's Law Triangle</h3>
+          <div class="text-xs text-slate-400 space-y-1 font-mono">
+            <div>V = I × R</div>
+            <div>I = V / R</div>
+            <div>R = V / I</div>
+            <div>P = V × I</div>
+            <div>P = I² × R</div>
+            <div>P = V² / R</div>
+          </div>
+        </div>
+        <div class="tp-card p-4">
+          <h3 class="font-semibold text-slate-200 mb-2">SI Prefixes</h3>
+          <div class="text-xs text-slate-400 space-y-1">
+            <div class="flex justify-between"><span>Pico (p)</span><span class="font-mono">10⁻¹²</span></div>
+            <div class="flex justify-between"><span>Nano (n)</span><span class="font-mono">10⁻⁹</span></div>
+            <div class="flex justify-between"><span>Micro (μ)</span><span class="font-mono">10⁻⁶</span></div>
+            <div class="flex justify-between"><span>Milli (m)</span><span class="font-mono">10⁻³</span></div>
+            <div class="flex justify-between"><span>Kilo (k)</span><span class="font-mono">10³</span></div>
+            <div class="flex justify-between"><span>Mega (M)</span><span class="font-mono">10⁶</span></div>
+            <div class="flex justify-between"><span>Giga (G)</span><span class="font-mono">10⁹</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>

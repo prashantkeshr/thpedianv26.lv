@@ -131,12 +131,12 @@ const schema = {
         </div>
 
         <!-- Electrical characteristics -->
-        {Object.keys(comp.electricalChars).length > 0 && (
+        {Object.keys(comp.electricalChars ?? {}).length > 0 && (
           <div class="mb-8">
             <h2 class="text-lg font-semibold text-slate-100 mb-4">Electrical Characteristics</h2>
             <div class="rounded-xl border border-tp-border overflow-hidden">
               <div class="divide-y divide-tp-border/50">
-                {Object.entries(comp.electricalChars).map(([k, v], i) => (
+                {Object.entries(comp.electricalChars ?? {}).map(([k, v], i) => (
                   <div class={`flex items-center px-4 py-2.5 ${i % 2 === 0 ? 'bg-navy-900/30' : 'bg-navy-800/20'}`}>
                     <span class="spec-label">
                       {k.replace(/([A-Z])/g, ' $1').replace(/^\w/, c => c.toUpperCase()).trim()}
@@ -150,12 +150,12 @@ const schema = {
         )}
 
         <!-- Technical specs -->
-        {Object.keys(comp.specs).length > 0 && (
+        {Object.keys(comp.specs ?? {}).length > 0 && (
           <div class="mb-8">
             <h2 class="text-lg font-semibold text-slate-100 mb-4">Technical Specifications</h2>
             <div class="rounded-xl border border-tp-border overflow-hidden">
               <div class="divide-y divide-tp-border/50">
-                {Object.entries(comp.specs).map(([k, v], i) => v !== null && (
+                {Object.entries(comp.specs ?? {}).map(([k, v], i) => v !== null && (
                   <div class={`flex items-start px-4 py-2.5 ${i % 2 === 0 ? 'bg-navy-900/30' : 'bg-navy-800/20'}`}>
                     <span class="spec-label">
                       {k.replace(/([A-Z])/g, ' $1').replace(/^\w/, c => c.toUpperCase()).trim()}

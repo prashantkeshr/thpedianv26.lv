@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ComponentCard from '../../../components/cards/ComponentCard';
+import { getAllComponents } from '../../../services/componentService';
+
+const BASE = '/thpedianv26.lv';
+const components = getAllComponents();
+
+const categoryLabel: Record<string, string> = {
+  cpu: 'प्रोसेसर (CPU)', gpu: 'ग्राफिक्स कार्ड (GPU)',
+  microcontroller: 'माइक्रोकंट्रोलर', resistor: 'रेज़िस्टर',
+  capacitor: 'कैपेसिटर', transistor: 'ट्रांजिस्टर', other: 'अन्य',
+};
+---
+
+<BaseLayout
+  title="इलेक्ट्रॉनिक घटक विश्वकोश — Techpedia"
+  description="CPU, GPU, माइक्रोकंट्रोलर और इलेक्ट्रॉनिक घटकों की पूरी जानकारी — डेटाशीट, पिनआउट और तकनीकी विशिष्टताएँ।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span class="text-slate-600">/</span>
+      <span class="text-slate-200">घटक (Components)</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/components/`} class="hover:text-slate-300 transition-colors">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">घटक विश्वकोश</h1>
+      <p class="text-slate-400">{components.length} घटक — CPU, GPU, MCU और इलेक्ट्रॉनिक पुर्जे</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {components.map(component => (
+        <ComponentCard component={component} lang="hi" client:visible />
+      ))}
+    </div>
+
+    {components.length === 0 && (
+      <div class="text-center py-20 text-slate-400">
+        <div class="text-5xl mb-4">🔌</div>
+        <p class="text-lg font-medium">कोई घटक नहीं मिला</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

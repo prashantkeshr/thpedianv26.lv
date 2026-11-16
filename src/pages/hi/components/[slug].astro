@@ -1,0 +1,94 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllComponents, getComponentBySlug } from '../../../services/componentService';
+
+export async function getStaticPaths() {
+  return getAllComponents().map(c => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const BASE = '/thpedianv26.lv';
+const component = getComponentBySlug(slug!)!;
+if (!component) return Astro.redirect(`${BASE}/hi/components/`);
+
+const categoryLabel: Record<string, string> = {
+  cpu: 'प्रोसेसर (CPU)', gpu: 'ग्राफिक्स (GPU)',
+  microcontroller: 'माइक्रोकंट्रोलर', resistor: 'रेज़िस्टर',
+  capacitor: 'कैपेसिटर', transistor: 'ट्रांजिस्टर', other: 'अन्य',
+};
+---
+
+<BaseLayout
+  title={`${component.name} — विशिष्टताएँ — Techpedia`}
+  description={component.description}
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200">होम</a>
+      <span>/</span>
+      <a href={`${BASE}/hi/components/`} class="hover:text-slate-200">घटक</a>
+      <span>/</span>
+      <span class="text-slate-200">{component.name}</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/components/${component.slug}/`} class="hover:text-slate-300">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="lg:col-span-1">
+        <div class="sticky top-6">
+          <div class="rounded-xl bg-navy-800/40 border border-tp-border p-8 mb-4 flex items-center justify-center min-h-[180px]">
+            <span class="text-6xl">{component.category === 'cpu' ? '⚙️' : component.category === 'gpu' ? '🎮' : '🔌'}</span>
+          </div>
+          <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 space-y-3 text-sm">
+            <div class="flex justify-between">
+              <span class="text-slate-400">श्रेणी</span>
+              <span class="text-slate-200">{categoryLabel[component.category] ?? component.category}</span>
+            </div>
+            <div class="flex justify-between">
+              <span class="text-slate-400">निर्माता</span>
+              <span class="text-slate-200">{component.manufacturerName}</span>
+            </div>
+            {component.partNumber && (
+              <div class="flex justify-between">
+                <span class="text-slate-400">पार्ट नंबर</span>
+                <span class="text-slate-200 font-mono text-xs">{component.partNumber}</span>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2">
+        <div class="mb-2 text-sm text-slate-400">{component.manufacturerName}</div>
+        <h1 class="text-2xl sm:text-3xl font-bold text-slate-100 mb-2">{component.name}</h1>
+        {component.commonNames?.length > 0 && (
+          <p class="text-sm text-slate-400 mb-4">अन्य नाम: {component.commonNames.join(', ')}</p>
+        )}
+        <p class="text-slate-400 mb-6 leading-relaxed">{component.description}</p>
+
+        <div class="mb-8">
+          <h2 class="text-lg font-semibold text-slate-100 mb-4">तकनीकी विशिष्टताएँ</h2>
+          <div class="rounded-xl overflow-hidden border border-tp-border">
+            {Object.entries(component.specs ?? {}).map(([k, v], i) => (
+              <div class={`spec-row ${i % 2 === 0 ? 'bg-navy-800/30' : 'bg-navy-800/10'}`}>
+                <span class="spec-label">{k.replace(/([A-Z])/g, ' $1').replace(/^\w/, c => c.toUpperCase()).trim()}</span>
+                <span class="spec-value">{Array.isArray(v) ? (v as string[]).join(', ') : String(v)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {component.applications && component.applications.length > 0 && (
+          <div class="mb-6">
+            <h2 class="text-lg font-semibold text-slate-100 mb-3">उपयोग</h2>
+            <ul class="list-disc list-inside space-y-1 text-sm text-slate-400">
+              {component.applications.map(app => <li>{app}</li>)}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

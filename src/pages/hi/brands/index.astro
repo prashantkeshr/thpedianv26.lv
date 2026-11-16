@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllBrands } from '../../../services/brandService';
+import { getAllDevices } from '../../../services/deviceService';
+
+const BASE = '/thpedianv26.lv';
+const brands = getAllBrands();
+const devices = getAllDevices();
+
+function getDeviceCountForBrand(brandId: string) {
+  return devices.filter(d => d.brand === brandId).length;
+}
+---
+
+<BaseLayout
+  title="ब्रांड डायरेक्टरी — Techpedia"
+  description="Techpedia पर सभी प्रमुख तकनीकी ब्रांड। Apple, Samsung, Intel, AMD, Google और अन्य की जानकारी।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span class="text-slate-600">/</span>
+      <span class="text-slate-200">ब्रांड</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/brands/`} class="hover:text-slate-300 transition-colors">English ↗</a>
+      </span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">ब्रांड डायरेक्टरी</h1>
+      <p class="text-slate-400">{brands.length} ब्रांड — विश्व की प्रमुख तकनीकी कंपनियाँ</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {brands.map(brand => {
+        const count = getDeviceCountForBrand(brand.id);
+        return (
+          <a href={`${BASE}/hi/brands/${brand.slug}/`} class="tp-card p-5 hover:border-tp-blue/40 transition-colors group">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-10 h-10 rounded-lg bg-navy-700 flex items-center justify-center text-xl font-bold text-tp-blue">
+                {brand.name[0]}
+              </div>
+              <div>
+                <h3 class="font-semibold text-slate-100 group-hover:text-tp-blue transition-colors">{brand.name}</h3>
+                <p class="text-xs text-slate-500">{brand.headquarters?.split(',').slice(-1)[0]?.trim() ?? 'Global'}</p>
+              </div>
+            </div>
+            <p class="text-sm text-slate-400 line-clamp-2 mb-3">{brand.description}</p>
+            <p class="text-xs text-slate-500">
+              {count > 0 ? `${count} डिवाइस` : 'सूचीबद्ध नहीं'}
+              {brand.founded ? ` · स्थापना ${brand.founded}` : ''}
+            </p>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>
