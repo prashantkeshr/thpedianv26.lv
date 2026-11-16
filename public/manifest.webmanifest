@@ -1,0 +1,13 @@
+{
+  "name": "Techpedia",
+  "short_name": "Techpedia",
+  "description": "Global Technology Encyclopedia — Explore Technology. Understand Every Device.",
+  "start_url": "/thpedianv26.lv/en/",
+  "display": "standalone",
+  "background_color": "#0B1120",
+  "theme_color": "#0B1120",
+  "icons": [
+    { "src": "/thpedianv26.lv/favicon.svg", "sizes": "any", "type": "image/svg+xml" }
+  ],
+  "categories": ["technology", "reference", "education"]
+}

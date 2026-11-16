@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ComponentCard from '../../../components/cards/ComponentCard';
+import { getAllComponents, getAllComponentCategories } from '../../../services/componentService';
+
+const BASE = '/thpedianv26.lv';
+const components = getAllComponents();
+const categories = getAllComponentCategories();
+
+const categoryLabel: Record<string, string> = {
+  cpu: 'CPUs', gpu: 'GPUs', microcontroller: 'Microcontrollers', ic: 'Integrated Circuits',
+  resistor: 'Resistors', capacitor: 'Capacitors', transistor: 'Transistors', mosfet: 'MOSFETs',
+  sensor: 'Sensors', relay: 'Relays', opamp: 'Op-Amps', memory: 'Memory', module: 'Modules',
+};
+---
+
+<BaseLayout
+  title="Component Encyclopedia — Techpedia"
+  description="Browse electronic components: CPUs, GPUs, microcontrollers, ICs, sensors, resistors, capacitors and more. Datasheets, pinouts and specifications."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <span class="text-slate-200">Components</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Component Encyclopedia</h1>
+      <p class="text-slate-400">{components.length} components with technical specifications and datasheets</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      <a href={`${BASE}/en/components/`} class="tp-btn-secondary text-sm px-3 py-1.5">
+        All ({components.length})
+      </a>
+      {categories.map(cat => (
+        <a href={`${BASE}/en/components/?category=${cat}`} class="tp-btn-ghost text-sm px-3 py-1.5">
+          {categoryLabel[cat] ?? cat} ({components.filter(c => c.category === cat).length})
+        </a>
+      ))}
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+      {components.map(comp => (
+        <ComponentCard component={comp} lang="en" client:visible />
+      ))}
+    </div>
+
+    {components.length === 0 && (
+      <div class="text-center py-20 text-slate-400">
+        <div class="text-5xl mb-4">🔌</div>
+        <p class="text-lg">No components found</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

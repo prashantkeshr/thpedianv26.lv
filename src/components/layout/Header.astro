@@ -1,0 +1,157 @@
+---
+interface Props {
+  lang?: string;
+}
+
+const { lang = 'en' } = Astro.props;
+const base = `/thpedianv26.lv`;
+
+const nav = lang === 'hi'
+  ? [
+      { href: `${base}/${lang}/devices/`, label: 'डिवाइस' },
+      { href: `${base}/${lang}/components/`, label: 'घटक' },
+      { href: `${base}/${lang}/compare/`, label: 'तुलना' },
+      { href: `${base}/${lang}/technologies/`, label: 'तकनीक' },
+      { href: `${base}/${lang}/learn/`, label: 'सीखें' },
+      { href: `${base}/${lang}/brands/`, label: 'ब्रांड' },
+    ]
+  : [
+      { href: `${base}/en/devices/`, label: 'Devices' },
+      { href: `${base}/en/components/`, label: 'Components' },
+      { href: `${base}/en/compare/`, label: 'Compare' },
+      { href: `${base}/en/technologies/`, label: 'Technologies' },
+      { href: `${base}/en/learn/`, label: 'Learn' },
+      { href: `${base}/en/brands/`, label: 'Brands' },
+    ];
+
+const otherLang = lang === 'en' ? 'hi' : 'en';
+const otherLangLabel = lang === 'en' ? 'हिंदी' : 'English';
+---
+
+<header class="sticky top-0 z-50 bg-navy-900/95 backdrop-blur-md border-b border-tp-border">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6">
+    <div class="flex items-center justify-between h-16">
+
+      <!-- Logo -->
+      <a href={`${base}/${lang}/`} class="flex items-center gap-2.5 group flex-shrink-0">
+        <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-tp-blue to-tp-cyan flex items-center justify-center group-hover:shadow-glow-blue transition-shadow">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 4.5h12M3 9h12M3 13.5h7.5" stroke="white" stroke-width="1.75" stroke-linecap="round"/>
+            <circle cx="14" cy="13.5" r="2" fill="none" stroke="#22D3EE" stroke-width="1.5"/>
+            <path d="M15.4 14.9l1.5 1.5" stroke="#22D3EE" stroke-width="1.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="font-bold text-lg tracking-tight text-white">
+          Tech<span class="text-tp-cyan">pedia</span>
+        </span>
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-1" aria-label="Main navigation">
+        {nav.map(({ href, label }) => (
+          <a
+            href={href}
+            class="px-3 py-1.5 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-700 transition-colors"
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <!-- Right: Search + Language + Mobile menu -->
+      <div class="flex items-center gap-2">
+        <!-- Search button -->
+        <a
+          href={`${base}/${lang}/search/`}
+          class="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-navy-800 border border-tp-border text-slate-400 text-sm hover:border-slate-600 hover:text-slate-200 transition-colors min-w-[160px]"
+        >
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+          </svg>
+          <span>{lang === 'hi' ? 'खोजें...' : 'Search...'}</span>
+          <span class="ml-auto text-xs bg-navy-700 px-1.5 py-0.5 rounded">⌘K</span>
+        </a>
+
+        <!-- Language switcher -->
+        <a
+          href={`${base}/${otherLang}/`}
+          class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-sm font-medium text-slate-400 hover:text-slate-200 hover:bg-navy-700 transition-colors border border-tp-border"
+          title={`Switch to ${otherLangLabel}`}
+        >
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+          </svg>
+          {otherLangLabel}
+        </a>
+
+        <!-- Mobile menu button -->
+        <button
+          id="mobile-menu-btn"
+          class="lg:hidden p-2 rounded-md text-slate-400 hover:text-white hover:bg-navy-700 transition-colors"
+          aria-label="Toggle navigation menu"
+          aria-expanded="false"
+        >
+          <svg id="menu-icon-open" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+          <svg id="menu-icon-close" class="w-5 h-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile nav -->
+    <nav
+      id="mobile-menu"
+      class="hidden lg:hidden border-t border-tp-border py-3 pb-4"
+      aria-label="Mobile navigation"
+    >
+      <div class="flex flex-col gap-1">
+        {nav.map(({ href, label }) => (
+          <a
+            href={href}
+            class="px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-navy-700 transition-colors"
+          >
+            {label}
+          </a>
+        ))}
+        <div class="mt-2 pt-2 border-t border-tp-border">
+          <a
+            href={`${base}/${lang}/search/`}
+            class="flex items-center gap-2 px-3 py-2 rounded-md text-sm font-medium text-slate-400 hover:text-white hover:bg-navy-700 transition-colors"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+            </svg>
+            {lang === 'hi' ? 'खोजें' : 'Search'}
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const iconOpen = document.getElementById('menu-icon-open');
+  const iconClose = document.getElementById('menu-icon-close');
+
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    menu?.classList.toggle('hidden');
+    iconOpen?.classList.toggle('hidden');
+    iconClose?.classList.toggle('hidden');
+  });
+
+  // Keyboard shortcut ⌘K / Ctrl+K → search
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const lang = document.documentElement.lang ?? 'en';
+      window.location.href = `/thpedianv26.lv/${lang}/search/`;
+    }
+  });
+</script>

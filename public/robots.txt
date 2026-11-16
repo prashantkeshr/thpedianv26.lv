@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://prashantkeshr.github.io/thpedianv26.lv/sitemap-index.xml

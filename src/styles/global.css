@@ -1,0 +1,154 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Inter variable font */
+@import '@fontsource-variable/inter';
+/* Noto Sans for Hindi */
+@import '@fontsource/noto-sans/400.css';
+@import '@fontsource/noto-sans/700.css';
+
+:root {
+  --tp-navy-950: #050B14;
+  --tp-navy-900: #0B1120;
+  --tp-navy-800: #0F172A;
+  --tp-navy-700: #161E2E;
+  --tp-navy-600: #1E2A3D;
+  --tp-blue: #3B82F6;
+  --tp-blue-dark: #2563EB;
+  --tp-cyan: #06B6D4;
+  --tp-violet: #7C3AED;
+  --tp-border: #1E293B;
+  --tp-text: #F1F5F9;
+  --tp-text-muted: #94A3B8;
+  --tp-text-dim: #64748B;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    @apply bg-navy-900 text-slate-100;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  body {
+    @apply bg-navy-900 text-slate-100 antialiased;
+    font-family: 'Inter var', 'Inter', system-ui, sans-serif;
+  }
+
+  :lang(hi) body,
+  :lang(hi) {
+    font-family: 'Noto Sans Devanagari', 'Noto Sans', sans-serif;
+  }
+
+  * {
+    @apply border-tp-border;
+    scrollbar-width: thin;
+    scrollbar-color: #253349 #0B1120;
+  }
+
+  *::-webkit-scrollbar { width: 6px; height: 6px; }
+  *::-webkit-scrollbar-track { background: #0B1120; }
+  *::-webkit-scrollbar-thumb { background: #253349; border-radius: 3px; }
+  *::-webkit-scrollbar-thumb:hover { background: #3B82F6; }
+
+  h1, h2, h3, h4, h5, h6 { @apply font-semibold tracking-tight; }
+
+  a { @apply transition-colors duration-150; }
+
+  code, pre {
+    font-family: 'JetBrains Mono', 'Menlo', 'Monaco', monospace;
+  }
+}
+
+@layer components {
+  .tp-card {
+    @apply bg-tp-surface rounded-xl border border-tp-border shadow-card
+           transition-all duration-200 hover:border-slate-600 hover:shadow-card-hover;
+  }
+
+  .tp-badge {
+    @apply inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-xs font-medium;
+  }
+
+  .tp-badge-blue {
+    @apply tp-badge bg-blue-900/40 text-tp-blue-bright border border-blue-700/30;
+  }
+
+  .tp-badge-cyan {
+    @apply tp-badge bg-cyan-900/30 text-tp-cyan-light border border-cyan-700/30;
+  }
+
+  .tp-badge-violet {
+    @apply tp-badge bg-violet-900/30 text-tp-violet-light border border-violet-700/30;
+  }
+
+  .tp-badge-green {
+    @apply tp-badge bg-emerald-900/30 text-emerald-400 border border-emerald-700/30;
+  }
+
+  .tp-badge-amber {
+    @apply tp-badge bg-amber-900/30 text-amber-400 border border-amber-700/30;
+  }
+
+  .tp-btn-primary {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-tp-blue hover:bg-tp-blue-dark
+           text-white font-medium text-sm transition-colors duration-150
+           focus:outline-none focus:ring-2 focus:ring-tp-blue focus:ring-offset-2 focus:ring-offset-navy-900;
+  }
+
+  .tp-btn-secondary {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-navy-700 hover:bg-tp-hover
+           text-slate-200 font-medium text-sm border border-tp-border transition-colors duration-150
+           focus:outline-none focus:ring-2 focus:ring-slate-500 focus:ring-offset-2 focus:ring-offset-navy-900;
+  }
+
+  .tp-btn-ghost {
+    @apply inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-slate-300
+           hover:text-white hover:bg-navy-700 font-medium text-sm transition-colors duration-150;
+  }
+
+  .tp-input {
+    @apply bg-navy-800 border border-tp-border rounded-lg px-4 py-2.5 text-slate-100
+           placeholder-slate-500 text-sm
+           focus:outline-none focus:ring-2 focus:ring-tp-blue focus:border-tp-blue
+           transition-colors duration-150;
+  }
+
+  .tp-section-title {
+    @apply text-2xl font-bold text-slate-100 tracking-tight;
+  }
+
+  .tp-section-subtitle {
+    @apply text-sm text-slate-400 mt-1;
+  }
+
+  .spec-row {
+    @apply flex justify-between items-start py-2.5 border-b border-tp-border/50 last:border-0;
+  }
+
+  .spec-label {
+    @apply text-sm text-slate-400 font-medium min-w-0 flex-shrink-0 w-40;
+  }
+
+  .spec-value {
+    @apply text-sm text-slate-100 text-right flex-1;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-to-r from-tp-blue via-tp-cyan to-tp-violet bg-clip-text text-transparent;
+  }
+}
+
+/* Skeleton loading animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #161E2E 25%, #1E2A3D 50%, #161E2E 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 4px;
+}

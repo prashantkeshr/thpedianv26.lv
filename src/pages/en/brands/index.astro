@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllBrands } from '../../../services/brandService';
+import { getAllDevices } from '../../../services/deviceService';
+
+const BASE = '/thpedianv26.lv';
+const brands = getAllBrands();
+const devices = getAllDevices();
+
+function getDeviceCountForBrand(brandId: string) {
+  return devices.filter(d => d.brand === brandId).length;
+}
+---
+
+<BaseLayout
+  title="Brand Directory — Techpedia"
+  description="Browse technology manufacturers and brands. Apple, Samsung, Intel, AMD, NVIDIA, Google and more."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <span class="text-slate-200">Brands</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Brand Directory</h1>
+      <p class="text-slate-400">{brands.length} manufacturers and technology companies</p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {brands.map(brand => {
+        const deviceCount = getDeviceCountForBrand(brand.id);
+        return (
+          <a href={`${BASE}/en/brands/${brand.slug}/`} class="tp-card p-6 group flex flex-col gap-3">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-navy-700 flex items-center justify-center text-2xl flex-shrink-0">
+                🏢
+              </div>
+              <div class="min-w-0">
+                <h3 class="font-semibold text-slate-100 group-hover:text-tp-cyan transition-colors">{brand.name}</h3>
+                {brand.headquarters && (
+                  <p class="text-xs text-slate-400 mt-0.5">{brand.headquarters}</p>
+                )}
+              </div>
+            </div>
+
+            <p class="text-sm text-slate-400 line-clamp-2">{brand.description}</p>
+
+            <div class="flex items-center justify-between mt-auto">
+              <div class="flex flex-wrap gap-1">
+                {brand.productCategories.slice(0, 3).map(cat => (
+                  <span class="tp-badge-blue">{cat}</span>
+                ))}
+              </div>
+              {deviceCount > 0 && (
+                <span class="text-xs text-slate-500">{deviceCount} devices</span>
+              )}
+            </div>
+          </a>
+        );
+      })}
+    </div>
+  </div>
+</BaseLayout>

@@ -1,0 +1,100 @@
+---
+interface Props {
+  lang?: string;
+}
+const { lang = 'en' } = Astro.props;
+const base = `/thpedianv26.lv`;
+const isHi = lang === 'hi';
+---
+
+<footer class="border-t border-tp-border mt-20 bg-navy-950">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
+
+      <!-- Brand -->
+      <div class="col-span-2 md:col-span-1">
+        <div class="flex items-center gap-2 mb-3">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-tp-blue to-tp-cyan flex items-center justify-center">
+            <svg width="14" height="14" viewBox="0 0 18 18" fill="none"><path d="M3 4.5h12M3 9h12M3 13.5h7.5" stroke="white" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="13.5" r="2" fill="none" stroke="#22D3EE" stroke-width="1.5"/></svg>
+          </div>
+          <span class="font-bold text-white">Tech<span class="text-tp-cyan">pedia</span></span>
+        </div>
+        <p class="text-sm text-slate-400 leading-relaxed mb-4">
+          {isHi
+            ? 'हर तकनीक की खोज करें। हर डिवाइस को समझें।'
+            : 'Explore Technology. Understand Every Device. Discover Every Possibility.'}
+        </p>
+        <p class="text-xs text-slate-500">
+          {isHi ? 'संस्करण 1.0 — नवंबर 2026' : 'Version 1.0 — November 2026'}
+        </p>
+      </div>
+
+      <!-- Discover -->
+      <div>
+        <h3 class="text-sm font-semibold text-slate-200 mb-3">{isHi ? 'खोजें' : 'Discover'}</h3>
+        <ul class="space-y-2">
+          {[
+            { href: `${base}/${lang}/devices/`, label: isHi ? 'डिवाइस' : 'Devices' },
+            { href: `${base}/${lang}/components/`, label: isHi ? 'घटक' : 'Components' },
+            { href: `${base}/${lang}/brands/`, label: isHi ? 'ब्रांड' : 'Brands' },
+            { href: `${base}/${lang}/technologies/`, label: isHi ? 'तकनीक' : 'Technologies' },
+            { href: `${base}/${lang}/compare/`, label: isHi ? 'तुलना करें' : 'Compare' },
+          ].map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-sm text-slate-400 hover:text-tp-cyan transition-colors">{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Learn -->
+      <div>
+        <h3 class="text-sm font-semibold text-slate-200 mb-3">{isHi ? 'सीखें' : 'Learn'}</h3>
+        <ul class="space-y-2">
+          {[
+            { href: `${base}/${lang}/learn/`, label: isHi ? 'शुरुआती मार्गदर्शिका' : 'Beginner Guides' },
+            { href: `${base}/${lang}/learn/tutorials/`, label: isHi ? 'ट्यूटोरियल' : 'Tutorials' },
+            { href: `${base}/${lang}/troubleshoot/`, label: isHi ? 'समस्या निवारण' : 'Troubleshoot' },
+            { href: `${base}/${lang}/tools/`, label: isHi ? 'कैलकुलेटर' : 'Calculators' },
+            { href: `${base}/${lang}/glossary/`, label: isHi ? 'शब्दकोश' : 'Glossary' },
+          ].map(({ href, label }) => (
+            <li>
+              <a href={href} class="text-sm text-slate-400 hover:text-tp-cyan transition-colors">{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Platform -->
+      <div>
+        <h3 class="text-sm font-semibold text-slate-200 mb-3">{isHi ? 'प्लेटफ़ॉर्म' : 'Platform'}</h3>
+        <ul class="space-y-2">
+          {[
+            { href: `${base}/${lang}/about/`, label: isHi ? 'Techpedia के बारे में' : 'About Techpedia' },
+            { href: `${base}/${lang}/data-sources/`, label: isHi ? 'डेटा स्रोत' : 'Data Sources' },
+            { href: `${base}/${lang}/contribute/`, label: isHi ? 'योगदान करें' : 'Contribute' },
+            { href: `${base}/${lang}/privacy/`, label: isHi ? 'गोपनीयता नीति' : 'Privacy Policy' },
+            { href: `https://github.com/prashantkeshr/thpedianv26.lv`, label: 'GitHub', target: '_blank', rel: 'noopener noreferrer' },
+          ].map(({ href, label, ...rest }) => (
+            <li>
+              <a href={href} class="text-sm text-slate-400 hover:text-tp-cyan transition-colors" {...rest}>{label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-6 border-t border-tp-border flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p class="text-xs text-slate-500">
+        {isHi
+          ? '© 2026 Techpedia। सभी तकनीकी डेटा सत्यापित स्रोतों से।'
+          : '© 2026 Techpedia. All technical data from verified sources.'}
+      </p>
+      <div class="flex items-center gap-4">
+        <span class="tp-badge-cyan text-xs">{isHi ? 'सत्यापित डेटा' : 'Verified Data'}</span>
+        <span class="tp-badge-blue text-xs">{isHi ? 'ओपन सोर्स' : 'Open Source'}</span>
+      </div>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,58 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '/thpedianv26.lv';
+
+const guides = [
+  { title: 'Laptop overheating', category: 'laptop', icon: '🌡️', symptoms: 'Thermal throttling, fan noise, shutdown during use.' },
+  { title: 'Smartphone battery drain', category: 'smartphone', icon: '🔋', symptoms: 'Battery depletes unusually fast or won\'t charge fully.' },
+  { title: 'PC won\'t boot', category: 'desktop', icon: '🖥️', symptoms: 'No POST, blank screen on startup, beep codes.' },
+  { title: 'Wi-Fi disconnecting', category: 'networking', icon: '📶', symptoms: 'Intermittent drops, slow speeds, cannot connect.' },
+  { title: 'Monitor flickering', category: 'monitor', icon: '🖥️', symptoms: 'Screen flicker, ghosting, resolution issues.' },
+  { title: 'Printer not printing', category: 'printer', icon: '🖨️', symptoms: 'Offline status, paper jams, color issues.' },
+];
+---
+
+<BaseLayout
+  title="Troubleshooting Guides — Techpedia"
+  description="Interactive troubleshooting guides for smartphones, laptops, PCs, circuits and components. Step-by-step diagnostic trees."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <span class="text-slate-200">Troubleshoot</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Troubleshooting Centre</h1>
+      <p class="text-slate-400">Step-by-step diagnostic guides for common technology problems</p>
+    </div>
+
+    <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 mb-8 flex items-start gap-3">
+      <span class="text-xl flex-shrink-0">⚠️</span>
+      <div class="text-sm text-amber-300">
+        <strong class="text-amber-200">Safety first:</strong> Some repairs involve high voltage, lasers or sharp components.
+        When in doubt, consult a qualified repair professional. These guides are for general diagnostic assistance only.
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {guides.map(guide => (
+        <div class="tp-card p-5 flex flex-col gap-3 cursor-default">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">{guide.icon}</div>
+            <div>
+              <h3 class="font-semibold text-slate-100">{guide.title}</h3>
+              <span class="tp-badge-amber text-xs capitalize">{guide.category}</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400">{guide.symptoms}</p>
+          <div class="mt-auto">
+            <span class="text-xs text-slate-500 italic">Interactive guide — coming soon</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

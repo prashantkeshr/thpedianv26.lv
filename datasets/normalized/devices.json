@@ -1,0 +1,452 @@
+[
+  {
+    "id": "dev-000001",
+    "slug": "apple-iphone-16-pro",
+    "name": "Apple iPhone 16 Pro",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-09-09",
+    "releasedAt": "2024-09-20",
+    "description": "The iPhone 16 Pro features the A18 Pro chip, Apple Intelligence support, Camera Control button, 48MP main/ultrawide/48MP 5x telephoto camera system, and a Super Retina XDR display with ProMotion.",
+    "images": [
+      {
+        "id": "img-dev000001-01",
+        "url": "https://www.apple.com/newsroom/images/2024/09/apple-debuts-iphone-16-pro-and-iphone-16-pro-max/article/Apple-iPhone-16-Pro-and-Pro-Max-240909_Full-Bleed-Image.jpg.large.jpg",
+        "type": "front",
+        "alt": "Apple iPhone 16 Pro — official front view",
+        "sourceName": "Apple Newsroom",
+        "sourceUrl": "https://www.apple.com/newsroom/",
+        "verificationStatus": "official"
+      }
+    ],
+    "specs": {
+      "display": {
+        "technology": "OLED Super Retina XDR, ProMotion",
+        "size": "6.3 inches",
+        "resolution": "2622 × 1206 pixels",
+        "refreshRate": "1–120 Hz (ProMotion)",
+        "brightness": "2000 nits peak (HDR)",
+        "protection": "Ceramic Shield (front), textured matte glass (rear)"
+      },
+      "processor": {
+        "name": "A18 Pro",
+        "manufacturer": "Apple",
+        "architecture": "3nm TSMC",
+        "cores": "6-core (2P+4E)",
+        "gpu": "6-core GPU",
+        "npu": "16-core Neural Engine"
+      },
+      "memory": { "ram": "8 GB", "storage": "128 GB / 256 GB / 512 GB / 1 TB", "expandable": false },
+      "battery": {
+        "capacity": "~3582 mAh (Apple does not publish)",
+        "chargingSpeed": "27 W wired (USB-C), 25 W MagSafe",
+        "wirelessCharging": "MagSafe 25 W, Qi2 15 W, Qi 7.5 W"
+      },
+      "camera": {
+        "main": "48 MP, f/1.78, OIS, Photonic Engine",
+        "ultrawide": "48 MP, f/2.2, macro photography",
+        "telephoto": "12 MP, f/2.8, 5× optical zoom",
+        "front": "12 MP, f/1.9, autofocus",
+        "video": "4K 120fps ProRes, Log video recording, Dolby Vision"
+      },
+      "os": { "name": "iOS", "version": "18.0 (upgradeable)", "updateSupport": "5+ years" },
+      "connectivity": {
+        "cellular": "5G sub-6 GHz + mmWave (US)",
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.3",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C)"
+      },
+      "sensors": ["Face ID", "Barometer", "Three-axis gyroscope", "Accelerometer", "Proximity sensor", "Ambient light sensor"],
+      "dimensions": { "height": "149.6 mm", "width": "71.5 mm", "depth": "8.25 mm", "weight": "199 g" },
+      "colors": ["Black Titanium", "White Titanium", "Natural Titanium", "Desert Titanium"]
+    },
+    "keyFeatures": ["A18 Pro chip", "Apple Intelligence", "Camera Control button", "ProMotion 120 Hz", "5× telephoto", "USB 3.2 (USB-C)", "Titanium frame"],
+    "variants": [
+      { "id": "var-dev000001-01", "name": "iPhone 16 Pro 128 GB", "region": "Global", "storageOptions": ["128 GB"] },
+      { "id": "var-dev000001-02", "name": "iPhone 16 Pro 256 GB", "region": "Global", "storageOptions": ["256 GB"] },
+      { "id": "var-dev000001-03", "name": "iPhone 16 Pro 512 GB", "region": "Global", "storageOptions": ["512 GB"] },
+      { "id": "var-dev000001-04", "name": "iPhone 16 Pro 1 TB", "region": "Global", "storageOptions": ["1 TB"] }
+    ],
+    "affiliateLinks": [],
+    "relatedIds": ["dev-000002", "dev-000003"],
+    "tags": ["apple", "iphone", "5g", "a18-pro", "apple-intelligence", "smartphone"],
+    "sources": [
+      { "provider": "Apple official", "url": "https://www.apple.com/iphone-16-pro/specs/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000002",
+    "slug": "samsung-galaxy-s25-ultra",
+    "name": "Samsung Galaxy S25 Ultra",
+    "brand": "brd-000002",
+    "brandName": "Samsung",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2025-01-22",
+    "releasedAt": "2025-02-07",
+    "description": "The Galaxy S25 Ultra combines Snapdragon 8 Elite performance with a 200 MP main camera, integrated titanium S Pen, and AI-powered Galaxy AI features across a 6.9-inch QHD+ display.",
+    "images": [
+      {
+        "id": "img-dev000002-01",
+        "url": "https://image-us.samsung.com/SamsungUS/home/mobile/galaxy-s/galaxy-s25/01222025/samsunggalaxys25ultrafromnewsroom.jpg",
+        "type": "front",
+        "alt": "Samsung Galaxy S25 Ultra — official front view",
+        "sourceName": "Samsung Newsroom",
+        "sourceUrl": "https://news.samsung.com/",
+        "verificationStatus": "official"
+      }
+    ],
+    "specs": {
+      "display": {
+        "technology": "Dynamic AMOLED 2X",
+        "size": "6.9 inches",
+        "resolution": "3088 × 1440 pixels (QHD+)",
+        "refreshRate": "1–120 Hz",
+        "brightness": "2600 nits peak",
+        "protection": "Corning Gorilla Armor 2 (front)"
+      },
+      "processor": {
+        "name": "Snapdragon 8 Elite (SM8750)",
+        "manufacturer": "Qualcomm",
+        "architecture": "4nm TSMC",
+        "cores": "8-core (2× Oryon Prime + 6× Oryon Performance)",
+        "gpu": "Adreno 830",
+        "npu": "Hexagon NPU (45 TOPS)"
+      },
+      "memory": { "ram": "12 GB", "storage": "256 GB / 512 GB / 1 TB", "expandable": false },
+      "battery": {
+        "capacity": "5000 mAh",
+        "chargingSpeed": "45 W wired",
+        "wirelessCharging": "15 W wireless, 4.5 W reverse wireless"
+      },
+      "camera": {
+        "main": "200 MP, f/1.7, OIS",
+        "ultrawide": "50 MP, f/1.9",
+        "telephoto": "50 MP, f/3.4, 5× optical + 10× optical zoom",
+        "front": "12 MP, f/2.2",
+        "video": "8K 30fps, 4K 120fps"
+      },
+      "os": { "name": "Android", "version": "15 + One UI 7.0", "updateSupport": "7 years OS + security" },
+      "connectivity": {
+        "cellular": "5G sub-6 GHz + mmWave",
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.4",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C)"
+      },
+      "sensors": ["Ultrasonic fingerprint (in-display)", "Accelerometer", "Barometer", "Gyroscope", "Geomagnetic", "Hall sensor", "Proximity", "Light sensor"],
+      "dimensions": { "height": "162.8 mm", "width": "77.6 mm", "depth": "8.2 mm", "weight": "218 g" },
+      "colors": ["Titanium Silverblue", "Titanium Black", "Titanium Whitesilver", "Titanium Gray"]
+    },
+    "keyFeatures": ["Snapdragon 8 Elite", "200 MP camera", "Integrated S Pen", "Galaxy AI", "7-year updates", "Titanium frame"],
+    "variants": [
+      { "id": "var-dev000002-01", "name": "Galaxy S25 Ultra 256 GB", "storageOptions": ["256 GB"], "ramOptions": ["12 GB"] },
+      { "id": "var-dev000002-02", "name": "Galaxy S25 Ultra 512 GB", "storageOptions": ["512 GB"], "ramOptions": ["12 GB"] },
+      { "id": "var-dev000002-03", "name": "Galaxy S25 Ultra 1 TB", "storageOptions": ["1 TB"], "ramOptions": ["12 GB"] }
+    ],
+    "affiliateLinks": [],
+    "relatedIds": ["dev-000001", "dev-000003"],
+    "tags": ["samsung", "galaxy-s25", "5g", "snapdragon-8-elite", "s-pen", "smartphone"],
+    "sources": [
+      { "provider": "Samsung official", "url": "https://www.samsung.com/global/galaxy/galaxy-s25-ultra/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000003",
+    "slug": "google-pixel-9-pro",
+    "name": "Google Pixel 9 Pro",
+    "brand": "brd-000006",
+    "brandName": "Google",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-08-13",
+    "releasedAt": "2024-08-22",
+    "description": "The Pixel 9 Pro runs on the Tensor G4 chip with a dedicated Titan M2 security coprocessor, offering Google AI capabilities, a 50 MP triple camera system, and satellite connectivity.",
+    "images": [
+      {
+        "id": "img-dev000003-01",
+        "url": "https://store.google.com/us/category/phones/assets/pixel9pro_hero.png",
+        "type": "front",
+        "alt": "Google Pixel 9 Pro",
+        "sourceName": "Google Store",
+        "sourceUrl": "https://store.google.com",
+        "verificationStatus": "official"
+      }
+    ],
+    "specs": {
+      "display": {
+        "technology": "LTPO OLED",
+        "size": "6.3 inches",
+        "resolution": "2856 × 1280 pixels",
+        "refreshRate": "1–120 Hz (LTPO)",
+        "brightness": "3000 nits peak",
+        "protection": "Corning Gorilla Glass Victus 2"
+      },
+      "processor": {
+        "name": "Google Tensor G4",
+        "manufacturer": "Google / Samsung",
+        "architecture": "4nm Samsung",
+        "cores": "9-core",
+        "gpu": "Imagination IMG DXT48"
+      },
+      "memory": { "ram": "16 GB", "storage": "128 GB / 256 GB / 512 GB / 1 TB", "expandable": false },
+      "battery": {
+        "capacity": "4700 mAh",
+        "chargingSpeed": "27 W wired, 23 W wireless",
+        "wirelessCharging": "Qi/Qi2 compatible"
+      },
+      "camera": {
+        "main": "50 MP, f/1.68, OIS",
+        "ultrawide": "48 MP, f/1.7",
+        "telephoto": "48 MP, f/2.8, 5× optical zoom",
+        "front": "10.5 MP, f/2.2",
+        "video": "8K 30fps, 4K 60fps"
+      },
+      "os": { "name": "Android", "version": "14 (upgradeable to 15+)", "updateSupport": "7 years OS + security" },
+      "connectivity": {
+        "cellular": "5G sub-6 GHz + mmWave (US)",
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.3",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C)"
+      },
+      "sensors": ["Fingerprint (under-display optical)", "Accelerometer", "Proximity", "Ambient light", "Barometer", "Magnetometer", "Thermometer"],
+      "dimensions": { "height": "152.3 mm", "width": "72.0 mm", "depth": "8.5 mm", "weight": "199 g" },
+      "colors": ["Obsidian", "Porcelain", "Wintergreen", "Rose Quartz"]
+    },
+    "keyFeatures": ["Tensor G4", "16 GB RAM", "Google AI features", "Satellite connectivity", "50 MP triple camera", "7-year updates"],
+    "variants": [],
+    "affiliateLinks": [],
+    "relatedIds": ["dev-000001", "dev-000002"],
+    "tags": ["google", "pixel-9", "tensor-g4", "5g", "smartphone", "android"],
+    "sources": [
+      { "provider": "Google Store", "url": "https://store.google.com/us/product/pixel_9_pro_specs", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000004",
+    "slug": "apple-macbook-pro-16-m4-pro",
+    "name": "Apple MacBook Pro 16\" (M4 Pro)",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "laptop",
+    "status": "available",
+    "announcedAt": "2024-10-28",
+    "releasedAt": "2024-11-08",
+    "description": "The MacBook Pro 16\" with M4 Pro delivers exceptional performance for professionals with up to 24-core CPU, 40-core GPU, 48 GB unified memory, Liquid Retina XDR display and up to 24 hours battery life.",
+    "images": [
+      {
+        "id": "img-dev000004-01",
+        "url": "https://www.apple.com/newsroom/images/2024/10/apple-introduces-new-macbook-pro-featuring-m4-family-chips/article/Apple-MacBook-Pro-M4-hero-241028_Full-Bleed-Image.jpg.large.jpg",
+        "type": "front",
+        "alt": "Apple MacBook Pro 16 M4 Pro",
+        "sourceName": "Apple Newsroom",
+        "sourceUrl": "https://www.apple.com/newsroom/",
+        "verificationStatus": "official"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Apple M4 Pro",
+        "manufacturer": "Apple",
+        "cores": "12-core CPU (8P+4E) or 14-core CPU (10P+4E)",
+        "architecture": "3nm TSMC (N3E)",
+        "tdp": "~30 W (SoC)"
+      },
+      "memory": {
+        "ram": "24 GB unified / 48 GB unified",
+        "ramType": "LPDDR5X unified memory",
+        "maxRam": "48 GB",
+        "storage": "512 GB / 1 TB / 2 TB / 4 TB",
+        "storageType": "Apple custom NVMe SSD",
+        "additionalSlots": "None (soldered)"
+      },
+      "display": {
+        "size": "16.2 inches",
+        "resolution": "3456 × 2234 pixels",
+        "technology": "Liquid Retina XDR (mini-LED)",
+        "refreshRate": "24–120 Hz (ProMotion)",
+        "brightness": "1600 nits peak HDR",
+        "colorGamut": "P3 wide color, True Tone",
+        "touchscreen": false
+      },
+      "gpu": {
+        "integrated": "Apple M4 Pro GPU (20-core or 40-core)",
+        "discrete": null
+      },
+      "battery": { "capacity": "100 Wh", "life": "Up to 24 hours", "chargingSpeed": "140 W USB-C (included)" },
+      "ports": ["3× Thunderbolt 5 (USB-C)", "HDMI 2.1", "SDXC card slot", "MagSafe 3", "3.5 mm headphone jack"],
+      "wireless": { "wifi": "Wi-Fi 6E (802.11ax)", "bluetooth": "Bluetooth 5.3" },
+      "keyboard": { "backlit": true, "layout": "Magic Keyboard with Touch ID and Touch Bar removed" },
+      "webcam": "12 MP Center Stage",
+      "audio": "6-speaker sound system with Spatial Audio and force-cancelling woofers",
+      "dimensions": { "width": "355.7 mm", "depth": "248.1 mm", "weight": "2.14 kg (M4 Pro)" },
+      "os": "macOS Sequoia 15",
+      "upgradeability": { "ram": "Not upgradeable (unified memory, soldered)", "storage": "Not upgradeable (soldered)" }
+    },
+    "keyFeatures": ["M4 Pro chip", "Up to 48 GB unified memory", "Liquid Retina XDR 120 Hz", "Up to 24 hrs battery", "Thunderbolt 5", "Mini-LED display"],
+    "variants": [
+      { "id": "var-dev000004-01", "name": "MacBook Pro 16\" M4 Pro 12-core", "ramOptions": ["24 GB"] },
+      { "id": "var-dev000004-02", "name": "MacBook Pro 16\" M4 Pro 14-core", "ramOptions": ["24 GB", "48 GB"] },
+      { "id": "var-dev000004-03", "name": "MacBook Pro 16\" M4 Max", "ramOptions": ["36 GB", "64 GB", "128 GB"] }
+    ],
+    "affiliateLinks": [],
+    "relatedIds": ["dev-000005", "dev-000006"],
+    "tags": ["apple", "macbook", "m4-pro", "laptop", "professional"],
+    "sources": [
+      { "provider": "Apple official", "url": "https://www.apple.com/macbook-pro/specs/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000005",
+    "slug": "dell-xps-15-9530",
+    "name": "Dell XPS 15 (9530)",
+    "brand": "brd-000009",
+    "brandName": "Dell",
+    "category": "laptop",
+    "status": "available",
+    "announcedAt": "2023-05-01",
+    "releasedAt": "2023-05-15",
+    "description": "The Dell XPS 15 9530 combines Intel Core H-series performance with discrete NVIDIA graphics, a stunning OLED or IPS display, and compact premium design for creators and professionals.",
+    "images": [
+      {
+        "id": "img-dev000005-01",
+        "url": "https://i.dell.com/is/image/DellContent/content/dam/ss2/product-images/dell-client-products/notebooks/xps-notebooks/xps-15-9530/media-gallery/laptop-xps-9530-nt-blue-gallery-1.psd",
+        "type": "front",
+        "alt": "Dell XPS 15 9530",
+        "sourceName": "Dell official",
+        "sourceUrl": "https://www.dell.com/",
+        "verificationStatus": "official"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Intel Core i7-13700H or i9-13900H",
+        "manufacturer": "Intel",
+        "cores": "14-core (6P+8E) / 20-core (6P+8E+2HT)",
+        "architecture": "Intel 7 (10 nm)",
+        "tdp": "45 W (base)"
+      },
+      "memory": {
+        "ram": "16 GB / 32 GB / 64 GB",
+        "ramType": "DDR5 4800 MHz (dual channel)",
+        "maxRam": "64 GB",
+        "storage": "512 GB / 1 TB / 2 TB",
+        "storageType": "PCIe NVMe Gen 4 SSD",
+        "additionalSlots": "1× M.2 2280 slot"
+      },
+      "display": {
+        "size": "15.6 inches",
+        "resolution": "1920×1200 (InfinityEdge IPS) or 3456×2160 (OLED touch)",
+        "technology": "IPS or OLED",
+        "refreshRate": "60 Hz (IPS) / 60 Hz (OLED)",
+        "brightness": "500 nits (IPS) / 400 nits (OLED)",
+        "colorGamut": "100% sRGB (IPS) / 100% DCI-P3 (OLED)",
+        "touchscreen": false
+      },
+      "gpu": {
+        "integrated": "Intel Iris Xe",
+        "discrete": "NVIDIA GeForce RTX 4060 8 GB or RTX 4070 8 GB",
+        "vram": "8 GB GDDR6"
+      },
+      "battery": { "capacity": "86 Wh", "life": "Up to 13 hours (IPS)", "chargingSpeed": "130 W DC or 60 W USB-C" },
+      "ports": ["2× Thunderbolt 4 (USB-C)", "1× USB-C 3.2 Gen 2", "SD card reader", "3.5 mm audio"],
+      "wireless": { "wifi": "Wi-Fi 6E (Killer AX1690i)", "bluetooth": "Bluetooth 5.3" },
+      "keyboard": { "backlit": true, "numpad": false },
+      "webcam": "720p / 2.0 MP",
+      "dimensions": { "width": "344.4 mm", "depth": "230.1 mm", "weight": "1.86 kg" },
+      "os": "Windows 11 Home / Pro",
+      "upgradeability": { "ram": "Upgradeable (2× SODIMM DDR5)", "storage": "Upgradeable (1× M.2)" }
+    },
+    "keyFeatures": ["Intel Core 13th Gen H", "RTX 4060/4070", "OLED option", "Thin and light", "Thunderbolt 4", "DDR5 upgradeable"],
+    "variants": [],
+    "affiliateLinks": [],
+    "relatedIds": ["dev-000004", "dev-000006"],
+    "tags": ["dell", "xps", "laptop", "intel", "nvidia", "creator"],
+    "sources": [
+      { "provider": "Dell official", "url": "https://www.dell.com/en-us/shop/laptops/xps-15-laptop/spd/xps-15-9530-laptop", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000006",
+    "slug": "lenovo-thinkpad-x1-carbon-gen12",
+    "name": "Lenovo ThinkPad X1 Carbon Gen 12",
+    "brand": "brd-000008",
+    "brandName": "Lenovo",
+    "category": "laptop",
+    "status": "available",
+    "announcedAt": "2024-01-08",
+    "releasedAt": "2024-03-01",
+    "description": "The ThinkPad X1 Carbon Gen 12 is an ultra-lightweight business laptop with Intel Core Ultra processors, up to 64 GB LPDDR5X RAM, and enterprise-grade security features in a 1.12 kg chassis.",
+    "images": [],
+    "specs": {
+      "processor": {
+        "name": "Intel Core Ultra 7 165U or Ultra 7 165H",
+        "manufacturer": "Intel",
+        "cores": "12-core (2P+8E+2LPE)",
+        "architecture": "Intel 4 (7 nm)",
+        "tdp": "15 W (U-series)"
+      },
+      "memory": {
+        "ram": "16 GB / 32 GB / 64 GB",
+        "ramType": "LPDDR5X 7467 MHz (soldered)",
+        "maxRam": "64 GB",
+        "storage": "256 GB to 2 TB",
+        "storageType": "PCIe NVMe Gen 4 SSD",
+        "additionalSlots": "1× M.2 2242"
+      },
+      "display": {
+        "size": "14 inches",
+        "resolution": "1920×1200 (IPS) or 2880×1800 (OLED)",
+        "technology": "IPS or OLED",
+        "refreshRate": "60 Hz",
+        "brightness": "400 nits / 600 nits (OLED)",
+        "touchscreen": false
+      },
+      "gpu": { "integrated": "Intel Arc (via Intel Core Ultra)" },
+      "battery": { "capacity": "57 Wh", "life": "Up to 15 hours" },
+      "ports": ["2× Thunderbolt 4 (USB-C)", "2× USB-A 3.2 Gen 1", "HDMI 2.1", "3.5 mm audio"],
+      "wireless": { "wifi": "Wi-Fi 6E (Intel AX211)", "bluetooth": "Bluetooth 5.3" },
+      "keyboard": { "backlit": true, "layout": "ThinkPad island-style keyboard", "numpad": false },
+      "webcam": "5 MP IR webcam with physical shutter",
+      "dimensions": { "width": "315.6 mm", "depth": "222.5 mm", "weight": "1.12 kg" },
+      "os": "Windows 11 Pro",
+      "upgradeability": { "ram": "Not upgradeable (soldered LPDDR5X)", "storage": "Upgradeable (1× M.2 slot)" }
+    },
+    "keyFeatures": ["Intel Core Ultra", "1.12 kg weight", "MIL-SPEC durability", "IR webcam", "Thunderbolt 4", "OLED option"],
+    "variants": [],
+    "affiliateLinks": [],
+    "relatedIds": ["dev-000004", "dev-000005"],
+    "tags": ["lenovo", "thinkpad", "laptop", "business", "ultra-light", "intel-core-ultra"],
+    "sources": [
+      { "provider": "Lenovo official", "url": "https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadx1/thinkpad-x1-carbon-gen-12-(14-inch-intel)/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-01",
+    "updatedAt": "2026-11-01",
+    "schemaVersion": 1
+  }
+]

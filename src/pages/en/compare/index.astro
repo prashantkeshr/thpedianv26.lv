@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ComparisonEngine from '../../../components/comparison/ComparisonEngine';
+import { getAllDevices, getDevicesByIds } from '../../../services/deviceService';
+
+const BASE = '/thpedianv26.lv';
+const devices = getAllDevices();
+
+// Pre-select items from URL params if provided
+const url = Astro.url;
+const idsParam = url.searchParams.get('ids') ?? '';
+const selectedIds = idsParam ? idsParam.split(',').filter(Boolean) : [];
+const selectedDevices = selectedIds.length >= 2 ? getDevicesByIds(selectedIds) : [];
+---
+
+<BaseLayout
+  title="Compare Devices & Components — Techpedia"
+  description="Side-by-side device and component comparison with specification highlighting, difference detection and shareable links."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <span class="text-slate-200">Compare</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Comparison Engine</h1>
+      <p class="text-slate-400">Compare up to 5 devices or components side-by-side</p>
+    </div>
+
+    <!-- Device selector -->
+    <div class="mb-8 rounded-xl bg-navy-800/40 border border-tp-border p-6">
+      <h2 class="text-sm font-semibold text-slate-300 mb-4">Select devices to compare</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-80 overflow-y-auto">
+        {devices.map(d => (
+          <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-navy-700 transition-colors group">
+            <input
+              type="checkbox"
+              name="compare-device"
+              value={d.id}
+              checked={selectedIds.includes(d.id)}
+              class="w-4 h-4 rounded border-tp-border bg-navy-800 text-tp-blue focus:ring-tp-blue"
+            />
+            <div class="min-w-0">
+              <div class="text-sm font-medium text-slate-200 group-hover:text-tp-cyan truncate">{d.name}</div>
+              <div class="text-xs text-slate-400">{d.brandName} · <span class="capitalize">{d.category}</span></div>
+            </div>
+          </label>
+        ))}
+      </div>
+      <div class="mt-4 flex justify-end">
+        <button
+          id="compare-btn"
+          class="tp-btn-primary"
+        >
+          Compare Selected
+        </button>
+      </div>
+    </div>
+
+    <!-- Comparison table -->
+    <div id="comparison-container" class={selectedDevices.length >= 2 ? '' : 'hidden'}>
+      {selectedDevices.length >= 2 && (
+        <div class="overflow-x-auto">
+          <ComparisonEngine items={selectedDevices} lang="en" client:load />
+        </div>
+      )}
+    </div>
+
+    {selectedDevices.length < 2 && selectedIds.length > 0 && (
+      <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-5 text-center text-amber-300 text-sm">
+        Select at least 2 devices to compare. Some selected IDs may not be in the database.
+      </div>
+    )}
+
+    {selectedIds.length === 0 && (
+      <div class="rounded-xl bg-navy-800/40 border border-tp-border p-10 text-center text-slate-400">
+        <div class="text-5xl mb-4">⚖️</div>
+        <p class="text-lg font-medium text-slate-300">Select devices above to compare</p>
+        <p class="text-sm mt-2">Check 2–5 devices and click "Compare Selected"</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<script>
+  const btn = document.getElementById('compare-btn');
+  btn?.addEventListener('click', () => {
+    const checked = Array.from(
+      document.querySelectorAll<HTMLInputElement>('input[name="compare-device"]:checked')
+    ).map(el => el.value);
+
+    if (checked.length < 2) {
+      alert('Please select at least 2 devices to compare.');
+      return;
+    }
+    if (checked.length > 5) {
+      alert('Please select at most 5 devices to compare.');
+      return;
+    }
+
+    const params = new URLSearchParams({ ids: checked.join(',') });
+    window.location.href = `/thpedianv26.lv/en/compare/?${params}`;
+  });
+</script>

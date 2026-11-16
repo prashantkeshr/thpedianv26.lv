@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '/thpedianv26.lv';
+
+const technologies = [
+  { name: 'USB Standards', slug: 'usb-standards', category: 'Interface', icon: '🔌', desc: 'USB 2.0, 3.x, 4.0 and USB-C evolution — speeds, power delivery and compatibility.' },
+  { name: 'Wi-Fi Generations', slug: 'wifi-generations', category: 'Wireless', icon: '📶', desc: '802.11 standards from 802.11a to Wi-Fi 7 (802.11be), speeds, bands and features.' },
+  { name: 'Display Technologies', slug: 'display-technologies', category: 'Display', icon: '🖥️', desc: 'LCD, IPS, OLED, AMOLED, Mini-LED, Micro-LED and emerging display technologies.' },
+  { name: 'Semiconductor Nodes', slug: 'semiconductor-nodes', category: 'Semiconductor', icon: '⚙️', desc: 'TSMC, Samsung and Intel process nodes from 10nm to 2nm and beyond.' },
+  { name: 'RAM Technologies', slug: 'ram-technologies', category: 'Memory', icon: '💾', desc: 'DDR4, DDR5, LPDDR5X — speeds, timing, bandwidth and platform compatibility.' },
+  { name: 'Bluetooth Standards', slug: 'bluetooth-standards', category: 'Wireless', icon: '📡', desc: 'Bluetooth Classic, BLE, Bluetooth 5.x, 6.0 — range, throughput, audio codecs.' },
+];
+---
+
+<BaseLayout
+  title="Technology Explorer — Techpedia"
+  description="Explore technology timelines, standards and comparisons: Wi-Fi, USB, display technologies, semiconductor nodes and more."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <span class="text-slate-200">Technologies</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Technology Explorer</h1>
+      <p class="text-slate-400">Standards, generations, timelines and deep technical explanations</p>
+    </div>
+
+    <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 mb-8 text-sm text-amber-300 flex items-center gap-2">
+      <span>🔄</span>
+      <span>Technology detail pages are in active development. The categories below are available now.</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {technologies.map(tech => (
+        <div class="tp-card p-5 flex flex-col gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-navy-700 flex items-center justify-center text-xl">{tech.icon}</div>
+            <div>
+              <h3 class="font-semibold text-slate-100">{tech.name}</h3>
+              <span class="tp-badge-blue text-xs">{tech.category}</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400">{tech.desc}</p>
+          <div class="mt-auto">
+            <span class="text-xs text-slate-500 italic">Coming soon</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

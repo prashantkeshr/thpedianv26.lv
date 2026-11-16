@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import SearchBar from '../../components/search/SearchBar';
+import DeviceCard from '../../components/cards/DeviceCard';
+import { getAllDevices } from '../../services/deviceService';
+import { getAllBrands } from '../../services/brandService';
+import { getAllComponents } from '../../services/componentService';
+
+const BASE = '/thpedianv26.lv';
+const devices = getAllDevices();
+const brands = getAllBrands();
+const components = getAllComponents();
+const featured = devices.slice(0, 4);
+---
+
+<BaseLayout
+  title="Techpedia — तकनीक खोजें। हर डिवाइस समझें।"
+  description="Techpedia एक वैश्विक प्रौद्योगिकी विश्वकोश है। डिवाइस, घटक, ब्रांड और तकनीक खोजें।"
+  lang="hi"
+>
+  <section class="relative overflow-hidden bg-gradient-to-b from-navy-950 via-navy-900 to-navy-900 pb-16 pt-20">
+    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-tp-blue/8 blur-[120px] rounded-full pointer-events-none" />
+
+    <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
+      <div class="inline-flex items-center gap-2 tp-badge-cyan mb-6 px-3 py-1.5 text-sm">
+        <span class="w-2 h-2 rounded-full bg-tp-cyan animate-pulse-slow" />
+        वैश्विक प्रौद्योगिकी विश्वकोश
+      </div>
+
+      <h1 class="text-4xl sm:text-5xl font-bold text-slate-100 leading-tight mb-5" lang="hi">
+        तकनीक खोजें।<br />
+        <span class="gradient-text">हर डिवाइस समझें।</span>
+      </h1>
+
+      <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed">
+        {devices.length} डिवाइस, {components.length} घटक और {brands.length} ब्रांड।
+        तकनीकी विनिर्देश, तुलना, डेटाशीट और सीखने के संसाधन।
+      </p>
+
+      <div class="max-w-3xl mx-auto">
+        <SearchBar lang="hi" variant="hero" client:load />
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-navy-800/60 border-y border-tp-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
+        {[
+          { label: 'डिवाइस', value: devices.length, icon: '📱' },
+          { label: 'घटक', value: components.length, icon: '🔌' },
+          { label: 'ब्रांड', value: brands.length, icon: '🏢' },
+          { label: 'भाषाएं', value: 2, icon: '🌐' },
+        ].map(({ label, value, icon }) => (
+          <div class="flex items-center justify-center gap-2">
+            <span class="text-xl">{icon}</span>
+            <div>
+              <div class="text-xl font-bold text-slate-100">{value}</div>
+              <div class="text-xs text-slate-400">{label}</div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
+    <div class="flex items-end justify-between mb-8">
+      <div>
+        <h2 class="tp-section-title">प्रमुख डिवाइस</h2>
+        <p class="tp-section-subtitle">नवीनतम और सर्वाधिक संदर्भित उपकरण</p>
+      </div>
+      <a href={`${BASE}/hi/devices/`} class="tp-btn-ghost text-sm">सभी देखें →</a>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {featured.map(device => (
+        <DeviceCard device={device} lang="hi" client:visible />
+      ))}
+    </div>
+  </section>
+
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
+    <div class="grid sm:grid-cols-2 gap-6">
+      <div class="tp-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-lg bg-violet-900/40 border border-violet-700/30 flex items-center justify-center text-xl">📚</div>
+          <div>
+            <h3 class="font-semibold text-slate-100">सीखने का केंद्र</h3>
+            <p class="text-xs text-slate-400">गाइड, ट्यूटोरियल और समझाइश</p>
+          </div>
+        </div>
+        <a href={`${BASE}/hi/learn/`} class="tp-btn-secondary text-sm">गाइड देखें</a>
+      </div>
+      <div class="tp-card p-6">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">🔧</div>
+          <div>
+            <h3 class="font-semibold text-slate-100">समस्या निवारण</h3>
+            <p class="text-xs text-slate-400">इंटरैक्टिव डायग्नोस्टिक गाइड</p>
+          </div>
+        </div>
+        <a href={`${BASE}/hi/troubleshoot/`} class="tp-btn-secondary text-sm">निवारण करें</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

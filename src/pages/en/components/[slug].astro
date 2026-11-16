@@ -1,0 +1,238 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllComponents, getComponentBySlug } from '../../../services/componentService';
+
+export async function getStaticPaths() {
+  return getAllComponents().map(c => ({ params: { slug: c.slug } }));
+}
+
+const { slug } = Astro.params;
+const BASE = '/thpedianv26.lv';
+const comp = getComponentBySlug(slug!)!;
+if (!comp) return Astro.redirect(`${BASE}/en/components/`);
+
+const primaryImage = comp.images?.[0];
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'Product',
+  name: comp.name,
+  description: comp.description,
+  brand: { '@type': 'Brand', name: comp.manufacturerName },
+  mpn: comp.partNumber,
+  image: primaryImage?.url,
+};
+---
+
+<BaseLayout
+  title={`${comp.name} — ${comp.partNumber} Datasheet & Specifications — Techpedia`}
+  description={`${comp.name} (${comp.partNumber}) complete technical specifications, pinout, electrical characteristics and datasheet. ${comp.description.slice(0, 100)}`}
+  lang="en"
+>
+  <slot name="head" slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </slot>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <a href={`${BASE}/en/components/`} class="hover:text-slate-200">Components</a>
+      <span>/</span>
+      <span class="text-slate-200">{comp.name}</span>
+    </nav>
+
+    <div class="grid lg:grid-cols-[300px_1fr] gap-10">
+      <!-- Left -->
+      <div class="lg:sticky lg:top-20 self-start">
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-6 mb-4 aspect-square flex items-center justify-center">
+          {primaryImage ? (
+            <img src={primaryImage.url} alt={primaryImage.alt} class="w-full h-full object-contain" loading="eager" />
+          ) : (
+            <div class="text-7xl opacity-20">🔌</div>
+          )}
+        </div>
+
+        <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 space-y-3">
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-400">Part Number</span>
+            <span class="text-xs font-mono text-slate-200">{comp.partNumber}</span>
+          </div>
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-400">Category</span>
+            <span class="tp-badge-cyan">{comp.category}</span>
+          </div>
+          {comp.packageType && (
+            <div class="flex justify-between">
+              <span class="text-xs text-slate-400">Package</span>
+              <span class="text-xs font-mono text-slate-200">{comp.packageType}</span>
+            </div>
+          )}
+          {comp.pinCount && (
+            <div class="flex justify-between">
+              <span class="text-xs text-slate-400">Pin Count</span>
+              <span class="text-xs text-slate-200">{comp.pinCount}</span>
+            </div>
+          )}
+          <div class="flex justify-between">
+            <span class="text-xs text-slate-400">Verification</span>
+            <span class="tp-badge-green">{comp.verificationLevel}</span>
+          </div>
+        </div>
+
+        {comp.datasheetUrl && (
+          <a
+            href={comp.datasheetUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-3 tp-btn-primary w-full justify-center text-sm"
+          >
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+            </svg>
+            View Datasheet
+          </a>
+        )}
+
+        {comp.sources.length > 0 && (
+          <div class="mt-4 rounded-xl bg-navy-800/40 border border-tp-border p-4">
+            <h4 class="text-xs font-semibold text-slate-300 mb-2 uppercase tracking-wider">Sources</h4>
+            <ul class="space-y-1.5">
+              {comp.sources.map(s => (
+                <li>
+                  <a href={s.url} target="_blank" rel="noopener noreferrer"
+                    class="text-xs text-tp-blue hover:text-tp-blue-bright flex items-center gap-1">
+                    <svg class="w-3 h-3 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                      <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/>
+                    </svg>
+                    {s.provider}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <!-- Right -->
+      <div class="min-w-0">
+        <div class="mb-8">
+          <div class="flex items-center gap-2 mb-2">
+            <span class="text-sm text-tp-blue font-medium">{comp.manufacturerName}</span>
+            <span class="text-slate-600">·</span>
+            <span class="tp-badge-cyan capitalize">{comp.category}</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-1">{comp.name}</h1>
+          <p class="text-sm font-mono text-slate-400 mb-3">{comp.partNumber}</p>
+          {comp.commonNames.length > 0 && (
+            <p class="text-sm text-slate-400 mb-3">Also known as: {comp.commonNames.join(', ')}</p>
+          )}
+          <p class="text-slate-400 leading-relaxed">{comp.description}</p>
+        </div>
+
+        <!-- Electrical characteristics -->
+        {Object.keys(comp.electricalChars).length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-100 mb-4">Electrical Characteristics</h2>
+            <div class="rounded-xl border border-tp-border overflow-hidden">
+              <div class="divide-y divide-tp-border/50">
+                {Object.entries(comp.electricalChars).map(([k, v], i) => (
+                  <div class={`flex items-center px-4 py-2.5 ${i % 2 === 0 ? 'bg-navy-900/30' : 'bg-navy-800/20'}`}>
+                    <span class="spec-label">
+                      {k.replace(/([A-Z])/g, ' $1').replace(/^\w/, c => c.toUpperCase()).trim()}
+                    </span>
+                    <span class="spec-value font-mono">{v}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Technical specs -->
+        {Object.keys(comp.specs).length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-100 mb-4">Technical Specifications</h2>
+            <div class="rounded-xl border border-tp-border overflow-hidden">
+              <div class="divide-y divide-tp-border/50">
+                {Object.entries(comp.specs).map(([k, v], i) => v !== null && (
+                  <div class={`flex items-start px-4 py-2.5 ${i % 2 === 0 ? 'bg-navy-900/30' : 'bg-navy-800/20'}`}>
+                    <span class="spec-label">
+                      {k.replace(/([A-Z])/g, ' $1').replace(/^\w/, c => c.toUpperCase()).trim()}
+                    </span>
+                    <span class="spec-value">{String(v)}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Pinout -->
+        {comp.pinout && comp.pinout.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-100 mb-4">Pin Configuration</h2>
+            <div class="rounded-xl border border-tp-border overflow-hidden">
+              <div class="bg-navy-700/50 px-4 py-2 border-b border-tp-border grid grid-cols-3 text-xs font-semibold text-tp-cyan uppercase tracking-wider">
+                <span>Pin</span><span>Name</span><span>Description</span>
+              </div>
+              <div class="divide-y divide-tp-border/50 max-h-64 overflow-y-auto">
+                {comp.pinout.map((pin, i) => (
+                  <div class={`grid grid-cols-3 px-4 py-2 ${i % 2 === 0 ? 'bg-navy-900/30' : 'bg-navy-800/20'}`}>
+                    <span class="text-sm font-mono text-slate-300">{pin.pin}</span>
+                    <span class="text-sm font-mono text-tp-cyan">{pin.name}</span>
+                    <span class="text-xs text-slate-400">{pin.description ?? '—'}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        <!-- Applications -->
+        {comp.applications.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-100 mb-3">Applications</h2>
+            <div class="flex flex-wrap gap-2">
+              {comp.applications.map(app => (
+                <span class="text-sm px-3 py-1 rounded-lg bg-navy-800 border border-tp-border text-slate-300">{app}</span>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Equivalent parts -->
+        {comp.equivalentParts && comp.equivalentParts.length > 0 && (
+          <div class="mb-8">
+            <h2 class="text-lg font-semibold text-slate-100 mb-3">Equivalent / Alternative Parts</h2>
+            <div class="flex flex-wrap gap-2">
+              {comp.equivalentParts.map(p => (
+                <a
+                  href={`${BASE}/en/search/?q=${encodeURIComponent(p)}`}
+                  class="text-sm px-3 py-1 rounded-lg bg-navy-800 border border-tp-border text-tp-blue hover:text-tp-blue-bright hover:border-tp-blue transition-colors"
+                >
+                  {p}
+                </a>
+              ))}
+            </div>
+          </div>
+        )}
+
+        <!-- Safety notes -->
+        {comp.safetyNotes && comp.safetyNotes.length > 0 && (
+          <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="text-lg">⚠️</span>
+              <h3 class="text-sm font-semibold text-amber-400">Safety Notes</h3>
+            </div>
+            <ul class="space-y-1">
+              {comp.safetyNotes.map(note => (
+                <li class="text-sm text-amber-200/70">{note}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    </div>
+  </div>
+</BaseLayout>

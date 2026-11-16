@@ -1,0 +1,80 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import DeviceCard from '../../../components/cards/DeviceCard';
+import { getAllBrands, getBrandBySlug } from '../../../services/brandService';
+import { getDevicesByBrand } from '../../../services/deviceService';
+
+export async function getStaticPaths() {
+  return getAllBrands().map(b => ({ params: { slug: b.slug } }));
+}
+
+const { slug } = Astro.params;
+const BASE = '/thpedianv26.lv';
+const brand = getBrandBySlug(slug!)!;
+if (!brand) return Astro.redirect(`${BASE}/en/brands/`);
+const brandDevices = getDevicesByBrand(brand.id);
+---
+
+<BaseLayout
+  title={`${brand.name} — Brand Overview — Techpedia`}
+  description={`${brand.name}: ${brand.description.slice(0, 150)}`}
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <a href={`${BASE}/en/brands/`} class="hover:text-slate-200">Brands</a>
+      <span>/</span>
+      <span class="text-slate-200">{brand.name}</span>
+    </nav>
+
+    <div class="flex items-start gap-6 mb-10">
+      <div class="w-20 h-20 rounded-2xl bg-navy-700 flex items-center justify-center text-4xl flex-shrink-0">
+        🏢
+      </div>
+      <div>
+        <h1 class="text-3xl font-bold text-slate-100">{brand.name}</h1>
+        {brand.headquarters && <p class="text-slate-400 mt-1">{brand.headquarters}</p>}
+        {brand.founded && <p class="text-sm text-slate-500">Founded {brand.founded}</p>}
+        {brand.website && (
+          <a href={brand.website} target="_blank" rel="noopener noreferrer"
+            class="text-sm text-tp-blue hover:text-tp-blue-bright mt-2 inline-flex items-center gap-1">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/>
+            </svg>
+            {brand.website.replace('https://', '')}
+          </a>
+        )}
+      </div>
+    </div>
+
+    <p class="text-slate-300 leading-relaxed max-w-3xl mb-10">{brand.description}</p>
+
+    <div class="flex flex-wrap gap-2 mb-10">
+      {brand.productCategories.map(cat => (
+        <span class="tp-badge-blue capitalize">{cat}</span>
+      ))}
+    </div>
+
+    {brandDevices.length > 0 && (
+      <div>
+        <h2 class="text-xl font-semibold text-slate-100 mb-5">
+          {brand.name} Devices ({brandDevices.length})
+        </h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+          {brandDevices.map(d => (
+            <DeviceCard device={d} lang="en" client:visible />
+          ))}
+        </div>
+      </div>
+    )}
+
+    {brandDevices.length === 0 && (
+      <div class="rounded-xl bg-navy-800/40 border border-tp-border p-8 text-center text-slate-400">
+        <p>No devices from {brand.name} are in the database yet.</p>
+        <p class="text-sm mt-2">More devices are being added regularly.</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

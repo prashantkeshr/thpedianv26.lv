@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '/thpedianv26.lv';
+
+const guides = [
+  { title: 'What is a CPU?', level: 'beginner', icon: '⚙️', summary: 'Understand how modern processors work — cores, threads, cache and instruction pipelines.' },
+  { title: 'How does RAM work?', level: 'beginner', icon: '💾', summary: 'From DRAM cells to DDR5 — memory types, timing, channels and latency explained.' },
+  { title: 'GPU Architecture Basics', level: 'intermediate', icon: '🎮', summary: 'Shader processors, VRAM, rasterization, ray tracing and AI acceleration.' },
+  { title: 'Understanding Transistors', level: 'beginner', icon: '🔌', summary: 'The fundamental building block of all digital electronics. BJT, MOSFET and beyond.' },
+  { title: 'Ohm\'s Law and Circuit Basics', level: 'beginner', icon: '⚡', summary: 'Voltage, current, resistance and how they relate in simple and complex circuits.' },
+  { title: 'SSD vs HDD Technology', level: 'beginner', icon: '💿', summary: 'NAND flash, wear leveling, NVMe protocol and why SSDs outperform spinning drives.' },
+  { title: 'Wi-Fi 7 Explained', level: 'intermediate', icon: '📶', summary: 'Multi-Link Operation, 320 MHz channels, QAM-4096 and what makes Wi-Fi 7 different.' },
+  { title: 'Introduction to Microcontrollers', level: 'beginner', icon: '🔧', summary: 'What microcontrollers are, how to choose one and common peripherals like GPIO, SPI, I2C.' },
+];
+
+const levelColors: Record<string, string> = {
+  beginner: 'tp-badge-green',
+  intermediate: 'tp-badge-blue',
+  advanced: 'tp-badge-violet',
+  professional: 'bg-slate-800/60 text-slate-300 border-slate-600/30 tp-badge',
+};
+---
+
+<BaseLayout
+  title="Learning Centre — Techpedia"
+  description="Technology guides, tutorials and explainers. Beginner to advanced electronics, computing and hardware topics."
+  lang="en"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200">Home</a>
+      <span>/</span>
+      <span class="text-slate-200">Learn</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">Learning Centre</h1>
+      <p class="text-slate-400">Structured guides and tutorials from beginner to professional level</p>
+    </div>
+
+    <div class="flex flex-wrap gap-2 mb-8">
+      {['All', 'Beginner', 'Intermediate', 'Advanced'].map(level => (
+        <button class={`text-sm px-3 py-1.5 rounded-lg border transition-colors ${level === 'All' ? 'bg-tp-blue text-white border-tp-blue' : 'bg-navy-800 text-slate-400 border-tp-border hover:border-slate-500 hover:text-slate-200'}`}>
+          {level}
+        </button>
+      ))}
+    </div>
+
+    <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 mb-8 text-sm text-amber-300 flex items-center gap-2">
+      <span>📚</span>
+      <span>Article pages are in development. The guide library will be published progressively.</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {guides.map(guide => (
+        <div class="tp-card p-5 flex flex-col gap-3 cursor-default">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-lg bg-navy-700 flex items-center justify-center text-xl flex-shrink-0">{guide.icon}</div>
+            <div class="min-w-0">
+              <h3 class="font-semibold text-slate-100 leading-tight">{guide.title}</h3>
+              <span class={`text-xs mt-1 ${levelColors[guide.level] ?? levelColors.beginner}`}>{guide.level}</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 line-clamp-3">{guide.summary}</p>
+          <div class="mt-auto">
+            <span class="text-xs text-slate-500 italic">Coming soon</span>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
