@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import type { Device } from '../../types';
 
 const BASE = '';
@@ -8,99 +9,153 @@ interface DeviceCardProps {
   compact?: boolean;
 }
 
-const statusColors = {
-  available: 'bg-emerald-900/40 text-emerald-400 border-emerald-700/30',
-  discontinued: 'bg-slate-800/60 text-slate-400 border-slate-600/30',
-  announced: 'bg-amber-900/40 text-amber-400 border-amber-700/30',
-  rumored: 'bg-violet-900/40 text-violet-400 border-violet-700/30',
-  cancelled: 'bg-red-900/40 text-red-400 border-red-600/30',
+const statusColors: Record<string, string> = {
+  available: 'bg-emerald-500/15 text-emerald-400 border-emerald-500/25',
+  discontinued: 'bg-slate-500/15 text-slate-400 border-slate-500/25',
+  announced: 'bg-amber-500/15 text-amber-400 border-amber-500/25',
+  rumored: 'bg-violet-500/15 text-violet-400 border-violet-500/25',
+  cancelled: 'bg-red-500/15 text-red-400 border-red-500/25',
 };
 
 const categoryIcons: Record<string, string> = {
   smartphone: '📱', tablet: '📟', laptop: '💻', desktop: '🖥️',
   gpu: '🎮', monitor: '🖥️', smartwatch: '⌚', headphones: '🎧',
   router: '📡', storage: '💾', camera: '📷', tv: '📺',
+  'gaming-console': '🎮', 'handheld-gaming': '🕹️',
 };
 
+const TTL = 7 * 24 * 60 * 60 * 1000;
+
+function readCache(key: string): string | null {
+  try {
+    const raw = localStorage.getItem('tp_img_' + key);
+    if (!raw) return null;
+    const { url, ts } = JSON.parse(raw) as { url: string; ts: number };
+    if (Date.now() - ts > TTL) { localStorage.removeItem('tp_img_' + key); return null; }
+    return url;
+  } catch { return null; }
+}
+
+function writeCache(key: string, url: string) {
+  try { localStorage.setItem('tp_img_' + key, JSON.stringify({ url, ts: Date.now() })); } catch {}
+}
+
+function cacheKey(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+}
+
+async function fetchWikiImage(name: string): Promise<string | null> {
+  try {
+    const r = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(name)}`, {
+      headers: { Accept: 'application/json' },
+    });
+    if (!r.ok) return null;
+    const d = await r.json() as { thumbnail?: { source: string }; originalimage?: { source: string } };
+    return d?.thumbnail?.source ?? d?.originalimage?.source ?? null;
+  } catch { return null; }
+}
+
 export default function DeviceCard({ device, lang = 'en', compact = false }: DeviceCardProps) {
-  const img = device.images?.[0];
+  const staticImg = device.images?.[0];
+  const [autoImg, setAutoImg] = useState<string | null>(null);
+  const [imgState, setImgState] = useState<'loading' | 'found' | 'missing'>(staticImg ? 'found' : 'loading');
+
+  useEffect(() => {
+    if (staticImg) return;
+    const key = cacheKey(device.name);
+    const cached = readCache(key);
+    if (cached === '') { setImgState('missing'); return; }
+    if (cached) { setAutoImg(cached); setImgState('found'); return; }
+
+    fetchWikiImage(device.name).then(url => {
+      if (url) { writeCache(key, url); setAutoImg(url); setImgState('found'); }
+      else { writeCache(key, ''); setImgState('missing'); }
+    });
+  }, [device.name, staticImg]);
+
   const href = `${BASE}/${lang}/devices/${device.slug}/`;
   const icon = categoryIcons[device.category] ?? '📦';
   const statusLabel = device.status.charAt(0).toUpperCase() + device.status.slice(1);
   const statusClass = statusColors[device.status] ?? statusColors.available;
+  const year = device.releasedAt ? new Date(device.releasedAt).getFullYear() : null;
 
-  // Extract a few quick specs for the card
-  const quickSpecs: string[] = [];
-  if (device.category === 'smartphone') {
-    const s = device.specs as Record<string, Record<string, string>>;
-    if (s?.processor?.name) quickSpecs.push(s.processor.name);
-    if (s?.memory?.ram) quickSpecs.push(s.memory.ram + ' RAM');
-    if (s?.display?.size) quickSpecs.push(s.display.size);
-  } else if (device.category === 'laptop') {
-    const s = device.specs as Record<string, Record<string, string>>;
-    if (s?.processor?.name) quickSpecs.push(s.processor.name);
-    if (s?.memory?.ram) quickSpecs.push(s.memory.ram);
-    if (s?.display?.size) quickSpecs.push(s.display.size);
-  }
+  const specs: string[] = [];
+  const s = device.specs as Record<string, Record<string, string>>;
+  if (s?.processor?.name) specs.push(s.processor.name);
+  if (s?.memory?.ram) specs.push(s.memory.ram + (s.memory.ram.endsWith('RAM') ? '' : ' RAM'));
+  if (s?.display?.size) specs.push(s.display.size);
+
+  const displayImg = staticImg?.url ?? autoImg;
 
   return (
     <a
       href={href}
-      className={`tp-card flex flex-col group overflow-hidden ${compact ? '' : 'h-full'}`}
+      className={`group relative flex flex-col overflow-hidden rounded-xl border border-slate-700/50 bg-slate-900/80 backdrop-blur-sm transition-all duration-200 hover:border-slate-500/70 hover:shadow-lg hover:shadow-blue-950/40 hover:-translate-y-0.5 ${compact ? '' : 'h-full'}`}
     >
       {/* Image area */}
-      <div className="relative bg-navy-800/60 aspect-[4/3] overflow-hidden">
-        {img ? (
+      <div className="relative bg-gradient-to-br from-slate-800/60 to-slate-900/60 overflow-hidden" style={{ aspectRatio: '4/3' }}>
+        {imgState === 'loading' && (
+          <div className="w-full h-full animate-pulse bg-slate-800/80" />
+        )}
+        {imgState === 'found' && displayImg && (
           <img
-            src={img.url}
-            alt={img.alt}
+            src={displayImg}
+            alt={device.name}
             className="w-full h-full object-contain p-4 group-hover:scale-105 transition-transform duration-300"
             loading="lazy"
             decoding="async"
+            onError={() => setImgState('missing')}
           />
-        ) : (
+        )}
+        {imgState === 'missing' && (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-5xl opacity-30">{icon}</span>
+            <span className="text-6xl opacity-15">{icon}</span>
           </div>
         )}
-        <div className="absolute top-2 right-2">
-          <span className={`inline-flex items-center px-2 py-0.5 rounded text-xs font-medium border ${statusClass}`}>
+
+        {/* Status pill */}
+        <div className="absolute top-2.5 right-2.5">
+          <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-semibold border ${statusClass}`}>
             {statusLabel}
           </span>
         </div>
+
+        {/* Category icon bottom-left */}
+        <div className="absolute bottom-2 left-2.5 text-sm opacity-60">{icon}</div>
       </div>
 
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1 gap-2">
-        <div className="flex items-start justify-between gap-2">
-          <div className="min-w-0">
-            <p className="text-xs text-slate-400 font-medium">{device.brandName}</p>
-            <h3 className="text-sm font-semibold text-slate-100 leading-tight group-hover:text-tp-cyan transition-colors line-clamp-2">
-              {device.name}
-            </h3>
-          </div>
-          <span className="text-lg flex-shrink-0">{icon}</span>
+      <div className="flex flex-col flex-1 gap-2 p-4">
+        {/* Brand + name */}
+        <div>
+          <p className="text-[11px] font-medium text-blue-400/80 uppercase tracking-wide mb-0.5">{device.brandName}</p>
+          <h3 className="text-sm font-bold text-slate-100 leading-snug group-hover:text-cyan-300 transition-colors line-clamp-2">
+            {device.name}
+          </h3>
         </div>
 
-        {quickSpecs.length > 0 && (
-          <div className="flex flex-wrap gap-1 mt-auto">
-            {quickSpecs.slice(0, 3).map((spec, i) => (
-              <span key={i} className="text-xs px-1.5 py-0.5 bg-navy-800 border border-tp-border rounded text-slate-400">
+        {/* Key specs */}
+        {specs.length > 0 && (
+          <div className="flex flex-wrap gap-1 mt-1">
+            {specs.slice(0, 3).map((spec, i) => (
+              <span key={i} className="text-[11px] px-2 py-0.5 rounded-full bg-slate-800/80 border border-slate-700/50 text-slate-400 font-medium">
                 {spec}
               </span>
             ))}
           </div>
         )}
 
-        <div className="flex items-center justify-between mt-auto pt-2">
-          <span className="tp-badge-blue">{device.category}</span>
-          {device.releasedAt && (
-            <span className="text-xs text-slate-500">
-              {new Date(device.releasedAt).getFullYear()}
-            </span>
-          )}
+        {/* Footer row */}
+        <div className="flex items-center justify-between mt-auto pt-2 border-t border-slate-800/60">
+          <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-950/60 text-blue-300 border border-blue-800/40 font-medium capitalize">
+            {device.category.replace(/-/g, ' ')}
+          </span>
+          {year && <span className="text-[11px] text-slate-500 font-medium">{year}</span>}
         </div>
       </div>
+
+      {/* Hover glow edge */}
+      <div className="absolute inset-x-0 bottom-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500/0 to-transparent group-hover:via-blue-500/50 transition-all duration-300" />
     </a>
   );
 }

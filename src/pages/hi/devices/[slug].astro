@@ -3,6 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getAllDevices, getDeviceBySlug, getRelatedDevices } from '../../../services/deviceService';
 import { getBrandById } from '../../../services/brandService';
 import DeviceCard from '../../../components/cards/DeviceCard';
+import DeviceAutoImage from '../../../components/DeviceAutoImage';
 
 export async function getStaticPaths() {
   const devices = getAllDevices();
@@ -74,20 +75,15 @@ const vb = verificationBadge[device.verificationLevel] ?? verificationBadge.unve
       <!-- Left column -->
       <div class="lg:col-span-1">
         <div class="sticky top-6">
-          {primaryImage ? (
-            <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-4 flex items-center justify-center min-h-[220px]">
-              <img
-                src={primaryImage.url}
-                alt={primaryImage.alt}
-                class="max-h-56 w-auto object-contain"
-                loading="lazy"
-              />
-            </div>
-          ) : (
-            <div class="rounded-xl bg-navy-800/40 border border-tp-border p-8 mb-4 flex items-center justify-center min-h-[220px]">
-              <span class="text-6xl opacity-30">📱</span>
-            </div>
-          )}
+          <div class="rounded-2xl overflow-hidden border border-slate-700/50 bg-gradient-to-br from-slate-800/60 to-slate-900/60 mb-4 aspect-square flex items-center justify-center">
+            <DeviceAutoImage
+              deviceName={device.name}
+              fallbackIcon="📱"
+              className="w-full h-full"
+              priority={true}
+              client:visible
+            />
+          </div>
 
           <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-4 space-y-3 text-sm">
             <div class="flex justify-between">
