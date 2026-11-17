@@ -32,10 +32,21 @@ const selectedDevices = selectedIds.length >= 2 ? getDevicesByIds(selectedIds) :
 
     <!-- Device selector -->
     <div class="mb-8 rounded-xl bg-navy-800/40 border border-tp-border p-6">
-      <h2 class="text-sm font-semibold text-slate-300 mb-4">Select devices to compare</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-80 overflow-y-auto">
+      <h2 class="text-sm font-semibold text-slate-300 mb-3">Select devices to compare</h2>
+
+      <!-- Category filter pills -->
+      <div id="category-filters" class="flex flex-wrap gap-2 mb-4">
+        {['All', ...Array.from(new Set(devices.map(d => d.category))).sort()].map(cat => (
+          <button
+            data-filter={cat === 'All' ? 'all' : cat}
+            class={`px-3 py-1 rounded-full text-xs font-medium border transition-colors capitalize category-pill ${cat === 'All' ? 'bg-tp-blue/20 border-tp-blue text-tp-blue' : 'bg-navy-700 border-tp-border text-slate-400 hover:border-slate-500 hover:text-slate-200'}`}
+          >{cat === 'All' ? 'All' : cat.replace(/-/g, ' ')}</button>
+        ))}
+      </div>
+
+      <div id="device-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 max-h-80 overflow-y-auto">
         {devices.map(d => (
-          <label class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-navy-700 transition-colors group">
+          <label data-category={d.category} class="flex items-center gap-3 cursor-pointer p-2 rounded-lg hover:bg-navy-700 transition-colors group device-row">
             <input
               type="checkbox"
               name="compare-device"
@@ -45,7 +56,7 @@ const selectedDevices = selectedIds.length >= 2 ? getDevicesByIds(selectedIds) :
             />
             <div class="min-w-0">
               <div class="text-sm font-medium text-slate-200 group-hover:text-tp-cyan truncate">{d.name}</div>
-              <div class="text-xs text-slate-400">{d.brandName} · <span class="capitalize">{d.category}</span></div>
+              <div class="text-xs text-slate-400">{d.brandName} · <span class="capitalize">{d.category.replace(/-/g, ' ')}</span></div>
             </div>
           </label>
         ))}
@@ -86,6 +97,30 @@ const selectedDevices = selectedIds.length >= 2 ? getDevicesByIds(selectedIds) :
 </BaseLayout>
 
 <script>
+  // Category filter pills
+  const pills = document.querySelectorAll<HTMLButtonElement>('.category-pill');
+  const rows = document.querySelectorAll<HTMLElement>('.device-row');
+  let activeFilter = 'all';
+
+  pills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      activeFilter = pill.dataset.filter ?? 'all';
+      pills.forEach(p => {
+        const isActive = p.dataset.filter === activeFilter;
+        p.classList.toggle('bg-tp-blue/20', isActive);
+        p.classList.toggle('border-tp-blue', isActive);
+        p.classList.toggle('text-tp-blue', isActive);
+        p.classList.toggle('bg-navy-700', !isActive);
+        p.classList.toggle('border-tp-border', !isActive);
+        p.classList.toggle('text-slate-400', !isActive);
+      });
+      rows.forEach(row => {
+        const match = activeFilter === 'all' || row.dataset.category === activeFilter;
+        row.style.display = match ? '' : 'none';
+      });
+    });
+  });
+
   const btn = document.getElementById('compare-btn');
   btn?.addEventListener('click', () => {
     const checked = Array.from(

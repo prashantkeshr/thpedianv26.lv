@@ -788,5 +788,356 @@
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
+  },
+  {
+    "id": "cmp-000006",
+    "slug": "microchip-atmega328p",
+    "name": "ATmega328P",
+    "commonNames": [
+      "ATmega328P-PU",
+      "Arduino Uno MCU",
+      "ATmega328"
+    ],
+    "manufacturerName": "Microchip Technology (formerly Atmel)",
+    "partNumber": "ATmega328P-PU",
+    "category": "microcontroller",
+    "description": "The ATmega328P is an 8-bit AVR RISC microcontroller that powers the Arduino Uno, Nano and Mini boards. Features 32 KB Flash, 2 KB SRAM, 1 KB EEPROM, 23 GPIO, 6 PWM channels and an internal RC oscillator. It is the entry-level MCU for makers and educators worldwide.",
+    "specs": {
+      "architecture": "8-bit AVR RISC",
+      "flash": "32 KB (self-programmable)",
+      "sram": "2 KB",
+      "eeprom": "1 KB",
+      "gpio": "23 pins",
+      "timers": "2× 8-bit, 1× 16-bit",
+      "pwm": "6 channels",
+      "adc": "8-channel, 10-bit",
+      "uart": "1× USART",
+      "spi": "1× SPI (master/slave)",
+      "i2c": "1× I²C (TWI)",
+      "maxClockMHz": 20,
+      "operatingVoltage": "1.8 V – 5.5 V",
+      "process": "130 nm",
+      "package": "DIP-28, TQFP-32, QFN-32"
+    },
+    "packageType": "DIP-28 / TQFP-32",
+    "pinCount": 28,
+    "electricalChars": {
+      "supplyVoltage": "1.8 V – 5.5 V",
+      "operatingTemp": "-40°C to +85°C",
+      "maxCurrent": "200 mA (total)",
+      "ioPinCurrent": "40 mA per pin",
+      "standbyPower": "0.1 µA at 1.8 V"
+    },
+    "operatingPrinciple": "Harvard RISC architecture with separate program (Flash) and data (SRAM) memory buses. Single-cycle instruction execution at up to 20 MIPS (at 20 MHz).",
+    "applications": [
+      "Arduino Uno, Nano, Mini",
+      "Hobbyist robotics",
+      "Sensor data logging",
+      "Motor control",
+      "Educational electronics"
+    ],
+    "equivalentParts": [
+      "ATmega168P",
+      "ATmega88P",
+      "PIC16F877A (non-pin-compatible)"
+    ],
+    "images": [],
+    "datasheetUrl": "https://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf",
+    "manufacturerUrl": "https://www.microchip.com/en-us/product/atmega328p",
+    "sources": [
+      {
+        "provider": "Microchip Technology",
+        "url": "https://www.microchip.com/en-us/product/atmega328p",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "cmp-000007",
+    "slug": "raspberry-pi-rp2040",
+    "name": "RP2040",
+    "commonNames": [
+      "RP2040",
+      "Pico MCU",
+      "Raspberry Pi Pico chip"
+    ],
+    "manufacturerName": "Raspberry Pi Ltd",
+    "partNumber": "RP2040",
+    "category": "microcontroller",
+    "description": "The RP2040 is a dual-core ARM Cortex-M0+ microcontroller designed by Raspberry Pi Ltd (2021). Its 133 MHz clock, 264 KB SRAM, 30 GPIO, 8 PIO state machines and $1 price point make it the dominant modern maker MCU, found in the Raspberry Pi Pico and hundreds of third-party boards.",
+    "specs": {
+      "architecture": "Dual-core ARM Cortex-M0+",
+      "maxClockMHz": 133,
+      "sram": "264 KB (6 banks)",
+      "flash": "None on-chip (external QSPI Flash required, up to 16 MB)",
+      "gpio": "30 pins (26 exposed on Pico)",
+      "pwm": "16 channels",
+      "adc": "4-channel, 12-bit (500 kSPS)",
+      "uart": "2× UART",
+      "spi": "2× SPI",
+      "i2c": "2× I²C",
+      "pio": "8 programmable I/O state machines",
+      "usb": "USB 1.1 host/device (native)",
+      "operatingVoltage": "1.8 V – 3.3 V (1.1 V core)",
+      "process": "TSMC 40 nm LP",
+      "package": "QFN-56"
+    },
+    "packageType": "QFN-56",
+    "pinCount": 56,
+    "electricalChars": {
+      "supplyVoltage": "1.8 V – 3.6 V",
+      "coreVoltage": "1.1 V (internal regulator)",
+      "operatingTemp": "-20°C to +85°C",
+      "typicalCurrent": "~25 mA at 133 MHz",
+      "dormantCurrent": "~0.8 mA"
+    },
+    "operatingPrinciple": "Symmetric dual-core with shared SRAM accessible by both cores simultaneously. PIO (Programmable I/O) state machines can bit-bang custom serial protocols at high speed independently of the CPU.",
+    "applications": [
+      "Raspberry Pi Pico",
+      "USB HID devices",
+      "CircuitPython projects",
+      "Real-time sensor interfaces",
+      "Custom serial protocol bit-banging"
+    ],
+    "equivalentParts": [
+      "RP2350 (successor, Cortex-M33, 2024)",
+      "STM32F103C8T6 (similar tier)"
+    ],
+    "images": [],
+    "datasheetUrl": "https://datasheets.raspberrypi.com/rp2040/rp2040-datasheet.pdf",
+    "manufacturerUrl": "https://www.raspberrypi.com/products/rp2040/",
+    "sources": [
+      {
+        "provider": "Raspberry Pi",
+        "url": "https://www.raspberrypi.com/products/rp2040/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "cmp-000008",
+    "slug": "ti-ne555-timer",
+    "name": "NE555 Timer",
+    "commonNames": [
+      "555 timer",
+      "NE555",
+      "LM555",
+      "SE555"
+    ],
+    "manufacturerName": "Texas Instruments (original: Signetics)",
+    "partNumber": "NE555DR",
+    "category": "ic",
+    "description": "The 555 timer, designed by Hans Camenzind at Signetics in 1971, is one of the best-selling integrated circuits ever made. It can operate in astable mode (oscillator), monostable mode (one-shot pulse) or bistable mode (flip-flop). Still in production 50+ years later, it is an essential component in timing, PWM generation and education.",
+    "specs": {
+      "supplyVoltage": "4.5 V – 16 V",
+      "outputCurrent": "200 mA source / sink",
+      "frequencyMax": "~500 kHz (astable)",
+      "timingAccuracy": "±1% typical (temperature stable)",
+      "outputTypes": "Push-pull (source and sink)",
+      "internalStructure": "25 transistors, 2 diodes, 15 resistors",
+      "package": "DIP-8, SOIC-8, SOT-23-5 (555C)"
+    },
+    "packageType": "DIP-8",
+    "pinCount": 8,
+    "pinout": [
+      {
+        "pin": 1,
+        "name": "GND",
+        "description": "Ground reference"
+      },
+      {
+        "pin": 2,
+        "name": "TRIG",
+        "description": "Trigger: sets output HIGH when < 1/3 Vcc"
+      },
+      {
+        "pin": 3,
+        "name": "OUT",
+        "description": "Output: HIGH or LOW depending on state"
+      },
+      {
+        "pin": 4,
+        "name": "RESET",
+        "description": "Active-LOW reset; tie HIGH if unused"
+      },
+      {
+        "pin": 5,
+        "name": "CTRL",
+        "description": "Control voltage (2/3 Vcc); bypass with 10 nF to GND if unused"
+      },
+      {
+        "pin": 6,
+        "name": "THR",
+        "description": "Threshold: resets output when > 2/3 Vcc"
+      },
+      {
+        "pin": 7,
+        "name": "DIS",
+        "description": "Discharge: open-collector; connects to RC timing network"
+      },
+      {
+        "pin": 8,
+        "name": "VCC",
+        "description": "Supply voltage (4.5 V – 16 V)"
+      }
+    ],
+    "electricalChars": {
+      "supplyVoltage": "4.5 V – 16 V",
+      "supplyCurrentActive": "10 mA at 15 V",
+      "outputHighVoltage": "Vcc − 1.5 V",
+      "outputLowVoltage": "< 0.25 V",
+      "operatingTemp": "-55°C to +125°C (SE555); 0°C to +70°C (NE555)"
+    },
+    "operatingPrinciple": "Two internal comparators compare input voltages to 1/3 and 2/3 Vcc (set by an internal resistor divider) and drive an SR flip-flop that controls the output stage and discharge transistor.",
+    "applications": [
+      "Astable oscillator (PWM generation)",
+      "Monostable one-shot timers",
+      "Debounce circuits",
+      "LED flashers",
+      "Motor speed control (PWM)",
+      "Missing-pulse detectors"
+    ],
+    "equivalentParts": [
+      "LM555 (National Semi)",
+      "ICM7555 (CMOS, lower power)",
+      "TLC555 (CMOS TI variant)",
+      "NE556 (dual 555)"
+    ],
+    "images": [],
+    "datasheetUrl": "https://www.ti.com/lit/ds/symlink/ne555.pdf",
+    "manufacturerUrl": "https://www.ti.com/product/NE555",
+    "sources": [
+      {
+        "provider": "Texas Instruments",
+        "url": "https://www.ti.com/product/NE555",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "cmp-000009",
+    "slug": "ti-lm741-opamp",
+    "name": "LM741 Op-Amp",
+    "commonNames": [
+      "741 op-amp",
+      "LM741",
+      "µA741",
+      "uA741"
+    ],
+    "manufacturerName": "Texas Instruments (original: Fairchild)",
+    "partNumber": "LM741CN",
+    "category": "opamp",
+    "description": "The LM741 is a general-purpose single bipolar operational amplifier, originally designed at Fairchild Semiconductor (1968). Despite its age, it remains in production as a canonical teaching op-amp. It features internal compensation, short-circuit protection and wide supply range, making it ideal for basic amplification, comparators and filter circuits.",
+    "specs": {
+      "supplyVoltage": "±5 V to ±18 V (single supply: 10 V – 36 V)",
+      "openLoopGain": "200 V/mV (106 dB)",
+      "gainBandwidthProduct": "1 MHz",
+      "slewRate": "0.5 V/µs",
+      "inputOffsetVoltage": "1 mV typical",
+      "inputBiasCurrentMax": "500 nA",
+      "outputCurrentMax": "25 mA",
+      "cmrr": "90 dB",
+      "package": "DIP-8, TO-99 (metal can), SOIC-8"
+    },
+    "packageType": "DIP-8",
+    "pinCount": 8,
+    "pinout": [
+      {
+        "pin": 1,
+        "name": "Offset Null",
+        "description": "Connect 10 kΩ pot between pins 1 and 5 with wiper to V– for null adjustment"
+      },
+      {
+        "pin": 2,
+        "name": "IN–",
+        "description": "Inverting input"
+      },
+      {
+        "pin": 3,
+        "name": "IN+",
+        "description": "Non-inverting input"
+      },
+      {
+        "pin": 4,
+        "name": "V–",
+        "description": "Negative supply voltage"
+      },
+      {
+        "pin": 5,
+        "name": "Offset Null",
+        "description": "Second offset null pin"
+      },
+      {
+        "pin": 6,
+        "name": "OUT",
+        "description": "Output"
+      },
+      {
+        "pin": 7,
+        "name": "V+",
+        "description": "Positive supply voltage"
+      },
+      {
+        "pin": 8,
+        "name": "NC",
+        "description": "No connection"
+      }
+    ],
+    "electricalChars": {
+      "supplyVoltage": "±5 V to ±18 V",
+      "openLoopGain": "200,000 V/V (typ)",
+      "outputSwing": "±13 V at ±15 V supply",
+      "slewRate": "0.5 V/µs",
+      "operatingTemp": "-55°C to +125°C (LM741) / 0°C to +70°C (LM741C)"
+    },
+    "operatingPrinciple": "Differential amplifier input stage (Q1/Q2) biased by a current mirror. Output stage is a class AB push-pull with internal frequency compensation (30 pF capacitor to prevent oscillation at high gain). Negative feedback via external resistors sets closed-loop gain.",
+    "applications": [
+      "Inverting amplifier",
+      "Non-inverting buffer/amplifier",
+      "Summing amplifier",
+      "Integrator and differentiator",
+      "Basic active filters (low-pass, high-pass)",
+      "Comparator (open-loop, no hysteresis)"
+    ],
+    "equivalentParts": [
+      "LM358 (dual, single-supply)",
+      "TL071 (JFET input, lower noise)",
+      "OP-07 (precision)",
+      "MCP601 (CMOS, single-supply)"
+    ],
+    "safetyNotes": [
+      "Never exceed supply voltage limits; exceeding ±18 V destroys the IC.",
+      "Output can source/sink only ~25 mA; do not drive low-impedance loads directly."
+    ],
+    "images": [],
+    "datasheetUrl": "https://www.ti.com/lit/ds/symlink/lm741.pdf",
+    "manufacturerUrl": "https://www.ti.com/product/LM741",
+    "sources": [
+      {
+        "provider": "Texas Instruments",
+        "url": "https://www.ti.com/product/LM741",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
   }
 ]

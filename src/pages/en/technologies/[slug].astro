@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 const BASE = '/thpedianv26.lv';
 
-type TechSlug = 'usb-standards' | 'wifi-generations' | 'display-technologies' | 'semiconductor-nodes' | 'ram-technologies' | 'bluetooth-standards' | 'nvme-storage' | '5g-cellular' | 'cooling-technologies' | 'gpu-apis';
+type TechSlug = 'usb-standards' | 'wifi-generations' | 'display-technologies' | 'semiconductor-nodes' | 'ram-technologies' | 'bluetooth-standards' | 'nvme-storage' | '5g-cellular' | 'cooling-technologies' | 'gpu-apis' | 'ai-hardware';
 
 const technologies: Record<TechSlug, {
   title: string;
@@ -406,11 +406,63 @@ const technologies: Record<TechSlug, {
       }
     ],
     tags: ['gpu', 'directx', 'vulkan', 'metal', 'opengl', 'webgpu', 'graphics-api', 'rendering']
+  },
+
+  'ai-hardware': {
+    title: 'AI Hardware Acceleration',
+    subtitle: 'NPU, Tensor Cores and Edge AI Silicon',
+    icon: '🤖',
+    category: 'AI / ML',
+    intro: 'AI inference has moved from cloud datacentres to the devices in your pocket. Modern smartphones, laptops and embedded systems include dedicated AI accelerators — Neural Processing Units (NPUs), Tensor Cores, and specialized matrix-math engines — that run deep learning models 10–100× faster and more efficiently than general-purpose CPUs or GPUs at equivalent compute budgets. This deep-dive covers the architecture, performance metrics, and real-world applications of on-device AI silicon.',
+    sections: [
+      {
+        heading: 'Why Dedicated AI Accelerators?',
+        content: 'Neural networks, at their core, are vast sequences of matrix multiplications and convolution operations. A CPU executes these sequentially and wastes energy on branch prediction, out-of-order execution and large caches — none of which help with matrix math. A GPU parallelises the computation enormously but its power envelope (100–300 W for a discrete GPU) is too high for battery-powered devices. An NPU is a fixed-function dataflow processor: arrays of multiply-accumulate (MAC) units arranged in a systolic array or similar topology, fed directly by a local high-bandwidth scratchpad — no branch predictor, minimal control logic, far less DRAM traffic.',
+        table: {
+          headers: ['Processor', 'TOPS*', 'Power', 'Best for', 'Limitation'],
+          rows: [
+            ['CPU (Core i9)', '~0.5', '45–125 W', 'Small models, control flow', 'Serial; cache pressure'],
+            ['GPU (RTX 4090)', '1457 AI TOPS', '450 W', 'Training; large batch inference', 'High power; PCIe latency'],
+            ['Apple Neural Engine (A18 Pro)', '38', '~5 W (device)', 'On-device ML, Photonic Engine', 'Apple silicon only'],
+            ['Qualcomm Hexagon (8 Elite)', '45', '~5 W (device)', 'Android AI, Snapdragon AI', 'Qualcomm SoC only'],
+            ['Google Tensor G4 (Edge TPU)', '~42', '~5 W (device)', 'Pixel AI features', 'Google devices only'],
+            ['Intel NPU (Meteor Lake)', '11.5', '~2 W', 'Windows Copilot+ features', 'Lower TOPS than mobile'],
+          ]
+        }
+      },
+      {
+        heading: 'TOPS: The Primary Performance Metric',
+        content: 'AI accelerator performance is measured in TOPS — Tera (10¹²) Operations Per Second. Each "operation" is typically a multiply-accumulate (MAC) on INT8 data: one multiply + one addition = 2 ops, so 1 TOPS = 10¹² MACs/s on INT8. TOPS figures are often reported for INT8 or INT4 precision. FP16 or FP32 TOPS is typically 2–4× lower than INT8 TOPS on the same silicon. Microsoft\'s Copilot+ PC requirement is 40 TOPS to run Recall, Cocreator and live captioning locally. Qualcomm Snapdragon X Elite (45 TOPS NPU) and Apple M4 (38 TOPS) both exceed this threshold.',
+        keyPoints: [
+          'INT8 TOPS is the most commonly cited figure — often 2–4× higher than FP16 TOPS.',
+          'TOPS alone does not determine real-world speed; memory bandwidth, model format (ONNX, CoreML, QNN) and framework support matter equally.',
+          'On-device AI enables privacy-preserving inference: no data leaves the device.',
+        ]
+      },
+      {
+        heading: 'NVIDIA Tensor Cores',
+        content: 'NVIDIA introduced Tensor Cores in Volta (V100, 2017). Each Tensor Core performs a 4×4 matrix multiply-accumulate (MMA) in one clock cycle rather than 16 separate multiply-adds. Ampere-generation Tensor Cores (RTX 30xx) added support for TF32, BF16 and INT8/INT4; Hopper (H100) introduced FP8 and transformer-engine auto-casting. Consumer RTX 40xx GPUs expose Tensor Cores for DLSS 3 frame generation, RTX Video Super Resolution, and local AI tools (Stable Diffusion, Whisper). The RTX 4090 delivers 1457 TOPS INT8 through its 512 Tensor Cores (4th gen).',
+      },
+      {
+        heading: 'Apple Neural Engine',
+        content: 'Apple\'s Neural Engine (ANE) first shipped in the A11 Bionic (iPhone X, 2017) at 600 billion ops/sec. Each iteration doubled or more: A17 Pro (35 TOPS), A18 (16-core ANE at 35 TOPS with better memory bandwidth), M4 (38 TOPS). The ANE is tightly integrated with the Core ML framework and Accelerate library — apps call standard APIs and the OS transparently routes inference to ANE, CPU or GPU depending on model type. The Photonic Engine (camera pipeline) uses the ANE for every photo taken, running semantic understanding and multi-frame fusion in real time. On macOS, ANE acceleration is available to any app using Core ML, enabling local LLM inference (GPT-4 class models at 10–30 tokens/sec on M2 Ultra).',
+      },
+      {
+        heading: 'Edge AI Applications',
+        content: 'On-device AI has moved beyond novelties. Live translation (Google Pixel, iOS 17 offline translate), real-time transcription (Apple Intelligence, Windows Recall), camera computational photography (every flagship since 2019), face/object recognition (Photos app semantic search), and voice assistants processing locally (Siri on-device NLP) all rely on NPU inference. Emerging applications include on-device LLMs (Gemini Nano, Llama 3.1 8B, Phi-3 Mini running locally on Snapdragon X Elite), real-time style transfer for video calls, and always-on sensor processing (fall detection, ECG analysis) on wearables using µNPUs with sub-mW power budgets.',
+        keyPoints: [
+          'On-device inference eliminates round-trip latency to cloud servers: <10 ms vs 100–500 ms for cloud.',
+          'Privacy: biometric data, voice and camera feed never leave the device.',
+          'Always-on micro-NPUs in wearables run continuously at < 1 mW (Apple S-series, Samsung BioActive Sensor).',
+        ]
+      }
+    ],
+    tags: ['npu', 'tensor-core', 'edge-ai', 'machine-learning', 'inference', 'tops', 'neural-engine', 'on-device-ai']
   }
 };
 
 export async function getStaticPaths() {
-  const slugs = ['usb-standards', 'wifi-generations', 'display-technologies', 'semiconductor-nodes', 'ram-technologies', 'bluetooth-standards', 'nvme-storage', '5g-cellular', 'cooling-technologies', 'gpu-apis'];
+  const slugs = ['usb-standards', 'wifi-generations', 'display-technologies', 'semiconductor-nodes', 'ram-technologies', 'bluetooth-standards', 'nvme-storage', '5g-cellular', 'cooling-technologies', 'gpu-apis', 'ai-hardware'];
   return slugs.map(slug => ({ params: { slug } }));
 }
 
