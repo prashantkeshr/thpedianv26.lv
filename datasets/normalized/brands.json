@@ -440,5 +440,59 @@
     ],
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
+  },
+  {
+    "id": "brd-000016",
+    "slug": "nintendo",
+    "name": "Nintendo",
+    "aliases": [
+      "Nintendo Co., Ltd."
+    ],
+    "website": "https://www.nintendo.com",
+    "headquarters": "Kyoto, Japan",
+    "description": "Japanese video game company and creator of iconic franchises including Mario, Zelda and Pokémon. Known for innovative gaming hardware such as the Game Boy, Wii, DS and Switch.",
+    "productCategories": [
+      "handheld-gaming",
+      "gaming-console"
+    ],
+    "founded": "1889",
+    "sources": [
+      {
+        "provider": "Nintendo Official",
+        "url": "https://www.nintendo.com/en-US/nintendo-history/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "brd-000017",
+    "slug": "lg",
+    "name": "LG Electronics",
+    "aliases": [
+      "LG",
+      "Lucky GoldStar"
+    ],
+    "website": "https://www.lg.com",
+    "headquarters": "Seoul, South Korea",
+    "description": "South Korean multinational electronics company known for OLED TV panels, QNED monitors, home appliances and mobile display technology. LG Display supplies OLED panels to Apple and other manufacturers.",
+    "productCategories": [
+      "tv",
+      "monitor",
+      "appliances"
+    ],
+    "founded": "1958",
+    "sources": [
+      {
+        "provider": "LG Official",
+        "url": "https://www.lg.com/us/about-lg",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
   }
 ]

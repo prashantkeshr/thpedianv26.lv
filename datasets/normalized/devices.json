@@ -2029,5 +2029,539 @@
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
+  },
+  {
+    "id": "dev-000019",
+    "slug": "nintendo-switch-2",
+    "name": "Nintendo Switch 2",
+    "brand": "brd-000016",
+    "brandName": "Nintendo",
+    "category": "handheld-gaming",
+    "status": "available",
+    "announcedAt": "2025-01-16",
+    "releasedAt": "2025-06-05",
+    "description": "The Nintendo Switch 2 is Nintendo's next-generation hybrid console featuring a larger 7.9-inch LCD display, improved Joy-Con controllers with a new C button for GameChat, and significantly upgraded processing power compared to the original Switch.",
+    "images": [],
+    "specs": {
+      "display": {
+        "technology": "LCD",
+        "size": "7.9 inches",
+        "resolution": "1920 × 1080 pixels",
+        "refreshRate": "120 Hz (handheld)"
+      },
+      "processor": {
+        "name": "Custom NVIDIA Tegra T239",
+        "manufacturer": "NVIDIA",
+        "architecture": "Arm Cortex-A78AE"
+      },
+      "memory": {
+        "ram": "12 GB LPDDR5",
+        "storage": "256 GB (expandable via microSD Express)"
+      },
+      "battery": {
+        "capacity": "Approx. 5220 mAh",
+        "chargingSpeed": "USB-C PD"
+      },
+      "connectivity": {
+        "wireless": "Wi-Fi 6 (802.11ax), Bluetooth 5.3",
+        "usb": "USB-C (USB 3.2 Gen 1)"
+      },
+      "dimensions": {
+        "height": "272 mm",
+        "width": "117 mm",
+        "depth": "13.9 mm",
+        "weight": "400 g (with Joy-Con 2)"
+      },
+      "os": "Nintendo Switch 2 System Software"
+    },
+    "keyFeatures": [
+      "Larger 7.9-inch 1080p 120 Hz display",
+      "GameChat with C button",
+      "Backward compatible with most Switch 1 games",
+      "Mouse-mode Joy-Con",
+      "HDR output via dock",
+      "Up to 4K TV output"
+    ],
+    "variants": [
+      {
+        "id": "nsw2-std",
+        "name": "Standard",
+        "region": "Global",
+        "storageOptions": [
+          "256 GB"
+        ]
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Nintendo",
+        "label": "Nintendo Store",
+        "url": "https://store.nintendo.com/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Nintendo+Switch+2",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "nintendo",
+      "handheld",
+      "hybrid",
+      "gaming"
+    ],
+    "sources": [
+      {
+        "provider": "Nintendo",
+        "url": "https://www.nintendo.com/switch/features/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "multiple-sources",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000020",
+    "slug": "samsung-galaxy-tab-s9-ultra",
+    "name": "Samsung Galaxy Tab S9 Ultra",
+    "brand": "brd-000002",
+    "brandName": "Samsung",
+    "category": "tablet",
+    "status": "available",
+    "announcedAt": "2023-07-26",
+    "releasedAt": "2023-08-11",
+    "description": "Samsung's flagship 14.6-inch Android tablet with a Dynamic AMOLED 2X display, Snapdragon 8 Gen 2 for Galaxy, S Pen included, and thin notch design. The largest and most powerful tablet in the Galaxy Tab S9 lineup.",
+    "images": [],
+    "specs": {
+      "display": {
+        "technology": "Dynamic AMOLED 2X",
+        "size": "14.6 inches",
+        "resolution": "2960 × 1848 pixels",
+        "refreshRate": "120 Hz",
+        "brightness": "930 nits (HBM 1200 nits)",
+        "protection": "Corning Gorilla Glass Victus"
+      },
+      "processor": {
+        "name": "Snapdragon 8 Gen 2 for Galaxy",
+        "manufacturer": "Qualcomm",
+        "architecture": "4 nm TSMC",
+        "cores": "1×3.36 + 4×2.8 + 3×2.0 GHz"
+      },
+      "memory": {
+        "ram": "12 GB / 16 GB",
+        "storage": "256 GB / 512 GB / 1 TB",
+        "expandable": false
+      },
+      "battery": {
+        "capacity": "11200 mAh",
+        "chargingSpeed": "45 W wired"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 6E",
+        "bluetooth": "5.3",
+        "usb": "USB-C 3.2 Gen 2 (Thunderbolt 4)"
+      },
+      "camera": {
+        "main": "13 MP + 8 MP ultrawide",
+        "front": "12 MP ultrawide + 12 MP portrait"
+      },
+      "dimensions": {
+        "height": "326.4 mm",
+        "width": "208.6 mm",
+        "depth": "5.5 mm",
+        "weight": "732 g"
+      },
+      "os": {
+        "name": "Android",
+        "version": "13 (One UI 5.1.1)"
+      }
+    },
+    "keyFeatures": [
+      "14.6-inch Dynamic AMOLED 2X 120 Hz display",
+      "S Pen included in-box",
+      "DeX desktop mode",
+      "IP68 dust/water resistance",
+      "45 W fast charging",
+      "Samsung DeX multi-window"
+    ],
+    "variants": [
+      {
+        "id": "tabs9u-12-256",
+        "name": "12 GB + 256 GB",
+        "storageOptions": [
+          "256 GB"
+        ]
+      },
+      {
+        "id": "tabs9u-16-512",
+        "name": "16 GB + 512 GB",
+        "storageOptions": [
+          "512 GB"
+        ]
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Samsung",
+        "label": "Samsung Shop",
+        "url": "https://www.samsung.com/us/tablets/galaxy-tab-s9-ultra/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Tab+S9+Ultra",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [
+      "dev-000002"
+    ],
+    "tags": [
+      "samsung",
+      "tablet",
+      "amoled",
+      "s-pen"
+    ],
+    "sources": [
+      {
+        "provider": "Samsung",
+        "url": "https://www.samsung.com/us/tablets/galaxy-tab-s9-ultra/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000021",
+    "slug": "lenovo-legion-go",
+    "name": "Lenovo Legion Go",
+    "brand": "brd-000008",
+    "brandName": "Lenovo",
+    "category": "handheld-gaming",
+    "status": "available",
+    "announcedAt": "2023-09-01",
+    "releasedAt": "2023-10-31",
+    "description": "Lenovo's Windows handheld gaming PC with the largest screen in its class — an 8.8-inch QHD+ 144 Hz display — and AMD Ryzen Z1 Extreme processor. Features detachable controllers with a unique FPS mode for right-hand controller.",
+    "images": [],
+    "specs": {
+      "display": {
+        "technology": "IPS LCD",
+        "size": "8.8 inches",
+        "resolution": "2560 × 1600 pixels",
+        "refreshRate": "144 Hz",
+        "brightness": "500 nits"
+      },
+      "processor": {
+        "name": "AMD Ryzen Z1 Extreme",
+        "manufacturer": "AMD",
+        "architecture": "4 nm TSMC",
+        "cores": "8-core (Zen 4)",
+        "gpu": "AMD Radeon RDNA 3 (12 CUs)",
+        "tdp": "30 W (configurable)"
+      },
+      "memory": {
+        "ram": "16 GB LPDDR5X-7500",
+        "storage": "512 GB / 1 TB SSD (M.2 2242, replaceable)",
+        "expandable": true
+      },
+      "battery": {
+        "capacity": "49.2 Wh",
+        "chargingSpeed": "65 W USB-C PD"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 6E",
+        "bluetooth": "5.1",
+        "usb": "2× USB-C (USB4 + USB 3.2)",
+        "storage": "microSD UHS-II"
+      },
+      "dimensions": {
+        "height": "299 mm (with controllers)",
+        "width": "131 mm",
+        "depth": "41 mm",
+        "weight": "854 g"
+      },
+      "os": "Windows 11 Home"
+    },
+    "keyFeatures": [
+      "8.8-inch QHD+ 144 Hz IPS display",
+      "Detachable Legion L/R controllers",
+      "FPS mode (right controller as mouse)",
+      "Replaceable SSD",
+      "AMD Ryzen Z1 Extreme (Zen 4 / RDNA 3)",
+      "USB4 connectivity"
+    ],
+    "variants": [
+      {
+        "id": "llgo-16-512",
+        "name": "16 GB + 512 GB"
+      },
+      {
+        "id": "llgo-16-1tb",
+        "name": "16 GB + 1 TB"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Lenovo",
+        "label": "Lenovo Store",
+        "url": "https://www.lenovo.com/us/en/legion-go/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Lenovo+Legion+Go",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [
+      "dev-000016"
+    ],
+    "tags": [
+      "lenovo",
+      "handheld",
+      "windows",
+      "amd"
+    ],
+    "sources": [
+      {
+        "provider": "Lenovo",
+        "url": "https://www.lenovo.com/us/en/legion-go/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "multiple-sources",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000022",
+    "slug": "sony-wh-1000xm5",
+    "name": "Sony WH-1000XM5",
+    "brand": "brd-000015",
+    "brandName": "Sony",
+    "category": "headphones",
+    "status": "available",
+    "announcedAt": "2022-05-12",
+    "releasedAt": "2022-05-20",
+    "description": "Sony's flagship over-ear noise-cancelling headphones. Industry-leading ANC powered by two V1 chips and eight microphones, combined with 30 mm carbon-fibre composite drivers and 30-hour battery life.",
+    "images": [],
+    "specs": {
+      "driver": {
+        "type": "Dynamic",
+        "size": "30 mm",
+        "material": "Carbon fibre composite"
+      },
+      "anc": {
+        "chips": "2× V1",
+        "mics": "8",
+        "performance": "Industry-leading"
+      },
+      "battery": {
+        "capacity": "~1250 mAh",
+        "life": "30 hours (ANC on)",
+        "chargingSpeed": "3 min = 3 hours (Quick Charge)",
+        "connector": "USB-C"
+      },
+      "connectivity": {
+        "bluetooth": "5.2",
+        "codecs": "SBC, AAC, LDAC, LC3 (LE Audio)",
+        "multipoint": "2 devices",
+        "nfc": true
+      },
+      "audio": {
+        "frequency": "4 Hz – 40 kHz",
+        "impedance": "48 Ω",
+        "sensitivity": "102 dB/mW"
+      },
+      "features": [
+        "DSEE Extreme upscaling",
+        "Speak-to-Chat",
+        "Touch controls",
+        "Wearing detection",
+        "3.5 mm jack"
+      ],
+      "dimensions": {
+        "weight": "250 g",
+        "foldable": false
+      }
+    },
+    "keyFeatures": [
+      "Industry-leading active noise cancellation",
+      "30-hour battery, 3-min quick charge",
+      "LDAC high-res wireless audio",
+      "Multipoint Bluetooth (2 devices)",
+      "Speak-to-Chat automatic pause",
+      "DSEE Extreme upscaling"
+    ],
+    "variants": [
+      {
+        "id": "xm5-black",
+        "name": "Black"
+      },
+      {
+        "id": "xm5-silver",
+        "name": "Silver"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Sony",
+        "label": "Sony Store",
+        "url": "https://www.sony.com/en/articles/wh-1000xm5",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Sony+WH-1000XM5",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "sony",
+      "headphones",
+      "anc",
+      "wireless"
+    ],
+    "sources": [
+      {
+        "provider": "Sony",
+        "url": "https://www.sony.com/en/articles/wh-1000xm5",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000023",
+    "slug": "lg-oled-c3-55",
+    "name": "LG OLED C3 55\"",
+    "brand": "brd-000017",
+    "brandName": "LG Electronics",
+    "category": "tv",
+    "status": "available",
+    "announcedAt": "2023-01-04",
+    "releasedAt": "2023-03-01",
+    "description": "LG's 2023 OLED C3 55-inch TV featuring the α9 Gen6 AI processor, Dolby Vision IQ, 4K 120 Hz with VRR, and near-perfect picture quality from self-emissive OLED pixels. A top-rated choice for gaming and home cinema.",
+    "images": [],
+    "specs": {
+      "display": {
+        "technology": "OLED evo",
+        "size": "55 inches",
+        "resolution": "3840 × 2160 (4K UHD)",
+        "refreshRate": "120 Hz",
+        "brightness": "~1000 nits (peak, HDR10)",
+        "hdr": "Dolby Vision IQ, HDR10, HLG, Filmmaker Mode"
+      },
+      "processor": {
+        "name": "α9 Gen6 AI",
+        "manufacturer": "LG",
+        "ai": "AI Picture / Sound Pro"
+      },
+      "gaming": {
+        "vrr": "HDMI 2.1 VRR (FreeSync Premium, G-Sync Compatible)",
+        "hdmi": "4× HDMI 2.1 (48 Gbps)",
+        "inputLag": "1.3 ms (120 Hz, 4K)",
+        "features": "Game Optimizer, 4K 144 Hz (HDMI 2.1)"
+      },
+      "audio": {
+        "output": "40 W (2.2 ch)",
+        "dolby": "Dolby Atmos",
+        "dts": "DTS:X"
+      },
+      "smart": {
+        "os": "webOS 23",
+        "assistant": "Google Assistant, Amazon Alexa, ThinQ AI"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 5 (802.11ac)",
+        "bluetooth": "5.0",
+        "usb": "3× USB",
+        "ethernet": "1× RJ-45"
+      },
+      "dimensions": {
+        "width": "1227 mm",
+        "height": "708 mm",
+        "depth": "45 mm (with stand: 265 mm)",
+        "weight": "17 kg (without stand)"
+      }
+    },
+    "keyFeatures": [
+      "Self-emissive OLED evo panel (true black)",
+      "4× HDMI 2.1 for 4K 120 Hz gaming",
+      "Dolby Vision IQ + Filmmaker Mode",
+      "G-Sync Compatible + FreeSync Premium",
+      "α9 Gen6 AI processor",
+      "1.3 ms input lag"
+    ],
+    "variants": [
+      {
+        "id": "oled55c3",
+        "name": "55-inch"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "LG",
+        "label": "LG Store",
+        "url": "https://www.lg.com/us/tvs/lg-oled55c3pua-oled-4k-tv",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=LG+OLED+C3+55",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "lg",
+      "oled",
+      "tv",
+      "4k",
+      "gaming"
+    ],
+    "sources": [
+      {
+        "provider": "LG",
+        "url": "https://www.lg.com/us/tvs/lg-oled55c3pua-oled-4k-tv",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
   }
 ]
