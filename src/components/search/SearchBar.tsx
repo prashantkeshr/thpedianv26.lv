@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import type { SearchResult } from '../../types';
 
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 
 interface SearchBarProps {
   lang?: string;

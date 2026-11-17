@@ -4,7 +4,7 @@ interface Props {
 }
 
 const { lang = 'en' } = Astro.props;
-const base = `/thpedianv26.lv`;
+const base = ``;
 
 const nav = lang === 'hi'
   ? [
@@ -150,7 +150,7 @@ const otherLangLabel = lang === 'en' ? 'हिंदी' : 'English';
     if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
       e.preventDefault();
       const lang = document.documentElement.lang ?? 'en';
-      window.location.href = `/thpedianv26.lv/${lang}/search/`;
+      window.location.href = `/${lang}/search/`;
     }
   });
 </script>

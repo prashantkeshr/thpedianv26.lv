@@ -1,6 +1,6 @@
 import type { Device } from '../../types';
 
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 
 interface DeviceCardProps {
   device: Device;

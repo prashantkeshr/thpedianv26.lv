@@ -33,7 +33,7 @@ let db: Awaited<ReturnType<typeof create<typeof schema>>> | null = null;
 let initialized = false;
 let initPromise: Promise<void> | null = null;
 
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 
 async function init(): Promise<void> {
   if (initialized) return;

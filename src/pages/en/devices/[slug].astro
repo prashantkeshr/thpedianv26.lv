@@ -11,7 +11,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 
 const device = getDeviceBySlug(slug!)!;
 if (!device) return Astro.redirect(`${BASE}/en/devices/`);

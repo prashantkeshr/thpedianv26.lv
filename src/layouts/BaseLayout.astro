@@ -21,7 +21,7 @@ const {
   noindex = false,
 } = Astro.props;
 
-const baseUrl = import.meta.env.SITE ?? 'https://prashantkeshr.github.io/thpedianv26.lv';
+const baseUrl = import.meta.env.SITE ?? 'https://techpedia.live';
 const canonicalUrl = canonical ?? new URL(Astro.url.pathname, baseUrl).href;
 const pageTitle = title.includes('Techpedia') ? title : `${title} — Techpedia`;
 ---

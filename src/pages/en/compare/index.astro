@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import ComparisonEngine from '../../../components/comparison/ComparisonEngine';
 import { getAllDevices, getDevicesByIds } from '../../../services/deviceService';
 
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 const devices = getAllDevices();
 
 // Pre-select items from URL params if provided
@@ -137,6 +137,6 @@ const selectedDevices = selectedIds.length >= 2 ? getDevicesByIds(selectedIds) :
     }
 
     const params = new URLSearchParams({ ids: checked.join(',') });
-    window.location.href = `/thpedianv26.lv/en/compare/?${params}`;
+    window.location.href = `/en/compare/?${params}`;
   });
 </script>

@@ -7,7 +7,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 const comp = getComponentBySlug(slug!)!;
 if (!comp) return Astro.redirect(`${BASE}/en/components/`);
 

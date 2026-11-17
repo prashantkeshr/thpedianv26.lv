@@ -1,6 +1,6 @@
 import type { ElectronicComponent } from '../../types';
 
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 
 const categoryIcons: Record<string, string> = {
   cpu: '⚙️', gpu: '🎮', microcontroller: '🔧', ic: '📐',

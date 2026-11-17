@@ -1,7 +1,7 @@
 import { useState, useMemo } from 'react';
 import type { Device, ElectronicComponent } from '../../types';
 
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 
 type AnyItem = Device | ElectronicComponent;
 

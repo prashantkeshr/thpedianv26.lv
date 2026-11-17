@@ -9,7 +9,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params;
-const BASE = '/thpedianv26.lv';
+const BASE = '';
 const brand = getBrandBySlug(slug!)!;
 if (!brand) return Astro.redirect(`${BASE}/hi/brands/`);
 const brandDevices = getDevicesByBrand(brand.id);
