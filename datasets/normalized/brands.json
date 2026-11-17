@@ -3,13 +3,30 @@
     "id": "brd-000001",
     "slug": "apple",
     "name": "Apple",
-    "aliases": ["Apple Inc."],
+    "aliases": [
+      "Apple Inc."
+    ],
     "website": "https://www.apple.com",
     "headquarters": "Cupertino, California, USA",
     "description": "Apple Inc. designs, manufactures and sells smartphones, personal computers, tablets, wearables and accessories worldwide. Known for the iPhone, Mac, iPad, Apple Watch and Apple Silicon.",
-    "productCategories": ["smartphone", "laptop", "desktop", "tablet", "smartwatch", "earbuds", "tv"],
+    "productCategories": [
+      "smartphone",
+      "laptop",
+      "desktop",
+      "tablet",
+      "smartwatch",
+      "earbuds",
+      "tv"
+    ],
     "founded": "1976",
-    "sources": [{ "provider": "Apple official", "url": "https://www.apple.com/about/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Apple official",
+        "url": "https://www.apple.com/about/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -17,13 +34,31 @@
     "id": "brd-000002",
     "slug": "samsung",
     "name": "Samsung",
-    "aliases": ["Samsung Electronics", "Samsung Electronics Co., Ltd."],
+    "aliases": [
+      "Samsung Electronics",
+      "Samsung Electronics Co., Ltd."
+    ],
     "website": "https://www.samsung.com",
     "headquarters": "Suwon, South Korea",
     "description": "Samsung Electronics is a global leader in technology, producing smartphones, televisions, home appliances, semiconductors, displays and components.",
-    "productCategories": ["smartphone", "tablet", "tv", "monitor", "laptop", "storage", "component"],
+    "productCategories": [
+      "smartphone",
+      "tablet",
+      "tv",
+      "monitor",
+      "laptop",
+      "storage",
+      "component"
+    ],
     "founded": "1969",
-    "sources": [{ "provider": "Samsung official", "url": "https://www.samsung.com/global/ir/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Samsung official",
+        "url": "https://www.samsung.com/global/ir/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -31,13 +66,28 @@
     "id": "brd-000003",
     "slug": "intel",
     "name": "Intel",
-    "aliases": ["Intel Corporation"],
+    "aliases": [
+      "Intel Corporation"
+    ],
     "website": "https://www.intel.com",
     "headquarters": "Santa Clara, California, USA",
     "description": "Intel Corporation designs and manufactures microprocessors, chipsets, graphics cards and other computing hardware. Creator of the x86 architecture.",
-    "productCategories": ["cpu", "gpu", "motherboard", "storage", "networking"],
+    "productCategories": [
+      "cpu",
+      "gpu",
+      "motherboard",
+      "storage",
+      "networking"
+    ],
     "founded": "1968",
-    "sources": [{ "provider": "Intel ARK", "url": "https://ark.intel.com", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Intel ARK",
+        "url": "https://ark.intel.com",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -45,13 +95,27 @@
     "id": "brd-000004",
     "slug": "amd",
     "name": "AMD",
-    "aliases": ["Advanced Micro Devices", "Advanced Micro Devices, Inc."],
+    "aliases": [
+      "Advanced Micro Devices",
+      "Advanced Micro Devices, Inc."
+    ],
     "website": "https://www.amd.com",
     "headquarters": "Santa Clara, California, USA",
     "description": "AMD designs high-performance computing and graphics products. Known for Ryzen processors, Radeon GPUs and EPYC server chips.",
-    "productCategories": ["cpu", "gpu", "apu"],
+    "productCategories": [
+      "cpu",
+      "gpu",
+      "apu"
+    ],
     "founded": "1969",
-    "sources": [{ "provider": "AMD official", "url": "https://www.amd.com/en/products.html", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "AMD official",
+        "url": "https://www.amd.com/en/products.html",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -59,13 +123,26 @@
     "id": "brd-000005",
     "slug": "nvidia",
     "name": "NVIDIA",
-    "aliases": ["NVIDIA Corporation"],
+    "aliases": [
+      "NVIDIA Corporation"
+    ],
     "website": "https://www.nvidia.com",
     "headquarters": "Santa Clara, California, USA",
     "description": "NVIDIA designs graphics processing units (GPUs), system-on-chip units and deep-learning software. Market leader in discrete desktop and workstation GPUs.",
-    "productCategories": ["gpu", "soc", "ai-accelerator"],
+    "productCategories": [
+      "gpu",
+      "soc",
+      "ai-accelerator"
+    ],
     "founded": "1993",
-    "sources": [{ "provider": "NVIDIA official", "url": "https://www.nvidia.com/en-us/geforce/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "NVIDIA official",
+        "url": "https://www.nvidia.com/en-us/geforce/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -73,13 +150,29 @@
     "id": "brd-000006",
     "slug": "google",
     "name": "Google",
-    "aliases": ["Google LLC", "Alphabet"],
+    "aliases": [
+      "Google LLC",
+      "Alphabet"
+    ],
     "website": "https://store.google.com",
     "headquarters": "Mountain View, California, USA",
     "description": "Google designs the Pixel smartphone line and Tensor chips, in addition to its services and software ecosystem including Android.",
-    "productCategories": ["smartphone", "tablet", "smartwatch", "earbuds", "laptop"],
+    "productCategories": [
+      "smartphone",
+      "tablet",
+      "smartwatch",
+      "earbuds",
+      "laptop"
+    ],
     "founded": "1998",
-    "sources": [{ "provider": "Google Store", "url": "https://store.google.com", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Google Store",
+        "url": "https://store.google.com",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -87,13 +180,27 @@
     "id": "brd-000007",
     "slug": "qualcomm",
     "name": "Qualcomm",
-    "aliases": ["Qualcomm Incorporated", "Qualcomm Technologies"],
+    "aliases": [
+      "Qualcomm Incorporated",
+      "Qualcomm Technologies"
+    ],
     "website": "https://www.qualcomm.com",
     "headquarters": "San Diego, California, USA",
     "description": "Qualcomm designs semiconductors, software and services related to wireless technology. Its Snapdragon SoCs power a wide range of Android smartphones.",
-    "productCategories": ["soc", "modem", "chip"],
+    "productCategories": [
+      "soc",
+      "modem",
+      "chip"
+    ],
     "founded": "1985",
-    "sources": [{ "provider": "Qualcomm official", "url": "https://www.qualcomm.com/products/mobile/snapdragon", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Qualcomm official",
+        "url": "https://www.qualcomm.com/products/mobile/snapdragon",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -101,13 +208,29 @@
     "id": "brd-000008",
     "slug": "lenovo",
     "name": "Lenovo",
-    "aliases": ["Lenovo Group", "Lenovo Group Limited"],
+    "aliases": [
+      "Lenovo Group",
+      "Lenovo Group Limited"
+    ],
     "website": "https://www.lenovo.com",
     "headquarters": "Beijing, China",
     "description": "Lenovo is the world's largest PC manufacturer, producing the ThinkPad and IdeaPad laptop lines, as well as desktops, tablets and servers.",
-    "productCategories": ["laptop", "desktop", "tablet", "server", "workstation"],
+    "productCategories": [
+      "laptop",
+      "desktop",
+      "tablet",
+      "server",
+      "workstation"
+    ],
     "founded": "1984",
-    "sources": [{ "provider": "Lenovo official", "url": "https://www.lenovo.com/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Lenovo official",
+        "url": "https://www.lenovo.com/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -115,13 +238,29 @@
     "id": "brd-000009",
     "slug": "dell",
     "name": "Dell",
-    "aliases": ["Dell Technologies", "Dell Inc."],
+    "aliases": [
+      "Dell Technologies",
+      "Dell Inc."
+    ],
     "website": "https://www.dell.com",
     "headquarters": "Round Rock, Texas, USA",
     "description": "Dell Technologies designs and sells personal computers, servers, storage devices and networking hardware. Known for the XPS and Alienware lines.",
-    "productCategories": ["laptop", "desktop", "monitor", "workstation", "server"],
+    "productCategories": [
+      "laptop",
+      "desktop",
+      "monitor",
+      "workstation",
+      "server"
+    ],
     "founded": "1984",
-    "sources": [{ "provider": "Dell official", "url": "https://www.dell.com/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Dell official",
+        "url": "https://www.dell.com/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -129,13 +268,30 @@
     "id": "brd-000010",
     "slug": "asus",
     "name": "ASUS",
-    "aliases": ["ASUSTeK Computer", "ASUSTeK Computer Inc."],
+    "aliases": [
+      "ASUSTeK Computer",
+      "ASUSTeK Computer Inc."
+    ],
     "website": "https://www.asus.com",
     "headquarters": "Taipei, Taiwan",
     "description": "ASUS makes laptops, desktop PCs, motherboards, graphics cards, monitors and smartphones. Known for the ROG gaming line and ZenBook premium laptops.",
-    "productCategories": ["laptop", "desktop", "motherboard", "gpu", "monitor", "smartphone"],
+    "productCategories": [
+      "laptop",
+      "desktop",
+      "motherboard",
+      "gpu",
+      "monitor",
+      "smartphone"
+    ],
     "founded": "1989",
-    "sources": [{ "provider": "ASUS official", "url": "https://www.asus.com/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "ASUS official",
+        "url": "https://www.asus.com/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-01",
     "schemaVersion": 1
   },
@@ -143,13 +299,27 @@
     "id": "brd-000011",
     "slug": "oneplus",
     "name": "OnePlus",
-    "aliases": ["OnePlus Technology"],
+    "aliases": [
+      "OnePlus Technology"
+    ],
     "website": "https://www.oneplus.com",
     "headquarters": "Shenzhen, China",
     "description": "OnePlus creates premium Android smartphones known for fast charging technology, clean OxygenOS software and high-refresh-rate displays at competitive prices.",
-    "productCategories": ["smartphone", "tablet", "earbuds", "tv"],
+    "productCategories": [
+      "smartphone",
+      "tablet",
+      "earbuds",
+      "tv"
+    ],
     "founded": "2013",
-    "sources": [{ "provider": "OnePlus official", "url": "https://www.oneplus.com/", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "OnePlus official",
+        "url": "https://www.oneplus.com/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
   },
@@ -157,13 +327,30 @@
     "id": "brd-000012",
     "slug": "xiaomi",
     "name": "Xiaomi",
-    "aliases": ["Xiaomi Corporation", "Xiaomi Inc."],
+    "aliases": [
+      "Xiaomi Corporation",
+      "Xiaomi Inc."
+    ],
     "website": "https://www.mi.com",
     "headquarters": "Beijing, China",
     "description": "Xiaomi is a leading consumer electronics company producing smartphones, smart home devices, laptops and wearables. Known for high-spec devices at aggressive pricing globally.",
-    "productCategories": ["smartphone", "laptop", "tablet", "smartwatch", "tv", "earbuds"],
+    "productCategories": [
+      "smartphone",
+      "laptop",
+      "tablet",
+      "smartwatch",
+      "tv",
+      "earbuds"
+    ],
     "founded": "2010",
-    "sources": [{ "provider": "Xiaomi official", "url": "https://www.mi.com/global/", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Xiaomi official",
+        "url": "https://www.mi.com/global/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
   },
@@ -171,13 +358,29 @@
     "id": "brd-000013",
     "slug": "hp",
     "name": "HP",
-    "aliases": ["Hewlett-Packard", "HP Inc."],
+    "aliases": [
+      "Hewlett-Packard",
+      "HP Inc."
+    ],
     "website": "https://www.hp.com",
     "headquarters": "Palo Alto, California, USA",
     "description": "HP Inc. designs and sells personal computers, printers, monitors and accessories. The Spectre and Envy laptop lines target the premium consumer segment.",
-    "productCategories": ["laptop", "desktop", "monitor", "printer", "workstation"],
+    "productCategories": [
+      "laptop",
+      "desktop",
+      "monitor",
+      "printer",
+      "workstation"
+    ],
     "founded": "1939",
-    "sources": [{ "provider": "HP official", "url": "https://www.hp.com/us-en/shop/pdp/hp-spectre-x360", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "HP official",
+        "url": "https://www.hp.com/us-en/shop/pdp/hp-spectre-x360",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
   },
@@ -185,13 +388,56 @@
     "id": "brd-000014",
     "slug": "microsoft",
     "name": "Microsoft",
-    "aliases": ["Microsoft Corporation"],
+    "aliases": [
+      "Microsoft Corporation"
+    ],
     "website": "https://www.microsoft.com",
     "headquarters": "Redmond, Washington, USA",
     "description": "Microsoft makes the Surface line of tablets, laptops and 2-in-1 PCs, alongside Windows OS, Xbox gaming consoles and cloud services.",
-    "productCategories": ["laptop", "tablet", "desktop", "gaming"],
+    "productCategories": [
+      "laptop",
+      "tablet",
+      "desktop",
+      "gaming"
+    ],
     "founded": "1975",
-    "sources": [{ "provider": "Microsoft official", "url": "https://www.microsoft.com/en-us/surface", "retrievedAt": "2026-11-17", "verificationLevel": "official" }],
+    "sources": [
+      {
+        "provider": "Microsoft official",
+        "url": "https://www.microsoft.com/en-us/surface",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "brd-000015",
+    "slug": "sony",
+    "name": "Sony",
+    "aliases": [
+      "Sony Corporation",
+      "Sony Interactive Entertainment"
+    ],
+    "website": "https://www.sony.com",
+    "headquarters": "Minato, Tokyo, Japan",
+    "description": "Sony makes PlayStation gaming consoles, Xperia smartphones, Bravia televisions and professional audio equipment.",
+    "productCategories": [
+      "gaming",
+      "smartphone",
+      "tv",
+      "audio"
+    ],
+    "founded": "1946",
+    "sources": [
+      {
+        "provider": "Sony official",
+        "url": "https://www.sony.com",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
   }

@@ -1,0 +1,456 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const BASE = '/thpedianv26.lv';
+
+export async function getStaticPaths() {
+  const slugs = [
+    'laptop-overheating', 'smartphone-battery-drain', 'pc-wont-boot',
+    'wifi-disconnecting', 'monitor-flickering', 'printer-not-printing',
+  ];
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+
+type Step = {
+  step: number;
+  check: string;
+  action: string;
+  warning?: string;
+};
+
+type Guide = {
+  title: string;
+  icon: string;
+  category: string;
+  symptoms: string[];
+  safetyNote?: string;
+  intro: string;
+  steps: Step[];
+  prevention: string[];
+  whenToSeekHelp: string;
+};
+
+const guides: Record<string, Guide> = {
+  'laptop-overheating': {
+    title: 'Laptop Overheating',
+    icon: '🌡️',
+    category: 'Laptop',
+    symptoms: ['Fans running constantly at high speed', 'CPU/GPU throttling (sudden performance drops)', 'Unexpected shutdowns during load', 'Hot underside or palm-rest area', 'Apps crashing under sustained use'],
+    safetyNote: 'Never block laptop vents while using it on a bed, pillow or lap. Heat cannot escape and will permanently damage components.',
+    intro: 'Overheating is the most common cause of laptop performance degradation and unexpected shutdowns. Modern laptops throttle CPU/GPU speed when temperatures exceed safe thresholds — often making the laptop feel sluggish long before it shuts down. Work through these steps in order: most overheating issues resolve at step 2 or 3.',
+    steps: [
+      {
+        step: 1,
+        check: 'Measure actual temperatures',
+        action: 'Install HWiNFO64 (Windows) or iStatMenus (macOS). Run a demanding task (YouTube at 4K or a game) for 5 minutes. If CPU temps exceed 95°C on modern Intel/AMD or 90°C on Apple Silicon, overheating is confirmed.',
+      },
+      {
+        step: 2,
+        check: 'Check for blocked vents',
+        action: 'Inspect all exhaust vents (usually bottom and rear edges). If vents appear clogged with lint or dust, use a can of compressed air from outside — a 1–2 second burst per vent opening. Do NOT insert anything into vents.',
+      },
+      {
+        step: 3,
+        check: 'Internal dust cleaning',
+        action: 'If temps remain high after step 2, the heatsink fins are likely clogged internally. This requires removing the bottom panel (check iFixit for your model). Blow out the heatsink and fan. This is the single most effective fix for laptops over 2 years old.',
+        warning: 'Opening the laptop may void warranty. On some models (Apple MacBook Air M1/M2) the heatsink is sealed — cleaning the external vents is the only option without specialist tools.',
+      },
+      {
+        step: 4,
+        check: 'Thermal paste degradation',
+        action: 'Thermal paste between the CPU/GPU die and heatsink dries out after 3–5 years, increasing temperatures by 10–20°C. Replacing it with a quality compound (Thermal Grizzly Kryonaut, Arctic MX-4) often restores factory-level temps. Requires full disassembly.',
+      },
+      {
+        step: 5,
+        check: 'Software and power plan',
+        action: 'On Windows: open Power Options → set plan to "Balanced" (not "High performance"). Check Task Manager Processes tab for processes using >20% CPU when idle. Malware scanners and Windows Update indexing are common culprits. On macOS: Activity Monitor → Energy tab.',
+      },
+      {
+        step: 6,
+        check: 'Fan curve and control software',
+        action: 'Some laptops allow manual fan control. ASUS Armoury Crate, MSI Dragon Center, Lenovo Vantage and Dell Power Manager have performance/cooling mode switches. Switching to "Quiet" mode reduces thermal load at the cost of some performance. For gaming laptops use "Performance" mode.',
+      },
+      {
+        step: 7,
+        check: 'External cooling',
+        action: 'A laptop cooling stand with active fans (USB-powered) reduces temps by 5–10°C, most effective when the fan blows directly onto bottom intake vents. Not a substitute for cleaning but useful as a supplement.',
+      },
+    ],
+    prevention: [
+      'Use on hard, flat surfaces with bottom vents unobstructed.',
+      'Clean vents with compressed air every 6–12 months.',
+      'Replace thermal paste every 3–4 years on aging laptops.',
+      'Keep ambient room temperature below 25°C for heavy use.',
+    ],
+    whenToSeekHelp: 'If temps exceed 100°C even after cleaning and repasting, the heatsink may be bent or the fan failing. If the laptop shuts down at idle below 70°C, the thermal shutdown threshold sensor may be faulty — these both require professional service.',
+  },
+
+  'smartphone-battery-drain': {
+    title: 'Smartphone Battery Drain',
+    icon: '🔋',
+    category: 'Smartphone',
+    symptoms: ['Battery percentage drops faster than expected', 'Phone warm even when idle', 'Battery dies at >10%', 'Charge cycle count not matching stated lifespan', 'Apps killed in background keep draining power'],
+    intro: 'Rapid battery drain has two categories: software (apps, settings, background activity) and hardware (degraded battery, faulty charger IC). Start with software — it resolves 70–80% of drain issues without any hardware work. Battery degradation is normal after 400–500 full cycles but can be accelerated by heat and fast charging.',
+    steps: [
+      {
+        step: 1,
+        check: 'Check battery health',
+        action: 'iOS: Settings → Battery → Battery Health. Android varies by manufacturer: Samsung → Settings → Device Care → Battery; stock Android → dial *#*#4636#*#* → Battery Information. If capacity is below 80% (iOS reports this directly), battery replacement is the likely fix.',
+      },
+      {
+        step: 2,
+        check: 'Identify high-drain apps',
+        action: 'iOS: Settings → Battery → scroll to "Battery Usage by App". Android: Settings → Battery → Usage/Details. Any single app using >20% battery while in background (not audio/navigation) is a problem. Force-stop it, check for updates, or uninstall.',
+      },
+      {
+        step: 3,
+        check: 'Background activity and location',
+        action: 'iOS: Settings → Privacy → Location Services → review apps set to "Always" and change to "While Using" or "Never" unless needed. Settings → General → Background App Refresh → disable for non-essential apps. Android: Settings → Location → App Permissions → check "All the time" permissions.',
+      },
+      {
+        step: 4,
+        check: 'Display and always-on features',
+        action: 'Screen is the single largest power consumer. Reduce brightness, disable Always-On Display (AMOLED phones), reduce refresh rate from 120 Hz to 60 Hz in battery-saving mode. Disable "Raise to Wake" if you do not use it.',
+      },
+      {
+        step: 5,
+        check: 'Push notifications and sync',
+        action: 'Email apps checking every minute, social media constantly syncing — these wake the CPU hundreds of times per day. Set email to "Manual" or 15-min fetch. Disable live widgets you do not use. Reduce notification frequency in heavily used apps.',
+      },
+      {
+        step: 6,
+        check: 'Connectivity radios',
+        action: 'Wi-Fi scanning, Bluetooth, NFC and 5G all increase drain. When you do not need Bluetooth, turn it off. 5G (especially mmWave) consumes significantly more power than LTE — in areas with poor 5G coverage, the radio works harder. Consider LTE-only mode in those areas.',
+      },
+      {
+        step: 7,
+        check: 'Factory reset (last resort for software drain)',
+        action: 'If steps 1–6 did not resolve the issue and battery health is above 80%, a factory reset can resolve background processes or corrupted settings causing unusual drain. Back up all data first.',
+        warning: 'A factory reset erases all local data. Use iCloud, Google Backup or Samsung Smart Switch first.',
+      },
+    ],
+    prevention: [
+      'Charge between 20–80% when possible — avoiding full 0–100% cycles extends battery life.',
+      'Avoid wireless charging overnight at 100% (heat + sustained full charge degrades cells faster).',
+      'Keep phone below 35°C; heat is the primary accelerant of battery degradation.',
+      'Use official or MFi/certified chargers — cheap chargers can damage the charge controller IC.',
+    ],
+    whenToSeekHelp: 'If the battery swells (back cover bowing, screen lifting at edges), stop using the device immediately — a swollen lithium battery is a fire risk. Take it to a service centre. Do not pierce or compress a swollen battery.',
+  },
+
+  'pc-wont-boot': {
+    title: "PC Won't Boot",
+    icon: '🖥️',
+    category: 'Desktop / Laptop',
+    symptoms: ['No display output on power-on', 'POST beep codes', 'Spinning fans but no display', 'Blue screen immediately on Windows load', 'Black screen after BIOS splash'],
+    safetyNote: 'Always power off and unplug the PC from the wall before opening the case or handling components. Discharge static electricity by touching a bare metal part of the case first.',
+    intro: 'A PC that will not boot can fail at several stages: no power delivery, no POST (Power-On Self-Test), OS boot failure, or driver/software crash on Windows load. Identify which stage fails first — it narrows the cause dramatically. Work through these steps from simplest to most involved.',
+    steps: [
+      {
+        step: 1,
+        check: 'Power and connections',
+        action: 'Verify PSU is switched on (rear switch on ATX PSUs). Try a different wall outlet. Check the 24-pin ATX and EPS CPU power connectors are fully seated. For desktops, reseat the graphics card. Clear CMOS by removing the motherboard battery for 30 seconds (powers off, unplug first).',
+      },
+      {
+        step: 2,
+        check: 'Display connection',
+        action: 'If you have a dedicated GPU, plug the monitor into the GPU, not the motherboard. Try a different cable (HDMI vs DisplayPort). Try a different monitor or TV. If the POST beeps but no display, the GPU or its PCI slot may be at fault.',
+      },
+      {
+        step: 3,
+        check: 'POST beep codes',
+        action: 'Beep codes identify the failing component. 1 short beep = POST passed (issue is later). Multiple beeps: consult your motherboard manufacturer\'s beep code table (ASUS, MSI, Gigabyte all differ). Common: 3 beeps = RAM failure; 1 long + 2 short = video failure (BIOS standard).',
+      },
+      {
+        step: 4,
+        check: 'RAM troubleshooting',
+        action: 'RAM is the most common cause of no-POST. Remove all RAM sticks. Reseat one stick in the first recommended slot (usually A2 — check motherboard manual). Try each stick individually. Test each RAM slot. If only one stick/slot combination works, the other stick or slot is likely faulty.',
+      },
+      {
+        step: 5,
+        check: 'GPU and PCIe slots',
+        action: 'Remove the GPU and use integrated graphics (if your CPU has one) to test. If the system posts with iGPU, the GPU or its PCIe slot may be faulty. Try the GPU in a different PCIe ×16 slot if available.',
+      },
+      {
+        step: 6,
+        check: 'Windows boot failure (blue screen or black screen)',
+        action: 'If POST passes but Windows fails: boot from Windows USB installation media → Repair your computer → Startup Repair. If that fails: Troubleshoot → Command Prompt → run `sfc /scannow` and `bootrec /fixmbr`. A new Windows install is the last resort but keep the old partition for data recovery.',
+      },
+      {
+        step: 7,
+        check: 'Storage drive check',
+        action: 'Boot from a Linux live USB (Ubuntu, Arch). Run `lsblk` to check if the drive is detected. Run `badblocks -sv /dev/sda` or `nvme smart-log /dev/nvme0` for NVMe to check for errors. A failing drive often causes boot loops.',
+      },
+    ],
+    prevention: [
+      'Use a surge protector or UPS to protect against power spikes.',
+      'Do not force-shutdown during Windows updates.',
+      'Reseat RAM and GPU annually if the PC is in a dusty environment.',
+      'Keep at least 10% SSD free — critically full SSDs can cause Windows boot failures.',
+    ],
+    whenToSeekHelp: 'If the motherboard shows no signs of life (no power LED, no fan spin) despite confirmed PSU function and re-seated 24-pin connector, the motherboard may be dead. CPU failures are rare but also cause no-POST with no beeps. These require component-level diagnosis or replacement.',
+  },
+
+  'wifi-disconnecting': {
+    title: 'Wi-Fi Disconnecting',
+    icon: '📶',
+    category: 'Networking',
+    symptoms: ['Drops connection every few minutes', 'Cannot reconnect without toggling Wi-Fi off/on', 'Shows connected but no internet', 'Slow speeds with good signal strength', 'Only specific device drops — others stay connected'],
+    intro: 'Wi-Fi drops can originate from the router, the client device, or interference in the radio spectrum. Isolating which of these is responsible determines the fix. The key question: does only one device drop, or all devices on the same network?',
+    steps: [
+      {
+        step: 1,
+        check: 'Is it one device or all devices?',
+        action: 'Check another device (phone, tablet) on the same Wi-Fi. If all devices drop: the issue is the router or ISP. Restart the router (unplug for 30 seconds). If only one device drops: the issue is that device\'s Wi-Fi adapter or driver.',
+      },
+      {
+        step: 2,
+        check: 'Router restart and firmware update',
+        action: 'Unplug the router for 30 seconds, then reconnect. Log into the router admin panel (usually 192.168.1.1 or 192.168.0.1) and check for firmware updates. Outdated router firmware is a frequent cause of random disconnections.',
+      },
+      {
+        step: 3,
+        check: 'Wi-Fi channel and band',
+        action: 'In router settings, switch to a less congested channel. 2.4 GHz: use channels 1, 6, or 11 (non-overlapping). 5 GHz: channels 36–64 or 149–165 are typically less congested. Use a Wi-Fi analyser app (Android: "Wi-Fi Analyzer") to see nearby networks. Consider switching the problem device to 5 GHz (less interference, shorter range).',
+      },
+      {
+        step: 4,
+        check: 'Windows power management (most common PC-specific fix)',
+        action: 'Windows disables Wi-Fi adapters to save power. Device Manager → Network Adapters → right-click your Wi-Fi adapter → Properties → Power Management → uncheck "Allow the computer to turn off this device to save power". Also: Power Options → Change plan settings → Change advanced power settings → Wireless Adapter Settings → Power Saving Mode → Maximum Performance.',
+      },
+      {
+        step: 5,
+        check: 'Driver update or rollback',
+        action: 'Outdated or buggy Wi-Fi drivers cause disconnections. Device Manager → Network Adapters → right-click Wi-Fi adapter → Update driver. If a recent update caused the issue, roll back: Properties → Driver tab → Roll Back Driver. For Intel AX cards: download the latest driver directly from Intel.',
+      },
+      {
+        step: 6,
+        check: 'Network adapter TCP settings',
+        action: 'Open Command Prompt as Administrator. Run these commands one at a time: `netsh winsock reset`, `netsh int ip reset`, `ipconfig /flushdns`. Restart the PC. These reset corrupted network stack settings that can cause connection drops.',
+      },
+      {
+        step: 7,
+        check: 'Router DHCP lease and static IP',
+        action: 'Some routers fail to renew DHCP leases correctly. Assign a static IP to the problem device: in Windows, go to Network Connections → Wi-Fi properties → IPv4 → Manual → enter an IP outside the router\'s DHCP range (e.g. 192.168.1.200 if DHCP range is .1–.100).',
+      },
+    ],
+    prevention: [
+      'Keep router firmware updated.',
+      'Place the router centrally, away from microwaves, cordless phones and other 2.4 GHz devices.',
+      'Use 5 GHz or 6 GHz (Wi-Fi 6E/7) where possible — far less interference.',
+      'Reboot router monthly if it has been running continuously.',
+    ],
+    whenToSeekHelp: 'If all devices drop on a known-working router/ISP, and the drops correlate with specific times of day, contact your ISP — line quality or congestion issues on the ISP side require their tools to diagnose.',
+  },
+
+  'monitor-flickering': {
+    title: 'Monitor Flickering',
+    icon: '🖥️',
+    category: 'Monitor',
+    symptoms: ['Screen flickers at a noticeable rate', 'Flickering only in certain apps or brightness levels', 'Lines or bands scrolling down/across', 'Black flash then image returns', 'Colour shift or ghosting'],
+    intro: 'Monitor flickering can originate in the display panel itself, the cable/connection, the GPU driver, or software settings. PWM dimming is a common but often overlooked cause for brightness-dependent flicker. Work through these in order — most cases are resolved by steps 1–3.',
+    steps: [
+      {
+        step: 1,
+        check: 'Cable and connection',
+        action: 'Replace the cable (try a different HDMI or DisplayPort cable). Try the other port on the GPU if available. Test with a different monitor on the same port. Try a different port type (switch from HDMI to DisplayPort or vice versa). A loose or damaged cable is the most common cause of intermittent flickering.',
+      },
+      {
+        step: 2,
+        check: 'Refresh rate and resolution mismatch',
+        action: 'Right-click desktop → Display Settings → Advanced display settings. Ensure the refresh rate matches the monitor\'s rated spec (e.g. 144 Hz, not 60 Hz on a 144 Hz panel). An incorrect refresh rate causes visible pulsing. Some HDMI versions cap bandwidth — HDMI 2.0 supports 4K 60 Hz but 4K 144 Hz requires DisplayPort 1.4 or HDMI 2.1.',
+      },
+      {
+        step: 3,
+        check: 'GPU driver update or DDU clean install',
+        action: 'Download the latest GPU driver (NVIDIA: geforce.com; AMD: amd.com/drivers; Intel: intel.com/drivers). For a clean install: boot into Safe Mode, run Display Driver Uninstaller (DDU) to fully remove the current driver, then install the new one fresh. DDU removes all driver remnants that standard uninstalls leave behind.',
+      },
+      {
+        step: 4,
+        check: 'PWM dimming at low brightness',
+        action: 'Most monitors use PWM (Pulse Width Modulation) to control backlight brightness — rapidly switching the backlight on/off. At low brightness levels (<30%), the PWM frequency may be visible as flicker, especially under fluorescent lighting. Try increasing brightness to 50%+ and see if flicker disappears. PWM-free monitors (like those using DC dimming) eliminate this — it is a hardware characteristic.',
+      },
+      {
+        step: 5,
+        check: 'Refresh rate and hardware acceleration in apps',
+        action: 'Some apps (browsers, video players) flicker due to hardware acceleration conflicts. In Chrome: Settings → System → disable "Use hardware acceleration when available" (then restart). In Firefox: Preferences → Performance → uncheck "Use recommended performance settings" → uncheck "Use hardware acceleration". If only one app flickers, this is likely the cause.',
+      },
+      {
+        step: 6,
+        check: 'Variable refresh rate (G-Sync / FreeSync) conflicts',
+        action: 'VRR can sometimes cause black flickers when frame rate drops near the VRR minimum. In NVIDIA Control Panel: disable G-Sync and test. In GPU drivers: check if VRR range is set too wide. Some monitors need firmware updates for stable VRR at all frame rates.',
+      },
+      {
+        step: 7,
+        check: 'Monitor self-test and panel health',
+        action: 'Most monitors have a built-in self-test mode (hold monitor\'s Menu/Input button while unplugging the data cable — the monitor displays a test pattern from its own circuitry). If the self-test pattern also flickers, the issue is the panel or its internal electronics, not the PC.',
+        warning: 'A flickering panel that shows colours correctly in self-test may have a failing scaler board (the internal electronics). This often makes professional repair more cost-effective than DIY.',
+      },
+    ],
+    prevention: [
+      'Use quality DisplayPort 1.4 or HDMI 2.1 cables rated for the bandwidth your resolution and refresh rate require.',
+      'Keep GPU drivers up to date, especially after Windows major updates which sometimes reset GPU settings.',
+      'Avoid running monitors above their rated refresh rate for extended periods.',
+    ],
+    whenToSeekHelp: 'If flickering appears in the monitor\'s self-test pattern (see step 7), the fault is inside the monitor. Panel replacements are often not cost-effective for monitors under 27" — compare repair cost vs. a new monitor.',
+  },
+
+  'printer-not-printing': {
+    title: 'Printer Not Printing',
+    icon: '🖨️',
+    category: 'Printer',
+    symptoms: ['Printer shows "Offline" in Windows', 'Print jobs stuck in queue', 'Pages print blank', 'Streaks, bands or missing colours in output', 'Error lights or codes on the printer panel'],
+    intro: 'Printer problems fall into three categories: connectivity (the PC cannot talk to the printer), software (spooler or driver issues) and hardware (ink, paper path, printhead). Offline errors are almost always software or connectivity; print quality issues are hardware. This guide covers the most common scenarios.',
+    steps: [
+      {
+        step: 1,
+        check: 'Printer power and connection',
+        action: 'Verify the printer is powered on with no error lights. For USB: try a different USB cable and port. For Wi-Fi: ensure the printer and PC are on the same network. Print a "Network Configuration Page" or "Test Page" directly from the printer\'s control panel — if this works, the printer hardware is functional.',
+      },
+      {
+        step: 2,
+        check: 'Clear print queue and restart spooler',
+        action: 'Open Services (search "services.msc") → find "Print Spooler" → Stop it. Navigate to C:\\Windows\\System32\\spool\\PRINTERS and delete all files in that folder (not the folder itself). Go back to Services → Start "Print Spooler" again. This clears stuck jobs that block all printing.',
+      },
+      {
+        step: 3,
+        check: 'Set as default and check offline status',
+        action: 'Control Panel → Devices and Printers → right-click your printer → "See what\'s printing" → Printer menu → uncheck "Use Printer Offline". Also right-click → "Set as default printer". In Windows 11, Settings → Bluetooth & devices → Printers & scanners → click the printer → "Set as default".',
+      },
+      {
+        step: 4,
+        check: 'Reinstall printer driver',
+        action: 'Go to Devices and Printers, right-click the printer → Remove device. Download the latest driver from the manufacturer\'s website (HP, Epson, Canon, Brother all have driver download pages by model number). Run the installer — choose full installation, not "basic driver". Avoid Windows\' built-in auto-detected drivers for complex all-in-one printers.',
+      },
+      {
+        step: 5,
+        check: 'Ink/toner and printhead',
+        action: 'Low ink can cause blank pages or banding before the "low ink" warning shows. Check ink levels in the printer utility software. Run a nozzle check (from printer settings) and a printhead cleaning cycle. For inkjet printers idle for weeks, dried ink in nozzles causes streaks — 2–3 cleaning cycles may be needed.',
+        warning: 'Excessive printhead cleaning uses significant ink. If quality does not improve after 3 cleaning cycles, the printhead may need manual cleaning (soak in distilled water) or replacement.',
+      },
+      {
+        step: 6,
+        check: 'Paper path and jam detection',
+        action: 'Open all access panels and check for tiny paper fragments even if you do not see a full jam. A piece of torn paper near a roller triggers the jam sensor. Remove debris carefully — do not tear paper against the direction of paper travel. Use the rear access panel for straight-pull paper removal if available.',
+      },
+      {
+        step: 7,
+        check: 'Network/Wi-Fi printer IP assignment',
+        action: 'Wi-Fi printers change IP if assigned by DHCP — the PC may be sending jobs to the old IP. Print a network config page from the printer to see its current IP. In Windows, go to printer Properties → Ports tab → check the IP matches the printed IP. Assign a static IP in the router\'s DHCP settings for the printer\'s MAC address.',
+      },
+    ],
+    prevention: [
+      'Print at least one page per week to prevent inkjet nozzles from drying.',
+      'Assign a static IP to network printers via the router\'s DHCP reservation.',
+      'Use original or high-quality compatible cartridges — cheap cartridges frequently cause nozzle clogs.',
+      'Store spare ink cartridges sealed and at room temperature.',
+    ],
+    whenToSeekHelp: 'If the printer shows error codes on its panel that do not clear after a power cycle and manual jam clearance, consult the manufacturer\'s error code list. Some errors (e.g. Epson "waste ink pad full") require a service tool to reset, available at authorised service centres.',
+  },
+};
+
+const guide = guides[slug as keyof typeof guides];
+if (!guide) return Astro.redirect(`${BASE}/en/troubleshoot/`);
+---
+
+<BaseLayout
+  title={`${guide.title} — Troubleshooting — Techpedia`}
+  description={`Step-by-step diagnostic guide for ${guide.title.toLowerCase()}. ${guide.symptoms.slice(0, 2).join(', ')}.`}
+  lang="en"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200 transition-colors">Home</a>
+      <span>/</span>
+      <a href={`${BASE}/en/troubleshoot/`} class="hover:text-slate-200 transition-colors">Troubleshoot</a>
+      <span>/</span>
+      <span class="text-slate-200">{guide.title}</span>
+    </nav>
+
+    <!-- Guide header -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-2xl">{guide.icon}</div>
+        <div>
+          <span class="tp-badge-amber text-xs">{guide.category}</span>
+        </div>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-3">{guide.title}</h1>
+      <p class="text-slate-400 leading-relaxed">{guide.intro}</p>
+    </div>
+
+    <!-- Safety note -->
+    {guide.safetyNote && (
+      <div class="rounded-lg bg-red-900/20 border border-red-700/30 px-4 py-3 mb-6 flex items-start gap-3">
+        <span class="text-xl flex-shrink-0">⚠️</span>
+        <p class="text-sm text-red-300"><span class="font-semibold text-red-200">Safety: </span>{guide.safetyNote}</p>
+      </div>
+    )}
+
+    <!-- Symptoms -->
+    <div class="rounded-xl bg-navy-800/60 border border-tp-border p-5 mb-8">
+      <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">Common symptoms this guide addresses</h2>
+      <ul class="space-y-1.5">
+        {guide.symptoms.map(s => (
+          <li class="flex items-start gap-2 text-sm text-slate-300">
+            <span class="text-amber-400 mt-0.5 flex-shrink-0">•</span>
+            <span>{s}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Steps -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold text-slate-100 mb-5">Diagnostic Steps</h2>
+      <div class="space-y-4">
+        {guide.steps.map((step) => (
+          <div class="rounded-xl border border-tp-border bg-navy-900/40 overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 bg-navy-800/60 border-b border-tp-border/50">
+              <div class="w-7 h-7 rounded-full bg-tp-blue/20 border border-tp-blue/30 flex items-center justify-center text-sm font-bold text-tp-blue flex-shrink-0">
+                {step.step}
+              </div>
+              <h3 class="font-semibold text-slate-100">{step.check}</h3>
+            </div>
+            <div class="px-4 py-3">
+              <p class="text-sm text-slate-300 leading-relaxed">{step.action}</p>
+              {step.warning && (
+                <div class="mt-3 rounded-lg bg-amber-900/20 border border-amber-700/30 px-3 py-2 text-xs text-amber-300">
+                  <span class="font-semibold text-amber-200">Note: </span>{step.warning}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Prevention -->
+    <div class="rounded-xl bg-tp-blue/5 border border-tp-blue/20 p-5 mb-6">
+      <h2 class="text-base font-bold text-slate-100 mb-3">Prevention Tips</h2>
+      <ul class="space-y-2">
+        {guide.prevention.map(tip => (
+          <li class="flex items-start gap-2 text-sm text-slate-300">
+            <span class="text-tp-cyan mt-0.5 flex-shrink-0">✓</span>
+            <span>{tip}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- When to seek help -->
+    <div class="rounded-lg bg-slate-800/40 border border-tp-border px-4 py-3 mb-8 text-sm text-slate-300">
+      <span class="font-semibold text-slate-200">When to seek professional help: </span>{guide.whenToSeekHelp}
+    </div>
+
+    <!-- Back -->
+    <a href={`${BASE}/en/troubleshoot/`} class="inline-flex items-center gap-2 text-sm text-tp-blue hover:text-tp-blue-bright transition-colors">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+      Back to Troubleshooting Centre
+    </a>
+  </div>
+</BaseLayout>

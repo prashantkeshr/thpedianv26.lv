@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '/thpedianv26.lv';
+
+const technologies = [
+  { name: 'USB मानक', slug: 'usb-standards', category: 'Interface', icon: '🔌', desc: 'USB 2.0, 3.x, 4.0 और USB-C का विकास — गति, पावर डिलीवरी और संगतता।' },
+  { name: 'Wi-Fi पीढ़ियाँ', slug: 'wifi-generations', category: 'Wireless', icon: '📶', desc: '802.11a से Wi-Fi 7 (802.11be) तक — गति, बैंड और मुख्य सुविधाएँ।' },
+  { name: 'डिस्प्ले तकनीक', slug: 'display-technologies', category: 'Display', icon: '🖥️', desc: 'LCD, IPS, OLED, AMOLED, Mini-LED, Micro-LED और नई डिस्प्ले तकनीक।' },
+  { name: 'सेमीकंडक्टर नोड', slug: 'semiconductor-nodes', category: 'Semiconductor', icon: '⚙️', desc: 'TSMC, Samsung और Intel के प्रोसेस नोड — 10nm से 2nm तक।' },
+  { name: 'RAM तकनीक', slug: 'ram-technologies', category: 'Memory', icon: '💾', desc: 'DDR4, DDR5, LPDDR5X — गति, टाइमिंग, बैंडविड्थ और प्लेटफ़ॉर्म।' },
+  { name: 'Bluetooth मानक', slug: 'bluetooth-standards', category: 'Wireless', icon: '📡', desc: 'Bluetooth Classic, BLE, 5.x, 6.0 — रेंज, थ्रूपुट, ऑडियो कोडेक।' },
+  { name: 'NVMe और स्टोरेज', slug: 'nvme-storage', category: 'Storage', icon: '💽', desc: 'SATA vs NVMe, PCIe 4.0/5.0 ड्राइव, NAND प्रकार और एंटरप्राइज़ स्टोरेज।' },
+  { name: '5G और सेल्युलर', slug: '5g-cellular', category: 'Cellular', icon: '📱', desc: '2G से 5G NR तक — sub-6 GHz vs mmWave, Massive MIMO और 5G-Advanced।' },
+  { name: 'कूलिंग तकनीक', slug: 'cooling-technologies', category: 'Thermal', icon: '❄️', desc: 'एयर कूलर, AIO लिक्विड, वेपर चैंबर, हीट पाइप और मोबाइल थर्मल।' },
+  { name: 'GPU API मानक', slug: 'gpu-apis', category: 'Graphics', icon: '🎮', desc: 'DirectX 12, Vulkan, Metal, OpenGL और WebGPU — कब और क्यों उपयोग करें।' },
+];
+---
+
+<BaseLayout
+  title="तकनीक एक्सप्लोरर — Techpedia"
+  description="तकनीकी मानकों, पीढ़ियों और तुलनाओं का गहन विश्लेषण — Wi-Fi, USB, डिस्प्ले, सेमीकंडक्टर नोड और अधिक।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span>/</span>
+      <span class="text-slate-200">तकनीक</span>
+    </nav>
+
+    <div class="mb-10">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">तकनीक एक्सप्लोरर</h1>
+      <p class="text-slate-400">मानक, पीढ़ियाँ, टाइमलाइन और गहन तकनीकी व्याख्याएँ</p>
+    </div>
+
+    <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-8 text-sm text-slate-400 flex items-center gap-2">
+      <span>🌐</span>
+      <span>गहन लेख अंग्रेज़ी में उपलब्ध हैं। अंग्रेज़ी संस्करण के लिए <a href={`${BASE}/en/technologies/`} class="text-tp-blue hover:underline">यहाँ क्लिक करें</a>।</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {technologies.map(tech => (
+        <a href={`${BASE}/en/technologies/${tech.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-tp-blue/40 transition-colors group">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-navy-700 flex items-center justify-center text-xl">{tech.icon}</div>
+            <div>
+              <h3 class="font-semibold text-slate-100 group-hover:text-tp-blue transition-colors">{tech.name}</h3>
+              <span class="tp-badge-blue text-xs">{tech.category}</span>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 leading-relaxed">{tech.desc}</p>
+          <div class="mt-auto">
+            <span class="text-xs text-tp-cyan group-hover:underline">गहन जानकारी पढ़ें →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

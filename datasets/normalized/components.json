@@ -3,7 +3,11 @@
     "id": "cpu-000001",
     "slug": "intel-core-ultra-9-285k",
     "name": "Intel Core Ultra 9 285K",
-    "commonNames": ["Core Ultra 9 285K", "285K", "Arrow Lake"],
+    "commonNames": [
+      "Core Ultra 9 285K",
+      "285K",
+      "Arrow Lake"
+    ],
     "manufacturerName": "Intel",
     "partNumber": "BX80768285K",
     "category": "cpu",
@@ -34,13 +38,27 @@
       "voltage": "0.9–1.4 V (approximate)",
       "maxTemperature": "100 °C"
     },
-    "applications": ["High-performance desktop computing", "Gaming", "Video editing", "3D rendering", "AI workloads"],
-    "equivalentParts": ["AMD Ryzen 9 9950X", "AMD Ryzen 9 7950X"],
+    "applications": [
+      "High-performance desktop computing",
+      "Gaming",
+      "Video editing",
+      "3D rendering",
+      "AI workloads"
+    ],
+    "equivalentParts": [
+      "AMD Ryzen 9 9950X",
+      "AMD Ryzen 9 7950X"
+    ],
     "images": [],
     "datasheetUrl": "https://ark.intel.com/content/www/us/en/ark/products/238128/intel-core-ultra-9-processor-285k-36m-cache-up-to-5-70-ghz.html",
     "manufacturerUrl": "https://ark.intel.com",
     "sources": [
-      { "provider": "Intel ARK", "url": "https://ark.intel.com/content/www/us/en/ark/products/238128.html", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+      {
+        "provider": "Intel ARK",
+        "url": "https://ark.intel.com/content/www/us/en/ark/products/238128.html",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
@@ -51,7 +69,11 @@
     "id": "cpu-000002",
     "slug": "amd-ryzen-9-9950x",
     "name": "AMD Ryzen 9 9950X",
-    "commonNames": ["Ryzen 9 9950X", "9950X", "Zen 5"],
+    "commonNames": [
+      "Ryzen 9 9950X",
+      "9950X",
+      "Zen 5"
+    ],
     "manufacturerName": "AMD",
     "partNumber": "100-100001277WOF",
     "category": "cpu",
@@ -82,13 +104,26 @@
       "voltage": "0.75–1.5 V",
       "maxTemperature": "95 °C"
     },
-    "applications": ["High-performance desktop", "Video production", "3D rendering", "Simulation", "Gaming"],
-    "equivalentParts": ["Intel Core Ultra 9 285K"],
+    "applications": [
+      "High-performance desktop",
+      "Video production",
+      "3D rendering",
+      "Simulation",
+      "Gaming"
+    ],
+    "equivalentParts": [
+      "Intel Core Ultra 9 285K"
+    ],
     "images": [],
     "datasheetUrl": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html",
     "manufacturerUrl": "https://www.amd.com",
     "sources": [
-      { "provider": "AMD official", "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+      {
+        "provider": "AMD official",
+        "url": "https://www.amd.com/en/products/processors/desktops/ryzen/9000-series/amd-ryzen-9-9950x.html",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
@@ -99,7 +134,11 @@
     "id": "gpu-000001",
     "slug": "nvidia-geforce-rtx-4090",
     "name": "NVIDIA GeForce RTX 4090",
-    "commonNames": ["RTX 4090", "AD102", "Ada Lovelace flagship"],
+    "commonNames": [
+      "RTX 4090",
+      "AD102",
+      "Ada Lovelace flagship"
+    ],
     "manufacturerName": "NVIDIA",
     "partNumber": "900-1G136-2530-000",
     "category": "gpu",
@@ -118,8 +157,16 @@
       "boostClock": "2520 MHz",
       "tdp": "450 W TGP",
       "busInterface": "PCIe 4.0 ×16",
-      "ports": ["3× DisplayPort 1.4a", "1× HDMI 2.1"],
-      "apiSupport": ["DirectX 12 Ultimate", "OpenGL 4.6", "Vulkan 1.3", "CUDA 8.9"],
+      "ports": [
+        "3× DisplayPort 1.4a",
+        "1× HDMI 2.1"
+      ],
+      "apiSupport": [
+        "DirectX 12 Ultimate",
+        "OpenGL 4.6",
+        "Vulkan 1.3",
+        "CUDA 8.9"
+      ],
       "releaseDate": "2022-10-12",
       "msrp": "$1599"
     },
@@ -129,13 +176,26 @@
       "powerConnector": "1× 16-pin (PCIe 5.0 adapter included)",
       "minPSU": "850 W"
     },
-    "applications": ["4K gaming", "AI inference and training", "3D rendering", "Video production", "Scientific computing"],
-    "equivalentParts": ["AMD Radeon RX 7900 XTX"],
+    "applications": [
+      "4K gaming",
+      "AI inference and training",
+      "3D rendering",
+      "Video production",
+      "Scientific computing"
+    ],
+    "equivalentParts": [
+      "AMD Radeon RX 7900 XTX"
+    ],
     "images": [],
     "datasheetUrl": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
     "manufacturerUrl": "https://www.nvidia.com",
     "sources": [
-      { "provider": "NVIDIA official", "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+      {
+        "provider": "NVIDIA official",
+        "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
@@ -146,7 +206,11 @@
     "id": "gpu-000002",
     "slug": "amd-radeon-rx-7900-xtx",
     "name": "AMD Radeon RX 7900 XTX",
-    "commonNames": ["RX 7900 XTX", "Navi 31", "RDNA 3 flagship"],
+    "commonNames": [
+      "RX 7900 XTX",
+      "Navi 31",
+      "RDNA 3 flagship"
+    ],
     "manufacturerName": "AMD",
     "partNumber": "100-300000012",
     "category": "gpu",
@@ -164,8 +228,15 @@
       "boostClock": "2500 MHz",
       "tdp": "355 W TBP",
       "busInterface": "PCIe 4.0 ×16",
-      "ports": ["2× DisplayPort 2.1", "1× HDMI 2.1"],
-      "apiSupport": ["DirectX 12 Ultimate", "OpenGL 4.6", "Vulkan 1.3"],
+      "ports": [
+        "2× DisplayPort 2.1",
+        "1× HDMI 2.1"
+      ],
+      "apiSupport": [
+        "DirectX 12 Ultimate",
+        "OpenGL 4.6",
+        "Vulkan 1.3"
+      ],
       "releaseDate": "2022-12-13",
       "msrp": "$999"
     },
@@ -175,13 +246,26 @@
       "powerConnector": "2× 8-pin",
       "minPSU": "800 W"
     },
-    "applications": ["4K gaming", "Video production", "Machine learning", "Scientific computing"],
-    "equivalentParts": ["NVIDIA GeForce RTX 4090", "NVIDIA GeForce RTX 4080 Super"],
+    "applications": [
+      "4K gaming",
+      "Video production",
+      "Machine learning",
+      "Scientific computing"
+    ],
+    "equivalentParts": [
+      "NVIDIA GeForce RTX 4090",
+      "NVIDIA GeForce RTX 4080 Super"
+    ],
     "images": [],
     "datasheetUrl": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xtx",
     "manufacturerUrl": "https://www.amd.com",
     "sources": [
-      { "provider": "AMD official", "url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xtx.html", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+      {
+        "provider": "AMD official",
+        "url": "https://www.amd.com/en/products/graphics/amd-radeon-rx-7900xtx.html",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
@@ -192,7 +276,11 @@
     "id": "cmp-000001",
     "slug": "nxp-lpc1768fbd100",
     "name": "NXP LPC1768",
-    "commonNames": ["LPC1768", "LPC17xx", "ARM Cortex-M3 MCU"],
+    "commonNames": [
+      "LPC1768",
+      "LPC17xx",
+      "ARM Cortex-M3 MCU"
+    ],
     "manufacturerName": "NXP Semiconductors",
     "partNumber": "LPC1768FBD100",
     "category": "microcontroller",
@@ -228,14 +316,32 @@
       "maxCurrent": "250 mA"
     },
     "operatingPrinciple": "32-bit RISC processor executing ARM Thumb-2 instructions with on-chip peripherals and memory.",
-    "applications": ["Embedded systems development", "IoT devices", "Industrial control", "Motor control", "Protocol bridging", "Robotics"],
-    "equivalentParts": ["STM32F103", "LPC1769", "NXP LPC1778"],
+    "applications": [
+      "Embedded systems development",
+      "IoT devices",
+      "Industrial control",
+      "Motor control",
+      "Protocol bridging",
+      "Robotics"
+    ],
+    "equivalentParts": [
+      "STM32F103",
+      "LPC1769",
+      "NXP LPC1778"
+    ],
     "images": [],
     "datasheetUrl": "https://www.nxp.com/docs/en/data-sheet/LPC1769_68_67_66_65_64_63.pdf",
     "manufacturerUrl": "https://www.nxp.com",
-    "safetyNotes": ["Sensitive to ESD; use anti-static precautions during handling."],
+    "safetyNotes": [
+      "Sensitive to ESD; use anti-static precautions during handling."
+    ],
     "sources": [
-      { "provider": "NXP Datasheet", "url": "https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/general-purpose-mcus/lpc1700-cortex-m3/:", "retrievedAt": "2026-11-01", "verificationLevel": "official" }
+      {
+        "provider": "NXP Datasheet",
+        "url": "https://www.nxp.com/products/processors-and-microcontrollers/arm-microcontrollers/general-purpose-mcus/lpc1700-cortex-m3/:",
+        "retrievedAt": "2026-11-01",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
@@ -246,7 +352,11 @@
     "id": "cpu-000003",
     "slug": "intel-core-i9-14900k",
     "name": "Intel Core i9-14900K",
-    "commonNames": ["i9-14900K", "14900K", "Raptor Lake Refresh"],
+    "commonNames": [
+      "i9-14900K",
+      "14900K",
+      "Raptor Lake Refresh"
+    ],
     "manufacturerName": "Intel",
     "partNumber": "BX8071514900K",
     "category": "cpu",
@@ -271,12 +381,31 @@
       "releaseDate": "2023-10-17",
       "msrp": "$589"
     },
-    "electricalChars": { "vcore": "0.6–1.52 V", "tdp": "253 W (MTP)", "socket": "LGA1700" },
-    "applications": ["High-performance gaming", "Video editing and rendering", "3D animation", "Software compilation"],
-    "equivalentParts": ["AMD Ryzen 9 7950X3D", "Intel Core i9-13900K"],
-    "safetyNotes": ["Requires robust cooling solution for PL2 operation. Adequate case airflow essential."],
+    "electricalChars": {
+      "vcore": "0.6–1.52 V",
+      "tdp": "253 W (MTP)",
+      "socket": "LGA1700"
+    },
+    "applications": [
+      "High-performance gaming",
+      "Video editing and rendering",
+      "3D animation",
+      "Software compilation"
+    ],
+    "equivalentParts": [
+      "AMD Ryzen 9 7950X3D",
+      "Intel Core i9-13900K"
+    ],
+    "safetyNotes": [
+      "Requires robust cooling solution for PL2 operation. Adequate case airflow essential."
+    ],
     "sources": [
-      { "provider": "Intel ARK", "url": "https://ark.intel.com/content/www/us/en/ark/products/236773/intel-core-i9-processor-14900k-36m-cache-up-to-6-00-ghz.html", "retrievedAt": "2026-11-17", "verificationLevel": "official" }
+      {
+        "provider": "Intel ARK",
+        "url": "https://ark.intel.com/content/www/us/en/ark/products/236773/intel-core-i9-processor-14900k-36m-cache-up-to-6-00-ghz.html",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
@@ -287,7 +416,11 @@
     "id": "gpu-000003",
     "slug": "nvidia-geforce-rtx-4070-super",
     "name": "NVIDIA GeForce RTX 4070 SUPER",
-    "commonNames": ["RTX 4070 Super", "RTX 4070S", "AD104"],
+    "commonNames": [
+      "RTX 4070 Super",
+      "RTX 4070S",
+      "AD104"
+    ],
     "manufacturerName": "NVIDIA",
     "partNumber": "900-1G141-2544-000",
     "category": "gpu",
@@ -306,16 +439,37 @@
       "tdp": "220 W TGP",
       "pciInterface": "PCIe 4.0 ×16",
       "powerConnectors": "1× 16-pin (600 W adapter to 3× 8-pin)",
-      "outputs": ["3× DisplayPort 1.4a", "1× HDMI 2.1"],
+      "outputs": [
+        "3× DisplayPort 1.4a",
+        "1× HDMI 2.1"
+      ],
       "releaseDate": "2024-01-17",
       "msrp": "$599"
     },
-    "electricalChars": { "tdp": "220 W TGP", "interface": "PCIe 4.0 ×16" },
-    "applications": ["1440p gaming", "4K gaming", "AI-accelerated rendering", "Video editing"],
-    "equivalentParts": ["AMD Radeon RX 7800 XT", "NVIDIA GeForce RTX 4070"],
-    "safetyNotes": ["Requires a minimum 650 W PSU for a typical build."],
+    "electricalChars": {
+      "tdp": "220 W TGP",
+      "interface": "PCIe 4.0 ×16"
+    },
+    "applications": [
+      "1440p gaming",
+      "4K gaming",
+      "AI-accelerated rendering",
+      "Video editing"
+    ],
+    "equivalentParts": [
+      "AMD Radeon RX 7800 XT",
+      "NVIDIA GeForce RTX 4070"
+    ],
+    "safetyNotes": [
+      "Requires a minimum 650 W PSU for a typical build."
+    ],
     "sources": [
-      { "provider": "NVIDIA official", "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-super/", "retrievedAt": "2026-11-17", "verificationLevel": "official" }
+      {
+        "provider": "NVIDIA official",
+        "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4070-super/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
@@ -326,7 +480,10 @@
     "id": "cmp-000002",
     "slug": "raspberry-pi-5",
     "name": "Raspberry Pi 5",
-    "commonNames": ["RPi 5", "Pi 5"],
+    "commonNames": [
+      "RPi 5",
+      "Pi 5"
+    ],
     "manufacturerName": "Raspberry Pi Foundation",
     "partNumber": "SC1112",
     "category": "microcontroller",
@@ -354,17 +511,53 @@
       "powerConsumption": "Up to 25W under load"
     },
     "pinout": [
-      { "pin": 1, "name": "3.3V", "description": "3.3V power output (max 300 mA)" },
-      { "pin": 2, "name": "5V", "description": "5V power input/output" },
-      { "pin": 6, "name": "GND", "description": "Ground" },
-      { "pin": 8, "name": "GPIO14 / TXD", "description": "UART transmit (Serial0)" },
-      { "pin": 10, "name": "GPIO15 / RXD", "description": "UART receive (Serial0)" }
+      {
+        "pin": 1,
+        "name": "3.3V",
+        "description": "3.3V power output (max 300 mA)"
+      },
+      {
+        "pin": 2,
+        "name": "5V",
+        "description": "5V power input/output"
+      },
+      {
+        "pin": 6,
+        "name": "GND",
+        "description": "Ground"
+      },
+      {
+        "pin": 8,
+        "name": "GPIO14 / TXD",
+        "description": "UART transmit (Serial0)"
+      },
+      {
+        "pin": 10,
+        "name": "GPIO15 / RXD",
+        "description": "UART receive (Serial0)"
+      }
     ],
-    "applications": ["IoT and edge computing", "DIY Linux server", "Robotics and automation", "Retro gaming emulation", "AI inferencing at the edge"],
-    "equivalentParts": ["Raspberry Pi 4 Model B", "Orange Pi 5"],
-    "safetyNotes": ["Use a certified 25 W USB-C power supply to avoid under-voltage. Add heatsink or fan for sustained loads."],
+    "applications": [
+      "IoT and edge computing",
+      "DIY Linux server",
+      "Robotics and automation",
+      "Retro gaming emulation",
+      "AI inferencing at the edge"
+    ],
+    "equivalentParts": [
+      "Raspberry Pi 4 Model B",
+      "Orange Pi 5"
+    ],
+    "safetyNotes": [
+      "Use a certified 25 W USB-C power supply to avoid under-voltage. Add heatsink or fan for sustained loads."
+    ],
     "sources": [
-      { "provider": "Raspberry Pi Foundation", "url": "https://www.raspberrypi.com/products/raspberry-pi-5/", "retrievedAt": "2026-11-17", "verificationLevel": "official" }
+      {
+        "provider": "Raspberry Pi Foundation",
+        "url": "https://www.raspberrypi.com/products/raspberry-pi-5/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
@@ -375,7 +568,11 @@
     "id": "cmp-000003",
     "slug": "stm32f103c8t6",
     "name": "STM32F103C8T6",
-    "commonNames": ["STM32 Blue Pill", "Blue Pill", "STM32F1"],
+    "commonNames": [
+      "STM32 Blue Pill",
+      "Blue Pill",
+      "STM32F1"
+    ],
     "manufacturerName": "STMicroelectronics",
     "partNumber": "STM32F103C8T6",
     "category": "microcontroller",
@@ -392,7 +589,13 @@
       "timers": "7 timers (3× 16-bit general purpose, 1× 16-bit advanced, 2× watchdog, 1× SysTick)",
       "adc": "2× 12-bit ADC (10 channels each)",
       "dac": "None",
-      "communication": ["2× SPI", "2× I2C", "3× USART", "1× CAN 2.0", "1× USB 2.0 FS"],
+      "communication": [
+        "2× SPI",
+        "2× I2C",
+        "3× USART",
+        "1× CAN 2.0",
+        "1× USB 2.0 FS"
+      ],
       "dma": "7-channel DMA controller",
       "operatingTemp": "-40°C to 85°C",
       "releaseYear": 2007
@@ -403,18 +606,183 @@
       "operatingTemp": "-40°C to 85°C"
     },
     "pinout": [
-      { "pin": 1, "name": "VDD", "description": "3.3V supply voltage" },
-      { "pin": 2, "name": "PC13", "description": "GPIO / RTC alarm output / onboard LED on Blue Pill board" },
-      { "pin": 5, "name": "PA0", "description": "GPIO / ADC12_IN0 / TIM2_CH1_ETR / USART2_CTS / WKUP" },
-      { "pin": 10, "name": "PA5", "description": "GPIO / ADC12_IN5 / SPI1_SCK" },
-      { "pin": 20, "name": "NRST", "description": "Active-low reset input" },
-      { "pin": 48, "name": "VSS", "description": "Ground" }
+      {
+        "pin": 1,
+        "name": "VDD",
+        "description": "3.3V supply voltage"
+      },
+      {
+        "pin": 2,
+        "name": "PC13",
+        "description": "GPIO / RTC alarm output / onboard LED on Blue Pill board"
+      },
+      {
+        "pin": 5,
+        "name": "PA0",
+        "description": "GPIO / ADC12_IN0 / TIM2_CH1_ETR / USART2_CTS / WKUP"
+      },
+      {
+        "pin": 10,
+        "name": "PA5",
+        "description": "GPIO / ADC12_IN5 / SPI1_SCK"
+      },
+      {
+        "pin": 20,
+        "name": "NRST",
+        "description": "Active-low reset input"
+      },
+      {
+        "pin": 48,
+        "name": "VSS",
+        "description": "Ground"
+      }
     ],
-    "applications": ["DIY electronics and prototyping", "Robotics control boards", "USB HID devices", "CAN-bus nodes", "Arduino IDE compatible (via STM32duino)"],
-    "equivalentParts": ["Arduino Uno (AVR)", "STM32F103C6T6"],
-    "safetyNotes": ["GPIO pins are 3.3V logic; use level shifters when interfacing with 5V devices. Max pin current 25 mA."],
+    "applications": [
+      "DIY electronics and prototyping",
+      "Robotics control boards",
+      "USB HID devices",
+      "CAN-bus nodes",
+      "Arduino IDE compatible (via STM32duino)"
+    ],
+    "equivalentParts": [
+      "Arduino Uno (AVR)",
+      "STM32F103C6T6"
+    ],
+    "safetyNotes": [
+      "GPIO pins are 3.3V logic; use level shifters when interfacing with 5V devices. Max pin current 25 mA."
+    ],
     "sources": [
-      { "provider": "STMicroelectronics Datasheet", "url": "https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html", "retrievedAt": "2026-11-17", "verificationLevel": "official" }
+      {
+        "provider": "STMicroelectronics Datasheet",
+        "url": "https://www.st.com/en/microcontrollers-microprocessors/stm32f103c8.html",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "cmp-000004",
+    "slug": "samsung-990-pro-2tb",
+    "name": "Samsung 990 Pro 2 TB",
+    "partNumber": "MZ-V9P2T0BW",
+    "manufacturerName": "Samsung",
+    "category": "storage",
+    "description": "The Samsung 990 Pro is a PCIe 4.0 ×4 NVMe SSD featuring Samsung's Pascal controller and 6th-generation Samsung V-NAND TLC. It delivers up to 7,450 MB/s sequential read and up to 6,900 MB/s sequential write, targeting enthusiast desktop and PS5 upgrade markets.",
+    "specs": {
+      "formFactor": "M.2 2280",
+      "interface": "PCIe 4.0 ×4 / NVMe 2.0",
+      "capacity": "2 TB",
+      "sequentialRead": "7,450 MB/s",
+      "sequentialWrite": "6,900 MB/s",
+      "randomRead4K": "1,400,000 IOPS",
+      "randomWrite4K": "1,550,000 IOPS",
+      "nandType": "Samsung V-NAND TLC (6th generation)",
+      "controller": "Samsung Pascal",
+      "dramCache": "2 GB LPDDR4",
+      "endurance": "1,200 TBW",
+      "mtbf": "1,500,000 hours",
+      "dimensions": "80 × 22 × 2.38 mm",
+      "weight": "10 g",
+      "powerRead": "7 W",
+      "powerWrite": "7 W",
+      "idle": "50 mW"
+    },
+    "electricalChars": {
+      "supplyVoltage": "3.3 V",
+      "formFactor": "M.2 (M-key)",
+      "thermalThrottlingTemp": "70°C"
+    },
+    "keyFeatures": [
+      "PCIe 4.0 ×4 NVMe 2.0",
+      "7,450 MB/s read",
+      "1.2 PBW endurance",
+      "Compatible with PS5",
+      "Samsung MagicianSoftware"
+    ],
+    "tags": [
+      "nvme",
+      "ssd",
+      "samsung",
+      "pcie4",
+      "m2",
+      "storage"
+    ],
+    "sources": [
+      {
+        "provider": "Samsung official",
+        "url": "https://www.samsung.com/us/computing/memory-storage/solid-state-drives/990-pro/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "cmp-000005",
+    "slug": "espressif-esp32-s3",
+    "name": "ESP32-S3",
+    "partNumber": "ESP32-S3",
+    "manufacturerName": "Espressif Systems",
+    "category": "microcontroller",
+    "description": "The ESP32-S3 is a dual-core Xtensa LX7 microcontroller SoC with integrated Wi-Fi 4 and Bluetooth 5.0 LE, 512 KB SRAM, 384 KB ROM, and a dedicated AI vector acceleration unit for machine learning inference at the edge. It is widely used for Wi-Fi IoT devices, voice recognition and TinyML applications.",
+    "specs": {
+      "cpu": "Dual-core Xtensa LX7",
+      "clockSpeed": "Up to 240 MHz",
+      "sram": "512 KB",
+      "rom": "384 KB",
+      "flashInterface": "QSPI (up to 16 MB external flash)",
+      "wifi": "2.4 GHz IEEE 802.11 b/g/n (Wi-Fi 4)",
+      "bluetooth": "Bluetooth 5.0 LE + Mesh",
+      "gpio": "45 programmable GPIOs",
+      "adc": "20 channels (12-bit SAR ADC)",
+      "dac": "None (use PWM)",
+      "spi": "4× SPI (1 general, 3 extra)",
+      "i2c": "2× I2C",
+      "uart": "3× UART",
+      "i2s": "2× I2S",
+      "usb": "USB OTG 1.1 (Full Speed)",
+      "securityFeatures": "RSA-3072, AES-128/256-XTS, SHA2, ECC, ECDSA, secure boot, flash encryption",
+      "aiAcceleration": "PIE vector instructions for NN matrix operations"
+    },
+    "electricalChars": {
+      "supplyVoltage": "3.0 V – 3.6 V",
+      "ioVoltage": "3.3 V",
+      "currentWifi": "< 240 mA peak (Wi-Fi TX)",
+      "currentDeepSleep": "7 µA",
+      "operatingTemp": "-40°C to 85°C (commercial); -40°C to 105°C (industrial)"
+    },
+    "keyFeatures": [
+      "Dual-core 240 MHz Xtensa LX7",
+      "Wi-Fi 4 + BT 5.0 LE",
+      "512 KB SRAM",
+      "USB OTG Full Speed",
+      "AI vector instructions",
+      "Secure boot + flash encryption"
+    ],
+    "tags": [
+      "esp32",
+      "esp32-s3",
+      "microcontroller",
+      "wifi",
+      "bluetooth",
+      "iot",
+      "tinyml",
+      "espressif"
+    ],
+    "sources": [
+      {
+        "provider": "Espressif datasheet",
+        "url": "https://www.espressif.com/en/products/socs/esp32-s3",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
     ],
     "verificationLevel": "official",
     "createdAt": "2026-11-17",

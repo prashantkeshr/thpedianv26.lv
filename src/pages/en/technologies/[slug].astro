@@ -3,7 +3,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 
 const BASE = '/thpedianv26.lv';
 
-type TechSlug = 'usb-standards' | 'wifi-generations' | 'display-technologies' | 'semiconductor-nodes' | 'ram-technologies' | 'bluetooth-standards';
+type TechSlug = 'usb-standards' | 'wifi-generations' | 'display-technologies' | 'semiconductor-nodes' | 'ram-technologies' | 'bluetooth-standards' | 'nvme-storage' | '5g-cellular' | 'cooling-technologies' | 'gpu-apis';
 
 const technologies: Record<TechSlug, {
   title: string;
@@ -255,11 +255,162 @@ const technologies: Record<TechSlug, {
       }
     ],
     tags: ['bluetooth', 'ble', 'le-audio', 'auracast', 'channel-sounding', 'bt5', 'bluetooth6', 'codec']
+  },
+
+  'nvme-storage': {
+    title: 'NVMe and Storage Standards',
+    subtitle: 'From SATA to PCIe 5.0 NVMe and beyond',
+    icon: '💽',
+    category: 'Storage',
+    intro: 'NVMe (Non-Volatile Memory Express) is the protocol that unlocked the full potential of NAND flash storage. Where AHCI (the SATA protocol) was designed for spinning hard drives with a single queue of 32 commands, NVMe was built for flash: 65,535 queues each holding 65,535 commands, sub-100 µs latency and direct PCIe attachment. The result is a generational leap in both throughput and I/O parallelism that has transformed system responsiveness.',
+    sections: [
+      {
+        heading: 'Interface Comparison: SATA vs NVMe',
+        content: 'SATA III is capped at 600 MB/s signalling — practical SSDs peak at 550 MB/s sequential read. It uses the AHCI command set, designed in 2004 for mechanical drives. NVMe over PCIe bypasses this bottleneck: PCIe 4.0 ×4 provides ~8 GB/s of raw bandwidth; PCIe 5.0 ×4 doubles this to ~16 GB/s. Sequential throughput is only part of the story — random 4K I/O performance, where AHCI is architecturally limited to 1 queue depth of 32, is where NVMe\'s parallel queue model most dramatically improves system responsiveness.',
+        table: {
+          headers: ['Interface', 'Protocol', 'Seq Read (max)', 'Seq Write (max)', 'Queue Depth', 'Form Factors'],
+          rows: [
+            ['SATA III', 'AHCI', '~550 MB/s', '~520 MB/s', '1 × 32', '2.5", M.2 2280'],
+            ['PCIe 3.0 ×4 NVMe', 'NVMe 1.3', '~3,500 MB/s', '~3,000 MB/s', '65k × 65k', 'M.2, U.2'],
+            ['PCIe 4.0 ×4 NVMe', 'NVMe 1.4', '~7,000 MB/s', '~7,000 MB/s', '65k × 65k', 'M.2, E1.S'],
+            ['PCIe 5.0 ×4 NVMe', 'NVMe 2.0', '~14,000 MB/s', '~14,000 MB/s', '65k × 65k', 'M.2, E1.S'],
+          ]
+        }
+      },
+      {
+        heading: 'NAND Flash: SLC, MLC, TLC, QLC',
+        content: 'NAND stores data as charge levels in floating-gate or charge-trap transistors. SLC (1 bit/cell) is fastest and most durable but costs ~4× more per GB than TLC. MLC (2 bits), TLC (3 bits) and QLC (4 bits) progressively trade endurance and performance for density. Consumer drives use TLC (256+ GB) or QLC (2 TB+). Enterprise and industrial drives use SLC or pSLC (pseudo-SLC — writing TLC as SLC temporarily). Most consumer TLC drives have an SLC write cache (a portion of the NAND configured as SLC) for burst performance; sustained writes beyond this cache reveal the drive\'s true TLC write speed, which may be 300–600 MB/s on budget drives.',
+      },
+      {
+        heading: 'Controller Architecture',
+        content: 'The NVMe controller is the drive\'s CPU — it manages wear levelling (distributing writes evenly across all NAND blocks), garbage collection (reclaiming erased blocks), over-provisioning (reserving ~7–28% of raw NAND for internal management), ECC (error correction), and the host interface. Major controllers: Phison E18/E26, Silicon Motion SM2267/SM2269, Marvell Bravada, Samsung\'s in-house Elpis/Artisan. DRAM-less drives (using Host Memory Buffer / HMB) are cheaper but show higher latency on 4K random reads.',
+      },
+      {
+        heading: 'Enterprise: NVMe-oF and CXL',
+        content: 'NVMe over Fabrics (NVMe-oF) extends the NVMe command set over Ethernet (NVMe/TCP, NVMe/RoCE) or Fibre Channel, allowing data centre servers to access remote NVMe SSDs with latency nearly matching local PCIe. Compute Express Link (CXL), based on PCIe 5.0 electrical, provides a cache-coherent interconnect between CPUs and storage-class memory (Intel Optane replacements, Samsung CXL DRAM). CXL enables pooled memory architectures in data centres — servers share a large memory pool rather than each holding their own DRAM.',
+      }
+    ],
+    tags: ['nvme', 'ssd', 'pcie', 'nand', 'storage', 'sata', 'nvme-of']
+  },
+
+  '5g-cellular': {
+    title: '5G and Cellular Standards',
+    subtitle: 'From 2G to 5G NR and 5G-Advanced',
+    icon: '📱',
+    category: 'Cellular',
+    intro: '5G (IMT-2020, NR — New Radio) is the fifth generation of cellular standards, specified by 3GPP (Releases 15–19). Unlike previous generations that focused primarily on mobile broadband, 5G is designed for three distinct use cases: eMBB (enhanced Mobile BroadBand) for high-speed data, URLLC (Ultra-Reliable Low Latency Communications) for industrial automation and V2X, and mMTC (massive Machine Type Communications) for IoT at scale.',
+    sections: [
+      {
+        heading: 'Cellular Generation Timeline',
+        content: '1G (1980s) introduced analog voice. 2G (GSM, 1991) brought digital voice and SMS. 3G (UMTS/HSPA, 1998–2001) enabled mobile data. 4G LTE (2008–2010) established the IP-only architecture and enabled video streaming. 5G NR (Release 15, 2018) adds mmWave, network slicing, and massive MIMO — but the full capability roadmap extends to Release 19 (5G-Advanced, 2025+).',
+        table: {
+          headers: ['Generation', 'Standard', 'Year', 'Peak Speed', 'Latency', 'Key Use Case'],
+          rows: [
+            ['2G', 'GSM / GPRS / EDGE', '1991', '0.3 Mbps (EDGE)', '500 ms', 'SMS, basic data'],
+            ['3G', 'UMTS / HSPA+', '1998', '21 Mbps', '50–100 ms', 'Mobile internet'],
+            ['4G', 'LTE / LTE-A Pro', '2008', '1 Gbps (theoretical)', '15–50 ms', 'Video, streaming'],
+            ['5G (Sub-6)', 'NR FR1', '2019', '~4 Gbps', '1–10 ms', 'Broadband, IoT'],
+            ['5G (mmWave)', 'NR FR2', '2019', '~20 Gbps', '<1 ms', 'Dense urban, stadiums'],
+            ['5G-Advanced', 'NR R18/R19', '2024+', '>50 Gbps', '<0.5 ms', 'Industrial, XR, AI'],
+          ]
+        }
+      },
+      {
+        heading: 'Spectrum: Sub-6 GHz vs mmWave',
+        content: 'Sub-6 GHz 5G (FR1: 410 MHz – 7.125 GHz) reuses or repurposes existing cellular bands plus new mid-band spectrum. It provides broad coverage and can penetrate walls — practical for nationwide deployment. n77/n78 (3.5 GHz) is the global standard band offering a balance of coverage and capacity. mmWave (FR2: 24–52 GHz) delivers extreme bandwidth (up to 800 MHz channels vs 100 MHz for mid-band) and sub-millisecond latency but cannot penetrate walls and requires line-of-sight. mmWave is ideal for dense outdoor venues (stadiums, train stations) but is rare outside the US, Japan and South Korea.',
+      },
+      {
+        heading: 'Massive MIMO and Beamforming',
+        content: 'Massive MIMO (Multiple Input Multiple Output) deploys 32–256+ antenna elements per base station (vs 2–8 in 4G). By using many antennas, the base station can direct separate spatial beams at different users simultaneously (MU-MIMO) and perform beam steering — focusing energy precisely toward each user rather than broadcasting omnidirectionally. This dramatically increases spectral efficiency (bits/Hz/cell). 5G base stations (gNodeB) use digital/analogue hybrid beamforming: analogue beam steering for coarse direction, digital precoding for fine-grained spatial multiplexing.',
+      },
+      {
+        heading: 'Network Slicing and 5G SA vs NSA',
+        content: '5G Non-Standalone (NSA, Release 15) anchors 5G on an existing 4G LTE core (EPC) for control-plane functions. It is faster to deploy but cannot support URLLC or network slicing. 5G Standalone (SA, Release 15+) uses the full 5G Core (5GC) with an entirely new Service-Based Architecture, enabling network slicing (virtual dedicated networks with guaranteed QoS), edge computing (MEC), and true URLLC. Most commercial 5G networks globally are still NSA as of 2025, though SA rollout is accelerating.',
+      }
+    ],
+    tags: ['5g', 'nr', 'lte', '4g', 'mmwave', 'mimo', 'cellular', '5g-sa']
+  },
+
+  'cooling-technologies': {
+    title: 'Cooling Technologies',
+    subtitle: 'Air cooling, liquid cooling, vapour chambers and beyond',
+    icon: '❄️',
+    category: 'Thermal',
+    intro: 'As transistor density increases, managing heat has become a first-order engineering challenge. A modern CPU socket dissipates 150–300 W from an area the size of a postage stamp; a flagship GPU dissipates 300–600 W. Cooling technology must transfer this heat efficiently from the silicon die to the surrounding air or liquid — the method used determines how quietly, efficiently and reliably a component can operate at its full rated performance.',
+    sections: [
+      {
+        heading: 'Heat Transfer Fundamentals',
+        content: 'Heat flows from hot to cold by conduction (through solids), convection (through fluid motion) and radiation. CPU/GPU cooling primarily uses conduction to move heat from the die through the heat spreader (IHS) and thermal interface material (TIM) to the cooler base, then convection to move it into the airstream or liquid loop, and finally convection/radiation to dump it into room air. Each interface introduces thermal resistance (°C/W) — the total thermal resistance from junction to ambient determines how much a component heats above room temperature at a given power level.',
+        table: {
+          headers: ['Cooler Type', 'Typical TDP (max)', 'Noise (typical)', 'Space', 'Complexity'],
+          rows: [
+            ['Stock box cooler', '65 W', 'Medium–High', 'Low', 'None'],
+            ['Budget air tower', '130 W', 'Low–Medium', 'Medium', 'Low'],
+            ['High-end air (Noctua NH-D15)', '250 W+', 'Very low', 'Large', 'Low'],
+            ['120mm AIO liquid', '150 W', 'Medium', 'Radiator + pump', 'Medium'],
+            ['240mm AIO liquid', '200 W', 'Low–Medium', 'Radiator + pump', 'Medium'],
+            ['360mm AIO liquid', '300 W', 'Low', 'Radiator + pump', 'Medium'],
+            ['Custom loop', '400 W+', 'Very low', 'Large', 'High'],
+          ]
+        }
+      },
+      {
+        heading: 'Heat Pipes and Vapour Chambers',
+        content: 'Heat pipes are hermetically sealed copper tubes containing a small amount of working fluid (usually water or acetone). Heat at one end vaporises the fluid; it condenses at the cooler end and wicks back via a sintered copper or grooved structure. This achieves far higher effective thermal conductivity than solid copper (10,000–100,000 W/m·K effective vs 400 W/m·K for copper). A vapour chamber is a flat 2D heat pipe — a sealed flat copper chamber where vapour can spread laterally across the entire surface area, then condense uniformly. Vapour chambers are used in flagship smartphones, gaming laptops, and GPU coolers because they spread heat from a small die across a large area more effectively than linear heat pipes.',
+      },
+      {
+        heading: 'AIO vs Custom Loop Liquid Cooling',
+        content: 'All-In-One (AIO) liquid coolers are sealed, maintenance-free units with a pump in the CPU block, a rubber hose, and a radiator. They are highly accessible (single SKU purchase), leak-resistant over typical warranty periods (5–7 years) and perform similarly to premium air coolers for most CPUs. Custom loops (open-loop liquid cooling) circulate water/coolant through a reservoir, pump, CPU block, GPU block and large external radiators — achievable TDP removal exceeds 600 W with 480mm+ radiators. The penalty is cost (£300–£1000+), complexity, and maintenance (fluid changes every 1–2 years, potential for leaks).',
+      },
+      {
+        heading: 'Mobile and Laptop Cooling',
+        content: 'Laptops and smartphones are thermally constrained by size and fanless requirements. Thin laptops often dissipate 15–45 W TDP — far below desktop equivalents of the same chip. Vapour chambers (Apple M-series MacBooks, gaming laptops) spread heat from a small die to a wider heatsink fin array. Graphene thermal pads are replacing copper in thin-and-light laptops due to higher in-plane thermal conductivity (~2000 W/m·K). Performance-mode software (Lenovo Vantage, ASUS Armoury Crate) manages thermal budgets dynamically. Liquid metal TIM (replacing standard paste between die and heatspreader) reduces CPU-to-IHS thermal resistance by 5–15°C — Sony uses it in the PS5.',
+      }
+    ],
+    tags: ['cooling', 'heat-pipe', 'vapour-chamber', 'aio', 'thermal', 'liquid-cooling', 'tdp']
+  },
+
+  'gpu-apis': {
+    title: 'GPU APIs and Graphics Standards',
+    subtitle: 'DirectX, Vulkan, Metal, OpenGL and WebGPU',
+    icon: '🎮',
+    category: 'Graphics',
+    intro: 'A graphics API (Application Programming Interface) is the software layer between game/application code and the GPU driver. It defines how programs submit draw calls, manage memory, run shaders and control the GPU pipeline. Choosing the right API involves trade-offs between portability, control overhead and feature support. The shift from high-level (OpenGL, DirectX 11) to low-level (Vulkan, DirectX 12, Metal) APIs is the most significant architectural change in graphics programming of the past decade.',
+    sections: [
+      {
+        heading: 'API Comparison',
+        content: 'Low-level APIs reduce driver overhead by giving applications explicit control over GPU resources, command buffers and synchronisation — but require significantly more code (draw call submission that takes 10 lines in DirectX 11 may take 500 lines in Vulkan). High-level APIs have smarter drivers that handle more state management but can introduce unpredictable performance hitches ("driver magic").',
+        table: {
+          headers: ['API', 'Vendor', 'Platform', 'Level', 'Primary Use Case', 'First Released'],
+          rows: [
+            ['OpenGL 4.6', 'Khronos', 'Cross-platform', 'High', 'Legacy desktop apps, education', '1992 (4.6: 2017)'],
+            ['DirectX 11', 'Microsoft', 'Windows', 'High', 'Broad game compatibility', '2009'],
+            ['DirectX 12', 'Microsoft', 'Windows / Xbox', 'Low', 'High-performance PC/console games', '2015'],
+            ['Vulkan 1.3', 'Khronos', 'Cross-platform', 'Low', 'High-performance cross-platform', '2016'],
+            ['Metal', 'Apple', 'Apple platforms', 'Low-Medium', 'All Apple GPU workloads', '2014'],
+            ['WebGPU', 'W3C/Khronos', 'Web browsers', 'Medium', 'GPU compute and 3D in browser', '2023'],
+          ]
+        }
+      },
+      {
+        heading: 'DirectX 12 and DirectX 12 Ultimate',
+        content: 'DirectX 12 introduced the lowest-level Windows graphics API: explicit memory management (heaps), explicit synchronisation (fences), multi-threaded command list recording, and resource binding redesign (descriptor heaps). DirectX 12 Ultimate (2020) added a mandatory feature set: DirectX Raytracing (DXR tier 1.1), Mesh Shaders, Sampler Feedback and Variable Rate Shading. All Xbox Series and all DX12 Ultimate-certified GPUs (NVIDIA Ampere+, AMD RDNA 2+, Intel Arc) support the full set. DirectX 12 Ultimate is now the assumed baseline for new Windows game development targeting high-end hardware.',
+      },
+      {
+        heading: 'Vulkan: Cross-Platform Low-Level API',
+        content: 'Vulkan (Khronos Group, 2016) is the cross-platform successor to OpenGL. It is explicitly low-level: applications manage GPU memory, command buffers, render passes and synchronisation directly. This eliminates driver overhead at the cost of significant application complexity. Vulkan is the primary API for cross-platform (Windows + Linux) game development, Android games (replacing OpenGL ES) and applications targeting non-Apple hardware. Vulkan 1.3 (2022) promoted several extensions (dynamic rendering, synchronisation 2, pipeline cache control) to core, simplifying development.',
+      },
+      {
+        heading: 'WebGPU: GPU Access in the Browser',
+        content: 'WebGPU is a W3C standard (landed in Chrome 113, May 2023) that exposes a modern GPU API to JavaScript and WASM. Unlike WebGL (which wraps OpenGL ES and is showing its age), WebGPU maps to Vulkan, Metal and DirectX 12 underneath. It supports GPU compute shaders (enabling machine learning inference, physics simulation and image processing directly in the browser without plugins) and modern rendering techniques. WebGPU is the foundation for in-browser AI inference frameworks (Transformers.js, MediaPipe web) and high-quality WebGL replacement rendering (Three.js WebGPU backend, Babylon.js).',
+      }
+    ],
+    tags: ['gpu', 'directx', 'vulkan', 'metal', 'opengl', 'webgpu', 'graphics-api', 'rendering']
   }
 };
 
 export async function getStaticPaths() {
-  const slugs = ['usb-standards', 'wifi-generations', 'display-technologies', 'semiconductor-nodes', 'ram-technologies', 'bluetooth-standards'];
+  const slugs = ['usb-standards', 'wifi-generations', 'display-technologies', 'semiconductor-nodes', 'ram-technologies', 'bluetooth-standards', 'nvme-storage', '5g-cellular', 'cooling-technologies', 'gpu-apis'];
   return slugs.map(slug => ({ params: { slug } }));
 }
 

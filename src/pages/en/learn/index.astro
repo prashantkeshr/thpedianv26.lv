@@ -3,14 +3,14 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 const BASE = '/thpedianv26.lv';
 
 const guides = [
-  { title: 'What is a CPU?', level: 'beginner', icon: '⚙️', summary: 'Understand how modern processors work — cores, threads, cache and instruction pipelines.' },
-  { title: 'How does RAM work?', level: 'beginner', icon: '💾', summary: 'From DRAM cells to DDR5 — memory types, timing, channels and latency explained.' },
-  { title: 'GPU Architecture Basics', level: 'intermediate', icon: '🎮', summary: 'Shader processors, VRAM, rasterization, ray tracing and AI acceleration.' },
-  { title: 'Understanding Transistors', level: 'beginner', icon: '🔌', summary: 'The fundamental building block of all digital electronics. BJT, MOSFET and beyond.' },
-  { title: 'Ohm\'s Law and Circuit Basics', level: 'beginner', icon: '⚡', summary: 'Voltage, current, resistance and how they relate in simple and complex circuits.' },
-  { title: 'SSD vs HDD Technology', level: 'beginner', icon: '💿', summary: 'NAND flash, wear leveling, NVMe protocol and why SSDs outperform spinning drives.' },
-  { title: 'Wi-Fi 7 Explained', level: 'intermediate', icon: '📶', summary: 'Multi-Link Operation, 320 MHz channels, QAM-4096 and what makes Wi-Fi 7 different.' },
-  { title: 'Introduction to Microcontrollers', level: 'beginner', icon: '🔧', summary: 'What microcontrollers are, how to choose one and common peripherals like GPIO, SPI, I2C.' },
+  { slug: 'what-is-a-cpu', title: 'What is a CPU?', level: 'beginner', icon: '⚙️', readTime: '8 min', summary: 'Understand how modern processors work — cores, threads, cache and instruction pipelines.' },
+  { slug: 'how-does-ram-work', title: 'How Does RAM Work?', level: 'beginner', icon: '💾', readTime: '7 min', summary: 'From DRAM cells to DDR5 — memory types, timing, channels and latency explained.' },
+  { slug: 'gpu-architecture-basics', title: 'GPU Architecture Basics', level: 'intermediate', icon: '🎮', readTime: '10 min', summary: 'Shader processors, VRAM, rasterization, ray tracing and AI acceleration.' },
+  { slug: 'understanding-transistors', title: 'Understanding Transistors', level: 'beginner', icon: '🔌', readTime: '6 min', summary: 'The fundamental building block of all digital electronics. BJT, MOSFET and beyond.' },
+  { slug: 'ohms-law-and-circuit-basics', title: "Ohm's Law and Circuit Basics", level: 'beginner', icon: '⚡', readTime: '6 min', summary: 'Voltage, current, resistance and how they relate in simple and complex circuits.' },
+  { slug: 'ssd-vs-hdd', title: 'SSD vs HDD Technology', level: 'beginner', icon: '💿', readTime: '7 min', summary: 'NAND flash, wear leveling, NVMe protocol and why SSDs outperform spinning drives.' },
+  { slug: 'wifi-7-explained', title: 'Wi-Fi 7 Explained', level: 'intermediate', icon: '📶', readTime: '8 min', summary: 'Multi-Link Operation, 320 MHz channels, QAM-4096 and what makes Wi-Fi 7 different.' },
+  { slug: 'introduction-to-microcontrollers', title: 'Introduction to Microcontrollers', level: 'beginner', icon: '🔧', readTime: '8 min', summary: 'What microcontrollers are, how to choose one and common peripherals like GPIO, SPI, I2C.' },
 ];
 
 const levelColors: Record<string, string> = {
@@ -46,26 +46,24 @@ const levelColors: Record<string, string> = {
       ))}
     </div>
 
-    <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 mb-8 text-sm text-amber-300 flex items-center gap-2">
-      <span>📚</span>
-      <span>Article pages are in development. The guide library will be published progressively.</span>
-    </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {guides.map(guide => (
-        <div class="tp-card p-5 flex flex-col gap-3 cursor-default">
+        <a href={`${BASE}/en/learn/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-tp-blue/50 transition-colors">
           <div class="flex items-start gap-3">
             <div class="w-9 h-9 rounded-lg bg-navy-700 flex items-center justify-center text-xl flex-shrink-0">{guide.icon}</div>
             <div class="min-w-0">
               <h3 class="font-semibold text-slate-100 leading-tight">{guide.title}</h3>
-              <span class={`text-xs mt-1 ${levelColors[guide.level] ?? levelColors.beginner}`}>{guide.level}</span>
+              <div class="flex items-center gap-2 mt-1">
+                <span class={`text-xs ${levelColors[guide.level] ?? levelColors.beginner}`}>{guide.level}</span>
+                <span class="text-xs text-slate-500">· {guide.readTime}</span>
+              </div>
             </div>
           </div>
           <p class="text-sm text-slate-400 line-clamp-3">{guide.summary}</p>
           <div class="mt-auto">
-            <span class="text-xs text-slate-500 italic">Coming soon</span>
+            <span class="text-xs text-tp-blue font-medium">Read article →</span>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>

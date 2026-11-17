@@ -3,12 +3,12 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 const BASE = '/thpedianv26.lv';
 
 const guides = [
-  { title: 'Laptop overheating', category: 'laptop', icon: '🌡️', symptoms: 'Thermal throttling, fan noise, shutdown during use.' },
-  { title: 'Smartphone battery drain', category: 'smartphone', icon: '🔋', symptoms: 'Battery depletes unusually fast or won\'t charge fully.' },
-  { title: 'PC won\'t boot', category: 'desktop', icon: '🖥️', symptoms: 'No POST, blank screen on startup, beep codes.' },
-  { title: 'Wi-Fi disconnecting', category: 'networking', icon: '📶', symptoms: 'Intermittent drops, slow speeds, cannot connect.' },
-  { title: 'Monitor flickering', category: 'monitor', icon: '🖥️', symptoms: 'Screen flicker, ghosting, resolution issues.' },
-  { title: 'Printer not printing', category: 'printer', icon: '🖨️', symptoms: 'Offline status, paper jams, color issues.' },
+  { slug: 'laptop-overheating', title: 'Laptop Overheating', category: 'laptop', icon: '🌡️', steps: 7, symptoms: 'Thermal throttling, fan noise, unexpected shutdown during load.' },
+  { slug: 'smartphone-battery-drain', title: 'Smartphone Battery Drain', category: 'smartphone', icon: '🔋', steps: 7, symptoms: 'Battery depletes unusually fast, phone warm at idle, dies above 10%.' },
+  { slug: 'pc-wont-boot', title: "PC Won't Boot", category: 'desktop', icon: '🖥️', steps: 7, symptoms: 'No POST, blank screen on startup, beep codes, Windows boot loop.' },
+  { slug: 'wifi-disconnecting', title: 'Wi-Fi Disconnecting', category: 'networking', icon: '📶', steps: 7, symptoms: 'Intermittent drops, shows connected but no internet, slow speeds.' },
+  { slug: 'monitor-flickering', title: 'Monitor Flickering', category: 'monitor', icon: '🖱️', steps: 7, symptoms: 'Screen flicker, brightness-dependent flicker, black flash, banding.' },
+  { slug: 'printer-not-printing', title: 'Printer Not Printing', category: 'printer', icon: '🖨️', steps: 7, symptoms: 'Offline status, stuck print queue, blank pages, colour streaks.' },
 ];
 ---
 
@@ -39,19 +39,22 @@ const guides = [
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {guides.map(guide => (
-        <div class="tp-card p-5 flex flex-col gap-3 cursor-default">
+        <a href={`${BASE}/en/troubleshoot/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-amber-700/50 transition-colors">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">{guide.icon}</div>
             <div>
               <h3 class="font-semibold text-slate-100">{guide.title}</h3>
-              <span class="tp-badge-amber text-xs capitalize">{guide.category}</span>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span class="tp-badge-amber text-xs capitalize">{guide.category}</span>
+                <span class="text-xs text-slate-500">· {guide.steps} steps</span>
+              </div>
             </div>
           </div>
           <p class="text-sm text-slate-400">{guide.symptoms}</p>
           <div class="mt-auto">
-            <span class="text-xs text-slate-500 italic">Interactive guide — coming soon</span>
+            <span class="text-xs text-amber-400 font-medium">View guide →</span>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>

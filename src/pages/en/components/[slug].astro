@@ -94,7 +94,7 @@ const schema = {
           </a>
         )}
 
-        {comp.sources.length > 0 && (
+        {(comp.sources?.length ?? 0) > 0 && (
           <div class="mt-4 rounded-xl bg-navy-800/40 border border-tp-border p-4">
             <h4 class="text-xs font-semibold text-slate-300 mb-2 uppercase tracking-wider">Sources</h4>
             <ul class="space-y-1.5">
@@ -124,7 +124,7 @@ const schema = {
           </div>
           <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-1">{comp.name}</h1>
           <p class="text-sm font-mono text-slate-400 mb-3">{comp.partNumber}</p>
-          {comp.commonNames.length > 0 && (
+          {(comp.commonNames?.length ?? 0) > 0 && (
             <p class="text-sm text-slate-400 mb-3">Also known as: {comp.commonNames.join(', ')}</p>
           )}
           <p class="text-slate-400 leading-relaxed">{comp.description}</p>
@@ -190,7 +190,7 @@ const schema = {
         )}
 
         <!-- Applications -->
-        {comp.applications.length > 0 && (
+        {(comp.applications?.length ?? 0) > 0 && (
           <div class="mb-8">
             <h2 class="text-lg font-semibold text-slate-100 mb-3">Applications</h2>
             <div class="flex flex-wrap gap-2">

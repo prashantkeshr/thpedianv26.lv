@@ -1,0 +1,502 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const BASE = '/thpedianv26.lv';
+
+export async function getStaticPaths() {
+  const slugs = [
+    'what-is-a-cpu', 'how-does-ram-work', 'gpu-architecture-basics',
+    'understanding-transistors', 'ohms-law-and-circuit-basics',
+    'ssd-vs-hdd', 'wifi-7-explained', 'introduction-to-microcontrollers',
+  ];
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+
+const levelColors: Record<string, string> = {
+  beginner: 'tp-badge-green',
+  intermediate: 'tp-badge-blue',
+  advanced: 'tp-badge-violet',
+};
+
+type Section = {
+  heading: string;
+  content: string;
+  keyPoints?: string[];
+  table?: { headers: string[]; rows: string[][] };
+  note?: string;
+};
+
+type Article = {
+  title: string;
+  level: string;
+  icon: string;
+  readTime: string;
+  summary: string;
+  intro: string;
+  sections: Section[];
+  tags: string[];
+};
+
+const articles: Record<string, Article> = {
+  'what-is-a-cpu': {
+    title: 'What is a CPU?',
+    level: 'beginner',
+    icon: '⚙️',
+    readTime: '8 min',
+    summary: 'Understand how modern processors work — cores, threads, cache and instruction pipelines.',
+    intro: 'The Central Processing Unit (CPU) is the primary processor in a computer — the component that executes program instructions. Everything you do on a computer, from opening a browser to running a game, ultimately comes down to the CPU fetching instructions from memory and executing them, billions of times per second.',
+    sections: [
+      {
+        heading: 'Cores and Threads',
+        content: 'Early CPUs had a single core — one execution unit. Modern CPUs have multiple cores, each of which can run instructions independently and in parallel. A quad-core CPU can genuinely run four programs simultaneously, one per core. Intel\'s Hyper-Threading (and AMD\'s SMT) adds a second hardware thread per core, letting the OS schedule two threads on the same core by sharing execution units. A 16-core CPU with SMT appears to the OS as 32 threads, though two threads on the same core share resources and are not as fast as two independent cores.',
+        keyPoints: [
+          'P-cores (Performance) run demanding single-threaded tasks; E-cores (Efficiency) handle background work at lower power.',
+          'Clock speed (GHz) measures how many cycles per second the CPU executes; more cycles = more work, all else equal.',
+          'Modern CPUs boost clock speed dynamically based on thermal headroom — Intel Turbo Boost, AMD Precision Boost.',
+        ],
+      },
+      {
+        heading: 'Cache Memory',
+        content: 'Fetching data from main RAM takes hundreds of nanoseconds — far too slow for a CPU running at 5 GHz. Cache memory is high-speed SRAM embedded on the CPU die, acting as a staging area for frequently used data and instructions. The CPU checks L1 cache first (fastest, ~1–4 ns, 32–128 KB per core), then L2 (~4–12 ns, 0.5–4 MB per core), then the shared L3 (~10–40 ns, 8–192 MB). A "cache miss" at L3 forces a main memory access, potentially stalling execution for 60–100+ ns.',
+        table: {
+          headers: ['Level', 'Latency', 'Typical Size', 'Shared?'],
+          rows: [
+            ['L1', '~1–4 ns', '32–128 KB per core', 'No'],
+            ['L2', '~4–12 ns', '0.5–4 MB per core', 'No'],
+            ['L3', '~10–40 ns', '8–192 MB total', 'Yes (all cores)'],
+            ['RAM', '~60–100 ns', '8–128 GB system', 'Yes'],
+          ],
+        },
+      },
+      {
+        heading: 'The Instruction Pipeline',
+        content: 'Modern CPUs don\'t execute instructions one at a time sequentially. They use a pipeline — breaking instruction execution into stages (Fetch → Decode → Execute → Write Back) and processing multiple instructions simultaneously at different stages, like an assembly line. A 20-stage pipeline can have 20 instructions in flight simultaneously. Superscalar CPUs have multiple execution units so they can retire more than one instruction per clock cycle, further boosting throughput. Out-of-order execution lets the CPU reorder instructions to avoid stalls.',
+        keyPoints: [
+          'IPC (Instructions Per Clock) measures how many instructions a CPU completes each cycle. Modern CPUs target 4–6+ IPC.',
+          'Branch prediction guesses which way an if/else branch will go so the pipeline can speculatively execute ahead.',
+          'Pipeline flushes (mispredictions) waste cycles. Deeper pipelines are more efficient but costly to flush.',
+        ],
+      },
+      {
+        heading: 'CPU Performance: What Actually Matters',
+        content: 'Raw clock speed is not the whole story. A CPU running at 4.0 GHz with better IPC can outperform one at 5.0 GHz with worse IPC. Memory bandwidth and latency matter for data-intensive workloads. The manufacturing process node (Intel 7, TSMC N3B) affects power efficiency and how many transistors fit on the die. For gaming, single-core performance and cache size are most important; for rendering and video encoding, core count and memory bandwidth dominate.',
+        note: 'TDP (Thermal Design Power) specifies the maximum heat a cooler must handle under typical use. Desktop i9-14900K has a 253 W MTP — it needs a large heatsink or AIO liquid cooler.',
+      },
+    ],
+    tags: ['CPU', 'Hardware basics', 'Cores', 'Cache', 'IPC'],
+  },
+
+  'how-does-ram-work': {
+    title: 'How Does RAM Work?',
+    level: 'beginner',
+    icon: '💾',
+    readTime: '7 min',
+    summary: 'From DRAM cells to DDR5 — memory types, timing, channels and latency explained.',
+    intro: 'RAM (Random Access Memory) is your computer\'s working memory — the fast, temporary storage that holds the OS, open applications and active data while the system is running. Unlike storage (SSD/HDD), RAM loses its contents when powered off. The CPU reads and writes to RAM constantly; insufficient RAM forces the system to swap data to the much slower SSD, causing severe performance degradation.',
+    sections: [
+      {
+        heading: 'How DRAM Cells Store Data',
+        content: 'Dynamic RAM stores each bit as a tiny electric charge in a capacitor paired with a transistor. Because capacitors leak charge, DRAM must be refreshed thousands of times per second — that\'s where "dynamic" comes from (SRAM, used in CPU cache, doesn\'t need refreshing but requires 6 transistors per bit vs 1). A DRAM chip contains billions of these capacitor cells arranged in rows and columns. To read a bit, the memory controller opens (activates) the row, reads the capacitor\'s charge, and amplifies it via a sense amplifier.',
+        keyPoints: [
+          'DRAM density is higher than SRAM — cheaper per bit, so we can afford gigabytes of it.',
+          'The refresh operation is why idle DRAM still consumes some power; LPDDR reduces refresh rate to save power in mobile devices.',
+        ],
+      },
+      {
+        heading: 'DDR Generations: DDR4 vs DDR5',
+        content: 'DDR (Double Data Rate) transfers data on both the rising and falling edges of the clock signal, doubling effective bandwidth vs the clock rate. DDR5 introduced major architectural changes: dual 32-bit sub-channels (vs a single 64-bit in DDR4), on-die ECC, on-die voltage regulation (VDD moved from motherboard to DIMM) and higher base speeds starting at 3200 MT/s up to 8800 MT/s JEDEC spec. The result is roughly 1.5–2× the bandwidth of DDR4 at comparable speeds.',
+        table: {
+          headers: ['Spec', 'DDR4', 'DDR5'],
+          rows: [
+            ['Base speed', '1600–2133 MT/s', '3200–4800 MT/s (JEDEC base)'],
+            ['Max mainstream', '~5600 MT/s OC', '~8800 MT/s (JEDEC)'],
+            ['Channel width', '64-bit', '2 × 32-bit sub-channels'],
+            ['On-die ECC', 'No', 'Yes'],
+            ['Voltage', '1.2 V', '1.1 V (lower for base)'],
+            ['Bandwidth (3200 MT/s)', '~51 GB/s', 'N/A'],
+            ['Bandwidth (6000 MT/s)', 'N/A', '~96 GB/s'],
+          ],
+        },
+      },
+      {
+        heading: 'Timings and Latency',
+        content: 'DDR memory specs include timings like CL36-38-38-76. CL (CAS Latency) is the most important — it\'s the number of clock cycles between requesting data and receiving it. Lower CL = faster response. But higher-speed RAM can still have lower absolute latency if the cycle time is short enough. Absolute latency = (CL / speed_in_MT/s) × 2000 ns. For example, DDR5-6000 CL30 gives 10 ns absolute CAS latency, better than DDR4-3200 CL16 at 10 ns — they\'re about equal. Gaming is sensitive to absolute latency.',
+        keyPoints: [
+          'XMP (Intel) / EXPO (AMD) are profiles stored on the DIMM that tell the motherboard to run at the rated advertised speed automatically.',
+          'Without XMP/EXPO enabled, most DIMMs run at JEDEC default speeds (slower than the box speed).',
+        ],
+      },
+      {
+        heading: 'Channels, Capacity and Gaming',
+        content: 'Modern CPUs benefit from dual-channel memory — two DIMMs installed in matched pairs, doubling theoretical bandwidth. Some enthusiast platforms support quad-channel. For gaming, 16–32 GB DDR5 in dual-channel is ideal. CPU-integrated graphics (Intel Arc, AMD Radeon iGPU, Apple Silicon) share system RAM and benefit enormously from faster, dual-channel memory since there is no dedicated VRAM. AI inference on Apple M-series Macs is similarly bandwidth-bound — the reason M4 Ultra with 192 GB unified memory competes with high-end AI accelerators.',
+        note: 'LPDDR5X is the mobile equivalent of DDR5. It is soldered to the motherboard (not user-upgradeable) and runs at 7500–8533 MT/s, used in flagship smartphones and thin laptops like the MacBook Air.',
+      },
+    ],
+    tags: ['RAM', 'DDR5', 'Memory', 'Hardware basics', 'DRAM'],
+  },
+
+  'gpu-architecture-basics': {
+    title: 'GPU Architecture Basics',
+    level: 'intermediate',
+    icon: '🎮',
+    readTime: '10 min',
+    summary: 'Shader processors, VRAM, rasterization, ray tracing and AI acceleration.',
+    intro: 'A GPU (Graphics Processing Unit) contains thousands of small parallel processors optimised for floating-point math and data-parallel tasks. Originally designed to transform and colour polygons for 3D games, modern GPUs are general-purpose accelerators running neural networks, scientific simulations and video encoding — sometimes faster than any CPU.',
+    sections: [
+      {
+        heading: 'Parallel Architecture: Why GPUs Are Different',
+        content: 'A CPU has a few powerful cores with large caches, branch predictors and out-of-order execution — optimised for single-threaded latency. A GPU has thousands of simpler cores (CUDA cores on NVIDIA, Stream Processors on AMD) grouped into Streaming Multiprocessors / Compute Units. These cores execute the same instruction on many data items simultaneously (SIMT — Single Instruction, Multiple Threads). This trade-off makes GPUs poor at serial, branchy code but exceptional at parallel workloads like transforming 2 million vertices or running 10,000 matrix multiplications at once.',
+        keyPoints: [
+          'RTX 4090: 16,384 CUDA cores in 128 Streaming Multiprocessors. Each SM has 128 cores.',
+          'GPU clock speeds (1.5–3.0 GHz) are much lower than CPUs, but thousands of cores compensate.',
+          'GPU memory bandwidth (GDDR6X RTX 4090: 1 TB/s) far exceeds CPU-RAM bandwidth (~96 GB/s DDR5).',
+        ],
+      },
+      {
+        heading: 'The Rendering Pipeline',
+        content: 'Traditional rasterization rendering works in stages: (1) Vertex shaders transform 3D geometry into 2D screen coordinates. (2) Geometry shaders (optional) can emit new geometry. (3) Rasterization converts triangle edges into pixel fragments covering the screen area. (4) Fragment/pixel shaders calculate the final colour of each pixel, applying textures, lighting and effects. (5) The output merger blends pixels and resolves depth. Modern GPUs use a unified shader model — the same shader cores run all stages, allowing the driver to balance workloads dynamically.',
+        table: {
+          headers: ['Stage', 'Input', 'Output', 'Runs on'],
+          rows: [
+            ['Vertex Shader', '3D vertices', '2D clip-space vertices', 'Shader cores'],
+            ['Rasterization', '2D triangles', 'Screen-space pixel fragments', 'Fixed-function HW'],
+            ['Pixel Shader', 'Pixel fragments', 'Coloured pixels', 'Shader cores'],
+            ['Output Merger', 'Coloured pixels', 'Final framebuffer', 'Fixed-function HW'],
+          ],
+        },
+      },
+      {
+        heading: 'Ray Tracing and RT Cores',
+        content: 'Ray tracing simulates light physically: rays are cast from the camera through each pixel, bounced around the scene and evaluated for colour. It produces photo-realistic reflections, shadows and global illumination that rasterization approximates poorly. The expensive step is testing each ray against millions of scene triangles to find intersections. NVIDIA RTX and AMD RDNA2+ GPUs include dedicated RT Cores (BVH traversal units) that accelerate this test in hardware. DLSS / FSR upscaling compensates for the performance cost by rendering at a lower resolution and using AI or spatial algorithms to reconstruct a higher-resolution image.',
+        keyPoints: [
+          'BVH (Bounding Volume Hierarchy) is a tree structure grouping triangles so the GPU can quickly narrow down which triangles a ray might hit.',
+          'Full path tracing (Cyberpunk 2077 "Overdrive") uses RT for all lighting — extremely demanding, requires DLSS or FSR to run at playable frame rates.',
+          'RTX 4090 has 128 third-gen RT Cores; AMD RX 7900 XTX has 96 second-gen ray accelerators.',
+        ],
+      },
+      {
+        heading: 'Tensor Cores and AI Acceleration',
+        content: 'Neural network inference involves huge matrix multiplications (multiply two matrices element-wise and sum). Tensor Cores are fixed-function units that perform 4×4 or 8×8 matrix multiply-accumulate operations in one instruction — far faster than general-purpose shader cores for this workload. NVIDIA RTX 4090 has 512 fourth-gen Tensor Cores achieving ~1.3 PFLOPS (FP8). They power DLSS 3 (frame generation), RTX Video Super Resolution, and local AI inference for tools like Stable Diffusion and Whisper transcription.',
+        note: 'VRAM capacity is a hard limit for gaming and AI. Rendering at 4K with complex scenes, or running large language models (Llama 3 70B needs ~40 GB VRAM), requires sufficient VRAM. Consumer GPUs top out at 24 GB (RTX 4090, RX 7900 XTX).',
+      },
+    ],
+    tags: ['GPU', 'Ray tracing', 'VRAM', 'CUDA', 'Rendering'],
+  },
+
+  'understanding-transistors': {
+    title: 'Understanding Transistors',
+    level: 'beginner',
+    icon: '🔌',
+    readTime: '6 min',
+    summary: 'The fundamental building block of all digital electronics. BJT, MOSFET and beyond.',
+    intro: 'The transistor is the fundamental building block of all modern electronics. Every CPU, GPU, smartphone and computer contains billions to tens of billions of them on a single chip the size of a fingernail. Understanding transistors — what they do and how they\'ve scaled — explains why computing has followed Moore\'s Law for six decades.',
+    sections: [
+      {
+        heading: 'What a Transistor Does',
+        content: 'At its core, a transistor is a voltage-controlled switch (or amplifier). In digital logic, we care about its switch function: apply a voltage to the control terminal (gate), and current can flow between two other terminals (source and drain). Remove the voltage, and current is blocked. This is a binary state — 1 or 0. Combine millions of these switches into logic gates (AND, OR, NOT, NAND), and you can represent and process any binary number, run any program.',
+        keyPoints: [
+          'BJT (Bipolar Junction Transistor): current-controlled, used in analog amplifiers, radio equipment, power electronics.',
+          'MOSFET (Metal-Oxide-Semiconductor FET): voltage-controlled, far more energy-efficient at scale — the dominant type in digital logic.',
+          'nMOS conducts when gate voltage is high; pMOS conducts when gate voltage is low. CMOS logic uses both types in complementary pairs, dissipating power only during switching (not while idle).',
+        ],
+      },
+      {
+        heading: 'Scaling: From 10 μm to 2 nm',
+        content: 'In 1971, Intel\'s 4004 processor contained 2,300 transistors at a 10 μm (micron) process node. The Apple M4 has 28 billion transistors at 3 nm. Smaller transistors switch faster, use less energy and pack more computing into the same die area. Halving the transistor size roughly quadruples the number on a chip — the geometric basis of Moore\'s Law. At sub-5 nm, transistors are only a few silicon atoms wide, requiring fundamentally new 3D designs to maintain electrostatic control.',
+        table: {
+          headers: ['Year', 'Node', 'Example', 'Transistors'],
+          rows: [
+            ['1971', '10 µm', 'Intel 4004', '2,300'],
+            ['1989', '1 µm', 'Intel 486', '1.2 million'],
+            ['2000', '180 nm', 'Pentium 4', '42 million'],
+            ['2015', '14 nm', 'Intel Skylake', '1.75 billion'],
+            ['2020', '5 nm', 'Apple M1', '16 billion'],
+            ['2023', '3 nm', 'Apple M3', '25 billion'],
+            ['2025', '2 nm', 'Apple M4 / A18', '28+ billion'],
+          ],
+        },
+      },
+      {
+        heading: 'FinFET and Gate-All-Around',
+        content: 'Classical planar MOSFETs faced a problem as they shrank below 20 nm: the gate electrode lost control over the channel, causing current to leak even when "off" (subthreshold leakage). The solution was FinFET (Fin Field-Effect Transistor): the channel is raised into a fin-shaped structure so the gate wraps around three sides, dramatically improving electrostatic control. FinFETs have been the dominant design from 22 nm to current 3 nm nodes. At 2 nm, the channel narrows further and FinFETs reach their limits, prompting the transition to GAA (Gate-All-Around), where the gate surrounds a horizontal nanosheet on all four sides.',
+        note: 'Intel calls its GAA architecture RibbonFET. Samsung was first to mass-produce GAA at 3GAE (2022). TSMC introduced GAA at N2 (2025). The transition maintains scaling but requires entirely new manufacturing processes.',
+      },
+    ],
+    tags: ['Transistors', 'MOSFET', 'Semiconductor', 'FinFET', 'Moore\'s Law'],
+  },
+
+  'ohms-law-and-circuit-basics': {
+    title: "Ohm's Law and Circuit Basics",
+    level: 'beginner',
+    icon: '⚡',
+    readTime: '6 min',
+    summary: "Voltage, current, resistance and how they relate in simple and complex circuits.",
+    intro: "Ohm's Law is the most fundamental relationship in electronics: V = I × R. Voltage (V) drives current (I) through resistance (R). With this single equation and an understanding of series/parallel circuits and power, you can analyse and design most basic electronic circuits.",
+    sections: [
+      {
+        heading: "Voltage, Current and Resistance",
+        content: "Voltage (measured in Volts, V) is electrical potential difference — the \"pressure\" that drives electrons. Current (Amperes, A) is the flow rate of charge — how many electrons pass a point per second. Resistance (Ohms, Ω) opposes current flow, converting electrical energy to heat. Think of water: voltage is water pressure, current is flow rate, resistance is the pipe's narrowness.",
+        table: {
+          headers: ['Quantity', 'Symbol', 'Unit', 'Analogy'],
+          rows: [
+            ['Voltage', 'V', 'Volt (V)', 'Water pressure'],
+            ['Current', 'I', 'Ampere (A)', 'Flow rate (L/s)'],
+            ['Resistance', 'R', 'Ohm (Ω)', 'Pipe narrowness'],
+            ['Power', 'P', 'Watt (W)', 'Hydraulic power'],
+          ],
+        },
+      },
+      {
+        heading: "Ohm's Law and Power",
+        content: "The three forms of Ohm's Law let you calculate the missing value: V = I × R, I = V / R, R = V / I. Power (the rate of energy transfer) adds three more equations: P = V × I, P = I² × R, P = V² / R. Example: a 100 Ω resistor connected to 5 V has I = 5/100 = 50 mA flowing through it and dissipates P = 5 × 0.05 = 0.25 W as heat. Component power ratings must be respected — a 0.25 W resistor used at 0.5 W will overheat and burn out.",
+        keyPoints: [
+          'Kirchhoff\'s Voltage Law (KVL): the sum of voltages around any closed loop = 0.',
+          'Kirchhoff\'s Current Law (KCL): the sum of currents entering a node = sum of currents leaving it.',
+        ],
+      },
+      {
+        heading: 'Series vs Parallel Circuits',
+        content: 'In a series circuit, components share the same current path. Resistances add: R_total = R1 + R2 + R3. The voltage divides across each resistor proportionally. In a parallel circuit, components share the same two nodes. The reciprocal of total resistance = sum of reciprocals: 1/R_total = 1/R1 + 1/R2. Total resistance is always less than the smallest resistor. Voltage is the same across all parallel components; current divides. Real circuits combine both topologies.',
+        table: {
+          headers: ['Property', 'Series', 'Parallel'],
+          rows: [
+            ['Current', 'Same through all', 'Divides between branches'],
+            ['Voltage', 'Divides across each', 'Same across all'],
+            ['Total resistance', 'R1 + R2 + ...', '1 / (1/R1 + 1/R2 + ...)'],
+          ],
+        },
+      },
+      {
+        heading: 'Practical Applications',
+        content: "Microcontrollers and ICs operate at fixed voltages (3.3 V or 5 V). Pull-up and pull-down resistors ensure inputs don't float. LED current limiting resistors prevent burnout (R = (Vsupply − Vf) / Iled). Voltage dividers create reference voltages. Decoupling capacitors filter power supply noise. Understanding Ohm's Law is the first step to safely interfacing sensors, controlling motors with transistors, and designing power delivery for embedded projects.",
+        note: "GPIO pins on microcontrollers typically source/sink ≤8–25 mA per pin. Driving an LED directly is fine; driving a motor requires a transistor or motor driver IC — it demands far more current than the pin can supply.",
+      },
+    ],
+    tags: ["Ohm's Law", 'Electronics', 'Circuits', 'Resistance', 'Power'],
+  },
+
+  'ssd-vs-hdd': {
+    title: 'SSD vs HDD Technology',
+    level: 'beginner',
+    icon: '💿',
+    readTime: '7 min',
+    summary: 'NAND flash, wear leveling, NVMe protocol and why SSDs outperform spinning drives.',
+    intro: 'Hard Disk Drives (HDDs) store data on spinning magnetic platters. Solid State Drives (SSDs) store data in NAND flash chips with no moving parts. The performance gap is enormous: a modern NVMe SSD delivers 7,000+ MB/s sequential reads, while a typical HDD peaks at 150–250 MB/s. Understanding the technology explains not just the speed difference but also SSD durability, longevity and optimal use cases.',
+    sections: [
+      {
+        heading: 'How HDDs Work',
+        content: 'An HDD stores bits as magnetic domains on a rotating platter. A read/write head on an actuator arm moves across the platter surface, sensing and changing the magnetic orientation of tiny areas. The platter rotates at 5,400–7,200 RPM for consumer drives. Data access requires the head to seek to the right track (seek time: 3–12 ms) and then wait for the right sector to rotate under the head (rotational latency: 4–8 ms). These mechanical latencies limit random 4K I/O to 100–200 IOPS — catastrophically slow for OS workloads that perform millions of small random reads.',
+        keyPoints: [
+          'HDDs excel at sequential workloads (large file writes, media) where seek time is amortised.',
+          'Helium-filled drives (Seagate Exos, WD Gold) reduce drag, allowing more platters and higher capacity.',
+          'HDDs remain cost-effective for bulk storage: ≤ $20/TB vs ≥ $60/TB for SSDs.',
+        ],
+      },
+      {
+        heading: 'NAND Flash: How SSDs Store Data',
+        content: 'NAND flash stores data as charge in a floating-gate transistor. The charge level determines the cell state. SLC stores 1 bit per cell (2 states), MLC 2 bits (4 states), TLC 3 bits (8 states), QLC 4 bits (16 states). More bits per cell = higher density and lower cost, but also lower write endurance, worse performance and higher error rates. Consumer SSDs use TLC or QLC; enterprise and high-endurance drives use SLC or MLC. NAND must be erased in large blocks (256+ KB) before being written — the reason SSDs need garbage collection and over-provisioning.',
+        table: {
+          headers: ['Type', 'Bits/Cell', 'Endurance', 'Performance', 'Cost'],
+          rows: [
+            ['SLC', '1', 'Very High (100k P/E)', 'Highest', 'Very High'],
+            ['MLC', '2', 'High (10k P/E)', 'High', 'High'],
+            ['TLC', '3', 'Medium (1k–3k P/E)', 'Good', 'Mainstream'],
+            ['QLC', '4', 'Lower (300–1k P/E)', 'Lower', 'Cheapest'],
+          ],
+        },
+      },
+      {
+        heading: 'SATA vs NVMe and PCIe Generations',
+        content: 'Early SSDs connected via SATA (the same interface as HDDs), capped at ~550 MB/s — far below what NAND can sustain. NVMe (Non-Volatile Memory Express) is a protocol designed from scratch for flash over PCIe, with a queue depth of 65,535 commands (vs 32 for AHCI/SATA) and sub-100 µs latency. PCIe 4.0 ×4 SSDs (Samsung 990 Pro, WD Black SN850X) reach 7,000 MB/s sequential read. PCIe 5.0 ×4 drives push beyond 14,000 MB/s. The M.2 2280 form factor (22 mm × 80 mm) fits both SATA and NVMe drives.',
+        note: 'For everyday desktop and gaming use, the difference between a PCIe 4.0 and PCIe 5.0 NVMe SSD is imperceptible — game load times are rarely storage-bound. NVMe vs SATA does make a noticeable difference for large file operations.',
+      },
+    ],
+    tags: ['SSD', 'HDD', 'NVMe', 'NAND', 'Storage'],
+  },
+
+  'wifi-7-explained': {
+    title: 'Wi-Fi 7 Explained',
+    level: 'intermediate',
+    icon: '📶',
+    readTime: '8 min',
+    summary: 'Multi-Link Operation, 320 MHz channels, QAM-4096 and what makes Wi-Fi 7 different.',
+    intro: 'Wi-Fi 7 (IEEE 802.11be) is the seventh generation of the Wi-Fi standard, finalised in 2024. It introduces Multi-Link Operation (MLO), 320 MHz channel width, 4096-QAM modulation and Multi-RU aggregation. The result is a theoretical maximum PHY rate of 46 Gbps — roughly 4–5× the theoretical peak of Wi-Fi 6E — and dramatically reduced latency in congested environments.',
+    sections: [
+      {
+        heading: 'Multi-Link Operation (MLO): The Key Innovation',
+        content: 'Previous Wi-Fi generations forced a device to connect to one band at a time (2.4 GHz, 5 GHz, or 6 GHz). MLO allows a single device to simultaneously maintain connections across multiple bands and channels, with the router aggregating them transparently. This provides two benefits: higher throughput (combine 5 GHz + 6 GHz for additive bandwidth) and lower latency (if one link is congested, traffic shifts to the other instantly, without association delays). MLO is the most impactful real-world improvement in Wi-Fi 7.',
+        keyPoints: [
+          'STR (Simultaneous Transmit and Receive) MLO uses different radio chains per band; constraints apply due to self-interference.',
+          'Non-STR MLO (EMLSR/EMLMR) is simpler but cannot truly transmit on both links simultaneously at all times.',
+          'MLO routers must have dedicated radio chains per supported band for maximum benefit.',
+        ],
+      },
+      {
+        heading: '320 MHz Channels and 4096-QAM',
+        content: 'Wi-Fi 6E opened up the 6 GHz band (5.925–7.125 GHz) with 1,200 MHz of clean spectrum. Wi-Fi 7 uses this space for 320 MHz channels — double the 160 MHz max of Wi-Fi 6E. Wider channels = more data per transmission. 4096-QAM (12 bits per symbol, vs 1024-QAM\'s 10 bits) encodes 20% more data per modulation symbol, but requires a very clean signal — practically speaking, it only activates within a few meters of the access point in line-of-sight conditions. The 2.4 GHz and 5 GHz bands are unaffected by this change (5 GHz is limited to 160 MHz by spectrum width).',
+        table: {
+          headers: ['Standard', 'Max Channel', 'Modulation', 'Spatial Streams', 'Peak PHY Rate'],
+          rows: [
+            ['Wi-Fi 5 (802.11ac)', '160 MHz', '256-QAM', '8', '6.9 Gbps'],
+            ['Wi-Fi 6 (802.11ax)', '160 MHz', '1024-QAM', '8', '9.6 Gbps'],
+            ['Wi-Fi 6E (802.11ax)', '160 MHz', '1024-QAM', '8', '9.6 Gbps'],
+            ['Wi-Fi 7 (802.11be)', '320 MHz', '4096-QAM', '16', '46 Gbps'],
+          ],
+        },
+      },
+      {
+        heading: 'OFDMA Improvements and Multi-RU',
+        content: 'Wi-Fi 6 introduced OFDMA (Orthogonal Frequency Division Multiple Access), splitting a channel into resource units (RUs) that can serve multiple clients simultaneously. Wi-Fi 7 adds Multi-RU (MRU), which allows a single client to use non-contiguous RUs within a channel — combining discontinuous spectral fragments into a single wider effective channel. This is particularly useful in the 6 GHz band where other devices or radar systems may occupy some portions of a 320 MHz channel, leaving gaps.',
+        note: 'Wi-Fi 7 is backwards compatible with Wi-Fi 6/6E/5. Existing devices will continue to work but won\'t gain MLO or 320 MHz benefits. The main real-world gain over Wi-Fi 6E is lower latency via MLO and better resilience in busy apartment buildings.',
+      },
+    ],
+    tags: ['Wi-Fi 7', 'MLO', 'Networking', '6 GHz', '802.11be'],
+  },
+
+  'introduction-to-microcontrollers': {
+    title: 'Introduction to Microcontrollers',
+    level: 'beginner',
+    icon: '🔧',
+    readTime: '8 min',
+    summary: 'What microcontrollers are, how to choose one and common peripherals like GPIO, SPI, I2C.',
+    intro: 'A microcontroller (MCU) is a self-contained computer on a single integrated circuit: processor core, flash memory (program storage), SRAM (working memory) and programmable I/O peripherals — all on one chip. Where a CPU (or SBC like Raspberry Pi) runs a full OS, an MCU typically runs a single program loop directly on the hardware, with response times measured in microseconds. This determinism makes MCUs ideal for real-time control, embedded sensing and battery-powered IoT.',
+    sections: [
+      {
+        heading: 'MCU vs Microprocessor vs SBC',
+        content: 'A microprocessor (MPU) is just the CPU core — it needs external RAM, Flash, power regulation and peripherals to function. A microcontroller integrates all of these on one chip. A Single-Board Computer (SBC like Raspberry Pi) has a powerful MPU, runs Linux, connects to screens and networks, but costs more, draws more power and boots in seconds. MCUs cost ¢25–$5, boot in microseconds, run on button batteries and control hardware in real time. The right tool depends on the application.',
+        table: {
+          headers: ['Type', 'Example', 'OS', 'Boot Time', 'Power', 'Best For'],
+          rows: [
+            ['MCU', 'STM32F103', 'None (bare-metal)', '< 1 ms', '10–500 mW', 'Real-time control, IoT'],
+            ['MCU (RTOS)', 'ESP32-S3', 'FreeRTOS', '< 100 ms', '50–500 mW', 'IoT with Wi-Fi/BT'],
+            ['MPU + SBC', 'Raspberry Pi 5', 'Linux', '10–20 s', '5–25 W', 'Edge AI, Linux apps'],
+          ],
+        },
+      },
+      {
+        heading: 'GPIO, Timers and Interrupts',
+        content: 'GPIO (General Purpose Input/Output) pins can be configured as digital input, digital output or alternate-function (SPI, I2C, UART, PWM). As an output, setting the pin high drives it to Vcc (3.3V typically), low to GND. As an input, the pin reads an external voltage and returns 0 or 1. Internal pull-up and pull-down resistors prevent floating inputs from reading noise. Timers are hardware counters that tick at a programmable rate; they generate interrupts or PWM signals independently of the main loop. Interrupts are hardware events that immediately suspend the main program and run a handler function — essential for real-time response (button press detected in microseconds).',
+        keyPoints: [
+          'Never directly source/sink more than the pin\'s rated current (typically 8–25 mA). Use a transistor or motor driver for heavier loads.',
+          'ADC (Analog-to-Digital Converter) pins sample analog voltages (0 to Vcc) and convert them to a digital number.',
+          'DAC (Digital-to-Analog Converter) pins output a programmed analog voltage level.',
+        ],
+      },
+      {
+        heading: 'Communication Protocols: UART, SPI, I2C',
+        content: 'UART (Universal Asynchronous Receiver-Transmitter) is the simplest: two wires (TX, RX), asynchronous, point-to-point. Used for debug consoles, GPS modules, Bluetooth serial. SPI (Serial Peripheral Interface) is synchronous, full-duplex, 4 wires (MOSI, MISO, SCK, CS). Very fast (up to 50+ MHz). Used for high-speed displays, SD cards, flash chips. One CS line per device limits scalability. I2C (Inter-Integrated Circuit) is synchronous, half-duplex, 2 wires (SDA, SCL). Addressable — many devices share the same bus, each with a unique 7-bit address. Slower than SPI (400 kHz standard, 3.4 MHz high-speed). Used for sensors, EEPROMs, real-time clocks.',
+        note: 'Popular beginner platforms: Arduino Uno (ATmega328P, 5V, 16 MHz, huge community), Arduino Nano, ESP32 (dual-core Xtensa, Wi-Fi + BT, good for IoT), STM32 (ARM Cortex-M, production-grade, ST Nucleo dev boards). MicroPython and CircuitPython run Python directly on the MCU for rapid prototyping.',
+      },
+    ],
+    tags: ['Microcontrollers', 'GPIO', 'SPI', 'I2C', 'Embedded systems', 'Arduino'],
+  },
+};
+
+const article = articles[slug as keyof typeof articles];
+if (!article) return Astro.redirect(`${BASE}/en/learn/`);
+---
+
+<BaseLayout
+  title={`${article.title} — Learning Centre — Techpedia`}
+  description={article.summary}
+  lang="en"
+>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/en/`} class="hover:text-slate-200 transition-colors">Home</a>
+      <span>/</span>
+      <a href={`${BASE}/en/learn/`} class="hover:text-slate-200 transition-colors">Learn</a>
+      <span>/</span>
+      <span class="text-slate-200">{article.title}</span>
+    </nav>
+
+    <!-- Article header -->
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl bg-navy-800 border border-tp-border flex items-center justify-center text-2xl">{article.icon}</div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class={`${levelColors[article.level] ?? levelColors.beginner}`}>{article.level}</span>
+            <span class="text-xs text-slate-500">·</span>
+            <span class="text-xs text-slate-500">{article.readTime} read</span>
+          </div>
+        </div>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-3">{article.title}</h1>
+      <p class="text-lg text-slate-400 leading-relaxed">{article.intro}</p>
+    </div>
+
+    <!-- Sections -->
+    <div class="space-y-10">
+      {article.sections.map((section) => (
+        <div>
+          <h2 class="text-xl font-bold text-slate-100 mb-3 pb-2 border-b border-tp-border/60">{section.heading}</h2>
+          <p class="text-slate-300 leading-relaxed mb-4">{section.content}</p>
+
+          {section.keyPoints && section.keyPoints.length > 0 && (
+            <ul class="space-y-2 mb-4">
+              {section.keyPoints.map(point => (
+                <li class="flex items-start gap-2 text-sm text-slate-400">
+                  <span class="text-tp-cyan mt-0.5 flex-shrink-0">▸</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {section.table && (
+            <div class="rounded-xl border border-tp-border overflow-x-auto mb-4">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-navy-700/50 border-b border-tp-border">
+                    {section.table.headers.map(h => (
+                      <th class="px-4 py-2.5 text-left font-semibold text-tp-cyan text-xs uppercase tracking-wider">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-tp-border/50">
+                  {section.table.rows.map((row, ri) => (
+                    <tr class={ri % 2 === 0 ? 'bg-navy-900/30' : 'bg-navy-800/20'}>
+                      {row.map(cell => (
+                        <td class="px-4 py-2.5 text-slate-300 font-mono text-xs">{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {section.note && (
+            <div class="rounded-lg bg-tp-blue/10 border border-tp-blue/20 px-4 py-3 text-sm text-slate-300">
+              <span class="font-semibold text-tp-blue">Note: </span>{section.note}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Tags -->
+    {article.tags.length > 0 && (
+      <div class="mt-10 pt-6 border-t border-tp-border">
+        <div class="flex flex-wrap gap-2">
+          {article.tags.map(tag => (
+            <span class="text-xs px-2.5 py-1 rounded-md bg-navy-800 border border-tp-border text-slate-400">{tag}</span>
+          ))}
+        </div>
+      </div>
+    )}
+
+    <!-- Back to Learn -->
+    <div class="mt-8">
+      <a href={`${BASE}/en/learn/`} class="inline-flex items-center gap-2 text-sm text-tp-blue hover:text-tp-blue-bright transition-colors">
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to Learning Centre
+      </a>
+    </div>
+  </div>
+</BaseLayout>
