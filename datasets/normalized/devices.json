@@ -131,7 +131,22 @@
         ]
       }
     ],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "Apple",
+        "label": "Apple Store",
+        "url": "https://www.apple.com/shop/buy-iphone/iphone-16-pro",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=iPhone+16+Pro",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [
       "dev-000002",
       "dev-000003"
@@ -288,7 +303,22 @@
         ]
       }
     ],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "Samsung",
+        "label": "Samsung Shop",
+        "url": "https://www.samsung.com/us/smartphones/galaxy-s25-ultra/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Samsung+Galaxy+S25+Ultra",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [
       "dev-000001",
       "dev-000003"
@@ -412,7 +442,22 @@
       "7-year updates"
     ],
     "variants": [],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "Google",
+        "label": "Google Store",
+        "url": "https://store.google.com/us/product/pixel_9_pro",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Google+Pixel+9+Pro",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [
       "dev-000001",
       "dev-000002"
@@ -883,7 +928,22 @@
       "MagSafe 25 W"
     ],
     "variants": [],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "Apple",
+        "label": "Apple Store",
+        "url": "https://www.apple.com/shop/buy-iphone/iphone-16",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=iPhone+16",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [
       "dev-000001",
       "dev-000002",
@@ -1601,7 +1661,22 @@
       "Dolby Vision"
     ],
     "variants": [],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "PlayStation",
+        "label": "PlayStation Direct",
+        "url": "https://direct.playstation.com/en-us/consoles/console/playstation5-pro-console.1000042550",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=PlayStation+5+Pro",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [],
     "tags": [
       "sony",
@@ -1701,7 +1776,22 @@
       "Full Windows 11"
     ],
     "variants": [],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "ASUS",
+        "label": "ASUS ROG Store",
+        "url": "https://rog.asus.com/gaming-handhelds/rog-ally/rog-ally-x-2024/",
+        "country": "Global",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+ROG+Ally+X",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [],
     "tags": [
       "asus",
@@ -1789,7 +1879,22 @@
       "Portrait + VESA mount"
     ],
     "variants": [],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "Dell",
+        "label": "Dell Official",
+        "url": "https://www.dell.com/en-us/shop/dell-ultrasharp-27-4k-usb-c-hub-monitor-u2723d/apd/210-bdpf/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Dell+UltraSharp+U2723D",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [],
     "tags": [
       "dell",
@@ -1884,7 +1989,22 @@
       "Thunderbolt 4"
     ],
     "variants": [],
-    "affiliateLinks": [],
+    "affiliateLinks": [
+      {
+        "provider": "Apple",
+        "label": "Apple Store",
+        "url": "https://www.apple.com/shop/buy-mac/macbook-air",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=MacBook+Air+M4",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
     "relatedIds": [
       "dev-000001"
     ],

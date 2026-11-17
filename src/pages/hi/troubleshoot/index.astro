@@ -1,0 +1,66 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '/thpedianv26.lv';
+
+const guides = [
+  { slug: 'laptop-overheating', title: 'लैपटॉप ओवरहीटिंग', category: 'लैपटॉप', icon: '🌡️', steps: 7, symptoms: 'थर्मल थ्रॉटलिंग, तेज़ फैन शोर, लोड में अचानक बंद होना।' },
+  { slug: 'smartphone-battery-drain', title: 'स्मार्टफोन बैटरी जल्दी खत्म', category: 'स्मार्टफोन', icon: '🔋', steps: 7, symptoms: 'बैटरी असामान्य रूप से जल्दी खत्म, फोन बिना काम के गर्म।' },
+  { slug: 'pc-wont-boot', title: 'PC बूट नहीं हो रहा', category: 'डेस्कटॉप', icon: '🖥️', steps: 7, symptoms: 'कोई POST नहीं, स्टार्टअप पर ब्लैंक स्क्रीन, बीप कोड।' },
+  { slug: 'wifi-disconnecting', title: 'Wi-Fi बार-बार डिस्कनेक्ट', category: 'नेटवर्किंग', icon: '📶', steps: 7, symptoms: 'रुक-रुक कर कनेक्शन टूटना, धीमी स्पीड, इंटरनेट नहीं।' },
+  { slug: 'monitor-flickering', title: 'मॉनिटर फ्लिकरिंग', category: 'मॉनिटर', icon: '🖥️', steps: 7, symptoms: 'स्क्रीन झिलमिलाना, ब्राइटनेस के साथ बदलना, ब्लैक फ्लैश।' },
+  { slug: 'printer-not-printing', title: 'प्रिंटर प्रिंट नहीं कर रहा', category: 'प्रिंटर', icon: '🖨️', steps: 7, symptoms: 'ऑफलाइन स्टेटस, प्रिंट कतार में फंसा, खाली पेज आना।' },
+];
+---
+
+<BaseLayout
+  title="ट्रबलशूटिंग गाइड — Techpedia"
+  description="स्मार्टफोन, लैपटॉप, PC और नेटवर्किंग की सामान्य समस्याओं के लिए चरण-दर-चरण निदान गाइड।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span>/</span>
+      <span class="text-slate-200">ट्रबलशूट</span>
+    </nav>
+
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">ट्रबलशूटिंग सेंटर</h1>
+      <p class="text-slate-400">सामान्य तकनीकी समस्याओं के लिए चरण-दर-चरण निदान गाइड</p>
+    </div>
+
+    <div class="rounded-xl bg-amber-900/20 border border-amber-700/30 p-4 mb-6 flex items-start gap-3">
+      <span class="text-xl flex-shrink-0">⚠️</span>
+      <div class="text-sm text-amber-300">
+        <strong class="text-amber-200">सुरक्षा पहले:</strong> कुछ मरम्मत में हाई वोल्टेज या तेज़ घटक हो सकते हैं।
+        संदेह होने पर किसी योग्य तकनीशियन से सहायता लें।
+      </div>
+    </div>
+
+    <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-8 text-sm text-slate-400 flex items-center gap-2">
+      <span>🌐</span>
+      <span>विस्तृत गाइड अंग्रेज़ी में उपलब्ध हैं। <a href={`${BASE}/en/troubleshoot/`} class="text-tp-blue hover:underline">अंग्रेज़ी संस्करण</a> देखें।</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {guides.map(guide => (
+        <a href={`${BASE}/en/troubleshoot/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-amber-700/50 transition-colors">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">{guide.icon}</div>
+            <div>
+              <h3 class="font-semibold text-slate-100">{guide.title}</h3>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span class="tp-badge-amber text-xs">{guide.category}</span>
+                <span class="text-xs text-slate-500">· {guide.steps} चरण</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400">{guide.symptoms}</p>
+          <div class="mt-auto">
+            <span class="text-xs text-amber-400 font-medium">गाइड देखें →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>

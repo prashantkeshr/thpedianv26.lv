@@ -1,0 +1,72 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '/thpedianv26.lv';
+
+const guides = [
+  { slug: 'what-is-a-cpu', title: 'CPU क्या होता है?', level: 'beginner', icon: '⚙️', readTime: '8 मिनट', summary: 'आधुनिक प्रोसेसर कैसे काम करते हैं — कोर, थ्रेड, कैश और इंस्ट्रक्शन पाइपलाइन।' },
+  { slug: 'how-does-ram-work', title: 'RAM कैसे काम करती है?', level: 'beginner', icon: '💾', readTime: '7 मिनट', summary: 'DRAM सेल से DDR5 तक — मेमोरी प्रकार, टाइमिंग, चैनल और लेटेंसी।' },
+  { slug: 'gpu-architecture-basics', title: 'GPU आर्किटेक्चर की मूल बातें', level: 'intermediate', icon: '🎮', readTime: '10 मिनट', summary: 'शेडर प्रोसेसर, VRAM, रास्टराइज़ेशन, रे ट्रेसिंग और AI एक्सेलेरेशन।' },
+  { slug: 'understanding-transistors', title: 'ट्रांजिस्टर को समझें', level: 'beginner', icon: '🔌', readTime: '6 मिनट', summary: 'सभी डिजिटल इलेक्ट्रॉनिक्स की मूल इकाई — BJT, MOSFET और आगे।' },
+  { slug: 'ohms-law-and-circuit-basics', title: 'ओम का नियम और सर्किट की मूल बातें', level: 'beginner', icon: '⚡', readTime: '6 मिनट', summary: 'वोल्टेज, करंट, प्रतिरोध और सर्किट में उनका संबंध।' },
+  { slug: 'ssd-vs-hdd', title: 'SSD बनाम HDD तकनीक', level: 'beginner', icon: '💿', readTime: '7 मिनट', summary: 'NAND फ्लैश, वेयर लेवलिंग, NVMe प्रोटोकॉल — SSD क्यों बेहतर है।' },
+  { slug: 'wifi-7-explained', title: 'Wi-Fi 7 की व्याख्या', level: 'intermediate', icon: '📶', readTime: '8 मिनट', summary: 'Multi-Link Operation, 320 MHz चैनल, QAM-4096 — Wi-Fi 7 क्या है।' },
+  { slug: 'introduction-to-microcontrollers', title: 'माइक्रोकंट्रोलर का परिचय', level: 'beginner', icon: '🔧', readTime: '8 मिनट', summary: 'माइक्रोकंट्रोलर क्या है, कैसे चुनें — GPIO, SPI, I2C पेरिफेरल।' },
+];
+
+const levelLabels: Record<string, string> = {
+  beginner: 'शुरुआती',
+  intermediate: 'मध्यम',
+  advanced: 'उन्नत',
+};
+
+const levelColors: Record<string, string> = {
+  beginner: 'tp-badge-green',
+  intermediate: 'tp-badge-blue',
+  advanced: 'tp-badge-violet',
+};
+---
+
+<BaseLayout
+  title="लर्निंग सेंटर — Techpedia"
+  description="शुरुआती से उन्नत स्तर तक तकनीकी गाइड और ट्यूटोरियल। CPU, RAM, GPU, सर्किट और हार्डवेयर।"
+  lang="hi"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span>/</span>
+      <span class="text-slate-200">सीखें</span>
+    </nav>
+
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-slate-100 mb-2">लर्निंग सेंटर</h1>
+      <p class="text-slate-400">शुरुआती से उन्नत स्तर तक संरचित गाइड और ट्यूटोरियल</p>
+    </div>
+
+    <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-8 text-sm text-slate-400 flex items-center gap-2">
+      <span>🌐</span>
+      <span>लेख अंग्रेज़ी में उपलब्ध हैं। अंग्रेज़ी संस्करण के लिए <a href={`${BASE}/en/learn/`} class="text-tp-blue hover:underline">यहाँ क्लिक करें</a>।</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      {guides.map(guide => (
+        <a href={`${BASE}/en/learn/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-tp-blue/50 transition-colors">
+          <div class="flex items-start gap-3">
+            <div class="w-9 h-9 rounded-lg bg-navy-700 flex items-center justify-center text-xl flex-shrink-0">{guide.icon}</div>
+            <div class="min-w-0">
+              <h3 class="font-semibold text-slate-100 leading-tight">{guide.title}</h3>
+              <div class="flex items-center gap-2 mt-1">
+                <span class={`text-xs ${levelColors[guide.level] ?? levelColors.beginner}`}>{levelLabels[guide.level] ?? guide.level}</span>
+                <span class="text-xs text-slate-500">· {guide.readTime}</span>
+              </div>
+            </div>
+          </div>
+          <p class="text-sm text-slate-400 line-clamp-3">{guide.summary}</p>
+          <div class="mt-auto">
+            <span class="text-xs text-tp-blue font-medium">लेख पढ़ें →</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </div>
+</BaseLayout>
