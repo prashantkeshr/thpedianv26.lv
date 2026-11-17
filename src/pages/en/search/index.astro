@@ -74,12 +74,12 @@ const q = Astro.url.searchParams.get('q') ?? '';
       if (!container) return;
 
       try {
-        const { searchAll } = await import('/thpedianv26.lv/_astro/searchEngine.js').catch(() =>
+        const { searchAll } = await import('/_astro/searchEngine.js').catch(() =>
           import(BASE + '/en/search/_searchEngine.js').catch(() => ({ searchAll: null }))
         );
 
         // Fallback: use dynamic import from module system
-        const mod = await import('/thpedianv26.lv/en/search/').catch(() => null);
+        const mod = await import('/en/search/').catch(() => null);
 
         // The search module is loaded via the SearchBar component's internal mechanism
         // For the full-page results we use a static approach
