@@ -157,7 +157,18 @@ export default function DeviceCard({ device, lang = 'en', compact = false }: Dev
           <span className="text-[11px] px-2 py-0.5 rounded-full bg-blue-950/60 text-blue-300 border border-blue-800/40 font-medium capitalize">
             {device.category.replace(/-/g, ' ')}
           </span>
-          {year && <span className="text-[11px] text-slate-500 font-medium">{year}</span>}
+          <div className="flex items-center gap-1.5">
+            {device.expertScore != null && (
+              <span className={`text-[11px] font-bold px-1.5 py-0.5 rounded border ${
+                device.expertScore >= 90 ? 'text-emerald-400 border-emerald-500/40 bg-emerald-500/10' :
+                device.expertScore >= 80 ? 'text-blue-400 border-blue-500/40 bg-blue-500/10' :
+                'text-amber-400 border-amber-500/40 bg-amber-500/10'
+              }`} title="Expert Score">
+                {device.expertScore}
+              </span>
+            )}
+            {year && <span className="text-[11px] text-slate-500 font-medium">{year}</span>}
+          </div>
         </div>
       </div>
 

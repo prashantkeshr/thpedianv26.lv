@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import DeviceCard from '../../../components/cards/DeviceCard';
+import BrandDeviceGrid from '../../../components/brand/BrandDeviceGrid';
 import { getAllBrands, getBrandBySlug } from '../../../services/brandService';
 import { getDevicesByBrand } from '../../../services/deviceService';
+import type { Device } from '../../../types';
 
 export async function getStaticPaths() {
   return getAllBrands().map(b => ({ params: { slug: b.slug } }));
@@ -12,7 +13,19 @@ const { slug } = Astro.params;
 const BASE = '';
 const brand = getBrandBySlug(slug!)!;
 if (!brand) return Astro.redirect(`${BASE}/hi/brands/`);
-const brandDevices = getDevicesByBrand(brand.id);
+const brandDevices = getDevicesByBrand(brand.id) as Device[];
+
+const scoredDevices = brandDevices.filter(d => d.expertScore != null).sort((a, b) => (b.expertScore ?? 0) - (a.expertScore ?? 0));
+const topDevices = scoredDevices.slice(0, 3);
+const avgScore = scoredDevices.length > 0
+  ? Math.round(scoredDevices.reduce((s, d) => s + (d.expertScore ?? 0), 0) / scoredDevices.length)
+  : null;
+
+const categoryLabel = (cat: string) =>
+  cat.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+const scoreColor = (s: number) =>
+  s >= 90 ? 'text-emerald-400' : s >= 80 ? 'text-blue-400' : 'text-amber-400';
 ---
 
 <BaseLayout
@@ -32,27 +45,92 @@ const brandDevices = getDevicesByBrand(brand.id);
       </span>
     </nav>
 
-    <div class="flex items-start gap-6 mb-10">
-      <div class="w-16 h-16 rounded-xl bg-navy-700 flex items-center justify-center text-3xl font-bold text-tp-blue shrink-0">
-        {brand.name[0]}
+    <!-- Brand hero -->
+    <div class="flex items-start gap-6 mb-8">
+      <div class="w-20 h-20 rounded-2xl bg-navy-700 border border-tp-border flex items-center justify-center text-4xl flex-shrink-0">
+        🏢
       </div>
-      <div>
-        <h1 class="text-3xl font-bold text-slate-100 mb-1">{brand.name}</h1>
-        <p class="text-sm text-slate-400">{brand.headquarters} · स्थापना {brand.founded ?? 'अज्ञात'}</p>
-        <p class="text-slate-400 mt-3 max-w-2xl">{brand.description}</p>
+      <div class="min-w-0">
+        <h1 class="text-3xl font-bold text-slate-100">{brand.name}</h1>
+        {brand.headquarters && <p class="text-slate-400 mt-1">{brand.headquarters}</p>}
+        {brand.website && (
+          <a href={brand.website} target="_blank" rel="noopener noreferrer"
+            class="text-sm text-tp-blue hover:text-tp-blue-bright mt-2 inline-flex items-center gap-1">
+            <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6m0 0v6m0-6L10 14"/>
+            </svg>
+            {brand.website.replace('https://', '')}
+          </a>
+        )}
       </div>
     </div>
 
-    {brandDevices.length > 0 && (
-      <div>
-        <h2 class="text-xl font-bold text-slate-100 mb-6">{brandDevices.length} डिवाइस</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
-          {brandDevices.map(d => <DeviceCard device={d} lang="hi" client:visible />)}
+    <!-- Stats strip -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+      {brand.founded && (
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+          <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">स्थापना</p>
+          <p class="text-xl font-bold text-slate-100">{brand.founded}</p>
+        </div>
+      )}
+      {brand.headquarters && (
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+          <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">मुख्यालय</p>
+          <p class="text-sm font-semibold text-slate-100 leading-tight">{brand.headquarters}</p>
+        </div>
+      )}
+      <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+        <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">डेटाबेस में</p>
+        <p class="text-xl font-bold text-slate-100">{brandDevices.length} <span class="text-sm font-normal text-slate-400">डिवाइस</span></p>
+      </div>
+      {avgScore !== null && (
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+          <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">औसत एक्सपर्ट स्कोर</p>
+          <p class={`text-xl font-bold ${scoreColor(avgScore)}`}>{avgScore}<span class="text-sm font-normal text-slate-400">/100</span></p>
+        </div>
+      )}
+    </div>
+
+    <p class="text-slate-300 leading-relaxed max-w-3xl mb-8">{brand.description}</p>
+
+    <!-- Product categories -->
+    <div class="flex flex-wrap gap-2 mb-10">
+      {brand.productCategories.map(cat => (
+        <span class="tp-badge-blue capitalize">{cat}</span>
+      ))}
+    </div>
+
+    <!-- Top rated devices spotlight -->
+    {topDevices.length > 0 && (
+      <div class="mb-10">
+        <h2 class="text-lg font-semibold text-slate-100 mb-4">शीर्ष रेटेड {brand.name} डिवाइस</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {topDevices.map((d, i) => (
+            <a href={`${BASE}/hi/devices/${d.slug}/`}
+              class="rounded-xl border border-tp-border bg-navy-800/60 p-4 flex items-center gap-4 hover:border-tp-blue/50 transition-colors">
+              <div class="text-2xl font-black text-slate-700">#{i + 1}</div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs text-blue-400/80 uppercase tracking-wide mb-0.5">{categoryLabel(d.category)}</p>
+                <p class="text-sm font-semibold text-slate-100 leading-snug line-clamp-2">{d.name}</p>
+              </div>
+              {d.expertScore != null && (
+                <div class={`text-lg font-black ${scoreColor(d.expertScore)} shrink-0`}>{d.expertScore}</div>
+              )}
+            </a>
+          ))}
         </div>
       </div>
     )}
 
-    {brandDevices.length === 0 && (
+    <!-- Device grid with category filter -->
+    {brandDevices.length > 0 ? (
+      <div>
+        <h2 class="text-xl font-semibold text-slate-100 mb-5">
+          {brand.name} डिवाइस ({brandDevices.length})
+        </h2>
+        <BrandDeviceGrid devices={brandDevices} lang="hi" client:visible />
+      </div>
+    ) : (
       <div class="text-center py-16 text-slate-400">
         <div class="text-5xl mb-4">📦</div>
         <p class="text-lg font-medium">इस ब्रांड के लिए कोई डिवाइस सूचीबद्ध नहीं है।</p>

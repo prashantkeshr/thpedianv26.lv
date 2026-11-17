@@ -109,6 +109,8 @@ export interface Device {
   relatedIds: string[];
   predecessorId?: string;
   successorId?: string;
+  expertScore?: number;        // 0–100 editorial score
+  proscons?: { text: string; type: 'pro' | 'con' }[];
   tags: string[];
   sources: SourceRef[];
   verificationLevel: VerificationLevel;

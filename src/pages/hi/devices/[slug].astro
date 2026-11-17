@@ -4,6 +4,7 @@ import { getAllDevices, getDeviceBySlug, getRelatedDevices } from '../../../serv
 import { getBrandById } from '../../../services/brandService';
 import DeviceCard from '../../../components/cards/DeviceCard';
 import DeviceAutoImage from '../../../components/DeviceAutoImage';
+import ExpertScoreCard from '../../../components/device/ExpertScoreCard';
 
 export async function getStaticPaths() {
   const devices = getAllDevices();
@@ -129,6 +130,12 @@ const vb = verificationBadge[device.verificationLevel] ?? verificationBadge.unve
             <div class="flex flex-wrap gap-2">
               {device.keyFeatures.map(f => <span class="tp-badge-blue">{f}</span>)}
             </div>
+          </div>
+        )}
+
+        {(device.expertScore != null || (device.proscons && device.proscons.length > 0)) && (
+          <div class="mb-8">
+            <ExpertScoreCard device={device} lang="hi" client:visible />
           </div>
         )}
 

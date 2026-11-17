@@ -1,8 +1,9 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import DeviceCard from '../../../components/cards/DeviceCard';
+import BrandDeviceGrid from '../../../components/brand/BrandDeviceGrid';
 import { getAllBrands, getBrandBySlug } from '../../../services/brandService';
 import { getDevicesByBrand } from '../../../services/deviceService';
+import type { Device } from '../../../types';
 
 export async function getStaticPaths() {
   return getAllBrands().map(b => ({ params: { slug: b.slug } }));
@@ -12,7 +13,20 @@ const { slug } = Astro.params;
 const BASE = '';
 const brand = getBrandBySlug(slug!)!;
 if (!brand) return Astro.redirect(`${BASE}/en/brands/`);
-const brandDevices = getDevicesByBrand(brand.id);
+const brandDevices = getDevicesByBrand(brand.id) as Device[];
+
+const categories = Array.from(new Set(brandDevices.map(d => d.category))).sort();
+const scoredDevices = brandDevices.filter(d => d.expertScore != null).sort((a, b) => (b.expertScore ?? 0) - (a.expertScore ?? 0));
+const topDevices = scoredDevices.slice(0, 3);
+const avgScore = scoredDevices.length > 0
+  ? Math.round(scoredDevices.reduce((s, d) => s + (d.expertScore ?? 0), 0) / scoredDevices.length)
+  : null;
+
+const categoryLabel = (cat: string) =>
+  cat.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+
+const scoreColor = (s: number) =>
+  s >= 90 ? 'text-emerald-400' : s >= 80 ? 'text-blue-400' : 'text-amber-400';
 ---
 
 <BaseLayout
@@ -29,14 +43,14 @@ const brandDevices = getDevicesByBrand(brand.id);
       <span class="text-slate-200">{brand.name}</span>
     </nav>
 
-    <div class="flex items-start gap-6 mb-10">
-      <div class="w-20 h-20 rounded-2xl bg-navy-700 flex items-center justify-center text-4xl flex-shrink-0">
+    <!-- Brand hero -->
+    <div class="flex items-start gap-6 mb-8">
+      <div class="w-20 h-20 rounded-2xl bg-navy-700 border border-tp-border flex items-center justify-center text-4xl flex-shrink-0">
         🏢
       </div>
-      <div>
+      <div class="min-w-0">
         <h1 class="text-3xl font-bold text-slate-100">{brand.name}</h1>
         {brand.headquarters && <p class="text-slate-400 mt-1">{brand.headquarters}</p>}
-        {brand.founded && <p class="text-sm text-slate-500">Founded {brand.founded}</p>}
         {brand.website && (
           <a href={brand.website} target="_blank" rel="noopener noreferrer"
             class="text-sm text-tp-blue hover:text-tp-blue-bright mt-2 inline-flex items-center gap-1">
@@ -49,28 +63,72 @@ const brandDevices = getDevicesByBrand(brand.id);
       </div>
     </div>
 
-    <p class="text-slate-300 leading-relaxed max-w-3xl mb-10">{brand.description}</p>
+    <!-- Stats strip -->
+    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+      {brand.founded && (
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+          <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Founded</p>
+          <p class="text-xl font-bold text-slate-100">{brand.founded}</p>
+        </div>
+      )}
+      {brand.headquarters && (
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+          <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Headquarters</p>
+          <p class="text-sm font-semibold text-slate-100 leading-tight">{brand.headquarters}</p>
+        </div>
+      )}
+      <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+        <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">In Database</p>
+        <p class="text-xl font-bold text-slate-100">{brandDevices.length} <span class="text-sm font-normal text-slate-400">devices</span></p>
+      </div>
+      {avgScore !== null && (
+        <div class="rounded-xl bg-navy-800/60 border border-tp-border p-4">
+          <p class="text-xs text-slate-500 uppercase tracking-wide mb-1">Avg Expert Score</p>
+          <p class={`text-xl font-bold ${scoreColor(avgScore)}`}>{avgScore}<span class="text-sm font-normal text-slate-400">/100</span></p>
+        </div>
+      )}
+    </div>
 
+    <p class="text-slate-300 leading-relaxed max-w-3xl mb-8">{brand.description}</p>
+
+    <!-- Product categories -->
     <div class="flex flex-wrap gap-2 mb-10">
       {brand.productCategories.map(cat => (
         <span class="tp-badge-blue capitalize">{cat}</span>
       ))}
     </div>
 
-    {brandDevices.length > 0 && (
-      <div>
-        <h2 class="text-xl font-semibold text-slate-100 mb-5">
-          {brand.name} Devices ({brandDevices.length})
-        </h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {brandDevices.map(d => (
-            <DeviceCard device={d} lang="en" client:visible />
+    <!-- Top rated devices spotlight -->
+    {topDevices.length > 0 && (
+      <div class="mb-10">
+        <h2 class="text-lg font-semibold text-slate-100 mb-4">Top Rated {brand.name} Devices</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {topDevices.map((d, i) => (
+            <a href={`${BASE}/en/devices/${d.slug}/`}
+              class="rounded-xl border border-tp-border bg-navy-800/60 p-4 flex items-center gap-4 hover:border-tp-blue/50 transition-colors">
+              <div class="text-2xl font-black text-slate-700">#{i + 1}</div>
+              <div class="min-w-0 flex-1">
+                <p class="text-xs text-blue-400/80 uppercase tracking-wide mb-0.5">{categoryLabel(d.category)}</p>
+                <p class="text-sm font-semibold text-slate-100 leading-snug line-clamp-2">{d.name}</p>
+              </div>
+              {d.expertScore != null && (
+                <div class={`text-lg font-black ${scoreColor(d.expertScore)} shrink-0`}>{d.expertScore}</div>
+              )}
+            </a>
           ))}
         </div>
       </div>
     )}
 
-    {brandDevices.length === 0 && (
+    <!-- Device grid with category filter -->
+    {brandDevices.length > 0 ? (
+      <div>
+        <h2 class="text-xl font-semibold text-slate-100 mb-5">
+          {brand.name} Devices ({brandDevices.length})
+        </h2>
+        <BrandDeviceGrid devices={brandDevices} lang="en" client:visible />
+      </div>
+    ) : (
       <div class="rounded-xl bg-navy-800/40 border border-tp-border p-8 text-center text-slate-400">
         <p>No devices from {brand.name} are in the database yet.</p>
         <p class="text-sm mt-2">More devices are being added regularly.</p>

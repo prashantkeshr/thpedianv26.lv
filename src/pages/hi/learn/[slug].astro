@@ -1,0 +1,392 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+
+const BASE = '';
+
+export async function getStaticPaths() {
+  const slugs = [
+    'what-is-a-cpu', 'how-does-ram-work', 'gpu-architecture-basics',
+    'understanding-transistors', 'ohms-law-and-circuit-basics',
+    'ssd-vs-hdd', 'wifi-7-explained', 'introduction-to-microcontrollers',
+    'npu-explained', 'display-refresh-rates-guide', 'soc-vs-cpu',
+    'nfc-explained', 'foldable-display-technology',
+  ];
+  return slugs.map(slug => ({ params: { slug } }));
+}
+
+const { slug } = Astro.params;
+
+const levelLabels: Record<string, string> = {
+  beginner: 'शुरुआती',
+  intermediate: 'मध्यम',
+  advanced: 'उन्नत',
+};
+
+const levelColors: Record<string, string> = {
+  beginner: 'tp-badge-green',
+  intermediate: 'tp-badge-blue',
+  advanced: 'tp-badge-violet',
+};
+
+type Section = {
+  heading: string;
+  content: string;
+  keyPoints?: string[];
+  table?: { headers: string[]; rows: string[][] };
+  note?: string;
+};
+
+type Article = {
+  title: string;
+  titleHi: string;
+  level: string;
+  icon: string;
+  readTime: string;
+  summary: string;
+  summaryHi: string;
+  intro: string;
+  sections: Section[];
+  tags: string[];
+};
+
+const articles: Record<string, Article> = {
+  'what-is-a-cpu': {
+    title: 'What is a CPU?',
+    titleHi: 'CPU क्या होता है?',
+    level: 'beginner',
+    icon: '⚙️',
+    readTime: '8 min',
+    summary: 'Understand how modern processors work — cores, threads, cache and instruction pipelines.',
+    summaryHi: 'आधुनिक प्रोसेसर कैसे काम करते हैं — कोर, थ्रेड, कैश और इंस्ट्रक्शन पाइपलाइन।',
+    intro: 'The Central Processing Unit (CPU) is the primary processor in a computer — the component that executes program instructions. Everything you do on a computer, from opening a browser to running a game, ultimately comes down to the CPU fetching instructions from memory and executing them, billions of times per second.',
+    sections: [
+      { heading: 'Cores and Threads', content: 'Early CPUs had a single core — one execution unit. Modern CPUs have multiple cores, each of which can run instructions independently and in parallel. A quad-core CPU can genuinely run four programs simultaneously, one per core. Intel\'s Hyper-Threading (and AMD\'s SMT) adds a second hardware thread per core, letting the OS schedule two threads on the same core by sharing execution units.', keyPoints: ['P-cores (Performance) run demanding single-threaded tasks; E-cores (Efficiency) handle background work at lower power.', 'Clock speed (GHz) measures how many cycles per second the CPU executes; more cycles = more work, all else equal.', 'Modern CPUs boost clock speed dynamically based on thermal headroom — Intel Turbo Boost, AMD Precision Boost.'] },
+      { heading: 'Cache Memory', content: 'Fetching data from main RAM takes hundreds of nanoseconds — far too slow for a CPU running at 5 GHz. Cache memory is high-speed SRAM embedded on the CPU die, acting as a staging area for frequently used data and instructions.', table: { headers: ['Level', 'Latency', 'Typical Size', 'Shared?'], rows: [['L1', '~1–4 ns', '32–128 KB per core', 'No'], ['L2', '~4–12 ns', '0.5–4 MB per core', 'No'], ['L3', '~10–40 ns', '8–192 MB total', 'Yes (all cores)'], ['RAM', '~60–100 ns', '8–128 GB system', 'Yes']] } },
+      { heading: 'The Instruction Pipeline', content: 'Modern CPUs use a pipeline — breaking instruction execution into stages (Fetch → Decode → Execute → Write Back) and processing multiple instructions simultaneously at different stages, like an assembly line. Superscalar CPUs have multiple execution units so they can retire more than one instruction per clock cycle.', keyPoints: ['IPC (Instructions Per Clock) measures how many instructions a CPU completes each cycle. Modern CPUs target 4–6+ IPC.', 'Branch prediction guesses which way an if/else branch will go so the pipeline can speculatively execute ahead.'] },
+      { heading: 'CPU Performance: What Actually Matters', content: 'Raw clock speed is not the whole story. A CPU running at 4.0 GHz with better IPC can outperform one at 5.0 GHz with worse IPC. Memory bandwidth and latency matter for data-intensive workloads.', note: 'TDP (Thermal Design Power) specifies the maximum heat a cooler must handle under typical use.' },
+    ],
+    tags: ['CPU', 'Hardware basics', 'Cores', 'Cache', 'IPC'],
+  },
+  'how-does-ram-work': {
+    title: 'How Does RAM Work?',
+    titleHi: 'RAM कैसे काम करती है?',
+    level: 'beginner',
+    icon: '💾',
+    readTime: '7 min',
+    summary: 'From DRAM cells to DDR5 — memory types, timing, channels and latency explained.',
+    summaryHi: 'DRAM सेल से DDR5 तक — मेमोरी प्रकार, टाइमिंग, चैनल और लेटेंसी।',
+    intro: 'RAM (Random Access Memory) is your computer\'s working memory — the fast, temporary storage that holds the OS, open applications and active data while the system is running. Unlike storage (SSD/HDD), RAM loses its contents when powered off.',
+    sections: [
+      { heading: 'How DRAM Cells Store Data', content: 'Dynamic RAM stores each bit as a tiny electric charge in a capacitor paired with a transistor. Because capacitors leak charge, DRAM must be refreshed thousands of times per second.', keyPoints: ['DRAM density is higher than SRAM — cheaper per bit, so we can afford gigabytes of it.', 'The refresh operation is why idle DRAM still consumes some power.'] },
+      { heading: 'DDR Generations: DDR4 vs DDR5', content: 'DDR (Double Data Rate) transfers data on both the rising and falling edges of the clock signal, doubling effective bandwidth. DDR5 introduced dual 32-bit sub-channels, on-die ECC, on-die voltage regulation and higher base speeds.', table: { headers: ['Spec', 'DDR4', 'DDR5'], rows: [['Base speed', '1600–2133 MT/s', '3200–4800 MT/s'], ['Max mainstream', '~5600 MT/s OC', '~8800 MT/s'], ['Channel width', '64-bit', '2 × 32-bit'], ['On-die ECC', 'No', 'Yes'], ['Voltage', '1.2 V', '1.1 V']] } },
+      { heading: 'Timings and Latency', content: 'DDR memory specs include timings like CL36-38-38-76. CL (CAS Latency) is the most important — it\'s the number of clock cycles between requesting data and receiving it.', keyPoints: ['XMP (Intel) / EXPO (AMD) are profiles stored on the DIMM that tell the motherboard to run at the rated advertised speed automatically.'] },
+      { heading: 'Channels, Capacity and Gaming', content: 'Modern CPUs benefit from dual-channel memory — two DIMMs installed in matched pairs, doubling theoretical bandwidth. For gaming, 16–32 GB DDR5 in dual-channel is ideal.', note: 'LPDDR5X is the mobile equivalent of DDR5. It is soldered to the motherboard and runs at 7500–8533 MT/s, used in flagship smartphones.' },
+    ],
+    tags: ['RAM', 'DDR5', 'Memory', 'Hardware basics', 'DRAM'],
+  },
+  'gpu-architecture-basics': {
+    title: 'GPU Architecture Basics',
+    titleHi: 'GPU आर्किटेक्चर की मूल बातें',
+    level: 'intermediate',
+    icon: '🎮',
+    readTime: '10 min',
+    summary: 'Shader processors, VRAM, rasterization, ray tracing and AI acceleration.',
+    summaryHi: 'शेडर प्रोसेसर, VRAM, रास्टराइज़ेशन, रे ट्रेसिंग और AI एक्सेलेरेशन।',
+    intro: 'A GPU (Graphics Processing Unit) contains thousands of small parallel processors optimised for floating-point math and data-parallel tasks. Originally designed for 3D games, modern GPUs are general-purpose accelerators running neural networks, scientific simulations and video encoding.',
+    sections: [
+      { heading: 'Parallel Architecture: Why GPUs Are Different', content: 'A CPU has a few powerful cores with large caches optimised for single-threaded latency. A GPU has thousands of simpler cores (CUDA cores on NVIDIA) grouped into Streaming Multiprocessors. These cores execute the same instruction on many data items simultaneously (SIMT).', keyPoints: ['RTX 4090: 16,384 CUDA cores in 128 Streaming Multiprocessors.', 'GPU clock speeds (1.5–3.0 GHz) are much lower than CPUs, but thousands of cores compensate.', 'GPU memory bandwidth (GDDR6X RTX 4090: 1 TB/s) far exceeds CPU-RAM bandwidth.'] },
+      { heading: 'The Rendering Pipeline', content: 'Traditional rasterization rendering works in stages: Vertex shaders transform 3D geometry into 2D screen coordinates, rasterization converts triangle edges into pixel fragments, fragment shaders calculate the final colour of each pixel.', table: { headers: ['Stage', 'Input', 'Output'], rows: [['Vertex Shader', '3D vertices', '2D clip-space vertices'], ['Rasterization', '2D triangles', 'Screen-space pixel fragments'], ['Pixel Shader', 'Pixel fragments', 'Coloured pixels']] } },
+      { heading: 'Ray Tracing and RT Cores', content: 'Ray tracing simulates light physically: rays are cast from the camera through each pixel, bounced around the scene and evaluated for colour. NVIDIA RTX and AMD RDNA2+ GPUs include dedicated RT Cores that accelerate this test in hardware.', keyPoints: ['BVH (Bounding Volume Hierarchy) is a tree structure grouping triangles so the GPU can quickly narrow down which triangles a ray might hit.', 'Full path tracing uses RT for all lighting — extremely demanding, requires DLSS or FSR.'] },
+      { heading: 'Tensor Cores and AI Acceleration', content: 'Neural network inference involves huge matrix multiplications. Tensor Cores are fixed-function units that perform matrix multiply-accumulate operations far faster than general-purpose shader cores. NVIDIA RTX 4090 has 512 fourth-gen Tensor Cores.', note: 'VRAM capacity is a hard limit for gaming and AI. Consumer GPUs top out at 24 GB (RTX 4090).' },
+    ],
+    tags: ['GPU', 'Ray tracing', 'VRAM', 'CUDA', 'Rendering'],
+  },
+  'understanding-transistors': {
+    title: 'Understanding Transistors',
+    titleHi: 'ट्रांजिस्टर को समझें',
+    level: 'beginner',
+    icon: '🔌',
+    readTime: '6 min',
+    summary: 'The fundamental building block of all digital electronics. BJT, MOSFET and beyond.',
+    summaryHi: 'सभी डिजिटल इलेक्ट्रॉनिक्स की मूल इकाई — BJT, MOSFET और आगे।',
+    intro: 'The transistor is the fundamental building block of all modern electronics. Every CPU, GPU, smartphone and computer contains billions to tens of billions of them on a single chip. Understanding transistors explains why computing has followed Moore\'s Law for six decades.',
+    sections: [
+      { heading: 'What a Transistor Does', content: 'A transistor is a voltage-controlled switch. In digital logic: apply a voltage to the gate, and current can flow between source and drain. Remove the voltage, and current is blocked. This binary state — 1 or 0 — is the foundation of all computing.', keyPoints: ['BJT: current-controlled, used in analog amplifiers.', 'MOSFET: voltage-controlled, far more energy-efficient at scale — the dominant type in digital logic.', 'CMOS logic uses complementary nMOS + pMOS pairs, dissipating power only during switching.'] },
+      { heading: 'Scaling: From 10 μm to 2 nm', content: 'In 1971, Intel 4004 had 2,300 transistors at 10 μm. The Apple M4 has 28 billion at 3 nm. Smaller transistors switch faster, use less energy and pack more computing into the same die area.', table: { headers: ['Year', 'Node', 'Example', 'Transistors'], rows: [['1971', '10 µm', 'Intel 4004', '2,300'], ['2015', '14 nm', 'Intel Skylake', '1.75 billion'], ['2020', '5 nm', 'Apple M1', '16 billion'], ['2025', '2 nm', 'Apple M4 / A18', '28+ billion']] } },
+      { heading: 'FinFET and Gate-All-Around', content: 'At sub-20 nm, classical planar MOSFETs lost gate control. FinFET raised the channel into a fin-shape so the gate wraps around three sides. At 2 nm, GAA (Gate-All-Around) surrounds the channel on all four sides using horizontal nanosheets.', note: 'Intel calls its GAA architecture RibbonFET. TSMC introduced GAA at N2 (2025).' },
+    ],
+    tags: ['Transistors', 'MOSFET', 'Semiconductor', 'FinFET', "Moore's Law"],
+  },
+  'ohms-law-and-circuit-basics': {
+    title: "Ohm's Law and Circuit Basics",
+    titleHi: 'ओम का नियम और सर्किट की मूल बातें',
+    level: 'beginner',
+    icon: '⚡',
+    readTime: '6 min',
+    summary: "Voltage, current, resistance and how they relate in simple and complex circuits.",
+    summaryHi: 'वोल्टेज, करंट, प्रतिरोध और सर्किट में उनका संबंध।',
+    intro: "Ohm's Law is the most fundamental relationship in electronics: V = I × R. Voltage (V) drives current (I) through resistance (R). With this single equation and an understanding of series/parallel circuits, you can analyse most basic electronic circuits.",
+    sections: [
+      { heading: 'Voltage, Current and Resistance', content: 'Voltage (Volts, V) is electrical potential difference. Current (Amperes, A) is the flow rate of charge. Resistance (Ohms, Ω) opposes current flow.', table: { headers: ['Quantity', 'Symbol', 'Unit', 'Analogy'], rows: [['Voltage', 'V', 'Volt (V)', 'Water pressure'], ['Current', 'I', 'Ampere (A)', 'Flow rate'], ['Resistance', 'R', 'Ohm (Ω)', 'Pipe narrowness'], ['Power', 'P', 'Watt (W)', 'Hydraulic power']] } },
+      { heading: "Ohm's Law and Power", content: "V = I × R, I = V / R, R = V / I. Power: P = V × I, P = I² × R, P = V² / R. Example: a 100 Ω resistor at 5 V has I = 50 mA and dissipates P = 0.25 W.", keyPoints: ["Kirchhoff's Voltage Law (KVL): sum of voltages around any closed loop = 0.", "Kirchhoff's Current Law (KCL): sum of currents entering a node = sum leaving it."] },
+      { heading: 'Series vs Parallel Circuits', content: 'Series: resistances add; voltage divides. Parallel: reciprocals of resistance add; voltage same across all; current divides.', table: { headers: ['Property', 'Series', 'Parallel'], rows: [['Current', 'Same through all', 'Divides between branches'], ['Voltage', 'Divides across each', 'Same across all'], ['Total resistance', 'R1 + R2 + ...', '1 / (1/R1 + 1/R2 + ...)']] } },
+      { heading: 'Practical Applications', content: 'Pull-up/pull-down resistors prevent floating inputs. LED current limiting: R = (Vsupply − Vf) / Iled. Voltage dividers create reference voltages. Decoupling capacitors filter power supply noise.', note: 'GPIO pins typically source/sink ≤8–25 mA. Driving a motor requires a transistor or motor driver IC.' },
+    ],
+    tags: ["Ohm's Law", 'Electronics', 'Circuits', 'Resistance', 'Power'],
+  },
+  'ssd-vs-hdd': {
+    title: 'SSD vs HDD Technology',
+    titleHi: 'SSD बनाम HDD तकनीक',
+    level: 'beginner',
+    icon: '💿',
+    readTime: '7 min',
+    summary: 'NAND flash, wear leveling, NVMe protocol and why SSDs outperform spinning drives.',
+    summaryHi: 'NAND फ्लैश, वेयर लेवलिंग, NVMe प्रोटोकॉल — SSD क्यों बेहतर है।',
+    intro: 'Hard Disk Drives (HDDs) store data on spinning magnetic platters. Solid State Drives (SSDs) store data in NAND flash chips with no moving parts. A modern NVMe SSD delivers 7,000+ MB/s sequential reads, while a typical HDD peaks at 150–250 MB/s.',
+    sections: [
+      { heading: 'How HDDs Work', content: 'An HDD stores bits as magnetic domains on a rotating platter. A read/write head moves across the platter surface. The platter rotates at 5,400–7,200 RPM. Data access requires seek time (3–12 ms) and rotational latency (4–8 ms).', keyPoints: ['HDDs excel at sequential workloads (large file writes, media).', 'HDDs remain cost-effective for bulk storage: ≤ $20/TB vs ≥ $60/TB for SSDs.'] },
+      { heading: 'NAND Flash: How SSDs Store Data', content: 'NAND flash stores data as charge in a floating-gate transistor. SLC stores 1 bit per cell, MLC 2 bits, TLC 3 bits, QLC 4 bits. More bits per cell = higher density but lower write endurance.', table: { headers: ['Type', 'Bits/Cell', 'Endurance', 'Cost'], rows: [['SLC', '1', 'Very High (100k P/E)', 'Very High'], ['TLC', '3', 'Medium (1k–3k P/E)', 'Mainstream'], ['QLC', '4', 'Lower (300–1k P/E)', 'Cheapest']] } },
+      { heading: 'SATA vs NVMe and PCIe Generations', content: 'SATA SSDs are capped at ~550 MB/s. NVMe over PCIe has queue depth of 65,535 commands and sub-100 µs latency. PCIe 4.0 ×4 SSDs reach 7,000 MB/s. PCIe 5.0 ×4 drives push beyond 14,000 MB/s.', note: 'For everyday gaming use, the difference between PCIe 4.0 and 5.0 NVMe SSD is imperceptible.' },
+    ],
+    tags: ['SSD', 'HDD', 'NVMe', 'NAND', 'Storage'],
+  },
+  'wifi-7-explained': {
+    title: 'Wi-Fi 7 Explained',
+    titleHi: 'Wi-Fi 7 की व्याख्या',
+    level: 'intermediate',
+    icon: '📶',
+    readTime: '8 min',
+    summary: 'Multi-Link Operation, 320 MHz channels, QAM-4096 and what makes Wi-Fi 7 different.',
+    summaryHi: 'Multi-Link Operation, 320 MHz चैनल, QAM-4096 — Wi-Fi 7 क्या है।',
+    intro: 'Wi-Fi 7 (IEEE 802.11be) is the seventh generation of the Wi-Fi standard, finalised in 2024. It introduces Multi-Link Operation (MLO), 320 MHz channel width, 4096-QAM modulation and Multi-RU aggregation, achieving a theoretical maximum PHY rate of 46 Gbps.',
+    sections: [
+      { heading: 'Multi-Link Operation (MLO): The Key Innovation', content: 'MLO allows a single device to simultaneously maintain connections across multiple bands and channels, with the router aggregating them transparently. This provides higher throughput (combine 5 GHz + 6 GHz) and lower latency.', keyPoints: ['STR (Simultaneous Transmit and Receive) MLO uses different radio chains per band.', 'MLO routers must have dedicated radio chains per supported band for maximum benefit.'] },
+      { heading: '320 MHz Channels and 4096-QAM', content: 'Wi-Fi 7 uses the 6 GHz band for 320 MHz channels — double the 160 MHz max of Wi-Fi 6E. 4096-QAM encodes 20% more data per modulation symbol.', table: { headers: ['Standard', 'Max Channel', 'Modulation', 'Peak PHY Rate'], rows: [['Wi-Fi 6 (802.11ax)', '160 MHz', '1024-QAM', '9.6 Gbps'], ['Wi-Fi 7 (802.11be)', '320 MHz', '4096-QAM', '46 Gbps']] } },
+      { heading: 'OFDMA Improvements and Multi-RU', content: 'Multi-RU (MRU) allows a single client to use non-contiguous Resource Units within a channel — combining discontinuous spectral fragments into a single wider effective channel.', note: 'Wi-Fi 7 is backwards compatible with Wi-Fi 6/6E/5. The main real-world gain over Wi-Fi 6E is lower latency via MLO.' },
+    ],
+    tags: ['Wi-Fi 7', 'MLO', 'Networking', '6 GHz', '802.11be'],
+  },
+  'introduction-to-microcontrollers': {
+    title: 'Introduction to Microcontrollers',
+    titleHi: 'माइक्रोकंट्रोलर का परिचय',
+    level: 'beginner',
+    icon: '🔧',
+    readTime: '8 min',
+    summary: 'What microcontrollers are, how to choose one and common peripherals like GPIO, SPI, I2C.',
+    summaryHi: 'माइक्रोकंट्रोलर क्या है, कैसे चुनें — GPIO, SPI, I2C पेरिफेरल।',
+    intro: 'A microcontroller (MCU) is a self-contained computer on a single IC: processor core, flash memory, SRAM and programmable I/O peripherals. MCUs run a single program loop directly on hardware with microsecond response times — ideal for real-time control, embedded sensing and battery-powered IoT.',
+    sections: [
+      { heading: 'MCU vs Microprocessor vs SBC', content: 'A microprocessor (MPU) needs external RAM, Flash and peripherals. A microcontroller integrates all on one chip. An SBC (Raspberry Pi) has a powerful MPU running Linux. MCUs cost ¢25–$5, boot in microseconds and run on button batteries.', table: { headers: ['Type', 'Example', 'OS', 'Boot Time', 'Best For'], rows: [['MCU', 'STM32F103', 'None (bare-metal)', '< 1 ms', 'Real-time control, IoT'], ['MCU (RTOS)', 'ESP32-S3', 'FreeRTOS', '< 100 ms', 'IoT with Wi-Fi/BT'], ['SBC', 'Raspberry Pi 5', 'Linux', '10–20 s', 'Edge AI, Linux apps']] } },
+      { heading: 'GPIO, Timers and Interrupts', content: 'GPIO pins can be configured as digital input, digital output or alternate-function (SPI, I2C, UART, PWM). Timers generate interrupts or PWM signals independently of the main loop. Interrupts immediately suspend the main program and run a handler function.', keyPoints: ['Never directly source/sink more than the pin rated current (typically 8–25 mA).', 'ADC pins sample analog voltages and convert them to a digital number.'] },
+      { heading: 'Communication Protocols: UART, SPI, I2C', content: 'UART: 2 wires, asynchronous, point-to-point. SPI: 4 wires, synchronous, full-duplex, up to 50+ MHz. I2C: 2 wires, addressable — many devices share the same bus, each with a unique 7-bit address.', note: 'Popular beginner platforms: Arduino Uno (ATmega328P), ESP32 (dual-core, Wi-Fi + BT), STM32 (ARM Cortex-M).' },
+    ],
+    tags: ['Microcontrollers', 'GPIO', 'SPI', 'I2C', 'Embedded systems', 'Arduino'],
+  },
+  'npu-explained': {
+    title: 'NPU Explained: What is a Neural Processing Unit?',
+    titleHi: 'NPU क्या है: न्यूरल प्रोसेसिंग यूनिट की व्याख्या',
+    level: 'intermediate',
+    icon: '🧠',
+    readTime: '8 min',
+    summary: 'How dedicated AI accelerators in phones and laptops work — and why they matter for on-device AI.',
+    summaryHi: 'फोन और लैपटॉप में AI एक्सेलेरेटर कैसे काम करते हैं — और ऑन-डिवाइस AI के लिए यह क्यों जरूरी है।',
+    intro: 'A Neural Processing Unit (NPU) is a dedicated processor designed to accelerate neural network inference. Unlike CPUs and GPUs, an NPU is built specifically for the matrix multiplications at the heart of deep learning — with far better performance-per-watt. Modern smartphones, laptops and desktops now include NPUs, enabling on-device AI without sending data to the cloud.',
+    sections: [
+      { heading: 'Why Not Just Use a CPU or GPU?', content: 'Neural network inference involves huge numbers of multiply-accumulate (MAC) operations. CPUs are optimised for serial, branchy code. GPUs consume significant power. An NPU maximises MAC throughput per milliwatt using a dataflow design where weights and activations stream through a grid of MAC units.', keyPoints: ['TOPS (Tera Operations Per Second) measures peak NPU throughput.', 'NPUs are designed for inference (running a trained model), not training.', 'An NPU runs common neural network layers (Conv2D, BatchNorm, Attention) in custom silicon.'] },
+      { heading: 'Common On-Device AI Use Cases', content: 'Real-time camera processing, speech recognition, real-time translation, Windows Copilot+ features, Apple Intelligence, local LLM inference — all benefit from NPU acceleration.', table: { headers: ['Chip', 'NPU Performance', 'Key AI Features'], rows: [['Apple A18 Pro', '35 TOPS', 'Apple Intelligence, real-time transcription'], ['Qualcomm SD 8 Elite', '45 TOPS', 'On-device Gemini Nano, AI camera'], ['Intel Core Ultra 200H', 'Up to 48 TOPS', 'Windows Copilot+, Recall, Live Captions']] } },
+      { heading: 'Privacy and Performance: Why On-Device AI Matters', content: 'On-device inference with an NPU processes data locally: your voice commands, photos and messages never leave the device. Response latency drops from hundreds of milliseconds to tens of milliseconds. Battery impact is drastically lower — a Snapdragon NPU runs inference at under 1 W.', note: 'The Windows 11 Copilot+ 40 TOPS NPU requirement ensures LLM-based features run locally at acceptable speed.' },
+    ],
+    tags: ['NPU', 'AI acceleration', 'On-device AI', 'Machine learning', 'SoC'],
+  },
+  'display-refresh-rates-guide': {
+    title: 'Display Refresh Rates: Hz, VRR and Motion Clarity',
+    titleHi: 'डिस्प्ले रिफ्रेश रेट: Hz, VRR और मोशन क्लैरिटी',
+    level: 'beginner',
+    icon: '🖥️',
+    readTime: '7 min',
+    summary: 'What refresh rate means, why higher Hz matters, and how VRR (FreeSync / G-Sync) eliminates tearing.',
+    summaryHi: 'रिफ्रेश रेट का मतलब क्या है, ज्यादा Hz क्यों जरूरी है, और VRR (FreeSync / G-Sync) टियरिंग को कैसे खत्म करता है।',
+    intro: 'Refresh rate — measured in Hz — is how many times per second a display updates the image. A 60 Hz display draws 60 frames per second; a 165 Hz display draws 165. The difference is immediately visible in fast motion: higher refresh rates produce smoother animations and reduced motion blur.',
+    sections: [
+      { heading: 'Why Refresh Rate Matters', content: 'At 60 Hz, each frame is displayed for 16.7 ms. At 120 Hz, each frame lasts 8.3 ms — making motion appear twice as smooth. For gaming, the display refresh rate is the ceiling for perceived frame rate.', keyPoints: ['Input lag and display latency are different things.', 'LCD response time (GtG): 1–5 ms for gaming monitors. Slow response causes ghosting.', 'OLED panels have near-instant response time (< 0.1 ms).'] },
+      { heading: 'LTPO and Adaptive Refresh in Phones', content: 'LTPO displays can dynamically vary refresh rate from 1 Hz to 120 Hz. When reading a static page, the display drops to 1–10 Hz to save battery. When scrolling or gaming, it jumps back to 120 Hz instantly.', table: { headers: ['Refresh Rate', 'Use Case', 'Response Feel'], rows: [['60 Hz', 'Basic phones, budget laptops', 'Standard'], ['120 Hz', 'Flagship phones, gaming monitors', 'Very smooth'], ['165 Hz', 'Mainstream gaming monitors QHD', 'Competitive advantage'], ['240–360 Hz', 'Competitive gaming monitors', 'Minimal input latency']] } },
+      { heading: 'VRR: FreeSync and G-Sync', content: 'VRR lets the display dynamically adjust its refresh rate to match whatever frame rate the GPU is delivering — eliminating screen tearing without V-Sync latency penalty. AMD FreeSync uses VESA Adaptive-Sync (open standard). NVIDIA G-Sync uses a proprietary hardware module.', note: 'Modern HDMI 2.1 brings VRR to TVs, enabling tear-free gaming on PS5 and Xbox Series X.' },
+    ],
+    tags: ['Display', 'Refresh rate', 'VRR', 'FreeSync', 'G-Sync', 'LTPO'],
+  },
+  'soc-vs-cpu': {
+    title: 'SoC vs CPU: What is the Difference?',
+    titleHi: 'SoC बनाम CPU: क्या अंतर है?',
+    level: 'beginner',
+    icon: '💡',
+    readTime: '6 min',
+    summary: 'How a System on a Chip differs from a discrete CPU, and why mobile devices use SoCs.',
+    summaryHi: 'SoC और अलग CPU में क्या फर्क है, और मोबाइल डिवाइस SoC क्यों इस्तेमाल करते हैं।',
+    intro: 'A CPU relies on separate chips for graphics, networking and storage. A SoC integrates the CPU, GPU, NPU, memory controller, wireless radios, image signal processor and more onto a single die. SoCs dominate smartphones and tablets, while desktops traditionally used discrete chips.',
+    sections: [
+      { heading: 'What Gets Integrated in a SoC', content: 'A flagship mobile SoC like Apple A18 Pro or Qualcomm Snapdragon 8 Elite packs: a multi-core CPU, a many-core GPU, an NPU for AI inference, an ISP for camera processing, a 5G modem, Wi-Fi 7 and Bluetooth radios, a secure enclave, and hardware video encode/decode blocks — all on one chip.', keyPoints: ['On-chip buses carry data between CPU, GPU and NPU without PCB-trace overhead.', 'Unified memory means CPU and GPU share the same physical memory pool.', 'Smaller manufacturing nodes benefit every block simultaneously.'] },
+      { heading: 'Discrete CPU Architecture', content: 'A discrete CPU is paired with a separate GPU, separate RAM DIMMs, a separate Wi-Fi module and a separate SSD controller. Each interface crossing consumes power and adds latency. This modularity allows independent upgrades.', table: { headers: ['Property', 'SoC', 'Discrete CPU + GPU'], rows: [['Integration', 'All on one die', 'CPU chip + separate GPU, RAM, modem'], ['Memory', 'On-package or unified pool', 'User-upgradeable DIMM slots'], ['Power', '5–45 W mobile SoC', '65–280 W desktop CPU + GPU'], ['Examples', 'Apple M4, Snapdragon 8 Elite', 'Intel Core Ultra 9 285K, Ryzen 9 9950X']] } },
+      { heading: 'Apple Silicon: SoC in a Laptop', content: 'Apple M4 Max integrates a 14-core CPU, 32-core GPU, 38 TOPS NPU, 128 GB unified memory controller, Thunderbolt 5 and display controller on one chip. By using unified memory, Apple avoids the VRAM bottleneck that limits AI inference on discrete-GPU laptops.', note: 'Qualcomm Snapdragon X Elite (Oryon CPU, Hexagon NPU, 45 TOPS) brings similar SoC integration to Windows Copilot+ PCs.' },
+    ],
+    tags: ['SoC', 'CPU', 'Apple Silicon', 'Snapdragon', 'Mobile', 'Architecture'],
+  },
+  'nfc-explained': {
+    title: 'NFC Explained: Contactless Payments and Beyond',
+    titleHi: 'NFC की व्याख्या: कॉन्टैक्टलेस पेमेंट और आगे',
+    level: 'beginner',
+    icon: '📲',
+    readTime: '5 min',
+    summary: 'How Near Field Communication works, its security model, and use cases beyond tap-to-pay.',
+    summaryHi: 'NFC कैसे काम करता है, इसका सुरक्षा मॉडल, और टैप-टू-पे से परे उपयोग।',
+    intro: 'NFC (Near Field Communication) enables two devices to exchange data when held within about 4 cm of each other. It operates at 13.56 MHz using inductive coupling. You likely use NFC every day — tapping your phone to pay, unlocking a hotel door or sharing a contact.',
+    sections: [
+      { heading: 'How NFC Works', content: 'One device (the initiator) generates an alternating magnetic field. The target device (phone or card) has an antenna coil that picks up this field, converts it to electricity, powers the NFC chip, and responds by modulating the magnetic field back — load modulation.', keyPoints: ['Range: 4 cm maximum — a security feature making eavesdropping at distance very difficult.', 'Three modes: Reader/Writer, Peer-to-Peer, and Card Emulation.', 'Card Emulation mode enables Apple Pay, Google Pay and Samsung Pay.'] },
+      { heading: 'Contactless Payments: Security Architecture', content: 'Apple Pay / Google Pay use Card Emulation mode. A unique Device Account Number (DAN) — not your real card number — is stored in the phone Secure Element. Each transaction generates a one-time cryptographic token (dynamic CVV) that cannot be reused.', table: { headers: ['Method', 'Data Sent', 'Replayable?', 'Requires auth?'], rows: [['Physical card tap', 'Real card number + static CVV', 'Potentially yes', 'No'], ['Apple Pay / Google Pay', 'Token + dynamic cryptogram', 'No (one-time use)', 'Yes (biometric)']] } },
+      { heading: 'NFC Use Cases Beyond Payments', content: 'Smart home / access control: NFC door locks for keyless entry. Product authentication: luxury goods embed NFC tags that link to manufacturer verification. Transit systems: Oyster, Suica, Octopus cards. Automation tags: tap to trigger phone automation. Bluetooth pairing: newer headphones initiate pairing via NFC.', note: 'Ultra-Wideband (UWB, found in iPhone 15+) is a complementary technology that provides centimeter-accurate spatial positioning for AirTag and digital car keys.' },
+    ],
+    tags: ['NFC', 'Contactless payment', 'Apple Pay', 'RFID', 'Wireless', 'Security'],
+  },
+  'foldable-display-technology': {
+    title: 'Foldable Display Technology Explained',
+    titleHi: 'फोल्डेबल डिस्प्ले तकनीक की व्याख्या',
+    level: 'intermediate',
+    icon: '📱',
+    readTime: '8 min',
+    summary: 'How plastic OLED panels fold without cracking, the engineering challenges and why creases persist.',
+    summaryHi: 'प्लास्टिक OLED पैनल बिना टूटे कैसे मुड़ते हैं, इंजीनियरिंग चुनौतियां और क्रीज क्यों बनी रहती है।',
+    intro: 'Foldable smartphones replace rigid glass with flexible plastic OLED panels (pOLED) that can bend to a radius as small as 2.5 mm — hundreds of thousands of times. The technology enables devices that unfold to tablet size but pocket as a phone.',
+    sections: [
+      { heading: 'From Glass to Plastic OLED', content: 'Standard OLED panels use a rigid glass substrate and are protected by Corning Gorilla Glass. Foldable panels replace both with flexible materials: the OLED layers are deposited on ultra-thin polyimide film (PI). The protective cover layer is replaced by ultra-thin glass (UTG, Under 100 µm) or CPI (Colorless Polyimide Film).', keyPoints: ['Touch sensors in foldable displays use metal mesh conductors rather than ITO glass — metal mesh flexes without cracking.', 'The water-drop hinge distributes fold stress across a wider radius to prevent panel failure.', 'OLED layers use multi-layer thin-film encapsulation instead of glass sealing.'] },
+      { heading: 'The Crease Problem', content: 'All current foldable displays have a visible crease at the fold point — a slight indentation where the cover layer deformed over thousands of fold cycles. Under direct light or at an angle it is noticeable. No manufacturer has solved this fully.', table: { headers: ['Factor', 'Book-fold (Z Fold style)', 'Clamshell (Z Flip style)'], rows: [['Main screen size', '7.0–8.0 inches unfolded', '6.6–6.9 inches unfolded'], ['Pocket size', 'Shorter and wider when folded', 'Compact — half the unfolded height'], ['Price tier', 'Premium ($1,500–$1,900)', 'Mainstream premium ($900–$1,200)']] } },
+      { heading: 'Durability and Waterproofing', content: 'Modern foldables are significantly more durable. Samsung Galaxy Z Fold 6 and Z Flip 6 carry IPX8 ratings — submersible to 1.5 m for 30 minutes. UTG scores about 7H on the Mohs pencil hardness scale vs 2–3H for plastic. Galaxy Z Fold 6 UTG survived over 200,000 fold cycles.', note: 'The inner display surface is always softer than rigid-glass phones and scratches more easily — screen protectors ship from the factory.' },
+      { heading: 'Next-Generation Foldables', content: 'Tri-fold displays — a device that folds twice — are emerging. Huawei Mate XT Ultimate pioneered this in 2024 with a 10.2-inch display that folds to phone size. Rollable displays, which extend via a motor, would eliminate the crease entirely and are in prototype stage.' },
+    ],
+    tags: ['Foldable', 'OLED', 'Display', 'Samsung Galaxy Z Fold', 'pOLED', 'UTG'],
+  },
+};
+
+const article = articles[slug as keyof typeof articles];
+if (!article) return Astro.redirect(`${BASE}/hi/learn/`);
+
+const learnBreadcrumb = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'होम', item: `${BASE}/hi/` },
+    { '@type': 'ListItem', position: 2, name: 'सीखें', item: `${BASE}/hi/learn/` },
+    { '@type': 'ListItem', position: 3, name: article.titleHi, item: `${BASE}/hi/learn/${slug}/` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${article.titleHi} — लर्निंग सेंटर — Techpedia`}
+  description={article.summaryHi}
+  lang="hi"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(learnBreadcrumb)} />
+  </Fragment>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span>/</span>
+      <a href={`${BASE}/hi/learn/`} class="hover:text-slate-200 transition-colors">सीखें</a>
+      <span>/</span>
+      <span class="text-slate-200">{article.titleHi}</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/learn/${slug}/`} class="hover:text-slate-300">English ↗</a>
+      </span>
+    </nav>
+
+    <!-- Article header -->
+    <div class="mb-10">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl bg-navy-800 border border-tp-border flex items-center justify-center text-2xl">{article.icon}</div>
+        <div>
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class={`${levelColors[article.level] ?? levelColors.beginner}`}>
+              {article.level === 'beginner' ? 'शुरुआती' : article.level === 'intermediate' ? 'मध्यम' : 'उन्नत'}
+            </span>
+            <span class="text-xs text-slate-500">·</span>
+            <span class="text-xs text-slate-500">{article.readTime} पढ़ने का समय</span>
+          </div>
+        </div>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-2">{article.titleHi}</h1>
+      <p class="text-base text-slate-400 mb-4">{article.summaryHi}</p>
+      <p class="text-slate-300 leading-relaxed">{article.intro}</p>
+    </div>
+
+    <!-- Language note -->
+    <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-8 text-sm text-slate-400 flex items-center gap-2">
+      <span>🌐</span>
+      <span>विस्तृत तकनीकी सामग्री अंग्रेज़ी में है। पूर्ण अंग्रेज़ी संस्करण के लिए <a href={`${BASE}/en/learn/${slug}/`} class="text-tp-blue hover:underline">यहाँ क्लिक करें</a>।</span>
+    </div>
+
+    <!-- Sections -->
+    <div class="space-y-10">
+      {article.sections.map((section) => (
+        <div>
+          <h2 class="text-xl font-bold text-slate-100 mb-3 pb-2 border-b border-tp-border/60">{section.heading}</h2>
+          <p class="text-slate-300 leading-relaxed mb-4">{section.content}</p>
+
+          {section.keyPoints && section.keyPoints.length > 0 && (
+            <ul class="space-y-2 mb-4">
+              {section.keyPoints.map(point => (
+                <li class="flex items-start gap-2 text-sm text-slate-300">
+                  <span class="text-tp-blue mt-1 shrink-0">▸</span>
+                  <span>{point}</span>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {section.table && (
+            <div class="overflow-x-auto rounded-xl border border-tp-border mb-4">
+              <table class="w-full text-sm">
+                <thead>
+                  <tr class="bg-navy-800/80">
+                    {section.table.headers.map(h => (
+                      <th class="px-4 py-2.5 text-left text-xs font-semibold text-slate-300 uppercase tracking-wide whitespace-nowrap">{h}</th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {section.table.rows.map((row, ri) => (
+                    <tr class={ri % 2 === 0 ? 'bg-navy-800/30' : 'bg-navy-800/10'}>
+                      {row.map(cell => (
+                        <td class="px-4 py-2.5 text-slate-300 align-top">{cell}</td>
+                      ))}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {section.note && (
+            <div class="rounded-lg bg-blue-950/30 border border-blue-800/30 px-4 py-3 text-sm text-blue-200">
+              <span class="font-semibold text-blue-300">नोट: </span>{section.note}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Tags -->
+    {article.tags && article.tags.length > 0 && (
+      <div class="mt-10 pt-6 border-t border-tp-border">
+        <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wide mb-3">टैग</h2>
+        <div class="flex flex-wrap gap-2">
+          {article.tags.map(t => <span class="tp-badge text-xs bg-navy-700/60 text-slate-400 border-slate-600/20">{t}</span>)}
+        </div>
+      </div>
+    )}
+
+    <!-- Back link -->
+    <div class="mt-8 pt-6 border-t border-tp-border">
+      <a href={`${BASE}/hi/learn/`} class="text-sm text-tp-blue hover:underline">← सभी लेख देखें</a>
+    </div>
+  </div>
+</BaseLayout>

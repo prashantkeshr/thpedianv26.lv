@@ -11,6 +11,11 @@ const guides = [
   { slug: 'ssd-vs-hdd', title: 'SSD बनाम HDD तकनीक', level: 'beginner', icon: '💿', readTime: '7 मिनट', summary: 'NAND फ्लैश, वेयर लेवलिंग, NVMe प्रोटोकॉल — SSD क्यों बेहतर है।' },
   { slug: 'wifi-7-explained', title: 'Wi-Fi 7 की व्याख्या', level: 'intermediate', icon: '📶', readTime: '8 मिनट', summary: 'Multi-Link Operation, 320 MHz चैनल, QAM-4096 — Wi-Fi 7 क्या है।' },
   { slug: 'introduction-to-microcontrollers', title: 'माइक्रोकंट्रोलर का परिचय', level: 'beginner', icon: '🔧', readTime: '8 मिनट', summary: 'माइक्रोकंट्रोलर क्या है, कैसे चुनें — GPIO, SPI, I2C पेरिफेरल।' },
+  { slug: 'npu-explained', title: 'NPU क्या है: न्यूरल प्रोसेसिंग यूनिट की व्याख्या', level: 'intermediate', icon: '🧠', readTime: '8 मिनट', summary: 'फोन और लैपटॉप में AI एक्सेलेरेटर कैसे काम करते हैं — ऑन-डिवाइस AI के लिए यह क्यों जरूरी है।' },
+  { slug: 'display-refresh-rates-guide', title: 'डिस्प्ले रिफ्रेश रेट: Hz, VRR और मोशन क्लैरिटी', level: 'beginner', icon: '🖥️', readTime: '7 मिनट', summary: 'रिफ्रेश रेट का मतलब, ज्यादा Hz क्यों जरूरी है, और VRR टियरिंग को कैसे खत्म करता है।' },
+  { slug: 'soc-vs-cpu', title: 'SoC बनाम CPU: क्या अंतर है?', level: 'beginner', icon: '💡', readTime: '6 मिनट', summary: 'SoC और अलग CPU में क्या फर्क है, और मोबाइल डिवाइस SoC क्यों इस्तेमाल करते हैं।' },
+  { slug: 'nfc-explained', title: 'NFC की व्याख्या: कॉन्टैक्टलेस पेमेंट और आगे', level: 'beginner', icon: '📲', readTime: '5 मिनट', summary: 'NFC कैसे काम करता है, इसका सुरक्षा मॉडल, और टैप-टू-पे से परे उपयोग।' },
+  { slug: 'foldable-display-technology', title: 'फोल्डेबल डिस्प्ले तकनीक की व्याख्या', level: 'intermediate', icon: '📱', readTime: '8 मिनट', summary: 'प्लास्टिक OLED पैनल बिना टूटे कैसे मुड़ते हैं, इंजीनियरिंग चुनौतियां और क्रीज क्यों बनी रहती है।' },
 ];
 
 const levelLabels: Record<string, string> = {
@@ -43,14 +48,9 @@ const levelColors: Record<string, string> = {
       <p class="text-slate-400">शुरुआती से उन्नत स्तर तक संरचित गाइड और ट्यूटोरियल</p>
     </div>
 
-    <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-8 text-sm text-slate-400 flex items-center gap-2">
-      <span>🌐</span>
-      <span>लेख अंग्रेज़ी में उपलब्ध हैं। अंग्रेज़ी संस्करण के लिए <a href={`${BASE}/en/learn/`} class="text-tp-blue hover:underline">यहाँ क्लिक करें</a>।</span>
-    </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {guides.map(guide => (
-        <a href={`${BASE}/en/learn/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-tp-blue/50 transition-colors">
+        <a href={`${BASE}/hi/learn/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-tp-blue/50 transition-colors">
           <div class="flex items-start gap-3">
             <div class="w-9 h-9 rounded-lg bg-navy-700 flex items-center justify-center text-xl flex-shrink-0">{guide.icon}</div>
             <div class="min-w-0">

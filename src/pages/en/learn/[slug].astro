@@ -8,6 +8,8 @@ export async function getStaticPaths() {
     'what-is-a-cpu', 'how-does-ram-work', 'gpu-architecture-basics',
     'understanding-transistors', 'ohms-law-and-circuit-basics',
     'ssd-vs-hdd', 'wifi-7-explained', 'introduction-to-microcontrollers',
+    'npu-explained', 'display-refresh-rates-guide', 'soc-vs-cpu',
+    'nfc-explained', 'foldable-display-technology',
   ];
   return slugs.map(slug => ({ params: { slug } }));
 }
@@ -391,6 +393,216 @@ const articles: Record<string, Article> = {
       },
     ],
     tags: ['Microcontrollers', 'GPIO', 'SPI', 'I2C', 'Embedded systems', 'Arduino'],
+  },
+
+  'npu-explained': {
+    title: 'NPU Explained: What is a Neural Processing Unit?',
+    level: 'intermediate',
+    icon: '🧠',
+    readTime: '8 min',
+    summary: 'How dedicated AI accelerators in phones and laptops work — and why they matter for on-device AI.',
+    intro: 'A Neural Processing Unit (NPU) is a dedicated processor designed to accelerate neural network inference. Unlike CPUs and GPUs, which are general-purpose, an NPU is built specifically to perform the matrix multiplications and convolutions at the heart of deep learning — with far better performance-per-watt than either. Modern smartphones, laptops and desktops now include NPUs, enabling on-device AI features like real-time translation, photo enhancement and large language model inference without sending data to the cloud.',
+    sections: [
+      {
+        heading: 'Why Not Just Use a CPU or GPU?',
+        content: 'Neural network inference involves huge numbers of multiply-accumulate (MAC) operations — the same calculation repeated across millions of parameters. CPUs are optimised for serial, branchy code with low latency per operation. GPUs are parallel but designed for rendering and use high-bandwidth GDDR memory that consumes significant power. An NPU is architecturally different: it maximises MAC throughput per milliwatt using a dataflow design where weights and activations are streamed through a grid of MAC units, keeping data movement (the main energy cost) minimal. Apple Neural Engine, Qualcomm Hexagon NPU, and MediaTek APU are all purpose-built this way.',
+        keyPoints: [
+          'TOPS (Tera Operations Per Second) measures peak NPU throughput. Qualcomm Snapdragon 8 Elite: 45 TOPS. Apple A18 Pro: 35 TOPS. Intel Core Ultra 200H: up to 48 TOPS.',
+          'NPUs are designed for inference (running a trained model), not training (adjusting model weights). Training is still done on data-centre GPU clusters.',
+          'An NPU runs common neural network layers (Conv2D, BatchNorm, ReLU, Attention) in custom silicon — far more efficiently than general hardware.',
+        ],
+      },
+      {
+        heading: 'Common On-Device AI Use Cases',
+        content: 'Real-time camera processing — portrait segmentation, night mode HDR fusion, face detection — has used NPUs since 2017 (Apple A11 Bionic was the first phone NPU). Today the use cases have expanded dramatically: speech recognition and real-time translation run entirely on-device on iPhone and Pixel, preserving privacy. Windows 11 Copilot+ requires 40+ TOPS to run Cocreator, Live Captions and Recall locally. Apple Intelligence runs language and image models on-device with M4 / A18 chips, with more demanding queries routed to Private Cloud Compute. Local LLM inference (Llama 3 8B, Phi-3 mini) runs at 20–60 tokens/second on modern phone NPUs.',
+        table: {
+          headers: ['Chip', 'NPU Performance', 'Key AI Features'],
+          rows: [
+            ['Apple A18 Pro', '35 TOPS', 'Apple Intelligence, real-time transcription, image generation'],
+            ['Qualcomm SD 8 Elite', '45 TOPS', 'On-device Gemini Nano, real-time translation, AI camera'],
+            ['Intel Core Ultra 200H', 'Up to 48 TOPS NPU', 'Windows Copilot+, Recall, Live Captions'],
+            ['Google Tensor G4', '~25 TOPS', 'Pixel AI features, on-device transcription, Magic Eraser'],
+          ],
+        },
+      },
+      {
+        heading: 'NPU vs Tensor Cores vs DSP',
+        content: 'Tensor Cores (NVIDIA) are fixed-function matrix multiply units inside the GPU — excellent for large-batch deep learning on a desktop or data centre but power-hungry. A DSP (Digital Signal Processor) is a general-purpose signal processor that can run neural networks in a pinch, but inefficiently compared to a true NPU. Modern mobile SoCs include all three: the CPU for serial AI code, the GPU Tensor Cores for heavy parallel work, and the NPU for sustained, efficient inference at low wattage. Qualcomm Hexagon integrates DSP and NPU capabilities in one block; Apple keeps them separate on the M-series die.',
+        note: 'The Windows 11 Copilot+ 40 TOPS NPU requirement was set to ensure LLM-based features run locally at acceptable speed. Devices below 40 TOPS run some Copilot+ features via cloud fallback instead.',
+      },
+      {
+        heading: 'Privacy and Performance: Why On-Device AI Matters',
+        content: 'Cloud AI inference sends your data to a remote server — introducing latency, requiring an internet connection, and raising privacy concerns. On-device inference with an NPU processes data locally: your voice commands, photos and messages never leave the device. Response latency drops from hundreds of milliseconds (round-trip to a data centre) to tens of milliseconds. Battery impact is drastically lower — a Snapdragon NPU runs inference at under 1 W vs 5–10 W for the same task on the GPU. These properties make NPUs essential for always-on features like wake-word detection and continuous health monitoring.',
+      },
+    ],
+    tags: ['NPU', 'AI acceleration', 'On-device AI', 'Machine learning', 'SoC'],
+  },
+
+  'display-refresh-rates-guide': {
+    title: 'Display Refresh Rates: Hz, VRR and Motion Clarity',
+    level: 'beginner',
+    icon: '🖥️',
+    readTime: '7 min',
+    summary: 'What refresh rate means, why higher Hz matters, and how VRR (FreeSync / G-Sync) eliminates tearing.',
+    intro: 'Refresh rate — measured in Hz — is how many times per second a display updates the image on screen. A 60 Hz display draws 60 new frames every second; a 165 Hz display draws 165. The difference is immediately visible in fast motion: higher refresh rates produce smoother animations, faster gaming response and reduced motion blur. Modern displays range from 60 Hz (basic monitors, entry phones) to 120 Hz (mainstream) and up to 500 Hz (competitive gaming). Variable Refresh Rate (VRR) technologies like AMD FreeSync and NVIDIA G-Sync synchronise the display to the GPU for a tear-free experience.',
+    sections: [
+      {
+        heading: 'Why Refresh Rate Matters',
+        content: 'At 60 Hz, each frame is displayed for 16.7 ms. At 120 Hz, each frame lasts 8.3 ms — half as long, making motion appear twice as smooth. For gaming, the display refresh rate is the ceiling for perceived frame rate: a GPU rendering 200 fps on a 60 Hz monitor still shows only 60 unique frames per second. Beyond smoothness, lower frame time (1/Hz in ms) reduces input lag — the delay between a mouse movement and the resulting update on screen. Competitive FPS players prefer 240–360 Hz monitors specifically to minimise this latency. For everyday desktop use and media, 60 Hz is adequate; 120 Hz is the minimum for a noticeably smooth phone or tablet.',
+        keyPoints: [
+          'Input lag and display latency are different. Input lag is the total delay from input to screen. Display latency (response time) is how fast each pixel transitions colour.',
+          'LCD response time (GtG, grey-to-grey): 1–5 ms for gaming monitors. Slow response causes ghosting — a smear behind fast-moving objects.',
+          'OLED panels have near-instant response time (< 0.1 ms), which is why OLED TVs show less motion blur than LCD at the same Hz.',
+        ],
+      },
+      {
+        heading: 'LTPO and Adaptive Refresh in Phones',
+        content: 'Phone displays using LTPO (Low Temperature Polycrystalline Oxide) backplane technology can dynamically vary their refresh rate from 1 Hz to 120 Hz depending on content. When reading a static page, the display drops to 1–10 Hz, dramatically reducing power consumption. When scrolling or gaming, it jumps back to 120 Hz instantly. This is why flagship phones like iPhone 16 Pro, Samsung Galaxy S25 Ultra and OnePlus 13 can have 120 Hz displays without destroying battery life. Non-LTPO 120 Hz screens consume significantly more power because they cannot step down when the display is static.',
+        table: {
+          headers: ['Refresh Rate', 'Use Case', 'Response Feel'],
+          rows: [
+            ['60 Hz', 'Basic phones, budget laptops', 'Standard, noticeable scroll judder'],
+            ['90 Hz', 'Mid-range phones', 'Noticeably smoother than 60 Hz'],
+            ['120 Hz', 'Flagship phones, mainstream gaming monitors', 'Very smooth for all content'],
+            ['165 Hz', 'Mainstream gaming monitors (QHD)', 'Competitive advantage in fast games'],
+            ['240–360 Hz', 'Competitive gaming monitors', 'Minimal input latency for FPS'],
+            ['500 Hz', 'Ultra-competitive (ROG Swift 500 Hz)', 'Maximum responsiveness'],
+          ],
+        },
+      },
+      {
+        heading: 'Screen Tearing and V-Sync',
+        content: 'Screen tearing occurs when the GPU finishes rendering a frame mid-way through the display refreshing — the top half of the screen shows frame N while the bottom half still shows frame N-1. The result is a horizontal tear line. V-Sync (Vertical Sync) fixes this by locking the GPU to only present frames when the display is ready to refresh. The downside: if the GPU cannot sustain the full refresh rate, V-Sync causes stuttering as it drops to half the refresh rate (from 60 Hz to 30 Hz). It also adds input latency as the GPU must wait for the display.',
+        note: 'Triple buffering with V-Sync reduces V-Sync stutter by allowing the GPU to continue rendering into a third buffer while the previous frame is waiting. It increases VRAM usage slightly but eliminates the frame-rate halving artefact.',
+      },
+      {
+        heading: 'VRR: FreeSync and G-Sync',
+        content: 'Variable Refresh Rate (VRR) solves tearing and V-Sync latency simultaneously. VRR lets the display dynamically adjust its refresh rate to match whatever frame rate the GPU is delivering — if the GPU renders at 73 fps, the display refreshes at exactly 73 Hz that moment. AMD FreeSync (open standard, no licence fee) uses VESA Adaptive-Sync over DisplayPort or HDMI. NVIDIA G-Sync (proprietary, requires a hardware module in the monitor) adds stricter quality certification. G-Sync Compatible is NVIDIA certification for FreeSync monitors that pass their quality tests. Modern HDMI 2.1 brings VRR to TVs, enabling tear-free gaming on PS5 and Xbox Series X.',
+      },
+    ],
+    tags: ['Display', 'Refresh rate', 'VRR', 'FreeSync', 'G-Sync', 'LTPO'],
+  },
+
+  'soc-vs-cpu': {
+    title: 'SoC vs CPU: What is the Difference?',
+    level: 'beginner',
+    icon: '💡',
+    readTime: '6 min',
+    summary: 'How a System on a Chip differs from a discrete CPU, and why mobile devices use SoCs.',
+    intro: 'A CPU (Central Processing Unit) is the core processor in a traditional desktop or laptop — it handles computation and relies on separate chips for graphics, networking and storage. A SoC (System on a Chip) integrates the CPU, GPU, NPU, memory controller, wireless radios, image signal processor and more onto a single die. SoCs dominate smartphones, tablets and embedded devices, while desktops and workstations traditionally used discrete chips. The boundary is blurring — Apple Silicon M-series chips are SoCs running full macOS, and Qualcomm Snapdragon X Elite brings SoC architecture to Windows laptops.',
+    sections: [
+      {
+        heading: 'What Gets Integrated in a SoC',
+        content: 'A flagship mobile SoC like Apple A18 Pro or Qualcomm Snapdragon 8 Elite packs onto a single chip: a multi-core CPU (big/little architecture), a many-core GPU, an NPU for AI inference, an ISP (Image Signal Processor) for camera processing, a DSP for audio and sensor work, a memory controller and the LPDDR RAM (in Apple and some Qualcomm designs, the RAM is a separate package directly stacked on the SoC — called SiP, System in Package), a 5G modem, Wi-Fi 7 and Bluetooth radios, a secure enclave for encryption and Touch/Face ID, and hardware video encode/decode blocks. This integration is why smartphones can be thin, cool and have multi-day battery life — data moves between blocks via on-chip buses at tiny energy cost, without crossing PCB traces.',
+        keyPoints: [
+          'On-chip buses carry data between CPU, GPU and NPU without latency or power overhead of discrete chip-to-chip communication.',
+          'Unified memory (Apple Silicon) means CPU and GPU share the same physical memory pool — no discrete VRAM to maintain or copy to.',
+          'Smaller manufacturing nodes (3nm, 2nm) are economically justified on SoCs because all blocks benefit from the same die shrink simultaneously.',
+        ],
+      },
+      {
+        heading: 'Discrete CPU Architecture',
+        content: 'A discrete CPU (Intel Core Ultra 200H, AMD Ryzen 9 9950X) is paired with a separate GPU, separate RAM DIMMs, a separate Wi-Fi module and a separate SSD controller. Each interface crossing (CPU to GPU PCIe link, CPU to RAM bus) consumes power and adds latency. This modularity allows independent upgrades: swap the GPU, upgrade the RAM. Desktop CPUs are physically larger (can hold bigger caches, more cores), run at higher clock speeds with active cooling, and are designed for sustained full-load performance, not sipping milliwatts while idle. The trade-off is higher power consumption and larger physical size.',
+        table: {
+          headers: ['Property', 'SoC', 'Discrete CPU + GPU'],
+          rows: [
+            ['Integration', 'CPU + GPU + NPU + modem + ISP on one die', 'CPU chip; GPU, RAM, modem are separate'],
+            ['Memory', 'On-package or unified pool', 'User-upgradeable DIMM slots'],
+            ['Power', '5–45 W (mobile SoC)', '65–280 W (desktop CPU + GPU)'],
+            ['Upgradeability', 'Soldered; not user-replaceable', 'GPU, RAM, storage swappable'],
+            ['Examples', 'Apple M4, Snapdragon 8 Elite, A18', 'Intel Core Ultra 9 285K, Ryzen 9 9950X'],
+          ],
+        },
+      },
+      {
+        heading: 'Apple Silicon: SoC in a Laptop',
+        content: 'Apple M-series chips prove that SoC architecture is not limited to phones. The M4 Max integrates a 14-core CPU, 32-core GPU, 38 TOPS NPU, media engine, 128 GB unified memory controller, Thunderbolt 5, and display controller on one chip. By using unified memory — CPU, GPU and Neural Engine all access the same 400 GB/s memory pool — Apple avoids the VRAM bottleneck that limits AI inference on discrete-GPU laptops. The MacBook Pro M4 Max delivers workstation-class performance at 30–40 W while running completely silently. This is only possible because every block is co-designed on the same 3nm die.',
+        note: 'Qualcomm Snapdragon X Elite (Oryon CPU, Adreno GPU, Hexagon NPU, 45 TOPS) brings similar SoC integration to Windows. Early 2024 Copilot+ PCs showed competitive multi-threaded performance with 20+ hour battery life — a direct result of the SoC architecture Apple pioneered.',
+      },
+    ],
+    tags: ['SoC', 'CPU', 'Apple Silicon', 'Snapdragon', 'Mobile', 'Architecture'],
+  },
+
+  'nfc-explained': {
+    title: 'NFC Explained: Contactless Payments and Beyond',
+    level: 'beginner',
+    icon: '📲',
+    readTime: '5 min',
+    summary: 'How Near Field Communication works, its security model, and use cases beyond tap-to-pay.',
+    intro: 'NFC (Near Field Communication) is a short-range wireless technology that enables two devices to exchange data when held within about 4 cm of each other. It operates at 13.56 MHz and derives from RFID. You likely use NFC every day — tapping your phone to pay at a card terminal, unlocking a hotel door or sharing a contact. NFC is now in virtually every flagship and mid-range smartphone, credit card, transit card and access badge.',
+    sections: [
+      {
+        heading: 'How NFC Works',
+        content: 'NFC operates at 13.56 MHz using inductive coupling. One device (the initiator, e.g., the POS terminal) generates an alternating magnetic field. The other device (the target, e.g., the phone or card) has an antenna coil that picks up this field, converts it to electricity, powers the NFC chip, and responds by modulating the magnetic field back — a technique called load modulation. Passive NFC tags (in stickers, posters, packaging) have no battery; they harvest power entirely from the reader field. Active devices (phones, readers) have their own power source. Data transfer rates are modest — 106, 212 or 424 kbps — but sufficient for the small payloads NFC carries (cryptographic tokens, URLs, contact records).',
+        keyPoints: [
+          'Range: 4 cm maximum in practice (20 cm theoretical). This extreme closeness is a security feature — eavesdropping at distance is very difficult.',
+          'NFC Forum defines three modes: Reader/Writer (phone reads a tag), Peer-to-Peer (two devices exchange data), and Card Emulation (phone behaves as a contactless card).',
+          'Card Emulation mode is what enables Apple Pay, Google Pay and Samsung Pay — the phone impersonates a contactless bank card.',
+        ],
+      },
+      {
+        heading: 'Contactless Payments: Security Architecture',
+        content: 'When you pay with Apple Pay or Google Pay, the NFC chip uses Card Emulation mode. A unique Device Account Number (DAN) — not your real card number — is stored in the phone Secure Element (a tamper-resistant hardware chip). Each transaction generates a one-time cryptographic token (a dynamic CVV). Even if the token is intercepted, it cannot be reused. The POS terminal never sees your real card number. This is more secure than a physical card, which transmits your real card number and static CVV. Apple Pay additionally requires Face ID or Touch ID before the Secure Element is unlocked — adding a biometric layer a physical card lacks.',
+        table: {
+          headers: ['Method', 'Data Sent', 'Replayable?', 'Requires auth?'],
+          rows: [
+            ['Physical card tap', 'Real card number + static CVV', 'Potentially yes', 'No'],
+            ['Apple Pay / Google Pay', 'Token + dynamic cryptogram (DAN)', 'No (one-time use)', 'Yes (biometric)'],
+            ['Stored-value transit card', 'Encrypted balance + trip record', 'No (server-verified)', 'No'],
+          ],
+        },
+      },
+      {
+        heading: 'NFC Use Cases Beyond Payments',
+        content: 'Smart home and access control: NFC door locks (AirBnB properties, hotel rooms, offices) use encrypted tags or phone card emulation for keyless entry. Android Beam / Quick Share: tap two Android phones together to initiate Bluetooth or Wi-Fi Direct file transfer. Product authentication: luxury goods, pharmaceuticals and electronics embed NFC tags that link to manufacturer verification servers — a tap reveals provenance. Transit systems: London Oyster, Tokyo Suica, Hong Kong Octopus and many others use NFC contactless cards. Automation tags: an NFC sticker on your nightstand can trigger a phone automation (enable Do Not Disturb, dim lights) when tapped. Bluetooth pairing: newer headphones (Sony, Samsung Galaxy Buds) initiate pairing with a tap via NFC.',
+        note: 'Ultra-Wideband (UWB, found in iPhone 15+, Samsung S24+ and newer vehicles) is a complementary technology to NFC that provides centimeter-accurate spatial positioning. UWB enables Precision Finding in AirTag, hands-free digital car keys and secure asset tracking — use cases where NFC 4 cm range is too short.',
+      },
+    ],
+    tags: ['NFC', 'Contactless payment', 'Apple Pay', 'RFID', 'Wireless', 'Security'],
+  },
+
+  'foldable-display-technology': {
+    title: 'Foldable Display Technology Explained',
+    level: 'intermediate',
+    icon: '📱',
+    readTime: '8 min',
+    summary: 'How plastic OLED panels fold without cracking, the engineering challenges and why creases persist.',
+    intro: 'Foldable smartphones replace rigid glass with flexible plastic OLED panels (pOLED) that can bend to a radius as small as 2.5 mm — hundreds of times. The technology enables devices that unfold to tablet size but pocket as a phone. Samsung Galaxy Z Fold 6, Motorola Razr 50 Ultra and Google Pixel 9 Pro Fold all use this approach. Building a display that can fold over 200,000 times in its lifetime while remaining bright, colour-accurate and waterproof required re-engineering every layer of the display stack.',
+    sections: [
+      {
+        heading: 'From Glass to Plastic OLED',
+        content: 'Standard OLED panels use a rigid glass substrate and are protected by Corning Gorilla Glass. Foldable panels replace both with flexible materials: the OLED layers are deposited on ultra-thin polyimide film (PI) instead of glass. Polyimide can bend without cracking. The protective cover layer — traditionally rigid glass — is replaced by ultra-thin glass (UTG, Under 100 µm) or CPI (Colorless Polyimide Film). Samsung developed UTG in-house (marketed as Samsung Ultra Thin Glass) — it is about 30 µm thick, flexible enough to fold, but significantly harder and more scratch-resistant than CPI. The polariser layer is also thinned or removed in many foldable designs to reduce stack rigidity.',
+        keyPoints: [
+          'Touch sensors in foldable displays use metal mesh conductors rather than ITO (Indium Tin Oxide) glass — metal mesh flexes without cracking.',
+          'The hinge mechanism must distribute fold stress across a wider radius to prevent panel failure — most use a water-drop hinge that creates a teardrop shape at the crease.',
+          'OLED organic layers are sensitive to oxygen and moisture — foldable panels use multi-layer thin-film encapsulation instead of glass sealing.',
+        ],
+      },
+      {
+        heading: 'The Crease Problem',
+        content: 'All current foldable displays have a visible crease at the fold point — a slight indentation where the cover layer deformed over thousands of fold cycles. Under direct light or at an angle it is noticeable. Manufacturers have reduced it considerably: the Samsung Galaxy Z Fold 6 crease is shallower than Z Fold 2, partly through improved hinge geometry and stiffer UTG. Oppo and Huawei claim their 2024 devices have near-invisible creases in their marketing, but independent reviews confirm the crease remains visible. Eliminating it entirely requires either a stiffer material that cannot fold without cracking, or a wider-radius hinge that makes the folded device thicker. No manufacturer has solved this fully.',
+        table: {
+          headers: ['Factor', 'Book-fold (Z Fold style)', 'Clamshell (Z Flip style)'],
+          rows: [
+            ['Crease location', 'Centre of inner screen', 'Centre of outer screen (usually bottom)'],
+            ['Main screen size', '7.0–8.0 inches unfolded', '6.6–6.9 inches unfolded'],
+            ['Pocket size', 'Shorter and wider when folded', 'Compact — half the unfolded height'],
+            ['One-hand use', 'Difficult unfolded (100mm+ width)', 'Good when folded'],
+            ['Price tier', 'Premium ($1,500–$1,900)', 'Mainstream premium ($900–$1,200)'],
+          ],
+        },
+      },
+      {
+        heading: 'Durability and Waterproofing',
+        content: 'Early foldables (2019–2020) were not water resistant and failed durability tests embarrassingly. Modern foldables have addressed this significantly: Samsung Galaxy Z Fold 6 and Z Flip 6 carry IPX8 ratings — submersible to 1.5 m for 30 minutes. The hinge design now uses internal brushes and gaskets to keep water and dust out of the mechanism, though IP ratings for foldables exclude particulate resistance (hence X in IPX8 rather than a dust rating). UTG is significantly harder than CPI, scoring about 7H on the Mohs pencil hardness scale vs 2–3H for plastic. Galaxy Z Fold 6 UTG survived over 200,000 fold cycles in Samsung endurance testing.',
+        note: 'Stylus support on foldables is limited: Samsung offers the S Pen Fold Edition with a retracted tip that reduces contact pressure on the folding screen. Standard S Pen pens with a standard tip can damage the plastic/UTG surface. The inner display surface is always softer than rigid-glass phones and scratches more easily — screen protectors ship from the factory.',
+      },
+      {
+        heading: 'Next-Generation Foldables',
+        content: 'The next frontier is tri-fold displays — a device that folds twice to create three panels. Huawei Mate XT Ultimate pioneered this in 2024 (with a large 10.2-inch display that folds to phone size). Glass-plastic composite cover layers (combining UTG stiffness with better flexibility) may reduce crease depth further. Under-screen cameras on the inner display are improving — Samsung Z Fold 6 uses a third-generation under-display camera that is less visible but still lower quality than the cover screen camera. Rollable displays — which extend via a motor rather than folding — are in prototype stage at several manufacturers and would eliminate the crease entirely.',
+      },
+    ],
+    tags: ['Foldable', 'OLED', 'Display', 'Samsung Galaxy Z Fold', 'pOLED', 'UTG'],
   },
 };
 

@@ -71,6 +71,41 @@ function isDifferent(values: CompareSpec['values']): boolean {
   return new Set(nonNull.map(String)).size > 1;
 }
 
+// Extract the leading numeric value from a spec string (e.g. "6000 mAh" → 6000, "120 Hz" → 120)
+function extractNumber(v: string): number | null {
+  const m = v.match(/^[\s]*([0-9]+(?:[.,][0-9]+)?)/);
+  if (!m) return null;
+  return parseFloat(m[1].replace(',', '.'));
+}
+
+// Keys where LOWER is better (lower number = winner)
+const LOWER_IS_BETTER = new Set([
+  'weight', 'thickness', 'depth', 'responseTime', 'inputLag', 'tdp', 'powerConsumption',
+]);
+
+function getWinnerIndex(key: string, values: CompareSpec['values']): number {
+  const nums = values.map(v => (v !== null && v !== undefined && v !== '' ? extractNumber(String(v)) : null));
+  const hasNums = nums.some(n => n !== null);
+  if (!hasNums) return -1;
+
+  const keyLeaf = key.split('.').pop() ?? key;
+  const lowerBetter = LOWER_IS_BETTER.has(keyLeaf);
+
+  let best: number | null = null;
+  let bestIdx = -1;
+  for (let i = 0; i < nums.length; i++) {
+    const n = nums[i];
+    if (n === null) continue;
+    if (best === null || (lowerBetter ? n < best : n > best)) {
+      best = n;
+      bestIdx = i;
+    }
+  }
+  // Only declare a winner if strictly best (not tied)
+  const winners = nums.filter(n => n !== null && n === best);
+  return winners.length === 1 ? bestIdx : -1;
+}
+
 interface ComparisonEngineProps {
   items: AnyItem[];
   lang?: string;
@@ -152,28 +187,38 @@ export default function ComparisonEngine({ items, lang = 'en' }: ComparisonEngin
           {/* Spec rows */}
           {groupSpecs.map((spec, si) => {
             const diff = isDifferent(spec.values);
+            const winnerIdx = diff ? getWinnerIndex(spec.key, spec.values) : -1;
             return (
               <div
                 key={spec.key}
                 className={`grid gap-px ${diff ? 'bg-amber-500/5' : ''}`}
                 style={{ gridTemplateColumns: `220px repeat(${items.length}, 1fr)` }}
               >
-                <div className={`px-3 py-2 bg-navy-800/40 flex items-center border-b border-tp-border/30 ${si % 2 === 0 ? 'bg-navy-800/40' : 'bg-navy-900/40'}`}>
+                <div className={`px-3 py-2 flex items-center border-b border-tp-border/30 ${si % 2 === 0 ? 'bg-navy-800/40' : 'bg-navy-900/40'}`}>
                   <span className="text-xs text-slate-400 font-medium">{spec.label}</span>
                   {diff && (
                     <span className="ml-2 text-amber-400 text-xs" title="Values differ">●</span>
                   )}
                 </div>
-                {spec.values.map((v, vi) => (
-                  <div
-                    key={vi}
-                    className={`px-3 py-2 text-center border-b border-tp-border/30 ${si % 2 === 0 ? 'bg-navy-800/20' : 'bg-navy-900/20'}`}
-                  >
-                    <span className={`text-xs ${v !== null && v !== undefined && v !== '' ? 'text-slate-100' : 'text-slate-600 italic'}`}>
-                      {v !== null && v !== undefined && v !== '' ? String(v) : '—'}
-                    </span>
-                  </div>
-                ))}
+                {spec.values.map((v, vi) => {
+                  const isWinner = winnerIdx === vi;
+                  const isLoser = diff && winnerIdx !== -1 && vi !== winnerIdx && v !== null && v !== undefined && v !== '';
+                  return (
+                    <div
+                      key={vi}
+                      className={`px-3 py-2 text-center border-b border-tp-border/30 relative
+                        ${isWinner ? 'bg-emerald-500/10 ring-1 ring-inset ring-emerald-500/30' : si % 2 === 0 ? 'bg-navy-800/20' : 'bg-navy-900/20'}`}
+                    >
+                      {isWinner && (
+                        <span className="absolute top-1 right-1 text-emerald-400 text-[9px] font-bold leading-none">▲</span>
+                      )}
+                      <span className={`text-xs font-${isWinner ? 'semibold' : 'normal'}
+                        ${isWinner ? 'text-emerald-300' : isLoser ? 'text-slate-500' : v !== null && v !== undefined && v !== '' ? 'text-slate-100' : 'text-slate-600 italic'}`}>
+                        {v !== null && v !== undefined && v !== '' ? String(v) : '—'}
+                      </span>
+                    </div>
+                  );
+                })}
               </div>
             );
           })}

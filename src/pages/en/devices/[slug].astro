@@ -4,6 +4,7 @@ import { getAllDevices, getDeviceBySlug, getRelatedDevices } from '../../../serv
 import { getBrandById } from '../../../services/brandService';
 import DeviceCard from '../../../components/cards/DeviceCard';
 import DeviceAutoImage from '../../../components/DeviceAutoImage';
+import ExpertScoreCard from '../../../components/device/ExpertScoreCard';
 import type { Device } from '../../../types';
 
 export async function getStaticPaths() {
@@ -292,6 +293,13 @@ const schema = {
                 </span>
               ))}
             </div>
+          </div>
+        )}
+
+        <!-- Expert verdict -->
+        {(device.expertScore != null || (device.proscons && device.proscons.length > 0)) && (
+          <div class="mb-8">
+            <ExpertScoreCard device={device} lang="en" client:visible />
           </div>
         )}
 

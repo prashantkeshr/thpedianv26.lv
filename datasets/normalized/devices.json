@@ -170,7 +170,42 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
     "updatedAt": "2026-11-01",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "expertScore": 94,
+    "proscons": [
+      {
+        "text": "Best single-core CPU on any smartphone",
+        "type": "pro"
+      },
+      {
+        "text": "Apple Intelligence AI with on-device privacy",
+        "type": "pro"
+      },
+      {
+        "text": "Camera Control hardware button - fast and versatile",
+        "type": "pro"
+      },
+      {
+        "text": "A18 Pro GPU leads mobile gaming",
+        "type": "pro"
+      },
+      {
+        "text": "7 years OS and security updates",
+        "type": "pro"
+      },
+      {
+        "text": "No USB4 on the USB 3 port",
+        "type": "con"
+      },
+      {
+        "text": "45 W charging is slower than Android rivals",
+        "type": "con"
+      },
+      {
+        "text": "No base storage increase from previous gen",
+        "type": "con"
+      }
+    ]
   },
   {
     "id": "dev-000002",
@@ -342,7 +377,38 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
     "updatedAt": "2026-11-01",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "expertScore": 92,
+    "proscons": [
+      {
+        "text": "Best-in-class 200 MP camera with 5x periscope zoom",
+        "type": "pro"
+      },
+      {
+        "text": "Built-in S Pen with Bluetooth is irreplaceable",
+        "type": "pro"
+      },
+      {
+        "text": "7 years OS and security updates guaranteed",
+        "type": "pro"
+      },
+      {
+        "text": "Snapdragon 8 Elite top-tier AI and gaming",
+        "type": "pro"
+      },
+      {
+        "text": "Wi-Fi 7 and USB 3.2 Gen 2",
+        "type": "pro"
+      },
+      {
+        "text": "45 W charging slow vs. rivals offering 100 W+",
+        "type": "con"
+      },
+      {
+        "text": "218 g weight is heavier than similarly-sized phones",
+        "type": "con"
+      }
+    ]
   },
   {
     "id": "dev-000003",
@@ -481,7 +547,42 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
     "updatedAt": "2026-11-01",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "expertScore": 90,
+    "proscons": [
+      {
+        "text": "Best computational photography on Android",
+        "type": "pro"
+      },
+      {
+        "text": "7 years OS and security updates",
+        "type": "pro"
+      },
+      {
+        "text": "On-device Gemini AI features are genuinely useful",
+        "type": "pro"
+      },
+      {
+        "text": "Emergency SOS via satellite",
+        "type": "pro"
+      },
+      {
+        "text": "23 W wireless + 12 W reverse charging",
+        "type": "pro"
+      },
+      {
+        "text": "Tensor G4 runs warm vs. Snapdragon 8 Elite",
+        "type": "con"
+      },
+      {
+        "text": "37 W wired charging is below 2024 average",
+        "type": "con"
+      },
+      {
+        "text": "Limited global availability",
+        "type": "con"
+      }
+    ]
   },
   {
     "id": "dev-000004",
@@ -2562,6 +2663,1993 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000024",
+    "slug": "apple-ipad-pro-13-m4",
+    "name": "Apple iPad Pro 13\" (M4)",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "tablet",
+    "status": "available",
+    "announcedAt": "2024-05-07",
+    "releasedAt": "2024-05-15",
+    "description": "The iPad Pro 13\" M4 is the thinnest Apple product ever at 5.1 mm, featuring a tandem OLED Ultra Retina XDR display, the M4 chip with hardware ray tracing and Apple Pencil Pro support.",
+    "images": [],
+    "specs": {
+      "processor": {
+        "name": "Apple M4",
+        "manufacturer": "Apple",
+        "architecture": "3nm TSMC (N3E)",
+        "cores": "10-core CPU (4P+6E)",
+        "gpu": "10-core GPU",
+        "npu": "16-core Neural Engine (38 TOPS)"
+      },
+      "display": {
+        "size": "13 inches",
+        "resolution": "2752 × 2064 pixels (264 PPI)",
+        "technology": "Tandem OLED (Ultra Retina XDR)",
+        "refreshRate": "10–120 Hz (ProMotion)",
+        "brightness": "1600 nits (HDR peak)",
+        "colorGamut": "P3 wide color, True Tone",
+        "touchscreen": true
+      },
+      "memory": {
+        "ram": "8 GB / 16 GB",
+        "ramType": "LPDDR5X unified memory",
+        "storage": "256 GB / 512 GB / 1 TB / 2 TB",
+        "storageType": "Apple custom NVMe",
+        "expandable": false
+      },
+      "battery": {
+        "capacity": "40.88 Wh",
+        "life": "Up to 10 hours web browsing",
+        "chargingSpeed": "Up to 45 W (USB-C)"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 6E (802.11ax)",
+        "bluetooth": "Bluetooth 5.3",
+        "usb": "USB4 (40 Gbps, Thunderbolt 3 compatible)",
+        "cellular": "Optional 5G (mmWave + sub-6)"
+      },
+      "accessories": {
+        "magicKeyboard": "Apple Magic Keyboard for iPad Pro 13\" (M4)",
+        "pencil": "Apple Pencil Pro (find my + squeeze gesture)"
+      },
+      "cameras": {
+        "rear": "12 MP wide, f/1.8",
+        "front": "12 MP landscape TrueDepth (Center Stage)"
+      },
+      "physical": {
+        "dimensions": "281.6 × 215.5 × 5.1 mm",
+        "weight": "582 g (Wi-Fi) / 597 g (cellular)",
+        "build": "Space Black or Silver aluminium",
+        "ipRating": "none"
+      },
+      "os": "iPadOS 17 (upgradeable to iPadOS 18)"
+    },
+    "keyFeatures": [
+      "5.1 mm ultra-thin design",
+      "Tandem OLED Ultra Retina XDR 120 Hz",
+      "M4 chip (10-core CPU, 10-core GPU)",
+      "USB4 (Thunderbolt 3) port",
+      "Apple Pencil Pro support",
+      "Magic Keyboard with trackpad"
+    ],
+    "variants": [
+      {
+        "id": "ipadprom4-13-256-wf",
+        "name": "13\" 256 GB Wi-Fi"
+      },
+      {
+        "id": "ipadprom4-13-512-wf",
+        "name": "13\" 512 GB Wi-Fi"
+      },
+      {
+        "id": "ipadprom4-13-1tb-wf",
+        "name": "13\" 1 TB Wi-Fi"
+      },
+      {
+        "id": "ipadprom4-13-2tb-wf",
+        "name": "13\" 2 TB Wi-Fi"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Apple",
+        "label": "Apple Store",
+        "url": "https://www.apple.com/shop/buy-ipad/ipad-pro",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=iPad+Pro+13+M4",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "apple",
+      "ipad",
+      "pro",
+      "m4",
+      "tablet",
+      "oled"
+    ],
+    "sources": [
+      {
+        "provider": "Apple official",
+        "url": "https://www.apple.com/ipad-pro/specs/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1,
+    "expertScore": 93,
+    "proscons": [
+      {
+        "text": "Thinnest premium device Apple has ever built (5.1 mm)",
+        "type": "pro"
+      },
+      {
+        "text": "Tandem OLED is the best tablet display available",
+        "type": "pro"
+      },
+      {
+        "text": "M4 chip outperforms most laptop CPUs",
+        "type": "pro"
+      },
+      {
+        "text": "USB4 at Thunderbolt 3 speeds",
+        "type": "pro"
+      },
+      {
+        "text": "Apple Pencil Pro with hover and find my",
+        "type": "pro"
+      },
+      {
+        "text": "No headphone jack",
+        "type": "con"
+      },
+      {
+        "text": "Magic Keyboard and Pencil sold separately at premium prices",
+        "type": "con"
+      },
+      {
+        "text": "iPadOS still cannot fully replace a laptop",
+        "type": "con"
+      }
+    ]
+  },
+  {
+    "id": "dev-000025",
+    "slug": "xiaomi-15-pro",
+    "name": "Xiaomi 15 Pro",
+    "brand": "brd-000012",
+    "brandName": "Xiaomi",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-10-29",
+    "releasedAt": "2024-11-01",
+    "description": "Xiaomi's 2024 global flagship powered by Snapdragon 8 Elite with Leica Light Hunter 900 cameras, 6100 mAh battery and 90 W HyperCharge — a true challenger at every spec point.",
+    "images": [],
+    "specs": {
+      "processor": {
+        "name": "Snapdragon 8 Elite (SM8750-AB)",
+        "manufacturer": "Qualcomm",
+        "architecture": "3nm TSMC (N3E)",
+        "cores": "8 cores (2×4.47 GHz Oryon + 6×3.53 GHz Oryon)",
+        "clockSpeed": "Up to 4.47 GHz"
+      },
+      "display": {
+        "size": "6.73 inches",
+        "resolution": "3200 × 1440 pixels (2K+, LTPO)",
+        "technology": "LTPO AMOLED",
+        "refreshRate": "1–120 Hz",
+        "brightness": "3200 nits (peak)",
+        "colorGamut": "DCI-P3",
+        "touchscreen": true
+      },
+      "memory": {
+        "ram": "12 GB / 16 GB",
+        "ramType": "LPDDR5T",
+        "storage": "256 GB / 512 GB / 1 TB",
+        "storageType": "UFS 4.0",
+        "expandable": false
+      },
+      "camera": {
+        "main": "50 MP Leica Light Hunter 900, f/1.42, OIS, 1\" sensor",
+        "telephoto": "50 MP Leica, f/2.5, 5× optical zoom, OIS (periscope)",
+        "ultrawide": "50 MP Leica, f/2.2, 115°",
+        "front": "32 MP, f/2.0",
+        "video": "8K@24fps, 4K@120fps"
+      },
+      "battery": {
+        "capacity": "6100 mAh",
+        "wiredCharging": "90 W HyperCharge",
+        "wirelessCharging": "50 W wireless",
+        "reverseCharging": "10 W"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.4",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C)",
+        "cellular": "5G sub-6"
+      },
+      "physical": {
+        "dimensions": "162.6 × 75.8 × 8.3 mm",
+        "weight": "229 g",
+        "build": "Ceramic or leather back, aluminium frame",
+        "ipRating": "IP68",
+        "colors": "Black, White, Sky Blue"
+      },
+      "os": "Android 15, HyperOS 2",
+      "features": {
+        "leica": "Leica Authentic / Vibrant colour profiles",
+        "aiFeatures": "Xiaomi AI Assistant, AI Portrait, AI Erase"
+      }
+    },
+    "keyFeatures": [
+      "50 MP Leica 1\" Light Hunter 900 main sensor",
+      "6100 mAh + 90 W HyperCharge",
+      "Triple 50 MP Leica cameras with 5× periscope",
+      "2K+ LTPO AMOLED 120 Hz",
+      "Wi-Fi 7",
+      "8K video recording"
+    ],
+    "variants": [
+      {
+        "id": "mi15p-12-256",
+        "name": "12 GB / 256 GB"
+      },
+      {
+        "id": "mi15p-16-512",
+        "name": "16 GB / 512 GB"
+      },
+      {
+        "id": "mi15p-16-1tb",
+        "name": "16 GB / 1 TB"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Xiaomi",
+        "label": "Xiaomi Global Store",
+        "url": "https://www.mi.com/global/product/xiaomi-15-pro",
+        "country": "Global",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Xiaomi+15+Pro",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "xiaomi",
+      "15",
+      "pro",
+      "leica",
+      "flagship",
+      "android"
+    ],
+    "sources": [
+      {
+        "provider": "Xiaomi official",
+        "url": "https://www.mi.com/global/product/xiaomi-15-pro",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1,
+    "expertScore": 88,
+    "proscons": [
+      {
+        "text": "1-inch Leica Light Hunter 900 sensor excels in low light",
+        "type": "pro"
+      },
+      {
+        "text": "6100 mAh + 90 W charging is best-in-class endurance",
+        "type": "pro"
+      },
+      {
+        "text": "Triple 50 MP Leica cameras consistent across focal lengths",
+        "type": "pro"
+      },
+      {
+        "text": "2K+ LTPO 3200 nits peak display",
+        "type": "pro"
+      },
+      {
+        "text": "Wi-Fi 7 and UFS 4.0",
+        "type": "pro"
+      },
+      {
+        "text": "HyperOS ships with more bloatware than OxygenOS",
+        "type": "con"
+      },
+      {
+        "text": "Heavy at 229 g vs. competitors",
+        "type": "con"
+      },
+      {
+        "text": "Global updates and availability lag behind Samsung/Apple",
+        "type": "con"
+      }
+    ]
+  },
+  {
+    "id": "dev-000026",
+    "slug": "asus-rog-phone-8-pro",
+    "name": "ASUS ROG Phone 8 Pro",
+    "brand": "brd-000010",
+    "brandName": "ASUS",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-01-08",
+    "releasedAt": "2024-02-01",
+    "description": "The ROG Phone 8 Pro brings Snapdragon 8 Gen 3, a 165 Hz AMOLED display, Sony LYT-900 50 MP camera and AeroActive Cooler compatibility to competitive mobile gaming — in a sleeker everyday-carry design.",
+    "images": [],
+    "specs": {
+      "processor": {
+        "name": "Snapdragon 8 Gen 3 (SM8650-AB)",
+        "manufacturer": "Qualcomm / TSMC",
+        "architecture": "4nm TSMC (N4P)",
+        "cores": "8 cores (1×3.3 GHz Cortex-X4 + 3×3.15 GHz A720 + 2×2.96 GHz A720 + 2×2.27 GHz A520)",
+        "clockSpeed": "Up to 3.3 GHz"
+      },
+      "display": {
+        "size": "6.78 inches",
+        "resolution": "2400 × 1080 pixels (FHD+)",
+        "technology": "AMOLED",
+        "refreshRate": "165 Hz",
+        "brightness": "2500 nits (peak)",
+        "colorGamut": "DCI-P3",
+        "touchscreen": true,
+        "samplingRate": "720 Hz touch sampling"
+      },
+      "memory": {
+        "ram": "16 GB / 24 GB",
+        "ramType": "LPDDR5X",
+        "storage": "512 GB / 1 TB",
+        "storageType": "UFS 4.0",
+        "expandable": false
+      },
+      "camera": {
+        "main": "50 MP Sony LYT-900, f/1.9, OIS, 1\" type sensor",
+        "telephoto": "32 MP, f/2.4, 3× optical zoom",
+        "ultrawide": "13 MP, f/2.2, 120°",
+        "front": "32 MP, f/2.0",
+        "video": "4K@60fps, HDR10+"
+      },
+      "battery": {
+        "capacity": "5500 mAh",
+        "wiredCharging": "65 W",
+        "wirelessCharging": "15 W (Qi)",
+        "reverseCharging": "No"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.4",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C) × 2 (bottom + side port)",
+        "cellular": "5G sub-6 + mmWave"
+      },
+      "physical": {
+        "dimensions": "173.0 × 77.0 × 8.9 mm",
+        "weight": "225 g",
+        "build": "Aluminium frame, glass back with RGB rear display",
+        "ipRating": "IP68",
+        "colors": "Phantom Black, Storm White"
+      },
+      "os": "Android 14, ROG UI / ZenUI 11",
+      "features": {
+        "aeroActiveCooler": "AeroActive Cooler 8 (accessory)",
+        "airTriggers": "Ultrasonic AirTrigger 6 shoulder buttons",
+        "rearDisplay": "2.0\" ROG Vision rear OLED display"
+      }
+    },
+    "keyFeatures": [
+      "165 Hz AMOLED + 720 Hz touch sampling",
+      "50 MP Sony LYT-900 1\" sensor",
+      "Side USB-C port for landscape charging",
+      "AeroActive Cooler 8 compatible",
+      "2\" ROG Vision rear display",
+      "Ultrasonic AirTrigger 6 shoulder buttons"
+    ],
+    "variants": [
+      {
+        "id": "rogp8p-16-512",
+        "name": "16 GB / 512 GB"
+      },
+      {
+        "id": "rogp8p-24-1tb",
+        "name": "24 GB / 1 TB"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "ASUS",
+        "label": "ASUS ROG Store",
+        "url": "https://rog.asus.com/phones/rog-phone-8-pro/",
+        "country": "Global",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=ASUS+ROG+Phone+8+Pro",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "asus",
+      "rog",
+      "phone",
+      "gaming",
+      "android",
+      "flagship"
+    ],
+    "sources": [
+      {
+        "provider": "ASUS ROG official",
+        "url": "https://rog.asus.com/phones/rog-phone-8-pro/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1,
+    "expertScore": 86,
+    "proscons": [
+      {
+        "text": "165 Hz AMOLED + 720 Hz touch: class-leading for gaming",
+        "type": "pro"
+      },
+      {
+        "text": "Side USB-C port enables landscape gaming while charging",
+        "type": "pro"
+      },
+      {
+        "text": "AeroActive Cooler 8 eliminates thermal throttling",
+        "type": "pro"
+      },
+      {
+        "text": "50 MP Sony LYT-900 1-inch sensor unmatched for gaming phones",
+        "type": "pro"
+      },
+      {
+        "text": "5500 mAh large battery for marathon sessions",
+        "type": "pro"
+      },
+      {
+        "text": "FHD+ resolution feels low on a 2024 flagship",
+        "type": "con"
+      },
+      {
+        "text": "173 mm length is bulky as a daily driver",
+        "type": "con"
+      },
+      {
+        "text": "Niche appeal beyond core mobile gamers",
+        "type": "con"
+      }
+    ]
+  },
+  {
+    "id": "dev-000027",
+    "slug": "sony-xperia-1-vi",
+    "name": "Sony Xperia 1 VI",
+    "brand": "brd-000015",
+    "brandName": "Sony",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-05-15",
+    "releasedAt": "2024-07-25",
+    "description": "Sony's 2024 flagship Xperia 1 VI breaks from the 21:9 aspect ratio with a 6.5\" LTPO OLED display, variable-zoom Zeiss telephoto, 3.5 mm headphone jack and class-leading audio credentials.",
+    "images": [],
+    "specs": {
+      "processor": {
+        "name": "Snapdragon 8 Gen 3 (SM8650-AB)",
+        "manufacturer": "Qualcomm / TSMC",
+        "architecture": "4nm TSMC (N4P)",
+        "cores": "8 cores (1×3.3 GHz Cortex-X4 + 7× Cortex-A series)",
+        "clockSpeed": "Up to 3.3 GHz"
+      },
+      "display": {
+        "size": "6.5 inches",
+        "resolution": "2340 × 1080 pixels (FHD+, 19.5:9)",
+        "technology": "LTPO OLED",
+        "refreshRate": "1–120 Hz",
+        "brightness": "4000 nits (peak)",
+        "colorGamut": "DCI-P3",
+        "touchscreen": true
+      },
+      "memory": {
+        "ram": "12 GB",
+        "ramType": "LPDDR5X",
+        "storage": "256 GB / 512 GB",
+        "storageType": "UFS 4.0",
+        "expandable": "microSD up to 1 TB"
+      },
+      "camera": {
+        "main": "52 MP Zeiss, f/1.9, OIS, 1/1.35\" Exmor T sensor",
+        "telephoto": "12 MP Zeiss variable 85–170mm (3.5–7.1×), OIS",
+        "ultrawide": "12 MP Zeiss, f/2.2, 124°",
+        "front": "12 MP, f/2.0",
+        "video": "4K@120fps, Sony XAVC S-I"
+      },
+      "battery": {
+        "capacity": "5000 mAh",
+        "wiredCharging": "30 W",
+        "wirelessCharging": "15 W (Qi)",
+        "reverseCharging": "10 W"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.4",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C)",
+        "cellular": "5G sub-6"
+      },
+      "physical": {
+        "dimensions": "162.0 × 73.0 × 8.2 mm",
+        "weight": "192 g",
+        "build": "Frosted glass back, aluminium frame",
+        "ipRating": "IP68",
+        "colors": "Black, Platinum Silver, Khaki Green"
+      },
+      "audio": {
+        "headphoneJack": "3.5 mm headphone jack",
+        "speakers": "Stereo speakers (front-firing)",
+        "hi_res": "Hi-Res Audio Wireless, LDAC, aptX Adaptive"
+      },
+      "os": "Android 14 (upgradeable to Android 15)"
+    },
+    "keyFeatures": [
+      "Variable Zeiss telephoto (3.5–7.1× optical zoom)",
+      "3.5 mm headphone jack with Hi-Res Audio",
+      "LTPO OLED 1–120 Hz (4000 nits peak)",
+      "4K@120fps video recording",
+      "52 MP Exmor T main sensor",
+      "IP68 + microSD expandable storage"
+    ],
+    "variants": [
+      {
+        "id": "xp1vi-12-256",
+        "name": "12 GB / 256 GB"
+      },
+      {
+        "id": "xp1vi-12-512",
+        "name": "12 GB / 512 GB"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Sony",
+        "label": "Sony Store",
+        "url": "https://www.sony.com/en/articles/xperia-1-vi",
+        "country": "Global",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Sony+Xperia+1+VI",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "sony",
+      "xperia",
+      "1",
+      "vi",
+      "zeiss",
+      "android",
+      "flagship"
+    ],
+    "sources": [
+      {
+        "provider": "Sony official",
+        "url": "https://www.sony.com/en/articles/xperia-1-vi",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1,
+    "expertScore": 87,
+    "proscons": [
+      {
+        "text": "Variable Zeiss telephoto 3.5-7.1x is a genuine creative tool",
+        "type": "pro"
+      },
+      {
+        "text": "3.5 mm headphone jack with Hi-Res Audio + LDAC unique in 2024",
+        "type": "pro"
+      },
+      {
+        "text": "4K at 120fps video recording",
+        "type": "pro"
+      },
+      {
+        "text": "52 MP Exmor T sensor captures exceptional detail",
+        "type": "pro"
+      },
+      {
+        "text": "LTPO OLED 4000 nits peak brightness",
+        "type": "pro"
+      },
+      {
+        "text": "30 W charging is slowest of any 2024 flagship",
+        "type": "con"
+      },
+      {
+        "text": "FHD+ resolution is noticeable at 6.5 inches",
+        "type": "con"
+      },
+      {
+        "text": "No microSD expansion in some markets",
+        "type": "con"
+      }
+    ]
+  },
+  {
+    "id": "dev-000028",
+    "slug": "samsung-galaxy-z-fold-6",
+    "name": "Samsung Galaxy Z Fold 6",
+    "brand": "brd-000002",
+    "brandName": "Samsung",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-07-10",
+    "releasedAt": "2024-07-24",
+    "description": "Samsung Galaxy Z Fold 6 redefines the foldable with Snapdragon 8 Gen 3, a slimmer Titanium frame, 7.6\" inner AMOLED display and Galaxy AI — the premium choice for multitaskers.",
+    "images": [],
+    "specs": {
+      "processor": {
+        "name": "Snapdragon 8 Gen 3 (SM8650-AB)",
+        "manufacturer": "Qualcomm / TSMC",
+        "architecture": "4nm TSMC (N4P)",
+        "cores": "8 cores (1×3.3 GHz Cortex-X4 + 7× Cortex-A series)",
+        "clockSpeed": "Up to 3.3 GHz"
+      },
+      "display": {
+        "mainDisplay": "7.6 inches, 2160 × 1856 Dynamic AMOLED 2X, 120 Hz, 2600 nits",
+        "coverDisplay": "6.3 inches, 2376 × 968 Dynamic AMOLED 2X, 120 Hz, 2600 nits",
+        "technology": "Dynamic AMOLED 2X (foldable)",
+        "refreshRate": "120 Hz (both displays)",
+        "brightness": "2600 nits (peak)",
+        "touchscreen": true
+      },
+      "memory": {
+        "ram": "12 GB",
+        "ramType": "LPDDR5X",
+        "storage": "256 GB / 512 GB / 1 TB",
+        "storageType": "UFS 4.0",
+        "expandable": false
+      },
+      "camera": {
+        "main": "50 MP, f/1.8, OIS",
+        "telephoto": "10 MP, f/2.4, 3× optical zoom, OIS",
+        "ultrawide": "12 MP, f/2.2, 123°",
+        "coverFront": "10 MP, f/2.2",
+        "innerFront": "4 MP under-display camera",
+        "video": "4K@60fps, 4K@30fps (front cameras)"
+      },
+      "battery": {
+        "capacity": "4400 mAh",
+        "wiredCharging": "25 W",
+        "wirelessCharging": "15 W (Qi2)",
+        "reverseCharging": "4.5 W"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.4",
+        "nfc": true,
+        "usb": "USB 3.2 Gen 2 (USB-C)",
+        "cellular": "5G sub-6 + mmWave"
+      },
+      "physical": {
+        "dimensionsUnfolded": "153.5 × 132.1 × 5.6 mm",
+        "dimensionsFolded": "153.5 × 68.1 × 12.1 mm",
+        "weight": "239 g",
+        "build": "Titanium frame, Corning Gorilla Glass Victus 2",
+        "ipRating": "IPX8",
+        "colors": "Navy, Pink, Silver Shadow, White"
+      },
+      "os": "Android 14, One UI 6.1 (upgradeable to Android 15 / One UI 7)",
+      "features": {
+        "sPen": "S Pen compatible (not included; must purchase separately)",
+        "galaxyAi": "Galaxy AI (Note Assist, Chat Assist, Circle to Search)",
+        "multiWindow": "Taskbar, App Continuity, Multi-active window"
+      }
+    },
+    "keyFeatures": [
+      "7.6\" foldable Dynamic AMOLED 2X (inner)",
+      "6.3\" cover Dynamic AMOLED (outer)",
+      "Slim 5.6 mm unfolded Titanium design",
+      "S Pen compatible (sold separately)",
+      "Galaxy AI features",
+      "7 years OS + security updates"
+    ],
+    "variants": [
+      {
+        "id": "zfold6-256",
+        "name": "256 GB"
+      },
+      {
+        "id": "zfold6-512",
+        "name": "512 GB"
+      },
+      {
+        "id": "zfold6-1tb",
+        "name": "1 TB"
+      }
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Samsung",
+        "label": "Samsung Store",
+        "url": "https://www.samsung.com/us/smartphones/galaxy-z-fold6/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Z+Fold+6",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "relatedIds": [
+      "dev-000024"
+    ],
+    "tags": [
+      "samsung",
+      "galaxy",
+      "z",
+      "fold",
+      "foldable",
+      "android",
+      "s-pen"
+    ],
+    "sources": [
+      {
+        "provider": "Samsung official",
+        "url": "https://www.samsung.com/us/smartphones/galaxy-z-fold6/",
+        "retrievedAt": "2026-11-17",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-17",
+    "updatedAt": "2026-11-17",
+    "schemaVersion": 1,
+    "expertScore": 88,
+    "proscons": [
+      {
+        "text": "Best foldable - slim 5.6 mm unfolded Titanium design",
+        "type": "pro"
+      },
+      {
+        "text": "7.6 inch inner + 6.3 inch cover display covers every use case",
+        "type": "pro"
+      },
+      {
+        "text": "7 years OS and security updates",
+        "type": "pro"
+      },
+      {
+        "text": "Galaxy AI features built in",
+        "type": "pro"
+      },
+      {
+        "text": "S Pen compatible for creative work",
+        "type": "pro"
+      },
+      {
+        "text": "4400 mAh is the smallest battery in its price class",
+        "type": "con"
+      },
+      {
+        "text": "25 W wired charging significantly slower than flagship norms",
+        "type": "con"
+      },
+      {
+        "text": "Expensive premium over conventional flagships",
+        "type": "con"
+      }
+    ]
+  },
+  {
+    "id": "dev-000029",
+    "slug": "microsoft-xbox-series-x",
+    "name": "Microsoft Xbox Series X",
+    "brand": "brd-000014",
+    "brandName": "Microsoft",
+    "category": "gaming-console",
+    "status": "available",
+    "announcedAt": "2019-12-12",
+    "releasedAt": "2020-11-10",
+    "description": "The Xbox Series X is Microsoft flagship 12-teraflop gaming console with a custom AMD Zen 2 / RDNA 2 SoC, 16 GB GDDR6 unified memory, DirectStorage NVMe SSD, and 4K 120 Hz gaming with ray tracing.",
+    "images": [],
+    "expertScore": 89,
+    "proscons": [
+      {
+        "text": "12 TFLOPS RDNA 2 GPU - most powerful console GPU at launch",
+        "type": "pro"
+      },
+      {
+        "text": "DirectStorage SSD near-eliminates load times",
+        "type": "pro"
+      },
+      {
+        "text": "Backward-compatible with every Xbox One, 360 and original Xbox game",
+        "type": "pro"
+      },
+      {
+        "text": "Xbox Game Pass Ultimate value proposition",
+        "type": "pro"
+      },
+      {
+        "text": "Quiet cooling with minimal coil whine",
+        "type": "pro"
+      },
+      {
+        "text": "No exclusive killer apps missing PlayStation counterparts",
+        "type": "con"
+      },
+      {
+        "text": "Monolithic tower design divides opinion on aesthetics",
+        "type": "con"
+      },
+      {
+        "text": "No pack-in game - controller only",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Custom AMD Zen 2 + RDNA 2",
+        "manufacturer": "AMD / Microsoft",
+        "architecture": "7nm TSMC",
+        "cores": "8-core Zen 2 CPU + RDNA 2 GPU (52 CUs)",
+        "gpu": "12 TFLOPS"
+      },
+      "memory": {
+        "ram": "16 GB GDDR6",
+        "memoryBandwidth": "336 GB/s (10 GB) + 56 GB/s (6 GB)",
+        "storage": "1 TB custom NVMe SSD",
+        "expandable": "Seagate Storage Expansion Card (1 TB)"
+      },
+      "display": {
+        "output": "4K @ 120 Hz (HDMI 2.1)",
+        "hdr": "HDR10 + Dolby Vision",
+        "vrr": "HDMI 2.1 VRR (FreeSync Premium Pro)"
+      },
+      "connectivity": {
+        "hdmi": "HDMI 2.1",
+        "usb": "3x USB-A 3.1 Gen 1",
+        "ethernet": "1 Gbps",
+        "wifi": "Wi-Fi 5 (802.11ac)",
+        "bluetooth": "Bluetooth 5.0"
+      },
+      "physical": {
+        "dimensions": "301 x 151 x 151 mm",
+        "weight": "4.45 kg",
+        "form": "Tower"
+      },
+      "performance": {
+        "rayTracing": "Hardware ray tracing (DXR)",
+        "frameRate": "Up to 4K @ 120 fps",
+        "resolution": "Up to 8K output"
+      },
+      "audio": {
+        "output": "Dolby Atmos, DTS:X, Windows Sonic"
+      }
+    },
+    "keyFeatures": [
+      "12 TFLOPS custom RDNA 2 GPU",
+      "DirectStorage NVMe SSD",
+      "4K @ 120 Hz HDMI 2.1",
+      "Hardware ray tracing",
+      "Xbox Game Pass compatible",
+      "Full backward compatibility"
+    ],
+    "variants": [],
+    "relatedIds": [],
+    "tags": [
+      "xbox",
+      "microsoft",
+      "gaming",
+      "console",
+      "4k",
+      "rdna2"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Microsoft",
+        "label": "Xbox Store",
+        "url": "https://www.xbox.com/en-US/consoles/xbox-series-x",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Xbox+Series+X",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "Microsoft Xbox",
+        "url": "https://www.xbox.com/en-US/consoles/xbox-series-x",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000030",
+    "slug": "apple-watch-ultra-2",
+    "name": "Apple Watch Ultra 2",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "smartwatch",
+    "status": "available",
+    "announcedAt": "2023-09-12",
+    "releasedAt": "2023-09-22",
+    "description": "Apple Watch Ultra 2 is the most capable Apple Watch ever with a 49 mm titanium case, up to 60 hours battery, dual-frequency GPS, the brightest Apple Watch display at 3000 nits, and advanced dive and altitude sensors.",
+    "images": [],
+    "expertScore": 92,
+    "proscons": [
+      {
+        "text": "3000 nits peak brightness - readable in direct sunlight",
+        "type": "pro"
+      },
+      {
+        "text": "Dual-frequency GPS (L1+L5) for precision trail navigation",
+        "type": "pro"
+      },
+      {
+        "text": "60 hours battery with low-power mode",
+        "type": "pro"
+      },
+      {
+        "text": "MIL-STD-810H + EN 13319 dive standard certified",
+        "type": "pro"
+      },
+      {
+        "text": "Cellular independent of iPhone",
+        "type": "pro"
+      },
+      {
+        "text": "49 mm titanium case is large and heavy for smaller wrists",
+        "type": "con"
+      },
+      {
+        "text": "Twice the price of Apple Watch Series 9",
+        "type": "con"
+      },
+      {
+        "text": "Overkill for everyday users who do not need extreme sports features",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Apple S9 SiP",
+        "manufacturer": "Apple",
+        "features": "Double Tap gesture, on-device Siri"
+      },
+      "display": {
+        "size": "49 mm",
+        "resolution": "410 x 502 pixels",
+        "technology": "LTPO OLED Always-On",
+        "brightness": "3000 nits peak",
+        "material": "Sapphire crystal glass"
+      },
+      "battery": {
+        "life": "60 hours low-power / 36 hours standard",
+        "chargingSpeed": "Fast charge 0-80% in 60 min"
+      },
+      "sensors": {
+        "gps": "Dual-frequency GPS L1 + L5",
+        "altimeter": "Always-on barometric altimeter",
+        "depth": "Water depth sensor EN 13319 100 m",
+        "heartRate": "Electrical + optical heart rate",
+        "ecg": "ECG app",
+        "bloodOxygen": "Blood oxygen sensor",
+        "temperature": "Wrist temperature sensor"
+      },
+      "connectivity": {
+        "cellular": "LTE / UMTS",
+        "wifi": "Wi-Fi 802.11b/g/n 2.4 + 5 GHz",
+        "bluetooth": "Bluetooth 5.3",
+        "nfc": "Apple Pay NFC"
+      },
+      "physical": {
+        "case": "49 mm Titanium",
+        "weight": "61.4 g",
+        "waterResistance": "100 m EN 13319 diving standard",
+        "ipRating": "IP6X dust"
+      },
+      "os": "watchOS 10"
+    },
+    "keyFeatures": [
+      "49 mm Titanium case",
+      "3000 nits peak brightness",
+      "60 hours battery",
+      "Dual-frequency GPS L1+L5",
+      "100 m dive rated",
+      "Action Button + customisable"
+    ],
+    "variants": [
+      {
+        "id": "awu2-black",
+        "name": "Black Titanium"
+      },
+      {
+        "id": "awu2-natural",
+        "name": "Natural Titanium"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "apple",
+      "watch",
+      "ultra",
+      "smartwatch",
+      "gps",
+      "titanium"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Apple",
+        "label": "Apple Store",
+        "url": "https://www.apple.com/apple-watch-ultra-2/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Apple+Watch+Ultra+2",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "Apple official",
+        "url": "https://www.apple.com/apple-watch-ultra-2/specs/",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000031",
+    "slug": "samsung-galaxy-watch-7",
+    "name": "Samsung Galaxy Watch 7",
+    "brand": "brd-000002",
+    "brandName": "Samsung",
+    "category": "smartwatch",
+    "status": "available",
+    "announcedAt": "2024-07-10",
+    "releasedAt": "2024-07-24",
+    "description": "Samsung Galaxy Watch 7 runs Wear OS 5 with One UI Watch 6, powered by the Exynos W1000 chip for 3x faster performance. Features advanced BioActive Sensor for body composition, HR, ECG and sleep coaching.",
+    "images": [],
+    "expertScore": 86,
+    "proscons": [
+      {
+        "text": "Exynos W1000 is a massive CPU/GPU leap over previous gen",
+        "type": "pro"
+      },
+      {
+        "text": "Body composition + BioActive Sensor suite is market-leading on Android",
+        "type": "pro"
+      },
+      {
+        "text": "Wear OS + Google ecosystem integration (Maps, Wallet, Play Store)",
+        "type": "pro"
+      },
+      {
+        "text": "7-day battery life in real use",
+        "type": "pro"
+      },
+      {
+        "text": "Bright 2000 nits display",
+        "type": "pro"
+      },
+      {
+        "text": "No rotating bezel physical like Watch 6 Classic",
+        "type": "con"
+      },
+      {
+        "text": "Wear OS platform still less polished than watchOS",
+        "type": "con"
+      },
+      {
+        "text": "Smaller 300 mAh battery on 40 mm model",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Exynos W1000",
+        "manufacturer": "Samsung",
+        "architecture": "3nm",
+        "cores": "5-core 1x2.0 GHz + 4x1.4 GHz"
+      },
+      "display": {
+        "size": "40 mm / 44 mm",
+        "resolution": "396 x 396 (40mm) / 432 x 432 (44mm)",
+        "technology": "Super AMOLED",
+        "brightness": "2000 nits peak",
+        "material": "Sapphire crystal"
+      },
+      "battery": {
+        "capacity": "300 mAh (40mm) / 425 mAh (44mm)",
+        "life": "Up to 40 hours / 7 days Power Saving",
+        "chargingSpeed": "10 W wireless"
+      },
+      "sensors": {
+        "bioActive": "Optical Heart Rate + ECG + BIA body composition",
+        "gps": "GPS + GLONASS + BeiDou + Galileo",
+        "altimeter": "Barometer",
+        "temperature": "Skin temperature sensor"
+      },
+      "connectivity": {
+        "cellular": "LTE optional",
+        "wifi": "Wi-Fi 2.4/5 GHz",
+        "bluetooth": "Bluetooth 5.3",
+        "nfc": "Samsung Pay NFC"
+      },
+      "physical": {
+        "case": "Aluminium 40 mm or 44 mm",
+        "weight": "28.9 g (40mm, without strap)",
+        "waterResistance": "5 ATM + IP68 + MIL-STD-810H"
+      },
+      "os": "Wear OS 5, One UI Watch 6"
+    },
+    "keyFeatures": [
+      "Exynos W1000 3nm chip (3x faster)",
+      "Body composition + ECG sensors",
+      "Wear OS 5 + Google services",
+      "2000 nits AMOLED",
+      "7-day battery power saving",
+      "5 ATM + IP68 + MIL-STD-810H"
+    ],
+    "variants": [
+      {
+        "id": "gw7-40-green",
+        "name": "40mm Green"
+      },
+      {
+        "id": "gw7-44-cream",
+        "name": "44mm Cream"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "samsung",
+      "galaxy",
+      "watch",
+      "smartwatch",
+      "wear-os",
+      "android"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Samsung",
+        "label": "Samsung Store",
+        "url": "https://www.samsung.com/us/smartphones/galaxy-watch7/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Samsung+Galaxy+Watch+7",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "Samsung official",
+        "url": "https://www.samsung.com/us/smartphones/galaxy-watch7/",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000032",
+    "slug": "nvidia-geforce-rtx-4090",
+    "name": "NVIDIA GeForce RTX 4090",
+    "brand": "brd-000005",
+    "brandName": "NVIDIA",
+    "category": "gpu",
+    "status": "available",
+    "announcedAt": "2022-09-20",
+    "releasedAt": "2022-10-12",
+    "description": "The GeForce RTX 4090 is NVIDIA flagship Ada Lovelace GPU with 16,384 CUDA cores, 24 GB GDDR6X, 82.6 TFLOPS FP32 and third-generation RT cores. It is the fastest consumer graphics card ever made.",
+    "images": [],
+    "expertScore": 96,
+    "proscons": [
+      {
+        "text": "Unchallenged 4K and 8K gaming performance",
+        "type": "pro"
+      },
+      {
+        "text": "82.6 TFLOPS sets a generational leap over RTX 3090 Ti",
+        "type": "pro"
+      },
+      {
+        "text": "Third-gen RT cores and 4th-gen Tensor cores for DLSS 3",
+        "type": "pro"
+      },
+      {
+        "text": "24 GB GDDR6X - future-proof VRAM for years",
+        "type": "pro"
+      },
+      {
+        "text": "DLSS 3 Frame Generation multiplies fps in supported games",
+        "type": "pro"
+      },
+      {
+        "text": "450 W TDP demands a 1000W+ PSU and excellent case airflow",
+        "type": "con"
+      },
+      {
+        "text": "Extremely expensive - premium pricing tier",
+        "type": "con"
+      },
+      {
+        "text": "Physically large up to 336mm - requires full-tower or large mid-tower",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "architecture": {
+        "name": "Ada Lovelace AD102",
+        "node": "4nm TSMC N4",
+        "transistors": "76.3 billion"
+      },
+      "cudaCores": "16384",
+      "rtCores": "3rd Gen (176 RT TFLOPS)",
+      "tensorCores": "4th Gen (1457.4 TOPS FP8)",
+      "baseClock": "2.23 GHz",
+      "boostClock": "2.52 GHz",
+      "memory": {
+        "vram": "24 GB GDDR6X",
+        "memoryBus": "384-bit",
+        "bandwidth": "1008 GB/s"
+      },
+      "performance": {
+        "fp32": "82.6 TFLOPS",
+        "dlss": "DLSS 3 Frame Generation + Super Resolution",
+        "rayTracing": "176 TFLOPS RT"
+      },
+      "power": {
+        "tdp": "450 W",
+        "recommendedPSU": "1000W+ recommended"
+      },
+      "display": {
+        "outputs": "1x HDMI 2.1a, 3x DisplayPort 1.4a",
+        "maxResolution": "8K @ 60 Hz",
+        "maxDisplays": "4"
+      },
+      "physical": {
+        "formFactor": "PCIe 4.0 x16",
+        "length": "336 mm FE",
+        "powerConnector": "1x 16-pin PCIe 5.0 adapter included"
+      }
+    },
+    "keyFeatures": [
+      "82.6 TFLOPS FP32 performance",
+      "24 GB GDDR6X 384-bit",
+      "DLSS 3 Frame Generation",
+      "3rd-gen RT cores",
+      "4nm Ada Lovelace AD102",
+      "450 W TDP"
+    ],
+    "variants": [
+      {
+        "id": "rtx4090-fe",
+        "name": "Founders Edition"
+      },
+      {
+        "id": "rtx4090-aib",
+        "name": "AIB Partner cards"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "nvidia",
+      "rtx",
+      "4090",
+      "gpu",
+      "ada-lovelace",
+      "gaming"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "NVIDIA",
+        "label": "NVIDIA Store",
+        "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=RTX+4090",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "NVIDIA official",
+        "url": "https://www.nvidia.com/en-us/geforce/graphics-cards/40-series/rtx-4090/",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000033",
+    "slug": "apple-iphone-16-plus",
+    "name": "Apple iPhone 16 Plus",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "smartphone",
+    "status": "available",
+    "announcedAt": "2024-09-09",
+    "releasedAt": "2024-09-20",
+    "description": "The iPhone 16 Plus brings the full iPhone 16 experience to a 6.7-inch canvas - same A18 chip, Camera Control, Apple Intelligence and Action Button as the standard iPhone 16, with the longest battery life of any non-Pro iPhone.",
+    "images": [],
+    "expertScore": 88,
+    "proscons": [
+      {
+        "text": "Longest battery life of any non-Pro iPhone",
+        "type": "pro"
+      },
+      {
+        "text": "A18 chip with Apple Intelligence on a large-screen phone",
+        "type": "pro"
+      },
+      {
+        "text": "Camera Control hardware button debuts on Plus",
+        "type": "pro"
+      },
+      {
+        "text": "Action Button for quick shortcuts",
+        "type": "pro"
+      },
+      {
+        "text": "6.7 inch display with 60 nits brighter than iPhone 15 Plus",
+        "type": "pro"
+      },
+      {
+        "text": "Still 60 Hz display - no ProMotion at this price",
+        "type": "con"
+      },
+      {
+        "text": "No ProRes video recording",
+        "type": "con"
+      },
+      {
+        "text": "Camera system less capable than Pro models",
+        "type": "con"
+      },
+      {
+        "text": "4K@120fps video only via USB-C not in-device",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Apple A18",
+        "manufacturer": "Apple",
+        "architecture": "3nm TSMC N3E",
+        "cores": "6-core CPU (2P+4E)",
+        "gpu": "5-core GPU",
+        "npu": "16-core Neural Engine"
+      },
+      "display": {
+        "size": "6.7 inches",
+        "resolution": "2796 x 1290 pixels 460 PPI",
+        "technology": "Super Retina XDR OLED",
+        "refreshRate": "60 Hz",
+        "brightness": "2000 nits peak HDR",
+        "colorGamut": "DCI-P3"
+      },
+      "memory": {
+        "ram": "8 GB LPDDR5",
+        "storage": "128 GB / 256 GB / 512 GB",
+        "storageType": "NVMe"
+      },
+      "camera": {
+        "main": "48 MP Fusion f/1.6 OIS sensor-shift",
+        "ultrawide": "12 MP f/2.2 2nd-gen photonics engine",
+        "front": "12 MP TrueDepth autofocus",
+        "video": "4K@60fps Cinematic mode 4K@30fps"
+      },
+      "battery": {
+        "capacity": "4674 mAh",
+        "wiredCharging": "25 W USB-C PD",
+        "wirelessCharging": "15 W MagSafe / 7.5 W Qi"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.3",
+        "usb": "USB 3.1 Gen 2 USB-C",
+        "cellular": "5G sub-6 + mmWave"
+      },
+      "physical": {
+        "dimensions": "160.9 x 77.8 x 7.8 mm",
+        "weight": "203 g",
+        "build": "Aluminium frame textured matte glass back",
+        "ipRating": "IP68"
+      },
+      "os": "iOS 18"
+    },
+    "keyFeatures": [
+      "Longest battery life of any non-Pro iPhone",
+      "Apple Intelligence AI features",
+      "A18 chip 3nm",
+      "Camera Control button",
+      "6.7 inch Super Retina XDR",
+      "Action Button"
+    ],
+    "variants": [
+      {
+        "id": "ip16plus-128",
+        "name": "128 GB"
+      },
+      {
+        "id": "ip16plus-256",
+        "name": "256 GB"
+      },
+      {
+        "id": "ip16plus-512",
+        "name": "512 GB"
+      }
+    ],
+    "relatedIds": [
+      "dev-000001",
+      "dev-000007"
+    ],
+    "tags": [
+      "apple",
+      "iphone",
+      "16",
+      "plus",
+      "a18",
+      "ios"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Apple",
+        "label": "Apple Store",
+        "url": "https://www.apple.com/iphone-16/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=iPhone+16+Plus",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "Apple official",
+        "url": "https://www.apple.com/iphone-16/specs/",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000034",
+    "slug": "google-pixel-tablet",
+    "name": "Google Pixel Tablet",
+    "brand": "brd-000006",
+    "brandName": "Google",
+    "category": "tablet",
+    "status": "available",
+    "announcedAt": "2023-05-10",
+    "releasedAt": "2023-06-20",
+    "description": "The Google Pixel Tablet runs Android 13 with Tensor G2, doubles as a smart home hub via its Charging Speaker Dock, and offers the cleanest Android tablet software experience with guaranteed 5 years of OS updates.",
+    "images": [],
+    "expertScore": 82,
+    "proscons": [
+      {
+        "text": "Charging Speaker Dock transforms it into a smart display",
+        "type": "pro"
+      },
+      {
+        "text": "Cleanest Android tablet OS - no bloatware",
+        "type": "pro"
+      },
+      {
+        "text": "5 years of guaranteed OS updates",
+        "type": "pro"
+      },
+      {
+        "text": "Tensor G2 handles everyday tasks well",
+        "type": "pro"
+      },
+      {
+        "text": "Good front-firing stereo speakers",
+        "type": "pro"
+      },
+      {
+        "text": "Tensor G2 is notably less powerful than Snapdragon 8 Gen 2 rivals",
+        "type": "con"
+      },
+      {
+        "text": "60 Hz display in 2023 is behind the competition",
+        "type": "con"
+      },
+      {
+        "text": "Only 8 GB RAM limits heavy multitasking",
+        "type": "con"
+      },
+      {
+        "text": "Limited app optimisation for Android tablets vs iPad",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Google Tensor G2",
+        "manufacturer": "Google / Samsung",
+        "architecture": "5nm Samsung",
+        "cores": "2x2.85 GHz Cortex-X1 + 2x2.35 GHz A78 + 4x1.80 GHz A55",
+        "npu": "Google TPU on-device AI"
+      },
+      "display": {
+        "size": "10.95 inches",
+        "resolution": "2560 x 1600 pixels 264 PPI",
+        "technology": "LCD",
+        "refreshRate": "60 Hz",
+        "brightness": "500 nits",
+        "colorGamut": "sRGB"
+      },
+      "memory": {
+        "ram": "8 GB LPDDR5",
+        "storage": "128 GB / 256 GB",
+        "storageType": "UFS 3.1"
+      },
+      "cameras": {
+        "rear": "8 MP f/2.0",
+        "front": "8 MP f/2.0"
+      },
+      "battery": {
+        "capacity": "7020 mAh",
+        "wiredCharging": "18 W USB-C",
+        "wirelessCharging": "No"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 6 (802.11ax)",
+        "bluetooth": "Bluetooth 5.2",
+        "usb": "USB 3.2 Gen 2 USB-C"
+      },
+      "physical": {
+        "dimensions": "258 x 169 x 8.1 mm",
+        "weight": "493 g",
+        "build": "Nano-ceramic coating aluminium",
+        "ipRating": "IP67"
+      },
+      "accessories": {
+        "chargingDock": "Charging Speaker Dock included",
+        "stylus": "USI 2.0 stylus compatible"
+      },
+      "os": "Android 13 upgradeable to Android 15 with 5 years OS updates"
+    },
+    "keyFeatures": [
+      "Charging Speaker Dock smart home hub",
+      "5 years OS + security updates",
+      "IP67 water resistance",
+      "10.95 inch LCD 2K display",
+      "Tensor G2 on-device AI",
+      "USI 2.0 stylus support"
+    ],
+    "variants": [
+      {
+        "id": "pxtab-128",
+        "name": "128 GB"
+      },
+      {
+        "id": "pxtab-256",
+        "name": "256 GB"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "google",
+      "pixel",
+      "tablet",
+      "android",
+      "tensor",
+      "smart-home"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Google",
+        "label": "Google Store",
+        "url": "https://store.google.com/us/product/pixel_tablet",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Google+Pixel+Tablet",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "Google Store",
+        "url": "https://store.google.com/us/product/pixel_tablet_specs",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000035",
+    "slug": "hp-omen-16-amd",
+    "name": "HP OMEN 16 AMD 2024",
+    "brand": "brd-000013",
+    "brandName": "HP",
+    "category": "laptop",
+    "status": "available",
+    "announcedAt": "2024-01-08",
+    "releasedAt": "2024-03-01",
+    "description": "The HP OMEN 16 AMD 2024 brings AMD Ryzen AI 9 HX 375 Strix, an RX 7700S / RTX 4070 GPU and a 165 Hz QHD display for under-budget 1440p gaming - punching well above its price point.",
+    "images": [],
+    "expertScore": 85,
+    "proscons": [
+      {
+        "text": "Ryzen AI 9 HX 375 delivers best-in-class multi-threaded CPU performance",
+        "type": "pro"
+      },
+      {
+        "text": "165 Hz QHD IPS display covers 100% sRGB",
+        "type": "pro"
+      },
+      {
+        "text": "Excellent thermal design - sustained full-performance boost",
+        "type": "pro"
+      },
+      {
+        "text": "Competitive pricing vs. ASUS/Lenovo rivals",
+        "type": "pro"
+      },
+      {
+        "text": "Wi-Fi 7 on a gaming laptop at this price",
+        "type": "pro"
+      },
+      {
+        "text": "Battery life under 4 hours gaming",
+        "type": "con"
+      },
+      {
+        "text": "Chassis is plasticky compared to premium tier",
+        "type": "con"
+      },
+      {
+        "text": "Webcam is 720p only",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "AMD Ryzen AI 9 HX 375",
+        "manufacturer": "AMD",
+        "architecture": "4nm TSMC Phoenix2",
+        "cores": "12 cores Zen 4",
+        "clockSpeed": "Up to 5.1 GHz boost"
+      },
+      "display": {
+        "size": "16.1 inches",
+        "resolution": "2560 x 1440 QHD",
+        "technology": "IPS",
+        "refreshRate": "165 Hz",
+        "brightness": "300 nits",
+        "colorGamut": "100% sRGB"
+      },
+      "memory": {
+        "ram": "16 GB / 32 GB DDR5-5600",
+        "maxRam": "64 GB",
+        "storage": "512 GB / 1 TB PCIe 4.0 NVMe"
+      },
+      "gpu": {
+        "integrated": "AMD Radeon 890M iGPU",
+        "discrete": "AMD Radeon RX 7700S 8 GB GDDR6 or NVIDIA RTX 4070 Laptop"
+      },
+      "battery": {
+        "capacity": "83 Wh",
+        "life": "Up to 8 hours productivity / 3-4 hours gaming",
+        "chargingSpeed": "200 W AC adapter"
+      },
+      "wireless": {
+        "wifi": "Wi-Fi 7 (802.11be)",
+        "bluetooth": "Bluetooth 5.4"
+      },
+      "dimensions": {
+        "width": "362 mm",
+        "depth": "258 mm",
+        "thickness": "22.3 mm",
+        "weight": "2.3 kg"
+      },
+      "os": "Windows 11 Home"
+    },
+    "keyFeatures": [
+      "Ryzen AI 9 HX 375 (12-core Zen 4)",
+      "165 Hz QHD 100% sRGB display",
+      "RX 7700S / RTX 4070 GPU options",
+      "Wi-Fi 7",
+      "83 Wh battery",
+      "OMEN Gaming Hub software"
+    ],
+    "variants": [
+      {
+        "id": "omen16-16-512",
+        "name": "Ryzen 7 / 16 GB / 512 GB"
+      },
+      {
+        "id": "omen16-32-1tb",
+        "name": "Ryzen AI 9 / 32 GB / 1 TB"
+      }
+    ],
+    "relatedIds": [],
+    "tags": [
+      "hp",
+      "omen",
+      "gaming",
+      "laptop",
+      "amd",
+      "ryzen",
+      "qhd"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "HP",
+        "label": "HP Store",
+        "url": "https://www.hp.com/us-en/gaming/omen/laptops.html",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=HP+OMEN+16+AMD+2024",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "HP official",
+        "url": "https://www.hp.com/us-en/gaming/omen/laptops.html",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000036",
+    "slug": "samsung-neo-qled-qn90d-55",
+    "name": "Samsung Neo QLED QN90D 55-inch",
+    "brand": "brd-000002",
+    "brandName": "Samsung",
+    "category": "tv",
+    "status": "available",
+    "announcedAt": "2024-01-09",
+    "releasedAt": "2024-03-01",
+    "description": "Samsung Neo QLED QN90D is Samsung 2024 flagship 4K Mini-LED TV with Quantum Matrix Pro, NQ8 AI Gen3 processor and 4000 nits peak - a perfect premium choice for bright living rooms with HDR gaming.",
+    "images": [],
+    "expertScore": 90,
+    "proscons": [
+      {
+        "text": "4000 nits peak brightness utterly destroys ambient light",
+        "type": "pro"
+      },
+      {
+        "text": "Quantum Matrix Pro delivers near-OLED contrast in bright rooms",
+        "type": "pro"
+      },
+      {
+        "text": "AMD FreeSync Premium Pro at 4K@144Hz for gaming",
+        "type": "pro"
+      },
+      {
+        "text": "NQ8 AI Gen3 upscaling is industry-leading",
+        "type": "pro"
+      },
+      {
+        "text": "Anti-reflection coating + matte screen reduce glare",
+        "type": "pro"
+      },
+      {
+        "text": "Mini-LED blooming still visible vs. OLED on dark-room cinema",
+        "type": "con"
+      },
+      {
+        "text": "Tizen OS can feel cluttered with ads",
+        "type": "con"
+      },
+      {
+        "text": "VA panel viewing angles narrower than OLED / IPS competitors",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "display": {
+        "technology": "Neo QLED Mini-LED + Quantum Dot",
+        "size": "55 inches",
+        "resolution": "3840 x 2160 4K UHD",
+        "refreshRate": "144 Hz native",
+        "brightness": "4000 nits peak HDR",
+        "hdr": "HDR10+, HDR10, HLG, Dolby Vision IQ"
+      },
+      "processor": {
+        "name": "NQ8 AI Gen3",
+        "manufacturer": "Samsung",
+        "ai": "AI Upscaling Pro, AI Sound Pro"
+      },
+      "gaming": {
+        "vrr": "AMD FreeSync Premium Pro HDMI 2.1",
+        "hdmi": "4x HDMI 2.1 48 Gbps",
+        "inputLag": "5.9 ms (120 Hz 4K)",
+        "features": "Game Bar 3.0, Auto Game Mode"
+      },
+      "audio": {
+        "output": "60 W (4.2.2 ch)",
+        "dolby": "Dolby Atmos",
+        "dts": "DTS:X",
+        "features": "OTS Pro Object Tracking Sound"
+      },
+      "smart": {
+        "os": "Tizen OS Samsung Smart TV",
+        "assistant": "Bixby, Google Assistant, Amazon Alexa"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 5 (802.11ac)",
+        "bluetooth": "5.2",
+        "usb": "2x USB",
+        "ethernet": "1x RJ-45"
+      },
+      "physical": {
+        "width": "1226.3 mm",
+        "height": "707.5 mm",
+        "depth": "27.9 mm",
+        "weight": "16.1 kg"
+      }
+    },
+    "keyFeatures": [
+      "4000 nits Neo QLED Mini-LED",
+      "4K@144 Hz HDMI 2.1 gaming",
+      "Dolby Vision IQ + HDR10+",
+      "AMD FreeSync Premium Pro",
+      "60 W 4.2.2 Atmos audio",
+      "Anti-reflection matte screen"
+    ],
+    "variants": [
+      {
+        "id": "qn90d-55",
+        "name": "55-inch"
+      },
+      {
+        "id": "qn90d-65",
+        "name": "65-inch"
+      }
+    ],
+    "relatedIds": [
+      "dev-000023"
+    ],
+    "tags": [
+      "samsung",
+      "neo-qled",
+      "mini-led",
+      "4k",
+      "tv",
+      "gaming",
+      "hdr"
+    ],
+    "affiliateLinks": [
+      {
+        "provider": "Samsung",
+        "label": "Samsung Store",
+        "url": "https://www.samsung.com/us/televisions-home-theater/tvs/neo-qled-4k/",
+        "country": "US",
+        "type": "official"
+      },
+      {
+        "provider": "Amazon",
+        "label": "Check on Amazon",
+        "url": "https://www.amazon.com/s?k=Samsung+QN90D+55",
+        "country": "US",
+        "type": "retail"
+      }
+    ],
+    "sources": [
+      {
+        "provider": "Samsung official",
+        "url": "https://www.samsung.com/us/televisions-home-theater/tvs/neo-qled-4k/",
+        "retrievedAt": "2026-11-18",
+        "verificationLevel": "official"
+      }
+    ],
+    "verificationLevel": "official",
+    "createdAt": "2026-11-18",
+    "updatedAt": "2026-11-18",
     "schemaVersion": 1
   }
 ]
