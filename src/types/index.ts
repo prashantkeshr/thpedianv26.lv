@@ -64,7 +64,8 @@ export type DeviceCategory =
   | 'smartphone' | 'tablet' | 'laptop' | 'desktop' | 'workstation'
   | 'mini-pc' | 'all-in-one' | 'gaming-console' | 'smartwatch'
   | 'headphones' | 'earbuds' | 'tv' | 'monitor' | 'camera'
-  | 'router' | 'storage' | 'printer' | 'gpu' | 'other';
+  | 'router' | 'storage' | 'printer' | 'gpu' | 'xr-headset'
+  | 'smart-display' | 'other';
 
 export interface DeviceVariant {
   id: string;

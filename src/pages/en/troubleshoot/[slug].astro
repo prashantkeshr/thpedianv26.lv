@@ -7,6 +7,7 @@ export async function getStaticPaths() {
   const slugs = [
     'laptop-overheating', 'smartphone-battery-drain', 'pc-wont-boot',
     'wifi-disconnecting', 'monitor-flickering', 'printer-not-printing',
+    'gpu-driver-crash', 'ssd-not-detected', 'bluetooth-pairing-issues',
   ];
   return slugs.map(slug => ({ params: { slug } }));
 }
@@ -295,6 +296,162 @@ const guides: Record<string, Guide> = {
       'Avoid running monitors above their rated refresh rate for extended periods.',
     ],
     whenToSeekHelp: 'If flickering appears in the monitor\'s self-test pattern (see step 7), the fault is inside the monitor. Panel replacements are often not cost-effective for monitors under 27" — compare repair cost vs. a new monitor.',
+  },
+
+  'gpu-driver-crash': {
+    title: 'GPU Driver Crash',
+    icon: '🎮',
+    category: 'GPU',
+    symptoms: ['Screen goes black then recovers ("Display driver stopped responding")', 'Blue screen with nvlddmkm.sys or atikmpag.sys error', 'Visual artifacts before crash', 'TDR (Timeout Detection and Recovery) events in Event Viewer'],
+    intro: 'GPU driver crashes (TDR events) are caused by driver bugs, overheating, insufficient power, overclocking instability, or faulty VRAM. Work from the most common cause — driver — before investigating hardware.',
+    steps: [
+      {
+        step: 1,
+        check: 'Check Event Viewer for TDR events',
+        action: 'Press Win+R → type "eventvwr" → Windows Logs → System. Look for "Display" or "nvlddmkm" errors. Note the time and frequency. This confirms a TDR (Timeout Detection and Recovery) rather than a hard crash.',
+      },
+      {
+        step: 2,
+        check: 'Update GPU driver (or roll back)',
+        action: 'Download the latest driver: NVIDIA GeForce Experience or nvidia.com; AMD Radeon Software or amd.com/drivers. If crashes started after a recent driver update, roll back: Device Manager → Display Adapters → right-click GPU → Properties → Driver tab → Roll Back Driver.',
+      },
+      {
+        step: 3,
+        check: 'DDU clean install',
+        action: 'Boot into Safe Mode. Download Display Driver Uninstaller (DDU). Run DDU with "Clean and restart" option — this removes ALL driver files, registry entries and leftover software. Install the driver fresh after restart.',
+      },
+      {
+        step: 4,
+        check: 'Monitor GPU temperature under load',
+        action: 'Use GPU-Z, HWiNFO64 or MSI Afterburner to monitor GPU temperature while gaming or benchmarking. Normal desktop GPU max: 83–90°C. If you see >95°C, overheating is contributing to the crash. Clean GPU fans and verify heatsink contact.',
+      },
+      {
+        step: 5,
+        check: 'Power supply adequacy',
+        action: 'Check your GPU\'s TDP and add ~100W for the rest of the system. Use a PSU calculator (OuterVision or PCPartPicker). An underpowered PSU causes crashes under heavy GPU load. Check all PCIe power connectors are fully seated.',
+      },
+      {
+        step: 6,
+        check: 'Disable overclocking',
+        action: 'If you use MSI Afterburner, EVGA Precision or AMD overlay for overclocking, reset all values to default. Factory overclocked cards (from AIB partners) can also be unstable — try underclocking core clock by 50–100 MHz to test stability.',
+      },
+      {
+        step: 7,
+        check: 'Test GPU in another slot or system',
+        action: 'Try the GPU in a different PCIe ×16 slot. If possible, test the GPU in another PC. If crashes follow the GPU, it is likely a hardware fault (VRAM, power delivery circuitry). If crashes disappear in another system, the issue may be the motherboard PCIe slot or PSU.',
+      },
+    ],
+    prevention: [
+      'Keep GPU drivers updated but wait a week after major releases for community bug reports.',
+      'Ensure adequate PSU wattage with 15–20% headroom.',
+      'Monitor GPU temperatures — keep below 85°C under sustained load.',
+      'Avoid aggressive overclocking without adequate cooling.',
+    ],
+    whenToSeekHelp: 'If artifacts appear even at desktop or in BIOS (outside the OS), or the GPU fails VRAM test tools like VRAM Check, the VRAM may be physically faulty — this requires GPU replacement.',
+  },
+
+  'ssd-not-detected': {
+    title: 'SSD Not Detected',
+    icon: '💾',
+    category: 'Storage',
+    symptoms: ['SSD missing from BIOS/UEFI boot devices', 'Drive not visible in Windows Disk Management', 'SSD disappears after a restart', 'Drive shows in BIOS but Windows cannot find it'],
+    intro: 'An SSD not detected can mean the drive is not receiving power, there is a physical or configuration issue with the slot, the drive needs initialisation in Windows, or the drive has failed. Work through these steps in order.',
+    steps: [
+      {
+        step: 1,
+        check: 'Check BIOS/UEFI for the drive',
+        action: 'Enter BIOS (F2, Del, or F10 at boot). Go to Storage/SATA configuration or the boot device list. If the SSD appears here, the issue is a Windows configuration or driver problem. If not, the issue is hardware or slot configuration.',
+      },
+      {
+        step: 2,
+        check: 'Physical connections (SATA / M.2)',
+        action: 'For SATA SSDs: reseat both the data cable and power cable. Try a different SATA data cable and port. For M.2 SSDs: power off, remove the screw, extract and reinsert firmly, rescrew. Ensure the M.2 key type matches (B+M key fits both NVMe and SATA M.2 slots; M key is NVMe only).',
+      },
+      {
+        step: 3,
+        check: 'M.2 slot mode (NVMe vs SATA)',
+        action: 'Many M.2 slots support both NVMe (PCIe) and SATA protocols, but some support only one. Check your motherboard manual. Using an NVMe SSD in a SATA-only M.2 slot means the drive will not appear in BIOS.',
+      },
+      {
+        step: 4,
+        check: 'Initialise in Disk Management (new drives)',
+        action: 'Press Win+X → Disk Management. If the SSD appears here but has no drive letter or partition, right-click → "Initialise Disk" (choose GPT for drives >2 TB or UEFI systems). Then right-click the unallocated space → "New Simple Volume" to format it.',
+      },
+      {
+        step: 5,
+        check: 'Enable M.2/NVMe slot in BIOS',
+        action: 'Some motherboards disable M.2 slots by default, or sharing bandwidth with a PCIe slot means enabling one disables the other. In BIOS, look for "M.2 Configuration", "PCIe/NVMe Configuration" or "Storage Configuration". Enable the M.2 slot the drive is in.',
+      },
+      {
+        step: 6,
+        check: 'Update storage controller driver',
+        action: 'Device Manager → Storage controllers. Update drivers for the NVMe or SATA AHCI controller. For Intel systems: Intel Rapid Storage Technology (RST) from intel.com. For AMD: AMD SATA controller drivers from amd.com.',
+      },
+      {
+        step: 7,
+        check: 'Test drive in another system or USB enclosure',
+        action: 'Insert the M.2 or SATA SSD into a USB enclosure (inexpensive, available for both SATA and NVMe). Connect to another PC. If detected externally, the issue is the motherboard slot. If not detected even externally, run CrystalDiskInfo — no SMART data at all suggests physical drive failure.',
+      },
+    ],
+    prevention: [
+      'Buy SSDs from reputable brands (Samsung, WD, Crucial, Seagate).',
+      'Use M.2 thermal pads in hot systems — NVMe drives throttle above 70°C.',
+      'Keep at least 10% SSD free — a critically full SSD can cause detection issues.',
+      'Back up data regularly; SSDs can fail without warning.',
+    ],
+    whenToSeekHelp: 'If the SSD is not detected externally via USB enclosure and CrystalDiskInfo shows no SMART data, the drive has likely experienced a physical failure. Data recovery services can sometimes recover data, but it is expensive.',
+  },
+
+  'bluetooth-pairing-issues': {
+    title: 'Bluetooth Pairing Issues',
+    icon: '📶',
+    category: 'Connectivity',
+    symptoms: ['Device refuses to pair or stay paired', 'Bluetooth audio stutters or disconnects', 'Device shows "Connected" but no audio or input received', 'Range significantly shorter than specified', 'Pairing works briefly then drops'],
+    intro: 'Bluetooth pairing failures are most often caused by stale pairing entries, driver bugs, radio interference, or power management settings aggressively cutting the Bluetooth adapter. Work through these in order — the fix is usually software-side.',
+    steps: [
+      {
+        step: 1,
+        check: 'Remove and re-pair the device',
+        action: 'On Windows: Settings → Bluetooth & devices → find the device → "..." → Remove device. On the Bluetooth peripheral, put it into pairing mode (usually hold the pairing button until the LED flashes rapidly — check the device manual). Then re-pair from scratch.',
+      },
+      {
+        step: 2,
+        check: 'Update or reinstall Bluetooth driver',
+        action: 'Device Manager → Bluetooth → right-click the Bluetooth adapter → Update driver. For Intel Wireless adapters: download the latest driver from intel.com/wireless. For Qualcomm/Atheros: check your laptop manufacturer\'s support site. After updating, re-pair.',
+      },
+      {
+        step: 3,
+        check: 'Disable power management on adapter',
+        action: 'Device Manager → Bluetooth → right-click adapter → Properties → Power Management → uncheck "Allow the computer to turn off this device to save power". This is the most common fix for Bluetooth that connects briefly then drops.',
+      },
+      {
+        step: 4,
+        check: 'Check for interference',
+        action: 'Bluetooth and 2.4 GHz Wi-Fi share the same frequency band and can interfere. Move away from your router. Microwave ovens, baby monitors and cordless phones also cause interference. Keep USB 3.0 devices (especially hubs) away from Bluetooth peripherals — USB 3.0 emits interference at 2.4 GHz.',
+      },
+      {
+        step: 5,
+        check: 'Restart Bluetooth services',
+        action: 'Press Win+R → type "services.msc". Find "Bluetooth Support Service" and "Bluetooth Audio Gateway Service". Right-click → Restart each. Also try: Turn Bluetooth off in Settings, wait 10 seconds, turn back on. This clears stuck pairing states without a full reboot.',
+      },
+      {
+        step: 6,
+        check: 'Test with a different Bluetooth device',
+        action: 'Try pairing a different Bluetooth device (e.g., your phone paired to your laptop). If another device pairs and stays connected, the issue is specific to the original peripheral — it may need a factory reset or firmware update.',
+      },
+      {
+        step: 7,
+        check: 'Factory reset or firmware update on the peripheral',
+        action: 'Most modern Bluetooth headsets, keyboards and mice have a factory reset procedure (check the manual — usually hold two buttons simultaneously for 5–10 seconds). Also check the manufacturer\'s app (Sony Headphones Connect, Samsung Galaxy Wearable, Jabra Sound+ etc.) for firmware updates that fix pairing stability bugs.',
+      },
+    ],
+    prevention: [
+      'Remove Bluetooth devices you no longer use — too many paired entries causes issues.',
+      'Keep USB 3.0 devices away from Bluetooth peripherals.',
+      'Update Bluetooth drivers after major Windows updates.',
+      'Use 5 GHz Wi-Fi where possible to free the 2.4 GHz band for Bluetooth.',
+    ],
+    whenToSeekHelp: 'If the Bluetooth adapter is not detected at all in Device Manager, or disappeared after a Windows update, a USB Bluetooth dongle is an inexpensive alternative. If the problem is the peripheral itself (crashes, no LED, no pairing mode), contact the manufacturer for warranty support.',
   },
 
   'printer-not-printing': {

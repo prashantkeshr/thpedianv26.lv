@@ -9,6 +9,9 @@ const guides = [
   { slug: 'wifi-disconnecting', title: 'Wi-Fi बार-बार डिस्कनेक्ट', category: 'नेटवर्किंग', icon: '📶', steps: 7, symptoms: 'रुक-रुक कर कनेक्शन टूटना, धीमी स्पीड, इंटरनेट नहीं।' },
   { slug: 'monitor-flickering', title: 'मॉनिटर फ्लिकरिंग', category: 'मॉनिटर', icon: '🖥️', steps: 7, symptoms: 'स्क्रीन झिलमिलाना, ब्राइटनेस के साथ बदलना, ब्लैक फ्लैश।' },
   { slug: 'printer-not-printing', title: 'प्रिंटर प्रिंट नहीं कर रहा', category: 'प्रिंटर', icon: '🖨️', steps: 7, symptoms: 'ऑफलाइन स्टेटस, प्रिंट कतार में फंसा, खाली पेज आना।' },
+  { slug: 'gpu-driver-crash', title: 'GPU ड्राइवर क्रैश', category: 'GPU', icon: '🎮', steps: 7, symptoms: 'काली स्क्रीन, nvlddmkm.sys BSOD, आर्टिफैक्ट, TDR टाइमआउट।' },
+  { slug: 'ssd-not-detected', title: 'SSD डिटेक्ट नहीं हो रहा', category: 'स्टोरेज', icon: '💾', steps: 7, symptoms: 'BIOS में SSD नहीं, Disk Management में अनुपस्थित, रिस्टार्ट पर गायब।' },
+  { slug: 'bluetooth-pairing-issues', title: 'Bluetooth पेयरिंग समस्याएं', category: 'कनेक्टिविटी', icon: '📶', steps: 7, symptoms: 'डिवाइस पेयर नहीं होती, ऑडियो रुकता है, थोड़े समय बाद डिस्कनेक्ट।' },
 ];
 ---
 
@@ -37,14 +40,9 @@ const guides = [
       </div>
     </div>
 
-    <div class="rounded-xl bg-navy-800/40 border border-tp-border p-4 mb-8 text-sm text-slate-400 flex items-center gap-2">
-      <span>🌐</span>
-      <span>विस्तृत गाइड अंग्रेज़ी में उपलब्ध हैं। <a href={`${BASE}/en/troubleshoot/`} class="text-tp-blue hover:underline">अंग्रेज़ी संस्करण</a> देखें।</span>
-    </div>
-
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
       {guides.map(guide => (
-        <a href={`${BASE}/en/troubleshoot/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-amber-700/50 transition-colors">
+        <a href={`${BASE}/hi/troubleshoot/${guide.slug}/`} class="tp-card p-5 flex flex-col gap-3 hover:border-amber-700/50 transition-colors">
           <div class="flex items-center gap-3">
             <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">{guide.icon}</div>
             <div>

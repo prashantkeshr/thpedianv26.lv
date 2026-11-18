@@ -1,0 +1,370 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+const BASE = '';
+
+export async function getStaticPaths() {
+  const slugs = [
+    'laptop-overheating', 'smartphone-battery-drain', 'pc-wont-boot',
+    'wifi-disconnecting', 'monitor-flickering', 'printer-not-printing',
+    'gpu-driver-crash', 'ssd-not-detected', 'bluetooth-pairing-issues',
+  ];
+  return slugs.map(s => ({ params: { slug: s } }));
+}
+
+const { slug } = Astro.params;
+
+type Step = { step: number; check: string; checkHi: string; action: string; actionHi: string; warning?: string; warningHi?: string; };
+type Guide = {
+  title: string; titleHi: string; icon: string; category: string; categoryHi: string;
+  symptoms: string[]; symptomsHi: string[];
+  safetyNote?: string; safetyNoteHi?: string;
+  intro: string; introHi: string;
+  steps: Step[];
+  prevention: string[]; preventionHi: string[];
+  whenToSeekHelp: string; whenToSeekHelpHi: string;
+};
+
+const guides: Record<string, Guide> = {
+
+  'laptop-overheating': {
+    title: 'Laptop Overheating', titleHi: 'लैपटॉप ओवरहीटिंग',
+    icon: '🌡️', category: 'Laptop', categoryHi: 'लैपटॉप',
+    symptoms: ['Laptop fan runs at full speed constantly', 'Performance drops under load (thermal throttling)', 'Unexpected shutdown during gaming or rendering', 'Bottom of the chassis is hot to touch', 'High CPU/GPU temps in monitoring software'],
+    symptomsHi: ['लैपटॉप का फैन हमेशा पूरी स्पीड पर चलता है', 'लोड में परफॉर्मेंस कम हो जाती है (थर्मल थ्रॉटलिंग)', 'गेमिंग या रेंडरिंग के दौरान अचानक बंद हो जाता है', 'चेसिस का निचला भाग छूने पर बहुत गर्म', 'मॉनिटरिंग सॉफ्टवेयर में CPU/GPU तापमान अधिक'],
+    intro: 'Overheating degrades performance and shortens component lifespan. Modern laptops throttle the CPU and GPU to protect hardware — if yours shuts down unexpectedly or the fan never stops, work through these steps.',
+    introHi: 'ओवरहीटिंग परफॉर्मेंस को कम करती है और घटकों की उम्र घटाती है। आधुनिक लैपटॉप हार्डवेयर की सुरक्षा के लिए CPU और GPU को धीमा कर देते हैं। यदि लैपटॉप अचानक बंद हो या फैन बंद न हो, तो ये चरण अपनाएं।',
+    steps: [
+      { step: 1, check: 'Monitor actual temperatures', checkHi: 'वास्तविक तापमान मापें', action: 'Download HWMonitor or HWiNFO64. Run a stress test for 10 minutes. Normal laptop CPU peak: 85–95°C. GPU: 80–90°C. If you see sustained temps above 95°C (CPU) or 90°C (GPU), overheating is confirmed.', actionHi: 'HWMonitor या HWiNFO64 डाउनलोड करें। 10 मिनट का स्ट्रेस टेस्ट चलाएं। सामान्य CPU पीक: 85–95°C, GPU: 80–90°C। यदि CPU 95°C और GPU 90°C से अधिक हो, ओवरहीटिंग की पुष्टि है।' },
+      { step: 2, check: 'Clean vents and fans', checkHi: 'वेंट और फैन साफ करें', action: 'Use compressed air to blow through the exhaust vents (bottom/side). Most laptops accumulate dust in the heatsink fins within 1–2 years. If possible, unscrew the bottom panel and blow dust directly at the heatsink and fan.', actionHi: 'कंप्रेस्ड एयर से एग्ज़ॉस्ट वेंट (नीचे/साइड) साफ करें। 1–2 साल में अधिकांश लैपटॉप के हीटसिंक में धूल जम जाती है। यदि संभव हो, बॉटम पैनल खोलकर सीधे हीटसिंक और फैन पर हवा मारें।' },
+      { step: 3, check: 'Surface and airflow', checkHi: 'सतह और एयरफ्लो जांचें', action: 'Never use on soft surfaces (bed, lap, sofa) that block bottom vents. Use a hard, flat surface. A laptop stand that elevates the chassis 2–3 cm can drop temps 5–8°C.', actionHi: 'कभी भी नरम सतहों (बिस्तर, गोद, सोफे) पर उपयोग न करें — ये नीचे के वेंट बंद कर देती हैं। कठोर, समतल सतह का उपयोग करें। लैपटॉप स्टैंड तापमान 5–8°C तक कम कर सकता है।' },
+      { step: 4, check: 'Power plan and GPU mode', checkHi: 'पावर प्लान और GPU मोड', action: 'Windows: Settings → System → Power → switch to "Balanced" instead of "High Performance". In NVIDIA Control Panel or AMD Software, switch to integrated graphics for light tasks. Some laptops have an MUX switch — set to iGPU-only for work tasks.', actionHi: 'Windows: Settings → System → Power → "Balanced" चुनें, "High Performance" नहीं। NVIDIA Control Panel या AMD Software में हल्के कार्यों के लिए इंटीग्रेटेड ग्राफिक्स पर स्विच करें। कुछ लैपटॉप में MUX स्विच होता है — काम के लिए iGPU-only चुनें।' },
+      { step: 5, check: 'Background processes and updates', checkHi: 'बैकग्राउंड प्रोसेस और अपडेट', action: 'Open Task Manager → CPU column. Any process using >15% CPU at idle is suspicious. Windows Update often runs in the background after a fresh install — wait 30–60 min and check if it calms down. Antivirus scans also spike CPU.', actionHi: 'Task Manager खोलें → CPU कॉलम देखें। आइडल पर 15% से अधिक CPU उपयोग करने वाली प्रोसेस संदिग्ध है। विंडोज अपडेट नई इंस्टाल के बाद बैकग्राउंड में चलता है — 30–60 मिनट प्रतीक्षा करें। एंटीवायरस स्कैन भी CPU बढ़ाता है।' },
+      { step: 6, check: 'BIOS/firmware fan settings', checkHi: 'BIOS/फर्मवेयर फैन सेटिंग', action: 'Enter BIOS (usually F2 or Del at boot). Check "Fan Control" or "Thermal Policy" settings. Some manufacturers set fans too conservatively. Update BIOS/firmware — manufacturers often push thermal improvements. For ASUS: MyASUS app; Lenovo: Vantage; Dell: SupportAssist.', actionHi: 'BIOS में जाएं (आमतौर पर F2 या Del)। "Fan Control" या "Thermal Policy" सेटिंग जांचें। BIOS/फर्मवेयर अपडेट करें — निर्माता अक्सर थर्मल सुधार लाते हैं। ASUS: MyASUS app; Lenovo: Vantage; Dell: SupportAssist।' },
+      { step: 7, check: 'Repaste the CPU/GPU (advanced)', checkHi: 'CPU/GPU थर्मल पेस्ट बदलें (उन्नत)', action: 'If the laptop is 3+ years old and temps remain high after cleaning, the thermal paste may have dried. Replace with a quality compound (Thermal Grizzly Kryonaut, Arctic MX-6). This requires opening the laptop — check a YouTube guide for your specific model.', actionHi: 'यदि लैपटॉप 3 साल से पुराना है और साफ करने के बाद भी तापमान अधिक है, तो थर्मल पेस्ट सूख गया होगा। गुणवत्तापूर्ण कंपाउंड से बदलें। इसके लिए लैपटॉप खोलना होगा — अपने मॉडल के लिए YouTube गाइड देखें।', warning: 'Opening the laptop voids warranty on many models. Confirm before proceeding.', warningHi: 'कई मॉडलों में लैपटॉप खोलने से वारंटी समाप्त हो जाती है। आगे बढ़ने से पहले पुष्टि करें।' },
+    ],
+    prevention: ['Use on hard, flat surfaces with bottom vents unobstructed.', 'Clean vents with compressed air every 6–12 months.', 'Replace thermal paste every 3–4 years on aging laptops.', 'Keep ambient room temperature below 25°C for heavy use.'],
+    preventionHi: ['कठोर, समतल सतह पर उपयोग करें, वेंट बंद न हों।', 'हर 6–12 महीने में कंप्रेस्ड एयर से वेंट साफ करें।', 'पुराने लैपटॉप में हर 3–4 साल में थर्मल पेस्ट बदलें।', 'भारी उपयोग के लिए कमरे का तापमान 25°C से नीचे रखें।'],
+    whenToSeekHelp: 'If temps exceed 100°C even after cleaning and repasting, the heatsink may be bent or the fan failing. These require professional service.',
+    whenToSeekHelpHi: 'यदि साफ करने और पेस्ट बदलने के बाद भी तापमान 100°C से अधिक हो, तो हीटसिंक टेढ़ा हो सकता है या फैन खराब — इसके लिए प्रोफेशनल सेवा आवश्यक है।',
+  },
+
+  'smartphone-battery-drain': {
+    title: 'Smartphone Battery Drain', titleHi: 'स्मार्टफोन बैटरी जल्दी खत्म',
+    icon: '🔋', category: 'Smartphone', categoryHi: 'स्मार्टफोन',
+    symptoms: ['Battery percentage drops faster than expected', 'Phone warm even when idle', 'Battery dies at >10%', 'Apps killed in background keep draining power'],
+    symptomsHi: ['बैटरी प्रतिशत अपेक्षा से तेज़ घटता है', 'फोन बिना काम के गर्म रहता है', 'बैटरी 10% से अधिक पर भी बंद हो जाती है', 'बैकग्राउंड में बंद ऐप्स बैटरी खींचते रहते हैं'],
+    intro: 'Rapid battery drain has two categories: software (apps, settings, background activity) and hardware (degraded battery). Start with software — it resolves 70–80% of drain issues.',
+    introHi: 'बैटरी की तेज़ खपत दो कारणों से होती है: सॉफ्टवेयर (ऐप्स, सेटिंग, बैकग्राउंड गतिविधि) और हार्डवेयर (खराब बैटरी)। सॉफ्टवेयर से शुरू करें — 70–80% समस्याएं यहीं ठीक होती हैं।',
+    steps: [
+      { step: 1, check: 'Check battery health', checkHi: 'बैटरी स्वास्थ्य जांचें', action: 'iOS: Settings → Battery → Battery Health. Android: Samsung → Settings → Device Care → Battery; stock Android → dial *#*#4636#*#* → Battery Information. If capacity is below 80%, battery replacement is likely the fix.', actionHi: 'iOS: Settings → Battery → Battery Health। Android: Samsung → Settings → Device Care → Battery; stock Android → *#*#4636#*#* डायल करें → Battery Information। क्षमता 80% से कम है तो बैटरी बदलना आवश्यक है।' },
+      { step: 2, check: 'Identify high-drain apps', checkHi: 'अधिक बैटरी खींचने वाले ऐप्स', action: 'iOS: Settings → Battery → scroll to "Battery Usage by App". Android: Settings → Battery → Usage/Details. Any single app using >20% battery while in background is a problem.', actionHi: 'iOS: Settings → Battery → "Battery Usage by App" देखें। Android: Settings → Battery → Usage/Details। कोई भी ऐप जो बैकग्राउंड में 20% से अधिक बैटरी उपयोग करे, समस्या है।' },
+      { step: 3, check: 'Background activity and location', checkHi: 'बैकग्राउंड और लोकेशन', action: 'iOS: Settings → Privacy → Location Services — change "Always" to "While Using". Settings → General → Background App Refresh → disable for non-essential apps. Android: Settings → Location → App Permissions → check "All the time" permissions.', actionHi: 'iOS: Settings → Privacy → Location Services — "Always" को "While Using" में बदलें। Settings → General → Background App Refresh → गैर-ज़रूरी ऐप्स के लिए बंद करें। Android: Settings → Location → App Permissions जांचें।' },
+      { step: 4, check: 'Display and always-on features', checkHi: 'डिस्प्ले और ऑलवेज़-ऑन फीचर', action: 'Screen is the single largest power consumer. Reduce brightness, disable Always-On Display, reduce refresh rate from 120 Hz to 60 Hz. Disable "Raise to Wake" if not needed.', actionHi: 'स्क्रीन सबसे अधिक बिजली खर्च करती है। ब्राइटनेस कम करें, Always-On Display बंद करें, 120 Hz से 60 Hz पर स्विच करें। "Raise to Wake" अनावश्यक हो तो बंद करें।' },
+      { step: 5, check: 'Push notifications and sync', checkHi: 'नोटिफिकेशन और सिंक', action: 'Email apps checking every minute wake the CPU hundreds of times per day. Set email to "Manual" or 15-min fetch. Disable live widgets you do not use.', actionHi: 'हर मिनट चेक करने वाले ईमेल ऐप्स CPU को सैकड़ों बार जगाते हैं। ईमेल को "Manual" या 15 मिनट फेच पर सेट करें। अनुपयोगी लाइव विजेट बंद करें।' },
+      { step: 6, check: 'Connectivity radios', checkHi: 'कनेक्टिविटी रेडियो', action: 'Wi-Fi scanning, Bluetooth, NFC and 5G all increase drain. When you do not need Bluetooth, turn it off. 5G (especially mmWave) consumes significantly more power than LTE.', actionHi: 'Wi-Fi स्कैनिंग, Bluetooth, NFC और 5G सभी बैटरी बढ़ाते हैं। Bluetooth ज़रूरी न हो तो बंद करें। 5G (विशेषकर mmWave) LTE से काफी अधिक बिजली खर्च करता है।' },
+      { step: 7, check: 'Factory reset (last resort)', checkHi: 'फैक्ट्री रीसेट (अंतिम उपाय)', action: 'If steps 1–6 did not resolve the issue and battery health is above 80%, a factory reset can resolve background processes or corrupted settings. Back up all data first.', actionHi: 'यदि चरण 1–6 से समस्या ठीक नहीं हुई और बैटरी स्वास्थ्य 80% से अधिक है, तो फैक्ट्री रीसेट करें। पहले सभी डेटा का बैकअप लें।', warning: 'A factory reset erases all local data. Use iCloud, Google Backup or Samsung Smart Switch first.', warningHi: 'फैक्ट्री रीसेट सारा डेटा मिटा देता है। पहले iCloud, Google Backup या Samsung Smart Switch उपयोग करें।' },
+    ],
+    prevention: ['Charge between 20–80% when possible.', 'Avoid wireless charging overnight at 100%.', 'Keep phone below 35°C; heat accelerates battery degradation.', 'Use official or certified chargers.'],
+    preventionHi: ['जब संभव हो 20–80% के बीच चार्ज करें।', 'रात भर 100% पर वायरलेस चार्जिंग से बचें।', 'फोन को 35°C से नीचे रखें; गर्मी बैटरी खराब करती है।', 'आधिकारिक या प्रमाणित चार्जर उपयोग करें।'],
+    whenToSeekHelp: 'If the battery swells (back cover bowing, screen lifting at edges), stop using the device immediately — a swollen lithium battery is a fire risk.',
+    whenToSeekHelpHi: 'यदि बैटरी फूल जाए (पीछे का कवर उठे, स्क्रीन किनारों से उठे), तुरंत उपयोग बंद करें — फूली हुई लिथियम बैटरी आग का खतरा है।',
+  },
+
+  'pc-wont-boot': {
+    title: "PC Won't Boot", titleHi: 'PC बूट नहीं हो रहा',
+    icon: '🖥️', category: 'Desktop / Laptop', categoryHi: 'डेस्कटॉप / लैपटॉप',
+    symptoms: ['No display output on power-on', 'POST beep codes', 'Spinning fans but no display', 'Blue screen immediately on Windows load'],
+    symptomsHi: ['पावर ऑन पर कोई डिस्प्ले नहीं', 'POST बीप कोड', 'फैन चलते हैं लेकिन डिस्प्ले नहीं', 'Windows लोड होते ही ब्लू स्क्रीन'],
+    safetyNote: 'Always power off and unplug the PC before opening the case. Discharge static by touching a bare metal part first.',
+    safetyNoteHi: 'केस खोलने से पहले हमेशा PC बंद करें और पावर हटाएं। पहले धातु के किसी हिस्से को छूकर स्टैटिक डिस्चार्ज करें।',
+    intro: 'A PC that will not boot can fail at several stages: no power, no POST, OS boot failure, or driver crash. Identify which stage fails first.',
+    introHi: 'बूट न होने वाला PC कई स्तरों पर विफल हो सकता है: कोई पावर नहीं, POST नहीं, OS बूट विफल, या ड्राइवर क्रैश। पहले पहचानें कि कौन सा चरण विफल है।',
+    steps: [
+      { step: 1, check: 'Power and connections', checkHi: 'पावर और कनेक्शन', action: 'Verify PSU is switched on. Try a different wall outlet. Check the 24-pin ATX and EPS CPU power connectors are fully seated. Clear CMOS by removing the motherboard battery for 30 seconds.', actionHi: 'PSU चालू है की नहीं जांचें। अलग वॉल आउटलेट आज़माएं। 24-pin ATX और EPS CPU पावर कनेक्टर पूरी तरह लगे हों। मदरबोर्ड बैटरी 30 सेकंड निकालकर CMOS क्लियर करें।' },
+      { step: 2, check: 'Display connection', checkHi: 'डिस्प्ले कनेक्शन', action: 'If you have a dedicated GPU, plug the monitor into the GPU, not the motherboard. Try a different cable (HDMI vs DisplayPort). Try a different monitor.', actionHi: 'यदि डेडिकेटेड GPU है, मॉनिटर को मदरबोर्ड नहीं बल्कि GPU में लगाएं। अलग केबल (HDMI बनाम DisplayPort) आज़माएं। अलग मॉनिटर आज़माएं।' },
+      { step: 3, check: 'POST beep codes', checkHi: 'POST बीप कोड', action: 'Beep codes identify the failing component. 1 short beep = POST passed. Multiple beeps: check your motherboard manufacturer\'s beep code table. Common: 3 beeps = RAM failure.', actionHi: 'बीप कोड विफल घटक बताते हैं। 1 छोटी बीप = POST सफल। कई बीप: अपने मदरबोर्ड निर्माता की बीप कोड तालिका देखें। सामान्य: 3 बीप = RAM विफल।' },
+      { step: 4, check: 'RAM troubleshooting', checkHi: 'RAM समस्या निवारण', action: 'Remove all RAM. Reseat one stick in the first recommended slot (usually A2). Try each stick individually. Test each RAM slot. If only one combination works, the other stick or slot is likely faulty.', actionHi: 'सभी RAM निकालें। एक स्टिक पहले अनुशंसित स्लॉट (आमतौर पर A2) में लगाएं। प्रत्येक स्टिक अलग-अलग आज़माएं। प्रत्येक RAM स्लॉट आज़माएं।' },
+      { step: 5, check: 'GPU and PCIe slots', checkHi: 'GPU और PCIe स्लॉट', action: 'Remove the GPU and use integrated graphics to test. If the system posts with iGPU, the GPU or PCIe slot may be faulty. Try the GPU in a different PCIe ×16 slot if available.', actionHi: 'GPU निकालें और इंटीग्रेटेड ग्राफिक्स से परीक्षण करें। यदि iGPU से POST होता है, तो GPU या PCIe स्लॉट खराब हो सकता है।' },
+      { step: 6, check: 'Windows boot failure', checkHi: 'Windows बूट विफल', action: 'Boot from Windows USB installation media → Repair your computer → Startup Repair. If that fails: Command Prompt → run `sfc /scannow` and `bootrec /fixmbr`.', actionHi: 'Windows USB इंस्टालेशन मीडिया से बूट करें → Repair your computer → Startup Repair। विफल होने पर: Command Prompt → `sfc /scannow` और `bootrec /fixmbr` चलाएं।' },
+      { step: 7, check: 'Storage drive check', checkHi: 'स्टोरेज ड्राइव जांच', action: 'Boot from a Linux live USB. Run `lsblk` to check if the drive is detected. Run `badblocks` or `nvme smart-log` for NVMe to check for errors. A failing drive often causes boot loops.', actionHi: 'Linux लाइव USB से बूट करें। `lsblk` से ड्राइव की पहचान जांचें। NVMe के लिए `badblocks` या `nvme smart-log` चलाएं। खराब ड्राइव अक्सर बूट लूप का कारण बनती है।' },
+    ],
+    prevention: ['Use a surge protector or UPS.', 'Do not force-shutdown during Windows updates.', 'Keep at least 10% SSD free.'],
+    preventionHi: ['सर्ज प्रोटेक्टर या UPS उपयोग करें।', 'Windows अपडेट के दौरान जबरदस्ती बंद न करें।', 'SSD में कम से कम 10% खाली जगह रखें।'],
+    whenToSeekHelp: 'If the motherboard shows no signs of life despite confirmed PSU function, the motherboard may be dead. CPU failures also cause no-POST.',
+    whenToSeekHelpHi: 'यदि PSU की पुष्टि के बावजूद मदरबोर्ड में कोई संकेत नहीं है, तो मदरबोर्ड खराब हो सकता है। CPU विफलता भी no-POST का कारण है।',
+  },
+
+  'wifi-disconnecting': {
+    title: 'Wi-Fi Disconnecting', titleHi: 'Wi-Fi बार-बार डिस्कनेक्ट',
+    icon: '📶', category: 'Networking', categoryHi: 'नेटवर्किंग',
+    symptoms: ['Drops connection every few minutes', 'Cannot reconnect without toggling Wi-Fi', 'Shows connected but no internet', 'Slow speeds with good signal'],
+    symptomsHi: ['हर कुछ मिनट में कनेक्शन टूट जाता है', 'Wi-Fi टॉगल किए बिना पुनः कनेक्ट नहीं होता', 'कनेक्टेड दिखता है लेकिन इंटरनेट नहीं', 'अच्छे सिग्नल में भी धीमी स्पीड'],
+    intro: 'Wi-Fi drops can originate from the router, the client device, or radio interference. The key question: does only one device drop, or all devices on the same network?',
+    introHi: 'Wi-Fi कटना राउटर, डिवाइस या रेडियो इंटरफेरेंस से हो सकता है। मुख्य प्रश्न: केवल एक डिवाइस कटती है या नेटवर्क के सभी डिवाइस?',
+    steps: [
+      { step: 1, check: 'Is it one device or all?', checkHi: 'एक डिवाइस या सभी?', action: 'Check another device on the same Wi-Fi. If all devices drop: restart the router (unplug 30 sec). If only one device drops: the issue is that device\'s Wi-Fi adapter or driver.', actionHi: 'उसी Wi-Fi पर दूसरा डिवाइस जांचें। यदि सभी कटते हैं: राउटर रिस्टार्ट करें (30 सेकंड अनप्लग)। यदि केवल एक कटे: समस्या उस डिवाइस के Wi-Fi अडैप्टर या ड्राइवर में है।' },
+      { step: 2, check: 'Router restart and firmware', checkHi: 'राउटर रिस्टार्ट और फर्मवेयर', action: 'Unplug the router for 30 seconds, then reconnect. Log into the router admin panel (usually 192.168.1.1) and check for firmware updates. Outdated firmware frequently causes disconnections.', actionHi: 'राउटर 30 सेकंड अनप्लग करें। एडमिन पैनल (192.168.1.1) में लॉगिन करें और फर्मवेयर अपडेट जांचें। पुराना फर्मवेयर अक्सर डिस्कनेक्शन का कारण बनता है।' },
+      { step: 3, check: 'Wi-Fi channel and band', checkHi: 'Wi-Fi चैनल और बैंड', action: 'Switch to a less congested channel. 2.4 GHz: use channels 1, 6, or 11. 5 GHz is typically less congested. Use a Wi-Fi analyser app to see nearby networks.', actionHi: 'कम भीड़ वाले चैनल पर स्विच करें। 2.4 GHz: चैनल 1, 6 या 11 उपयोग करें। 5 GHz आमतौर पर कम भीड़ वाला है। Wi-Fi एनालाइज़र ऐप से पास के नेटवर्क देखें।' },
+      { step: 4, check: 'Windows power management', checkHi: 'Windows पावर प्रबंधन', action: 'Device Manager → Network Adapters → right-click Wi-Fi adapter → Properties → Power Management → uncheck "Allow the computer to turn off this device to save power".', actionHi: 'Device Manager → Network Adapters → Wi-Fi अडैप्टर पर राइट क्लिक → Properties → Power Management → "Allow the computer to turn off this device to save power" अनचेक करें।' },
+      { step: 5, check: 'Driver update or rollback', checkHi: 'ड्राइवर अपडेट या रोलबैक', action: 'Device Manager → right-click Wi-Fi adapter → Update driver. If a recent update caused the issue, roll back: Properties → Driver tab → Roll Back Driver.', actionHi: 'Device Manager → Wi-Fi अडैप्टर → ड्राइवर अपडेट करें। यदि हालिया अपडेट से समस्या हुई: Properties → Driver → Roll Back Driver।' },
+      { step: 6, check: 'Network stack reset', checkHi: 'नेटवर्क स्टैक रीसेट', action: 'Open Command Prompt as Administrator. Run: `netsh winsock reset`, `netsh int ip reset`, `ipconfig /flushdns`. Restart the PC.', actionHi: 'Command Prompt एडमिनिस्ट्रेटर के रूप में खोलें। चलाएं: `netsh winsock reset`, `netsh int ip reset`, `ipconfig /flushdns`। PC रिस्टार्ट करें।' },
+      { step: 7, check: 'Static IP assignment', checkHi: 'स्टैटिक IP असाइनमेंट', action: 'Some routers fail to renew DHCP leases. Assign a static IP: Network Connections → Wi-Fi properties → IPv4 → Manual → enter an IP outside the router\'s DHCP range.', actionHi: 'कुछ राउटर DHCP लीज़ रिन्यू नहीं करते। स्टैटिक IP असाइन करें: Network Connections → Wi-Fi → IPv4 → Manual → राउटर की DHCP रेंज से बाहर IP दर्ज करें।' },
+    ],
+    prevention: ['Keep router firmware updated.', 'Place the router centrally, away from microwaves.', 'Use 5 GHz or 6 GHz where possible.', 'Reboot router monthly.'],
+    preventionHi: ['राउटर फर्मवेयर अपडेट रखें।', 'राउटर को केंद्रीय स्थान पर रखें, माइक्रोवेव से दूर।', 'जहां संभव हो 5 GHz या 6 GHz उपयोग करें।', 'राउटर को मासिक रीबूट करें।'],
+    whenToSeekHelp: 'If all devices drop and drops correlate with specific times of day, contact your ISP — line quality or congestion issues require their tools.',
+    whenToSeekHelpHi: 'यदि सभी डिवाइस कटती हैं और दिन के निश्चित समय पर होता है, तो ISP से संपर्क करें — लाइन गुणवत्ता या कंजेशन समस्या उनके टूल से हल होगी।',
+  },
+
+  'monitor-flickering': {
+    title: 'Monitor Flickering', titleHi: 'मॉनिटर फ्लिकरिंग',
+    icon: '🖥️', category: 'Monitor', categoryHi: 'मॉनिटर',
+    symptoms: ['Screen flickers at a noticeable rate', 'Flickering only in certain apps or brightness levels', 'Lines or bands scrolling across', 'Black flash then image returns'],
+    symptomsHi: ['स्क्रीन ध्यान देने योग्य दर से झिलमिलाती है', 'कुछ ऐप्स या ब्राइटनेस स्तरों पर फ्लिकरिंग', 'स्क्रीन पर धारियां या बैंड', 'काला फ्लैश फिर छवि वापस आती है'],
+    intro: 'Monitor flickering can originate in the display panel, the cable, the GPU driver, or software settings. PWM dimming is a common cause for brightness-dependent flicker.',
+    introHi: 'मॉनिटर फ्लिकरिंग डिस्प्ले पैनल, केबल, GPU ड्राइवर या सॉफ्टवेयर सेटिंग से हो सकती है। PWM डिमिंग ब्राइटनेस-निर्भर फ्लिकर का सामान्य कारण है।',
+    steps: [
+      { step: 1, check: 'Cable and connection', checkHi: 'केबल और कनेक्शन', action: 'Replace the cable (try a different HDMI or DisplayPort). Try the other port on the GPU. Test with a different monitor. A loose cable is the most common cause.', actionHi: 'केबल बदलें (अलग HDMI या DisplayPort)। GPU के दूसरे पोर्ट पर कोशिश करें। दूसरे मॉनिटर से परीक्षण करें। ढीली केबल सबसे आम कारण है।' },
+      { step: 2, check: 'Refresh rate and resolution', checkHi: 'रिफ्रेश रेट और रेज़ोल्यूशन', action: 'Right-click desktop → Display Settings → Advanced display settings. Ensure refresh rate matches monitor\'s rated spec. Incorrect refresh rate causes visible pulsing.', actionHi: 'डेस्कटॉप पर राइट क्लिक → Display Settings → Advanced display settings। रिफ्रेश रेट मॉनिटर की रेटेड स्पेक से मेल खाना चाहिए। गलत रिफ्रेश रेट से स्पंदन दिखता है।' },
+      { step: 3, check: 'GPU driver clean install', checkHi: 'GPU ड्राइवर क्लीन इंस्टाल', action: 'Boot into Safe Mode, run Display Driver Uninstaller (DDU) to fully remove the current driver, then install the latest version fresh from NVIDIA/AMD/Intel.', actionHi: 'Safe Mode में बूट करें, Display Driver Uninstaller (DDU) से वर्तमान ड्राइवर पूरी तरह हटाएं, फिर NVIDIA/AMD/Intel से नवीनतम संस्करण इंस्टाल करें।' },
+      { step: 4, check: 'PWM dimming at low brightness', checkHi: 'कम ब्राइटनेस पर PWM डिमिंग', action: 'Most monitors use PWM to control brightness. At low brightness (<30%), the PWM frequency may be visible as flicker. Try increasing brightness to 50%+ and see if flicker disappears.', actionHi: 'अधिकांश मॉनिटर ब्राइटनेस के लिए PWM उपयोग करते हैं। कम ब्राइटनेस (<30%) पर PWM फ्रीक्वेंसी फ्लिकर के रूप में दिख सकती है। ब्राइटनेस 50%+ बढ़ाएं और देखें।' },
+      { step: 5, check: 'Hardware acceleration in apps', checkHi: 'ऐप्स में हार्डवेयर एक्सेलरेशन', action: 'In Chrome: Settings → System → disable "Use hardware acceleration". In Firefox: Performance → uncheck "Use hardware acceleration". If only one app flickers, this is likely the cause.', actionHi: 'Chrome में: Settings → System → "Use hardware acceleration" बंद करें। Firefox में: Performance → "Use hardware acceleration" अनचेक करें। यदि केवल एक ऐप में फ्लिकर है, यही कारण है।' },
+      { step: 6, check: 'VRR / G-Sync / FreeSync', checkHi: 'VRR / G-Sync / FreeSync', action: 'VRR can cause black flickers when frame rate drops near the VRR minimum. In NVIDIA Control Panel: disable G-Sync and test. Some monitors need firmware updates for stable VRR.', actionHi: 'VRR न्यूनतम के पास फ्रेम रेट गिरने पर काले फ्लैश हो सकते हैं। NVIDIA Control Panel में G-Sync बंद करके परीक्षण करें। कुछ मॉनिटरों को VRR के लिए फर्मवेयर अपडेट चाहिए।' },
+      { step: 7, check: 'Monitor self-test', checkHi: 'मॉनिटर सेल्फ-टेस्ट', action: 'Hold monitor\'s Menu/Input button while unplugging the data cable. The monitor displays a test pattern from its own circuitry. If the self-test pattern also flickers, the issue is the panel itself.', actionHi: 'डेटा केबल अनप्लग करते समय मॉनिटर का Menu/Input बटन दबाएं। मॉनिटर अपना टेस्ट पैटर्न दिखाएगा। यदि टेस्ट पैटर्न में भी फ्लिकर हो, तो समस्या पैनल में है।', warning: 'A flickering panel in self-test indicates a failing scaler board — repair may cost more than a new monitor.', warningHi: 'सेल्फ-टेस्ट में फ्लिकरिंग स्केलर बोर्ड विफलता दर्शाती है — मरम्मत नए मॉनिटर से महंगी हो सकती है।' },
+    ],
+    prevention: ['Use quality DisplayPort 1.4 or HDMI 2.1 cables.', 'Keep GPU drivers up to date.', 'Avoid running monitors above their rated refresh rate.'],
+    preventionHi: ['गुणवत्तापूर्ण DisplayPort 1.4 या HDMI 2.1 केबल उपयोग करें।', 'GPU ड्राइवर अपडेट रखें।', 'मॉनिटर को उसकी रेटेड रिफ्रेश रेट से अधिक पर न चलाएं।'],
+    whenToSeekHelp: 'If flickering appears in the monitor\'s self-test pattern, the fault is inside the monitor. Panel replacements are often not cost-effective for monitors under 27".',
+    whenToSeekHelpHi: 'यदि सेल्फ-टेस्ट पैटर्न में फ्लिकरिंग हो, तो खराबी मॉनिटर के अंदर है। 27" से छोटे मॉनिटर में पैनल बदलना किफायती नहीं होता।',
+  },
+
+  'printer-not-printing': {
+    title: 'Printer Not Printing', titleHi: 'प्रिंटर प्रिंट नहीं कर रहा',
+    icon: '🖨️', category: 'Printer', categoryHi: 'प्रिंटर',
+    symptoms: ['Printer shows "Offline" in Windows', 'Print jobs stuck in queue', 'Pages print blank', 'Streaks, bands or missing colours'],
+    symptomsHi: ['Windows में प्रिंटर "Offline" दिखता है', 'प्रिंट जॉब कतार में फंसे', 'खाली पेज छपते हैं', 'धारियां, बैंड या रंग गायब'],
+    intro: 'Printer problems fall into three categories: connectivity, software (spooler/driver) and hardware (ink, paper path, printhead). Offline errors are almost always software or connectivity.',
+    introHi: 'प्रिंटर समस्याएं तीन श्रेणियों में हैं: कनेक्टिविटी, सॉफ्टवेयर (स्पूलर/ड्राइवर) और हार्डवेयर (स्याही, पेपर पाथ)। ऑफलाइन त्रुटियां लगभग हमेशा सॉफ्टवेयर या कनेक्टिविटी की होती हैं।',
+    steps: [
+      { step: 1, check: 'Printer power and connection', checkHi: 'प्रिंटर पावर और कनेक्शन', action: 'Verify the printer is powered on with no error lights. For USB: try a different cable and port. For Wi-Fi: ensure the printer and PC are on the same network. Print a test page from the printer\'s control panel.', actionHi: 'प्रिंटर चालू है और कोई एरर लाइट नहीं — सुनिश्चित करें। USB के लिए: अलग केबल और पोर्ट आज़माएं। Wi-Fi के लिए: प्रिंटर और PC एक ही नेटवर्क पर हों। प्रिंटर के कंट्रोल पैनल से टेस्ट पेज प्रिंट करें।' },
+      { step: 2, check: 'Clear print queue and spooler', checkHi: 'प्रिंट कतार और स्पूलर साफ करें', action: 'Open Services (search "services.msc") → find "Print Spooler" → Stop it. Navigate to C:\\Windows\\System32\\spool\\PRINTERS and delete all files. Go back to Services → Start "Print Spooler" again.', actionHi: '"services.msc" खोजें → "Print Spooler" → बंद करें। C:\\Windows\\System32\\spool\\PRINTERS में सभी फाइलें हटाएं। Services में वापस जाएं → "Print Spooler" शुरू करें।' },
+      { step: 3, check: 'Default printer and offline status', checkHi: 'डिफ़ॉल्ट प्रिंटर और ऑफलाइन स्टेटस', action: 'Control Panel → Devices and Printers → right-click your printer → "See what\'s printing" → Printer menu → uncheck "Use Printer Offline". Also right-click → "Set as default printer".', actionHi: 'Control Panel → Devices and Printers → प्रिंटर पर राइट क्लिक → "See what\'s printing" → Printer मेनू → "Use Printer Offline" अनचेक करें। "Set as default printer" भी करें।' },
+      { step: 4, check: 'Reinstall printer driver', checkHi: 'प्रिंटर ड्राइवर पुनः इंस्टाल', action: 'Remove the printer from Devices and Printers. Download the latest driver from the manufacturer\'s website. Run the installer — choose full installation, not "basic driver".', actionHi: 'Devices and Printers से प्रिंटर हटाएं। निर्माता की वेबसाइट से नवीनतम ड्राइवर डाउनलोड करें। इंस्टालर चलाएं — "basic driver" नहीं, पूर्ण इंस्टालेशन चुनें।' },
+      { step: 5, check: 'Ink/toner and printhead', checkHi: 'स्याही/टोनर और प्रिंटहेड', action: 'Check ink levels in the printer utility software. Run a nozzle check and a printhead cleaning cycle. For inkjet printers idle for weeks, 2–3 cleaning cycles may be needed for dried nozzles.', actionHi: 'प्रिंटर यूटिलिटी सॉफ्टवेयर में स्याही स्तर जांचें। नोज़ल चेक और प्रिंटहेड क्लीनिंग साइकल चलाएं। हफ्तों से बंद inkjet में 2–3 क्लीनिंग साइकल चाहिए।', warning: 'Excessive printhead cleaning uses significant ink. After 3 cycles with no improvement, consider manual cleaning or replacement.', warningHi: 'अत्यधिक प्रिंटहेड क्लीनिंग स्याही खर्च करती है। 3 साइकल में सुधार न हो तो मैनुअल क्लीनिंग या बदलाव सोचें।' },
+      { step: 6, check: 'Paper path and jam detection', checkHi: 'पेपर पाथ और जाम', action: 'Open all access panels and check for tiny paper fragments even if you do not see a full jam. Remove debris carefully — do not tear paper against the direction of paper travel.', actionHi: 'सभी एक्सेस पैनल खोलें और छोटे कागज़ के टुकड़े जांचें, भले ही पूरा जाम न दिखे। मलबा सावधानी से हटाएं — पेपर यात्रा की दिशा के विरुद्ध न खींचें।' },
+      { step: 7, check: 'Network printer IP', checkHi: 'नेटवर्क प्रिंटर IP', action: 'Wi-Fi printers change IP if assigned by DHCP. Print a network config page from the printer to see its current IP. In Windows, check printer Properties → Ports → verify the IP matches.', actionHi: 'DHCP से IP मिलने पर Wi-Fi प्रिंटर की IP बदल जाती है। प्रिंटर से नेटवर्क कॉन्फिग पेज प्रिंट करें। Windows में प्रिंटर Properties → Ports → IP जांचें।' },
+    ],
+    prevention: ['Print at least one page per week to prevent inkjet nozzle drying.', 'Assign a static IP to network printers via the router.', 'Use original or high-quality cartridges.'],
+    preventionHi: ['inkjet नोज़ल सूखने से बचाने के लिए हर हफ्ते कम से कम एक पेज प्रिंट करें।', 'राउटर से नेटवर्क प्रिंटरों को स्टैटिक IP दें।', 'मूल या उच्च-गुणवत्ता वाले कार्ट्रिज उपयोग करें।'],
+    whenToSeekHelp: 'If the printer shows error codes that do not clear after a power cycle, consult the manufacturer\'s error code list. Some errors (e.g. Epson "waste ink pad full") require a service tool to reset.',
+    whenToSeekHelpHi: 'यदि प्रिंटर ऐसे एरर कोड दिखाए जो पावर साइकल के बाद भी न जाएं, तो निर्माता की एरर कोड सूची देखें। कुछ एरर (जैसे Epson "waste ink pad full") रीसेट के लिए सर्विस टूल चाहिए।',
+  },
+
+  'gpu-driver-crash': {
+    title: 'GPU Driver Crash', titleHi: 'GPU ड्राइवर क्रैश',
+    icon: '🎮', category: 'GPU', categoryHi: 'GPU',
+    symptoms: ['Screen goes black then recovers ("Display driver stopped responding")', 'Blue screen with nvlddmkm.sys or atikmpag.sys error', 'Visual artifacts (glitches, corruption) before crash', 'TDR (Timeout Detection and Recovery) events in Event Viewer'],
+    symptomsHi: ['स्क्रीन काली होकर वापस आती है ("Display driver stopped responding")', 'nvlddmkm.sys या atikmpag.sys एरर से ब्लू स्क्रीन', 'क्रैश से पहले विज़ुअल आर्टिफैक्ट (ग्लिच)', 'Event Viewer में TDR इवेंट'],
+    intro: 'GPU driver crashes (TDR events) are caused by driver bugs, overheating, insufficient power, overclocking instability, or faulty VRAM. Work from the most common cause — driver — before investigating hardware.',
+    introHi: 'GPU ड्राइवर क्रैश (TDR इवेंट) ड्राइवर बग, ओवरहीटिंग, अपर्याप्त पावर, ओवरक्लॉकिंग अस्थिरता या खराब VRAM से होते हैं। हार्डवेयर जांचने से पहले सबसे सामान्य कारण — ड्राइवर — से शुरू करें।',
+    steps: [
+      { step: 1, check: 'Check Event Viewer for TDR events', checkHi: 'Event Viewer में TDR इवेंट जांचें', action: 'Press Win+R → type "eventvwr" → Windows Logs → System. Look for "Display" or "nvlddmkm" errors. Note the time and frequency. This confirms a TDR (Timeout Detection and Recovery) rather than a hard crash.', actionHi: 'Win+R → "eventvwr" → Windows Logs → System। "Display" या "nvlddmkm" त्रुटियां देखें। समय और आवृत्ति नोट करें। यह TDR (Timeout Detection and Recovery) की पुष्टि करता है।' },
+      { step: 2, check: 'Update GPU driver (or roll back)', checkHi: 'GPU ड्राइवर अपडेट (या रोलबैक)', action: 'Download the latest driver: NVIDIA GeForce Experience or nvidia.com; AMD Radeon Software or amd.com/drivers. If crashes started after a recent driver update, roll back: Device Manager → Display Adapters → right-click GPU → Properties → Driver tab → Roll Back Driver.', actionHi: 'नवीनतम ड्राइवर डाउनलोड करें: NVIDIA GeForce Experience या nvidia.com; AMD Radeon Software या amd.com/drivers। यदि क्रैश हालिया ड्राइवर अपडेट के बाद शुरू हुए, रोलबैक करें: Device Manager → Display Adapters → GPU → Properties → Driver → Roll Back Driver।' },
+      { step: 3, check: 'DDU clean install', checkHi: 'DDU क्लीन इंस्टाल', action: 'Boot into Safe Mode. Download Display Driver Uninstaller (DDU). Run DDU with "Clean and restart" option — this removes ALL driver files, registry entries and leftover software. Install the driver fresh after restart.', actionHi: 'Safe Mode में बूट करें। Display Driver Uninstaller (DDU) डाउनलोड करें। "Clean and restart" विकल्प से DDU चलाएं — सभी ड्राइवर फाइलें, रजिस्ट्री और बचे हुए सॉफ्टवेयर हटाएं। रिस्टार्ट के बाद ड्राइवर फ्रेश इंस्टाल करें।' },
+      { step: 4, check: 'Monitor GPU temperatures under load', checkHi: 'लोड में GPU तापमान मॉनिटर करें', action: 'Use GPU-Z, HWiNFO64 or MSI Afterburner to monitor GPU temperature while gaming or benchmarking. Normal desktop GPU max: 83–90°C. If you see >95°C, overheating is contributing to the crash. Clean GPU fans and check the thermal pad.', actionHi: 'गेमिंग या बेंचमार्किंग के दौरान GPU-Z, HWiNFO64 या MSI Afterburner से GPU तापमान मॉनिटर करें। सामान्य डेस्कटॉप GPU अधिकतम: 83–90°C। 95°C से अधिक हो तो ओवरहीटिंग क्रैश में योगदान कर रही है।' },
+      { step: 5, check: 'Power supply adequacy', checkHi: 'बिजली आपूर्ति की पर्याप्तता', action: 'Check your GPU\'s TDP and add ~100W for the rest of the system. Use a PSU calculator (OuterVision or PCPartPicker). An underpowered PSU causes crashes under heavy GPU load. Check all PCIe power connectors are fully seated.', actionHi: 'GPU की TDP जांचें और सिस्टम के बाकी के लिए ~100W जोड़ें। PSU कैलकुलेटर (OuterVision या PCPartPicker) उपयोग करें। कम पावर PSU भारी GPU लोड में क्रैश करता है। सभी PCIe पावर कनेक्टर पूरी तरह लगे हों।' },
+      { step: 6, check: 'Disable overclocking', checkHi: 'ओवरक्लॉकिंग बंद करें', action: 'If you use MSI Afterburner, EVGA Precision or AMD Radeon overlay for overclocking, reset all values to default. Factory overclocked cards (from AIB partners) can also be unstable — try underclocking core clock by 50–100 MHz to test.', actionHi: 'यदि MSI Afterburner, EVGA Precision या AMD Radeon ओवरलेसे ओवरक्लॉकिंग करते हैं, सभी वैल्यू डिफ़ॉल्ट पर रीसेट करें। फैक्ट्री ओवरक्लॉक्ड कार्ड भी अस्थिर हो सकते हैं — कोर क्लॉक 50–100 MHz कम करके परीक्षण करें।' },
+      { step: 7, check: 'Test GPU in another slot or system', checkHi: 'दूसरे स्लॉट या सिस्टम में GPU परीक्षण', action: 'Try the GPU in a different PCIe ×16 slot on the same motherboard. If possible, test the GPU in another PC. If crashes follow the GPU, it is likely a hardware fault (VRAM, power delivery circuitry). If crashes disappear in another system, the issue may be the motherboard PCIe slot or PSU.', actionHi: 'उसी मदरबोर्ड के दूसरे PCIe ×16 स्लॉट में GPU आज़माएं। यदि संभव हो, दूसरे PC में GPU परीक्षण करें। यदि क्रैश GPU के साथ जाता है, तो हार्डवेयर दोष है (VRAM, पावर सर्किट्री)। दूसरे सिस्टम में क्रैश न हो तो समस्या मदरबोर्ड PCIe स्लॉट या PSU में है।' },
+    ],
+    prevention: ['Keep GPU drivers updated but wait a week after major releases for community bug reports.', 'Ensure adequate PSU wattage with 15–20% headroom.', 'Monitor GPU temperatures — keep below 85°C under sustained load.', 'Avoid aggressive overclocking without adequate cooling.'],
+    preventionHi: ['GPU ड्राइवर अपडेट रखें लेकिन बड़े रिलीज़ के बाद सामुदायिक बग रिपोर्ट के लिए एक हफ्ता प्रतीक्षा करें।', 'PSU वाटेज 15–20% हेडरूम के साथ पर्याप्त रखें।', 'GPU तापमान मॉनिटर करें — निरंतर लोड में 85°C से नीचे रखें।', 'पर्याप्त कूलिंग के बिना आक्रामक ओवरक्लॉकिंग से बचें।'],
+    whenToSeekHelp: 'If artifacts appear even at desktop or in BIOS (outside the OS), or the GPU fails memtest tools like VRAM Check, the VRAM may be physically faulty — this requires GPU replacement.',
+    whenToSeekHelpHi: 'यदि डेस्कटॉप या BIOS पर भी आर्टिफैक्ट दिखें (OS के बाहर), या VRAM Check जैसे टूल में GPU विफल हो, तो VRAM भौतिक रूप से खराब है — GPU बदलना होगा।',
+  },
+
+  'ssd-not-detected': {
+    title: 'SSD Not Detected', titleHi: 'SSD डिटेक्ट नहीं हो रहा',
+    icon: '💾', category: 'Storage', categoryHi: 'स्टोरेज',
+    symptoms: ['SSD missing from BIOS/UEFI boot devices', 'Drive not visible in Windows Disk Management', 'SSD disappears after a restart', 'Drive shows in BIOS but Windows cannot find it'],
+    symptomsHi: ['SSD BIOS/UEFI बूट डिवाइस में नहीं दिखता', 'Windows Disk Management में ड्राइव नहीं दिखती', 'रिस्टार्ट के बाद SSD गायब हो जाती है', 'BIOS में दिखती है लेकिन Windows में नहीं'],
+    intro: 'An SSD not detected can mean the drive is not receiving power, there is a physical or configuration issue with the slot, the drive needs initialisation in Windows, or the drive has failed. Work through these steps in order.',
+    introHi: 'SSD डिटेक्ट न होने का मतलब है ड्राइव को पावर नहीं मिल रही, स्लॉट में भौतिक या कॉन्फिगरेशन समस्या है, Windows में इनिशियलाइज़ेशन चाहिए, या ड्राइव खराब हो गई है। ये चरण क्रम में अपनाएं।',
+    steps: [
+      { step: 1, check: 'Check BIOS/UEFI for the drive', checkHi: 'BIOS/UEFI में ड्राइव जांचें', action: 'Enter BIOS (F2, Del, or F10 at boot). Go to Storage/SATA configuration or the boot device list. If the SSD appears here, the issue is a Windows configuration or driver problem. If the SSD does not appear in BIOS, the issue is hardware or slot configuration.', actionHi: 'BIOS में जाएं (F2, Del, या F10)। Storage/SATA कॉन्फिगरेशन या बूट डिवाइस सूची देखें। यदि SSD यहां दिखे, समस्या Windows कॉन्फिगरेशन या ड्राइवर में है। यदि BIOS में भी न दिखे, समस्या हार्डवेयर या स्लॉट में है।' },
+      { step: 2, check: 'Physical connections (SATA / M.2)', checkHi: 'भौतिक कनेक्शन (SATA / M.2)', action: 'For SATA SSDs: reseat both the data cable and power cable. Try a different SATA data cable. Try a different SATA port on the motherboard. For M.2 SSDs: power off, reseat the M.2 drive (remove screw, extract, reinsert firmly, rescrew). M.2 drives can appear loose but actually be properly seated — a slight rock is normal.', actionHi: 'SATA SSD के लिए: डेटा और पावर केबल दोबारा लगाएं। अलग SATA केबल आज़माएं। मदरबोर्ड पर दूसरा SATA पोर्ट आज़माएं। M.2 SSD के लिए: बंद करें, M.2 ड्राइव दोबारा लगाएं (स्क्रू हटाएं, निकालें, मज़बूती से लगाएं, स्क्रू लगाएं)।' },
+      { step: 3, check: 'M.2 slot mode (NVMe vs SATA)', checkHi: 'M.2 स्लॉट मोड (NVMe बनाम SATA)', action: 'Many M.2 slots support both NVMe (PCIe) and SATA protocols, but some support only one. Check your motherboard manual for which M.2 slots support NVMe and which support SATA M.2. Using an NVMe SSD in a SATA-only M.2 slot means the drive will not appear.', actionHi: 'कई M.2 स्लॉट NVMe (PCIe) और SATA दोनों सपोर्ट करते हैं, लेकिन कुछ केवल एक। अपने मदरबोर्ड मैनुअल में जांचें कि कौन से M.2 स्लॉट NVMe और कौन से SATA सपोर्ट करते हैं। SATA-only M.2 स्लॉट में NVMe SSD काम नहीं करेगी।' },
+      { step: 4, check: 'Initialise in Disk Management (new drives)', checkHi: 'Disk Management में इनिशियलाइज़ करें (नई ड्राइव)', action: 'Press Win+X → Disk Management. If the SSD appears here but has no drive letter, right-click → "Initialise Disk" (choose GPT for drives >2 TB or for UEFI systems). Then right-click the unallocated space → "New Simple Volume" to format it.', actionHi: 'Win+X → Disk Management। SSD दिखे लेकिन ड्राइव लेटर न हो, राइट क्लिक → "Initialise Disk" (2 TB से बड़ी या UEFI सिस्टम के लिए GPT)। फिर unallocated space → "New Simple Volume" से फॉर्मेट करें।' },
+      { step: 5, check: 'Enable or change M.2/NVMe in BIOS', checkHi: 'BIOS में M.2/NVMe सक्षम करें', action: 'Some motherboards disable M.2 slots by default, or sharing bandwidth with a PCIe slot means enabling one disables the other. In BIOS, look for "M.2 Configuration", "PCIe/NVMe Configuration" or similar. Enable the M.2 slot the drive is in.', actionHi: 'कुछ मदरबोर्ड M.2 स्लॉट डिफ़ॉल्ट रूप से अक्षम करते हैं। BIOS में "M.2 Configuration", "PCIe/NVMe Configuration" या समान देखें। जिस M.2 स्लॉट में ड्राइव है उसे सक्षम करें।' },
+      { step: 6, check: 'Update storage controller driver', checkHi: 'स्टोरेज कंट्रोलर ड्राइवर अपडेट', action: 'Device Manager → Storage controllers. Update drivers for the NVMe or SATA AHCI controller. For Intel systems: Intel Rapid Storage Technology (RST) driver from intel.com. For AMD: AMD SATA controller drivers from amd.com.', actionHi: 'Device Manager → Storage controllers। NVMe या SATA AHCI कंट्रोलर के ड्राइवर अपडेट करें। Intel सिस्टम के लिए: Intel Rapid Storage Technology (RST)। AMD के लिए: AMD SATA कंट्रोलर ड्राइवर।' },
+      { step: 7, check: 'Test drive in another system or USB enclosure', checkHi: 'दूसरे सिस्टम या USB एनक्लोज़र में परीक्षण', action: 'Insert the M.2 or SATA SSD into a USB enclosure (inexpensive, available online for both SATA and NVMe). Connect to another PC. If detected, the issue is the motherboard slot. If not detected even externally, run CrystalDiskInfo — a drive showing no SMART data has likely failed.', actionHi: 'M.2 या SATA SSD को USB एनक्लोज़र में डालें (SATA और NVMe दोनों के लिए सस्ते उपलब्ध)। दूसरे PC से कनेक्ट करें। यदि डिटेक्ट हो, तो मदरबोर्ड स्लॉट में समस्या है। बाहरी रूप से भी डिटेक्ट न हो और CrystalDiskInfo में SMART डेटा न दिखे — ड्राइव खराब हो गई है।' },
+    ],
+    prevention: ['Buy SSDs from reputable brands (Samsung, WD, Crucial, Seagate).', 'Use M.2 thermal pads in hot systems — NVMe drives throttle above 70°C.', 'Keep at least 10% SSD free — critically full SSDs can cause detection issues.', 'Back up data regularly; SSDs can fail without warning.'],
+    preventionHi: ['विश्वसनीय ब्रांड (Samsung, WD, Crucial, Seagate) से SSD खरीदें।', 'गर्म सिस्टम में M.2 थर्मल पैड उपयोग करें — NVMe 70°C से ऊपर थ्रॉटल होती है।', 'SSD में कम से कम 10% खाली रखें।', 'नियमित डेटा बैकअप लें — SSD बिना चेतावनी के विफल हो सकती है।'],
+    whenToSeekHelp: 'If the SSD is not detected externally via USB enclosure and CrystalDiskInfo shows no SMART data at all, the drive has likely experienced a physical failure. Data recovery services can sometimes recover data from failed drives, but it is expensive.',
+    whenToSeekHelpHi: 'यदि USB एनक्लोज़र से भी SSD डिटेक्ट न हो और CrystalDiskInfo में SMART डेटा बिल्कुल न दिखे, तो ड्राइव भौतिक रूप से विफल हो गई है। डेटा रिकवरी सेवाएं कभी-कभी डेटा बचा सकती हैं, लेकिन यह महंगा है।',
+  },
+
+  'bluetooth-pairing-issues': {
+    title: 'Bluetooth Pairing Issues', titleHi: 'Bluetooth पेयरिंग समस्याएं',
+    icon: '📶', category: 'Connectivity', categoryHi: 'कनेक्टिविटी',
+    symptoms: ['Device refuses to pair or stay paired', 'Bluetooth audio stutters or disconnects', 'Device shows "Connected" but no audio or input received', 'Range significantly shorter than specified', 'Pairing works briefly then drops'],
+    symptomsHi: ['डिवाइस पेयर नहीं होती या पेयरिंग टिकती नहीं', 'Bluetooth ऑडियो रुकता है या डिस्कनेक्ट होता है', 'डिवाइस "Connected" दिखती है लेकिन ऑडियो/इनपुट नहीं', 'रेंज निर्दिष्ट से काफी कम', 'थोड़ी देर पेयरिंग होती है फिर टूट जाती है'],
+    intro: 'Bluetooth pairing failures are most often caused by stale pairing entries, driver bugs, radio interference, or power management settings aggressively cutting the Bluetooth adapter. Work through these in order — the fix is usually software-side.',
+    introHi: 'Bluetooth पेयरिंग विफलताएं अक्सर पुरानी पेयरिंग प्रविष्टियों, ड्राइवर बग, रेडियो इंटरफेरेंस, या Bluetooth अडैप्टर को आक्रामक रूप से काटने वाली पावर प्रबंधन सेटिंग से होती हैं।',
+    steps: [
+      { step: 1, check: 'Remove and re-pair the device', checkHi: 'डिवाइस हटाएं और फिर से पेयर करें', action: 'On Windows: Settings → Bluetooth & devices → find the device → "..." → Remove device. On the Bluetooth peripheral, put it into pairing mode (usually hold the pairing button until the LED flashes rapidly — check the device manual). Then re-pair from scratch.', actionHi: 'Windows: Settings → Bluetooth & devices → डिवाइस → "..." → Remove device। Bluetooth परिधीय पर पेयरिंग मोड में डालें (आमतौर पर LED तेज़ी से चमकने तक पेयरिंग बटन दबाएं)। फिर शुरू से पेयर करें।' },
+      { step: 2, check: 'Update or reinstall Bluetooth driver', checkHi: 'Bluetooth ड्राइवर अपडेट या पुनः इंस्टाल', action: 'Device Manager → Bluetooth → right-click the Bluetooth adapter → Update driver. For Intel Wireless adapters: download the latest driver from intel.com/wireless. For Qualcomm/Atheros: check your laptop manufacturer\'s support site for the latest Bluetooth driver.', actionHi: 'Device Manager → Bluetooth → Bluetooth अडैप्टर → ड्राइवर अपडेट करें। Intel Wireless के लिए: intel.com/wireless से नवीनतम ड्राइवर। Qualcomm/Atheros के लिए: अपने लैपटॉप निर्माता की सपोर्ट साइट।' },
+      { step: 3, check: 'Disable power management on adapter', checkHi: 'अडैप्टर पर पावर प्रबंधन बंद करें', action: 'Device Manager → Bluetooth → right-click adapter → Properties → Power Management → uncheck "Allow the computer to turn off this device to save power". This is the most common fix for Bluetooth that connects briefly then drops.', actionHi: 'Device Manager → Bluetooth → अडैप्टर → Properties → Power Management → "Allow the computer to turn off this device to save power" अनचेक करें। यह थोड़ी देर बाद टूटने वाले Bluetooth का सबसे आम समाधान है।' },
+      { step: 4, check: 'Check for interference', checkHi: 'इंटरफेरेंस जांचें', action: 'Bluetooth and 2.4 GHz Wi-Fi share the same frequency band and can interfere. Move away from your Wi-Fi router. Microwave ovens, baby monitors and cordless phones also cause interference. Try using 5 GHz Wi-Fi on your router. Keep USB 3.0 devices (especially hubs) away from Bluetooth peripherals — USB 3.0 emits interference at 2.4 GHz.', actionHi: 'Bluetooth और 2.4 GHz Wi-Fi एक ही फ्रीक्वेंसी बैंड साझा करते हैं और इंटरफेरेंस हो सकता है। Wi-Fi राउटर से दूर जाएं। माइक्रोवेव ओवन, बेबी मॉनिटर और कॉर्डलेस फोन भी इंटरफेरेंस करते हैं। राउटर पर 5 GHz Wi-Fi उपयोग करें। USB 3.0 डिवाइस Bluetooth परिधीयों से दूर रखें।' },
+      { step: 5, check: 'Restart Bluetooth services (Windows)', checkHi: 'Bluetooth सेवाएं रिस्टार्ट करें (Windows)', action: 'Press Win+R → type "services.msc". Find "Bluetooth Support Service" and "Bluetooth Audio Gateway Service". Right-click → Restart each. Also try: Turn Bluetooth off in Settings, wait 10 seconds, turn back on. Sometimes this clears stuck pairing states without a full reboot.', actionHi: 'Win+R → "services.msc"। "Bluetooth Support Service" और "Bluetooth Audio Gateway Service" खोजें। प्रत्येक → Restart करें। Settings में Bluetooth बंद करें, 10 सेकंड प्रतीक्षा करें, फिर चालू करें।' },
+      { step: 6, check: 'Test with a different Bluetooth device', checkHi: 'दूसरे Bluetooth डिवाइस से परीक्षण', action: 'Try pairing a different Bluetooth device (e.g., your phone paired to your laptop, or a different set of earphones). If another device pairs and stays connected, the issue is specific to the original peripheral — it may need a factory reset or firmware update.', actionHi: 'दूसरे Bluetooth डिवाइस से पेयर करने की कोशिश करें (जैसे फोन को लैपटॉप से)। यदि दूसरा डिवाइस पेयर रहे, समस्या मूल परिधीय की है — उसे फैक्ट्री रीसेट या फर्मवेयर अपडेट की ज़रूरत हो सकती है।' },
+      { step: 7, check: 'Reset or update firmware on the peripheral', checkHi: 'परिधीय का फर्मवेयर रीसेट या अपडेट करें', action: 'Most modern Bluetooth headsets, keyboards and mice have a factory reset procedure (check the manual — usually hold two buttons simultaneously for 5–10 seconds). Also check the manufacturer\'s app (Sony Headphones Connect, Samsung Galaxy Wearable, Jabra Sound+ etc.) for firmware updates that fix pairing or connection stability bugs.', actionHi: 'अधिकांश आधुनिक Bluetooth हेडसेट, कीबोर्ड और माउस में फैक्ट्री रीसेट प्रक्रिया है (मैनुअल जांचें)। निर्माता के ऐप (Sony Headphones Connect, Samsung Galaxy Wearable, Jabra Sound+) में फर्मवेयर अपडेट भी जांचें।' },
+    ],
+    prevention: ['Avoid keeping too many paired devices on the same computer — remove devices you no longer use.', 'Keep USB 3.0 devices away from Bluetooth peripherals.', 'Update Bluetooth drivers after major Windows updates.', 'Use 5 GHz Wi-Fi where possible to free the 2.4 GHz band for Bluetooth.'],
+    preventionHi: ['एक ही कंप्यूटर पर बहुत अधिक पेयर्ड डिवाइस न रखें — अनुपयोगी हटाएं।', 'USB 3.0 डिवाइस Bluetooth परिधीयों से दूर रखें।', 'बड़े Windows अपडेट के बाद Bluetooth ड्राइवर अपडेट करें।', 'जहां संभव 5 GHz Wi-Fi उपयोग करें।'],
+    whenToSeekHelp: 'If a Bluetooth adapter is not detected at all in Device Manager, or disappeared after a Windows update, the adapter driver may be corrupted beyond recovery. A USB Bluetooth dongle is an inexpensive alternative while troubleshooting.',
+    whenToSeekHelpHi: 'यदि Device Manager में Bluetooth अडैप्टर बिल्कुल नहीं दिखता या Windows अपडेट के बाद गायब हो गया, तो ड्राइवर भ्रष्ट हो सकता है। समस्या निवारण के दौरान USB Bluetooth डोंगल सस्ता विकल्प है।',
+  },
+};
+
+const guide = guides[slug as keyof typeof guides];
+if (!guide) return Astro.redirect(`${BASE}/hi/troubleshoot/`);
+
+const howToJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'HowTo',
+  name: guide.titleHi,
+  description: guide.introHi,
+  inLanguage: 'hi',
+  step: guide.steps.map(s => ({
+    '@type': 'HowToStep',
+    position: s.step,
+    name: s.checkHi,
+    text: s.actionHi,
+  })),
+};
+const breadcrumbJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'होम', item: `${BASE}/hi/` },
+    { '@type': 'ListItem', position: 2, name: 'ट्रबलशूट', item: `${BASE}/hi/troubleshoot/` },
+    { '@type': 'ListItem', position: 3, name: guide.titleHi, item: `${BASE}/hi/troubleshoot/${slug}/` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`${guide.titleHi} — ट्रबलशूटिंग — Techpedia`}
+  description={`${guide.titleHi} के लिए चरण-दर-चरण निदान गाइड। ${guide.symptomsHi.slice(0, 2).join(', ')}.`}
+  lang="hi"
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(howToJsonLd)} />
+    <script type="application/ld+json" set:html={JSON.stringify(breadcrumbJsonLd)} />
+  </Fragment>
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 py-10">
+    <nav class="flex items-center gap-2 text-sm text-slate-400 mb-6 flex-wrap">
+      <a href={`${BASE}/hi/`} class="hover:text-slate-200 transition-colors">होम</a>
+      <span>/</span>
+      <a href={`${BASE}/hi/troubleshoot/`} class="hover:text-slate-200 transition-colors">ट्रबलशूट</a>
+      <span>/</span>
+      <span class="text-slate-200">{guide.titleHi}</span>
+      <span class="ml-auto text-xs text-slate-500">
+        <a href={`${BASE}/en/troubleshoot/${slug}/`} class="hover:text-slate-300">English ↗</a>
+      </span>
+    </nav>
+
+    <!-- Guide header -->
+    <div class="mb-8">
+      <div class="flex items-center gap-3 mb-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-2xl">{guide.icon}</div>
+        <div>
+          <span class="tp-badge-amber text-xs">{guide.categoryHi}</span>
+        </div>
+      </div>
+      <h1 class="text-3xl sm:text-4xl font-bold text-slate-100 mb-3">{guide.titleHi}</h1>
+      <p class="text-slate-400 leading-relaxed">{guide.introHi}</p>
+    </div>
+
+    <!-- Language notice -->
+    <div class="rounded-lg bg-navy-800/40 border border-tp-border px-4 py-3 mb-6 flex items-center gap-3 text-sm">
+      <span class="text-xl flex-shrink-0">🌐</span>
+      <span class="text-slate-400">विस्तृत तकनीकी सामग्री अंग्रेज़ी में है।
+        <a href={`${BASE}/en/troubleshoot/${slug}/`} class="text-tp-blue hover:underline ml-1">पूर्ण अंग्रेज़ी संस्करण के लिए यहाँ क्लिक करें।</a>
+      </span>
+    </div>
+
+    <!-- Safety note -->
+    {guide.safetyNoteHi && (
+      <div class="rounded-lg bg-red-900/20 border border-red-700/30 px-4 py-3 mb-6 flex items-start gap-3">
+        <span class="text-xl flex-shrink-0">⚠️</span>
+        <p class="text-sm text-red-300"><span class="font-semibold text-red-200">सुरक्षा: </span>{guide.safetyNoteHi}</p>
+      </div>
+    )}
+
+    <!-- Symptoms -->
+    <div class="rounded-xl bg-navy-800/60 border border-tp-border p-5 mb-8">
+      <h2 class="text-sm font-semibold text-slate-400 uppercase tracking-wider mb-3">इस गाइड द्वारा संबोधित सामान्य लक्षण</h2>
+      <ul class="space-y-1.5">
+        {guide.symptomsHi.map(s => (
+          <li class="flex items-start gap-2 text-sm text-slate-300">
+            <span class="text-amber-400 mt-0.5 flex-shrink-0">•</span>
+            <span>{s}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- Steps -->
+    <div class="mb-8">
+      <h2 class="text-xl font-bold text-slate-100 mb-5">निदान चरण</h2>
+      <div class="space-y-4">
+        {guide.steps.map((step) => (
+          <div class="rounded-xl border border-tp-border bg-navy-900/40 overflow-hidden">
+            <div class="flex items-center gap-3 px-4 py-3 bg-navy-800/60 border-b border-tp-border/50">
+              <div class="w-7 h-7 rounded-full bg-tp-blue/20 border border-tp-blue/30 flex items-center justify-center text-sm font-bold text-tp-blue flex-shrink-0">
+                {step.step}
+              </div>
+              <h3 class="font-semibold text-slate-100">{step.checkHi}</h3>
+            </div>
+            <div class="px-4 py-3">
+              <p class="text-sm text-slate-300 leading-relaxed">{step.actionHi}</p>
+              {step.warningHi && (
+                <div class="mt-3 rounded-lg bg-amber-900/20 border border-amber-700/30 px-3 py-2 text-xs text-amber-300">
+                  <span class="font-semibold text-amber-200">नोट: </span>{step.warningHi}
+                </div>
+              )}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Prevention -->
+    <div class="rounded-xl bg-tp-blue/5 border border-tp-blue/20 p-5 mb-6">
+      <h2 class="text-base font-bold text-slate-100 mb-3">बचाव युक्तियां</h2>
+      <ul class="space-y-2">
+        {guide.preventionHi.map(tip => (
+          <li class="flex items-start gap-2 text-sm text-slate-300">
+            <span class="text-tp-cyan mt-0.5 flex-shrink-0">✓</span>
+            <span>{tip}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <!-- When to seek help -->
+    <div class="rounded-lg bg-slate-800/40 border border-tp-border px-4 py-3 mb-8 text-sm text-slate-300">
+      <span class="font-semibold text-slate-200">प्रोफेशनल मदद कब लें: </span>{guide.whenToSeekHelpHi}
+    </div>
+
+    <!-- Back -->
+    <a href={`${BASE}/hi/troubleshoot/`} class="inline-flex items-center gap-2 text-sm text-tp-blue hover:text-tp-blue-bright transition-colors">
+      <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7"/>
+      </svg>
+      ट्रबलशूटिंग सेंटर पर वापस जाएं
+    </a>
+  </div>
+</BaseLayout>

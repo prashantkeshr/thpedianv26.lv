@@ -4651,5 +4651,578 @@
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
     "schemaVersion": 1
+  },
+  {
+    "id": "dev-000037",
+    "slug": "meta-quest-3",
+    "name": "Meta Quest 3",
+    "brand": "brd-000018",
+    "brandName": "Meta",
+    "category": "xr-headset",
+    "status": "available",
+    "announcedAt": "2023-06-01",
+    "releasedAt": "2023-10-10",
+    "description": "The Meta Quest 3 is Meta's most capable mixed-reality headset, featuring a Snapdragon XR2 Gen 2 chip, full-colour passthrough cameras for mixed reality, and a 40% slimmer design than its predecessor. With 2064x2208 per-eye resolution, 120 Hz refresh rate, and over 500 compatible applications at launch, it represents a major leap in standalone XR computing.",
+    "images": [],
+    "expertScore": 90,
+    "proscons": [
+      {
+        "text": "Full-colour mixed reality passthrough is best in class",
+        "type": "pro"
+      },
+      {
+        "text": "Snapdragon XR2 Gen 2 delivers significant performance uplift",
+        "type": "pro"
+      },
+      {
+        "text": "40% slimmer and lighter than Quest 2",
+        "type": "pro"
+      },
+      {
+        "text": "Requires Meta account; privacy concerns for some users",
+        "type": "con"
+      },
+      {
+        "text": "Battery life under 3 hours for demanding apps",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "display": {
+        "technology": "LCD (pancake lens)",
+        "resolution": "2064 x 2208 per eye",
+        "refreshRate": "120 Hz",
+        "fieldOfView": "110° horizontal, 96° vertical"
+      },
+      "processor": {
+        "name": "Snapdragon XR2 Gen 2",
+        "manufacturer": "Qualcomm"
+      },
+      "memory": {
+        "ram": "8 GB",
+        "storage": "128 GB / 512 GB"
+      },
+      "connectivity": {
+        "wifi": "Wi-Fi 6E (802.11ax)",
+        "bluetooth": "Bluetooth 5.3",
+        "usb": "USB-C 3.0"
+      },
+      "battery": {
+        "capacity": "5060 mAh",
+        "life": "~2.5 hours"
+      },
+      "sensors": {
+        "tracking": "6DoF inside-out",
+        "controllers": "Touch Plus"
+      },
+      "dimensions": {
+        "weight": "515 g"
+      }
+    },
+    "keyFeatures": [
+      "Mixed Reality Passthrough",
+      "Snapdragon XR2 Gen 2",
+      "120 Hz Display",
+      "Hand Tracking",
+      "Meta Horizon Store"
+    ],
+    "variants": [],
+    "relatedIds": [],
+    "tags": [
+      "xr",
+      "vr",
+      "mixed-reality",
+      "standalone-headset",
+      "meta",
+      "quest"
+    ],
+    "affiliateLinks": [],
+    "sources": [
+      {
+        "provider": "Meta",
+        "url": "https://www.meta.com/quest/quest-3/",
+        "retrievedAt": "2026-11-18T00:00:00Z",
+        "verificationLevel": "verified"
+      }
+    ],
+    "verificationLevel": "verified",
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000038",
+    "slug": "apple-airpods-pro-2",
+    "name": "Apple AirPods Pro (2nd gen)",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "earbuds",
+    "status": "available",
+    "announcedAt": "2022-09-07",
+    "releasedAt": "2022-09-23",
+    "description": "The AirPods Pro 2 introduce Apple H2 chip, bringing significantly improved Active Noise Cancellation (up to 2x over gen 1), Adaptive Transparency mode, and lossless audio via USB-C with Apple Vision Pro. With up to 6 hours listening time and 30 hours total with case, they set the benchmark for wireless earbuds in the Apple ecosystem.",
+    "images": [],
+    "expertScore": 93,
+    "proscons": [
+      {
+        "text": "Best-in-class ANC for earbuds at any price",
+        "type": "pro"
+      },
+      {
+        "text": "Adaptive Transparency seamlessly mixes ambient audio",
+        "type": "pro"
+      },
+      {
+        "text": "Stem swipe for volume is intuitive and unique",
+        "type": "pro"
+      },
+      {
+        "text": "Limited compatibility advantages outside Apple ecosystem",
+        "type": "con"
+      },
+      {
+        "text": "No multi-device Bluetooth pairing simultaneously",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "audio": {
+        "chip": "Apple H2",
+        "anc": "Active Noise Cancellation (2nd gen)",
+        "codec": "AAC, Apple Lossless (ALAC) via USB-C",
+        "driver": "Custom Apple"
+      },
+      "connectivity": {
+        "bluetooth": "Bluetooth 5.3",
+        "charging": "USB-C / MagSafe / Qi"
+      },
+      "battery": {
+        "earbuds": "6 hours ANC on",
+        "case": "30 hours total",
+        "charge": "1 hour ANC from 5 min charge"
+      },
+      "dimensions": {
+        "weight": "5.3 g per earbud"
+      },
+      "features": {
+        "waterResistance": "IPX4 (earbuds and case)"
+      }
+    },
+    "keyFeatures": [
+      "Apple H2 Chip",
+      "Adaptive ANC",
+      "Adaptive Transparency",
+      "USB-C Charging",
+      "Lossless Audio"
+    ],
+    "variants": [],
+    "relatedIds": [
+      "dev-000001"
+    ],
+    "tags": [
+      "earbuds",
+      "anc",
+      "apple",
+      "wireless",
+      "h2-chip"
+    ],
+    "affiliateLinks": [],
+    "sources": [
+      {
+        "provider": "Apple",
+        "url": "https://www.apple.com/airpods-pro/",
+        "retrievedAt": "2026-11-18T00:00:00Z",
+        "verificationLevel": "verified"
+      }
+    ],
+    "verificationLevel": "verified",
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000039",
+    "slug": "apple-mac-mini-m4",
+    "name": "Apple Mac mini M4",
+    "brand": "brd-000001",
+    "brandName": "Apple",
+    "category": "desktop",
+    "status": "available",
+    "announcedAt": "2024-10-28",
+    "releasedAt": "2024-11-08",
+    "description": "The Mac mini with M4 chip is Apple's most affordable desktop, now 50% smaller than its predecessor and featuring the M4 SoC with a 10-core CPU and 10-core GPU. It delivers up to 1.8x faster CPU and 2.2x faster GPU than M2, supports up to three external displays, and starts at just 16 GB unified memory — making it one of the best price-to-performance desktop computers available.",
+    "images": [],
+    "expertScore": 94,
+    "proscons": [
+      {
+        "text": "Exceptional performance-per-watt — M4 chip is class-leading",
+        "type": "pro"
+      },
+      {
+        "text": "Compact redesign fits in tight spaces",
+        "type": "pro"
+      },
+      {
+        "text": "Three display support (Thunderbolt + HDMI)",
+        "type": "pro"
+      },
+      {
+        "text": "RAM and storage are soldered — not upgradeable",
+        "type": "con"
+      },
+      {
+        "text": "No display, keyboard or mouse included",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Apple M4",
+        "cores": "10-core CPU, 10-core GPU",
+        "neuralEngine": "16-core Neural Engine"
+      },
+      "memory": {
+        "ram": "16 GB unified memory",
+        "storage": "256 GB / 512 GB / 1 TB / 2 TB SSD"
+      },
+      "connectivity": {
+        "thunderbolt": "3x Thunderbolt 4",
+        "usb": "2x USB-A 3.2 Gen 2",
+        "hdmi": "1x HDMI 2.1",
+        "ethernet": "Gigabit Ethernet",
+        "wifi": "Wi-Fi 6E",
+        "bluetooth": "Bluetooth 5.3"
+      },
+      "display": {
+        "maxDisplays": "3 (2x Thunderbolt + 1x HDMI)",
+        "maxResolution": "8K via Thunderbolt"
+      },
+      "dimensions": {
+        "width": "127 mm",
+        "depth": "127 mm",
+        "height": "50 mm",
+        "weight": "670 g"
+      },
+      "power": {
+        "tdp": "~15 W typical"
+      }
+    },
+    "keyFeatures": [
+      "Apple M4 Chip",
+      "10-core CPU + GPU",
+      "Three Display Support",
+      "Compact Design",
+      "macOS Sequoia"
+    ],
+    "variants": [],
+    "relatedIds": [],
+    "tags": [
+      "desktop",
+      "apple",
+      "m4",
+      "macos",
+      "mini-pc",
+      "silicon"
+    ],
+    "affiliateLinks": [],
+    "sources": [
+      {
+        "provider": "Apple",
+        "url": "https://www.apple.com/mac-mini/",
+        "retrievedAt": "2026-11-18T00:00:00Z",
+        "verificationLevel": "verified"
+      }
+    ],
+    "verificationLevel": "verified",
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000040",
+    "slug": "amd-radeon-rx-7900-xtx",
+    "name": "AMD Radeon RX 7900 XTX",
+    "brand": "brd-000004",
+    "brandName": "AMD",
+    "category": "gpu",
+    "status": "available",
+    "announcedAt": "2022-11-03",
+    "releasedAt": "2022-12-13",
+    "description": "The Radeon RX 7900 XTX is AMD's flagship RDNA 3 GPU, featuring 96 Compute Units, 24 GB GDDR6 memory on a 384-bit bus, and AMD's first chiplet GPU architecture. It delivers competitive 4K gaming performance against NVIDIA's RTX 4080, with particular strengths in memory bandwidth and open-source driver support on Linux.",
+    "images": [],
+    "expertScore": 88,
+    "proscons": [
+      {
+        "text": "24 GB GDDR6 VRAM is class-leading — ideal for AI and 4K textures",
+        "type": "pro"
+      },
+      {
+        "text": "Excellent Linux open-source driver support",
+        "type": "pro"
+      },
+      {
+        "text": "Strong rasterization performance at 4K",
+        "type": "pro"
+      },
+      {
+        "text": "Ray tracing performance trails NVIDIA RTX 4080/4090",
+        "type": "con"
+      },
+      {
+        "text": "FSR upscaling inferior to DLSS 3 Frame Generation",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "gpu": {
+        "architecture": "RDNA 3",
+        "computeUnits": 96,
+        "streamProcessors": 6144,
+        "boostClock": "2.5 GHz",
+        "baseClock": "1.9 GHz"
+      },
+      "memory": {
+        "capacity": "24 GB GDDR6",
+        "bus": "384-bit",
+        "bandwidth": "960 GB/s"
+      },
+      "performance": {
+        "flops": "61.4 TFLOPS FP32"
+      },
+      "display": {
+        "outputs": "2x DP 2.1, 1x HDMI 2.1",
+        "maxDisplays": 4
+      },
+      "power": {
+        "tdp": "355 W",
+        "connector": "2x 8-pin PCIe"
+      },
+      "dimensions": {
+        "length": "287 mm",
+        "slots": "2.5-slot"
+      }
+    },
+    "keyFeatures": [
+      "RDNA 3 Chiplet",
+      "24 GB GDDR6",
+      "DisplayPort 2.1",
+      "FSR 3",
+      "AV1 Encode/Decode"
+    ],
+    "variants": [],
+    "relatedIds": [
+      "dev-000031"
+    ],
+    "tags": [
+      "gpu",
+      "amd",
+      "radeon",
+      "rdna3",
+      "4k-gaming",
+      "24gb-vram"
+    ],
+    "affiliateLinks": [],
+    "sources": [
+      {
+        "provider": "AMD",
+        "url": "https://www.amd.com/en/products/graphics/desktops/radeon/7000-series/amd-radeon-rx-7900-xtx.html",
+        "retrievedAt": "2026-11-18T00:00:00Z",
+        "verificationLevel": "verified"
+      }
+    ],
+    "verificationLevel": "verified",
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000041",
+    "slug": "lenovo-thinkpad-x1-carbon-gen12",
+    "name": "Lenovo ThinkPad X1 Carbon Gen 12",
+    "brand": "brd-000008",
+    "brandName": "Lenovo",
+    "category": "laptop",
+    "status": "available",
+    "announcedAt": "2024-01-08",
+    "releasedAt": "2024-02-15",
+    "description": "The ThinkPad X1 Carbon Gen 12 is Lenovo's flagship ultrabook for professionals, built around Intel Core Ultra Series 1 processors with AI-powered performance. At just 1.09 kg, it offers up to 15 hours battery life, a 14-inch 2.8K OLED display option, and military-grade durability (MIL-SPEC 810H). It remains the benchmark for business laptops combining portability with productivity.",
+    "images": [],
+    "expertScore": 91,
+    "proscons": [
+      {
+        "text": "Lightest 14-inch business laptop at 1.09 kg",
+        "type": "pro"
+      },
+      {
+        "text": "Outstanding keyboard — benchmark for laptop typing",
+        "type": "pro"
+      },
+      {
+        "text": "Intel vPro optional for enterprise IT management",
+        "type": "pro"
+      },
+      {
+        "text": "Premium pricing versus equally capable consumer laptops",
+        "type": "con"
+      },
+      {
+        "text": "Integrated graphics only — no discrete GPU option",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "processor": {
+        "name": "Intel Core Ultra 7 165U / 165H",
+        "series": "Intel Core Ultra Series 1 (Meteor Lake)"
+      },
+      "display": {
+        "size": "14 inch",
+        "resolution": "1920x1200 IPS or 2880x1800 OLED",
+        "refreshRate": "60 Hz"
+      },
+      "memory": {
+        "ram": "16 GB / 32 GB / 64 GB LPDDR5x",
+        "storage": "256 GB – 2 TB NVMe SSD"
+      },
+      "connectivity": {
+        "thunderbolt": "2x Thunderbolt 4",
+        "usb": "2x USB-A 3.2 Gen 1",
+        "hdmi": "1x HDMI 2.1",
+        "wifi": "Wi-Fi 6E",
+        "bluetooth": "Bluetooth 5.3"
+      },
+      "battery": {
+        "capacity": "57 Wh",
+        "life": "Up to 15 hours"
+      },
+      "dimensions": {
+        "weight": "1.09 kg",
+        "thickness": "14.9 mm"
+      }
+    },
+    "keyFeatures": [
+      "Intel Core Ultra",
+      "1.09 kg Weight",
+      "MIL-SPEC 810H",
+      "OLED Option",
+      "AI-Powered Performance"
+    ],
+    "variants": [],
+    "relatedIds": [],
+    "tags": [
+      "laptop",
+      "business",
+      "ultrabook",
+      "lenovo",
+      "thinkpad",
+      "intel-core-ultra"
+    ],
+    "affiliateLinks": [],
+    "sources": [
+      {
+        "provider": "Lenovo",
+        "url": "https://www.lenovo.com/us/en/p/laptops/thinkpad/thinkpadx1/thinkpad-x1-carbon-gen-12/",
+        "retrievedAt": "2026-11-18T00:00:00Z",
+        "verificationLevel": "verified"
+      }
+    ],
+    "verificationLevel": "verified",
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z",
+    "schemaVersion": 1
+  },
+  {
+    "id": "dev-000042",
+    "slug": "google-nest-hub-max",
+    "name": "Google Nest Hub Max",
+    "brand": "brd-000006",
+    "brandName": "Google",
+    "category": "smart-display",
+    "status": "available",
+    "announcedAt": "2019-05-07",
+    "releasedAt": "2019-09-09",
+    "description": "The Google Nest Hub Max is a 10-inch smart home display featuring a built-in 6.5 MP camera for video calling, Nest camera streaming, and face-match personalisation. Powered by Google Assistant, it controls smart home devices, streams YouTube, plays music via Google Cast, and displays photo albums. The largest screen in the Nest Hub lineup, it anchors the connected home.",
+    "images": [],
+    "expertScore": 82,
+    "proscons": [
+      {
+        "text": "10-inch screen ideal as kitchen hub or home dashboard",
+        "type": "pro"
+      },
+      {
+        "text": "Built-in camera enables video calls and security monitoring",
+        "type": "pro"
+      },
+      {
+        "text": "Deep Google ecosystem integration (Nest cams, Calendar, YouTube)",
+        "type": "pro"
+      },
+      {
+        "text": "Alexa and Apple HomeKit not supported natively",
+        "type": "con"
+      },
+      {
+        "text": "No browser or productivity apps",
+        "type": "con"
+      }
+    ],
+    "specs": {
+      "display": {
+        "size": "10 inch",
+        "resolution": "1280 x 800 LCD",
+        "technology": "LCD touchscreen"
+      },
+      "processor": {
+        "name": "ARM Cortex-A53 (quad-core)"
+      },
+      "memory": {
+        "ram": "1.5 GB",
+        "storage": "16 GB"
+      },
+      "camera": {
+        "sensor": "6.5 MP camera"
+      },
+      "audio": {
+        "speakers": "Stereo (2x 10W)"
+      },
+      "connectivity": {
+        "wifi": "802.11a/b/g/n/ac",
+        "bluetooth": "Bluetooth 5.0",
+        "zigbee": "Thread/Matter"
+      },
+      "power": {
+        "supply": "AC adapter (included)"
+      }
+    },
+    "keyFeatures": [
+      "10-inch Touchscreen",
+      "6.5MP Camera",
+      "Google Assistant",
+      "Google Cast",
+      "Nest Camera Viewer"
+    ],
+    "variants": [],
+    "relatedIds": [],
+    "tags": [
+      "smart-display",
+      "google",
+      "nest",
+      "smart-home",
+      "assistant",
+      "hub"
+    ],
+    "affiliateLinks": [],
+    "sources": [
+      {
+        "provider": "Google",
+        "url": "https://store.google.com/us/product/google_nest_hub_max",
+        "retrievedAt": "2026-11-18T00:00:00Z",
+        "verificationLevel": "verified"
+      }
+    ],
+    "verificationLevel": "verified",
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z",
+    "schemaVersion": 1
   }
 ]

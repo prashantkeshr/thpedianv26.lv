@@ -494,5 +494,30 @@
     ],
     "updatedAt": "2026-11-17",
     "schemaVersion": 1
+  },
+  {
+    "id": "brd-000018",
+    "slug": "meta",
+    "name": "Meta",
+    "aliases": [
+      "Meta Platforms",
+      "Facebook"
+    ],
+    "headquarters": "Menlo Park, California, USA",
+    "founded": 2004,
+    "website": "https://www.meta.com",
+    "description": "Meta Platforms, formerly Facebook, is a global technology company focused on social media and immersive computing. Its Reality Labs division develops the Meta Quest line of standalone XR headsets, Ray-Ban smart glasses, and mixed-reality hardware, positioning Meta as a leading force in the metaverse and spatial computing landscape.",
+    "productCategories": [
+      "xr-headset"
+    ],
+    "primaryMarkets": [
+      "USA",
+      "Europe",
+      "Asia Pacific"
+    ],
+    "logoUrl": null,
+    "schemaVersion": 1,
+    "createdAt": "2026-11-18T00:00:00Z",
+    "updatedAt": "2026-11-18T00:00:00Z"
   }
 ]

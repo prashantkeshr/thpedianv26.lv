@@ -22,6 +22,7 @@ const categoryIcons: Record<string, string> = {
   gpu: '🎮', monitor: '🖥️', smartwatch: '⌚', headphones: '🎧',
   router: '📡', storage: '💾', camera: '📷', tv: '📺',
   'gaming-console': '🎮', 'handheld-gaming': '🕹️',
+  'xr-headset': '🥽', 'smart-display': '📺',
 };
 
 const TTL = 7 * 24 * 60 * 60 * 1000;
