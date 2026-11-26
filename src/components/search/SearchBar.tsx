@@ -77,8 +77,9 @@ export default function SearchBar({
 
   const showDropdown = focused && (results.length > 0 || loading) && query.length >= 2;
 
-  const typeIcon: Record<string, string> = {
-    device: '📱', component: '🔌', brand: '🏢', technology: '💡', article: '📄', troubleshooting: '🔧',
+  const typeColors: Record<string, string> = {
+    device: 'text-blue-400', component: 'text-violet-400', brand: 'text-emerald-400',
+    technology: 'text-amber-400', article: 'text-sky-400', troubleshooting: 'text-rose-400',
   };
 
   if (variant === 'hero') {
@@ -132,7 +133,9 @@ export default function SearchBar({
                     onClick={() => handleSelect(r)}
                     className={`w-full flex items-start gap-3 px-4 py-3 text-left hover:bg-navy-700 transition-colors border-b border-tp-border/50 last:border-0 ${selected === i ? 'bg-navy-700' : ''}`}
                   >
-                    <span className="text-lg flex-shrink-0 mt-0.5">{typeIcon[r.type] ?? '🔍'}</span>
+                    <div className={`w-6 h-6 rounded flex-shrink-0 mt-0.5 flex items-center justify-center ${typeColors[r.type] ?? 'text-slate-400'}`}>
+                      <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 8 8"><circle cx="4" cy="4" r="3"/></svg>
+                    </div>
                     <div className="min-w-0 flex-1">
                       <div className="text-sm font-medium text-slate-100 truncate">{r.title}</div>
                       {r.description && <div className="text-xs text-slate-400 truncate mt-0.5">{r.description}</div>}

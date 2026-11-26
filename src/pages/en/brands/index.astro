@@ -10,6 +10,17 @@ const devices = getAllDevices();
 function getDeviceCountForBrand(brandId: string) {
   return devices.filter(d => d.brand === brandId).length;
 }
+
+const brandColorClasses = [
+  'bg-blue-900/30 text-blue-300 border-blue-700/30',
+  'bg-violet-900/30 text-violet-300 border-violet-700/30',
+  'bg-emerald-900/30 text-emerald-300 border-emerald-700/30',
+  'bg-amber-900/30 text-amber-300 border-amber-700/30',
+  'bg-rose-900/30 text-rose-300 border-rose-700/30',
+  'bg-indigo-900/30 text-indigo-300 border-indigo-700/30',
+  'bg-sky-900/30 text-sky-300 border-sky-700/30',
+  'bg-teal-900/30 text-teal-300 border-teal-700/30',
+];
 ---
 
 <BaseLayout
@@ -30,16 +41,16 @@ function getDeviceCountForBrand(brandId: string) {
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-      {brands.map(brand => {
+      {brands.map((brand, idx) => {
         const deviceCount = getDeviceCountForBrand(brand.id);
         return (
           <a href={`${BASE}/en/brands/${brand.slug}/`} class="tp-card p-6 group flex flex-col gap-3">
             <div class="flex items-start gap-4">
-              <div class="w-12 h-12 rounded-xl bg-navy-700 flex items-center justify-center text-2xl flex-shrink-0">
-                🏢
+              <div class={`w-12 h-12 rounded-xl border flex items-center justify-center text-base font-bold flex-shrink-0 ${brandColorClasses[idx % brandColorClasses.length]}`}>
+                {brand.name[0]}
               </div>
               <div class="min-w-0">
-                <h3 class="font-semibold text-slate-100 group-hover:text-tp-cyan transition-colors">{brand.name}</h3>
+                <h3 class="font-semibold text-slate-100 group-hover:text-blue-300 transition-colors">{brand.name}</h3>
                 {brand.headquarters && (
                   <p class="text-xs text-slate-400 mt-0.5">{brand.headquarters}</p>
                 )}

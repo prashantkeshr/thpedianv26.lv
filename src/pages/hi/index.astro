@@ -11,6 +11,15 @@ const devices = getAllDevices();
 const brands = getAllBrands();
 const components = getAllComponents();
 const featured = devices.slice(0, 4);
+
+const brandColorClasses = [
+  'bg-blue-900/30 text-blue-300 border-blue-700/30',
+  'bg-violet-900/30 text-violet-300 border-violet-700/30',
+  'bg-emerald-900/30 text-emerald-300 border-emerald-700/30',
+  'bg-amber-900/30 text-amber-300 border-amber-700/30',
+  'bg-rose-900/30 text-rose-300 border-rose-700/30',
+  'bg-indigo-900/30 text-indigo-300 border-indigo-700/30',
+];
 ---
 
 <BaseLayout
@@ -18,13 +27,14 @@ const featured = devices.slice(0, 4);
   description="Techpedia एक वैश्विक प्रौद्योगिकी विश्वकोश है। डिवाइस, घटक, ब्रांड और तकनीक खोजें।"
   lang="hi"
 >
+  <!-- Hero -->
   <section class="relative overflow-hidden bg-gradient-to-b from-navy-950 via-navy-900 to-navy-900 pb-16 pt-20">
-    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-tp-blue/8 blur-[120px] rounded-full pointer-events-none" />
+    <div class="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-tp-blue/5 blur-[100px] rounded-full pointer-events-none" />
 
     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
-      <div class="inline-flex items-center gap-2 tp-badge-cyan mb-6 px-3 py-1.5 text-sm">
-        <span class="w-2 h-2 rounded-full bg-tp-cyan animate-pulse-slow" />
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 text-sm mb-6 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 font-medium">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-400" />
         वैश्विक प्रौद्योगिकी विश्वकोश
       </div>
 
@@ -44,20 +54,33 @@ const featured = devices.slice(0, 4);
     </div>
   </section>
 
-  <section class="bg-navy-800/60 border-y border-tp-border">
+  <!-- Stats bar -->
+  <section class="bg-navy-800/50 border-y border-tp-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
         {[
-          { label: 'डिवाइस', value: devices.length, icon: '📱' },
-          { label: 'घटक', value: components.length, icon: '🔌' },
-          { label: 'ब्रांड', value: brands.length, icon: '🏢' },
-          { label: 'भाषाएं', value: 2, icon: '🌐' },
+          {
+            label: 'डिवाइस', value: devices.length,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/></svg>`
+          },
+          {
+            label: 'घटक', value: components.length,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v5M15 1v5M9 18v5M15 18v5M1 9h5M1 15h5M18 9h5M18 15h5"/></svg>`
+          },
+          {
+            label: 'ब्रांड', value: brands.length,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21V8l9-6 9 6v13"/><path d="M9 21v-6h6v6"/></svg>`
+          },
+          {
+            label: 'भाषाएं', value: 2,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`
+          },
         ].map(({ label, value, icon }) => (
-          <div class="flex items-center justify-center gap-2">
-            <span class="text-xl">{icon}</span>
+          <div class="flex items-center justify-center gap-2.5">
+            <span class="text-slate-500" set:html={icon} />
             <div>
               <div class="text-xl font-bold text-slate-100">{value}</div>
-              <div class="text-xs text-slate-400">{label}</div>
+              <div class="text-xs text-slate-500">{label}</div>
             </div>
           </div>
         ))}
@@ -65,6 +88,7 @@ const featured = devices.slice(0, 4);
     </div>
   </section>
 
+  <!-- Featured Devices -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
     <div class="flex items-end justify-between mb-8">
       <div>
@@ -80,26 +104,63 @@ const featured = devices.slice(0, 4);
     </div>
   </section>
 
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
+  <!-- Brand Directory -->
+  <section class="bg-navy-800/30 py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="flex items-end justify-between mb-8">
+        <div>
+          <h2 class="tp-section-title">ब्रांड डायरेक्टरी</h2>
+          <p class="tp-section-subtitle">निर्माता और प्रौद्योगिकी कंपनियां</p>
+        </div>
+        <a href={`${BASE}/hi/brands/`} class="tp-btn-ghost text-sm">सभी देखें →</a>
+      </div>
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+        {brands.slice(0, 6).map((brand, idx) => (
+          <a href={`${BASE}/hi/brands/${brand.slug}/`} class="tp-card p-4 flex flex-col items-center text-center group">
+            <div class={`w-12 h-12 rounded-xl border flex items-center justify-center mb-2 text-base font-bold ${brandColorClasses[idx % brandColorClasses.length]}`}>
+              {brand.name[0]}
+            </div>
+            <div class="text-sm font-medium text-slate-200 group-hover:text-blue-300 transition-colors">{brand.name}</div>
+            <div class="text-xs text-slate-500 mt-0.5 capitalize">{brand.productCategories[0]?.replace(/-/g, ' ')}</div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Learn + Troubleshoot -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
     <div class="grid sm:grid-cols-2 gap-6">
       <div class="tp-card p-6">
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-violet-900/40 border border-violet-700/30 flex items-center justify-center text-xl">📚</div>
+          <div class="w-10 h-10 rounded-lg bg-violet-900/30 border border-violet-700/30 flex items-center justify-center text-violet-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+            </svg>
+          </div>
           <div>
             <h3 class="font-semibold text-slate-100">सीखने का केंद्र</h3>
             <p class="text-xs text-slate-400">गाइड, ट्यूटोरियल और समझाइश</p>
           </div>
         </div>
+        <p class="text-sm text-slate-400 mb-4">शुरुआती इलेक्ट्रॉनिक्स से उन्नत सेमीकंडक्टर विषयों तक। सभी स्तरों के लिए संरचित सीखने के रास्ते।</p>
         <a href={`${BASE}/hi/learn/`} class="tp-btn-secondary text-sm">गाइड देखें</a>
       </div>
+
       <div class="tp-card p-6">
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">🔧</div>
+          <div class="w-10 h-10 rounded-lg bg-amber-900/30 border border-amber-700/30 flex items-center justify-center text-amber-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
+          </div>
           <div>
             <h3 class="font-semibold text-slate-100">समस्या निवारण</h3>
             <p class="text-xs text-slate-400">इंटरैक्टिव डायग्नोस्टिक गाइड</p>
           </div>
         </div>
+        <p class="text-sm text-slate-400 mb-4">स्मार्टफोन, लैपटॉप, डेस्कटॉप और घटकों के लिए चरण-दर-चरण निवारण।</p>
         <a href={`${BASE}/hi/troubleshoot/`} class="tp-btn-secondary text-sm">निवारण करें</a>
       </div>
     </div>
