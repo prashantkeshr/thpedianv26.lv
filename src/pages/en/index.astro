@@ -16,15 +16,13 @@ const featuredDevices = devices.slice(0, 4);
 const featuredComponents = components.slice(0, 4);
 const featuredBrands = brands.slice(0, 6);
 
-const categories = [
-  { name: 'Smartphones', icon: '📱', slug: 'smartphone', count: devices.filter(d => d.category === 'smartphone').length },
-  { name: 'Laptops', icon: '💻', slug: 'laptop', count: devices.filter(d => d.category === 'laptop').length },
-  { name: 'CPUs', icon: '⚙️', slug: 'cpu', count: components.filter(c => c.category === 'cpu').length },
-  { name: 'GPUs', icon: '🎮', slug: 'gpu', count: components.filter(c => c.category === 'gpu').length },
-  { name: 'Microcontrollers', icon: '🔧', slug: 'microcontroller', count: components.filter(c => c.category === 'microcontroller').length },
-  { name: 'Monitors', icon: '🖥️', slug: 'monitor', count: devices.filter(d => d.category === 'monitor').length },
-  { name: 'Storage', icon: '💾', slug: 'storage', count: devices.filter(d => d.category === 'storage').length },
-  { name: 'All Components', icon: '🔌', slug: null, count: components.length },
+const brandColorClasses = [
+  'bg-blue-900/30 text-blue-300 border-blue-700/30',
+  'bg-violet-900/30 text-violet-300 border-violet-700/30',
+  'bg-emerald-900/30 text-emerald-300 border-emerald-700/30',
+  'bg-amber-900/30 text-amber-300 border-amber-700/30',
+  'bg-rose-900/30 text-rose-300 border-rose-700/30',
+  'bg-indigo-900/30 text-indigo-300 border-indigo-700/30',
 ];
 ---
 
@@ -35,16 +33,13 @@ const categories = [
 >
   <!-- Hero Section -->
   <section class="relative overflow-hidden bg-gradient-to-b from-navy-950 via-navy-900 to-navy-900 pb-16 pt-20">
-    <!-- Background grid pattern -->
-    <div class="absolute inset-0 bg-grid-pattern opacity-30 pointer-events-none" />
-
-    <!-- Accent glow -->
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-tp-blue/8 blur-[120px] rounded-full pointer-events-none" />
+    <div class="absolute inset-0 bg-grid-pattern opacity-20 pointer-events-none" />
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[250px] bg-tp-blue/5 blur-[100px] rounded-full pointer-events-none" />
 
     <div class="relative max-w-5xl mx-auto px-4 sm:px-6 text-center">
       <!-- Label -->
-      <div class="inline-flex items-center gap-2 tp-badge-cyan mb-6 px-3 py-1.5 text-sm">
-        <span class="w-2 h-2 rounded-full bg-tp-cyan animate-pulse-slow" />
+      <div class="inline-flex items-center gap-2 px-3 py-1.5 text-sm mb-6 rounded-full bg-blue-950/60 border border-blue-800/40 text-blue-300 font-medium">
+        <span class="w-1.5 h-1.5 rounded-full bg-blue-400" />
         Global Technology Encyclopedia
       </div>
 
@@ -59,18 +54,16 @@ const categories = [
         Technical specifications, comparisons, datasheets and learning resources.
       </p>
 
-      <!-- Search bar -->
       <div class="max-w-3xl mx-auto">
         <SearchBar lang="en" variant="hero" client:load />
       </div>
 
-      <!-- Popular searches -->
       <div class="mt-6 flex flex-wrap items-center justify-center gap-2">
         <span class="text-sm text-slate-500">Popular:</span>
-        {['iPhone 16 Pro', 'RTX 4090', 'Ryzen 9 9950X', 'Galaxy S25 Ultra'].map(term => (
+        {['iPhone 16 Pro', 'RTX 4090', 'Ryzen 9 9950X', 'Galaxy S24 Ultra'].map(term => (
           <a
             href={`${BASE}/en/search/?q=${encodeURIComponent(term)}`}
-            class="text-sm text-slate-400 hover:text-tp-cyan transition-colors px-2 py-0.5 rounded bg-navy-800 border border-tp-border hover:border-tp-cyan"
+            class="text-sm text-slate-400 hover:text-slate-200 transition-colors px-2.5 py-1 rounded-lg bg-navy-800 border border-tp-border hover:border-slate-600"
           >
             {term}
           </a>
@@ -80,20 +73,32 @@ const categories = [
   </section>
 
   <!-- Stats bar -->
-  <section class="bg-navy-800/60 border-y border-tp-border">
+  <section class="bg-navy-800/50 border-y border-tp-border">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4">
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 text-center">
         {[
-          { label: 'Devices', value: devices.length, icon: '📱' },
-          { label: 'Components', value: components.length, icon: '🔌' },
-          { label: 'Brands', value: brands.length, icon: '🏢' },
-          { label: 'Languages', value: 2, icon: '🌐' },
+          {
+            label: 'Devices', value: devices.length,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/></svg>`
+          },
+          {
+            label: 'Components', value: components.length,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v5M15 1v5M9 18v5M15 18v5M1 9h5M1 15h5M18 9h5M18 15h5"/></svg>`
+          },
+          {
+            label: 'Brands', value: brands.length,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M3 21V8l9-6 9 6v13"/><path d="M9 21v-6h6v6"/></svg>`
+          },
+          {
+            label: 'Languages', value: 2,
+            icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg>`
+          },
         ].map(({ label, value, icon }) => (
-          <div class="flex items-center justify-center gap-2">
-            <span class="text-xl">{icon}</span>
+          <div class="flex items-center justify-center gap-2.5">
+            <span class="text-slate-500" set:html={icon} />
             <div>
-              <div class="text-xl font-bold text-slate-100">{value.toLocaleString()}</div>
-              <div class="text-xs text-slate-400">{label}</div>
+              <div class="text-xl font-bold text-slate-100">{value}</div>
+              <div class="text-xs text-slate-500">{label}</div>
             </div>
           </div>
         ))}
@@ -110,14 +115,61 @@ const categories = [
       </div>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-      {categories.map(({ name, icon, slug, count }) => (
+      {[
+        {
+          name: 'Smartphones', slug: 'smartphone',
+          count: devices.filter(d => d.category === 'smartphone').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2.5"/><circle cx="12" cy="17.5" r="1" fill="currentColor" stroke="none"/></svg>`
+        },
+        {
+          name: 'Laptops', slug: 'laptop',
+          count: devices.filter(d => d.category === 'laptop').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M2 20h20M9 20v-3h6v3"/></svg>`
+        },
+        {
+          name: 'CPUs', slug: 'cpu',
+          count: components.filter(c => c.category === 'cpu').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><path d="M9 1v5M15 1v5M9 18v5M15 18v5M1 9h5M1 15h5M18 9h5M18 15h5"/></svg>`,
+          isComponent: true
+        },
+        {
+          name: 'GPUs', slug: 'gpu',
+          count: components.filter(c => c.category === 'gpu').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="8" cy="12" r="2"/><circle cx="16" cy="12" r="2"/><path d="M6 6V4M10 6V4M14 6V4M18 6V4"/></svg>`,
+          isComponent: true
+        },
+        {
+          name: 'Microcontrollers', slug: 'microcontroller',
+          count: components.filter(c => c.category === 'microcontroller').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M9 1v6M12 1v6M15 1v6M9 17v6M12 17v6M15 17v6M1 9h6M1 12h6M1 15h6M17 9h6M17 12h6M17 15h6"/></svg>`,
+          isComponent: true
+        },
+        {
+          name: 'Monitors', slug: 'monitor',
+          count: devices.filter(d => d.category === 'monitor').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`
+        },
+        {
+          name: 'Storage', slug: 'storage',
+          count: devices.filter(d => d.category === 'storage').length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="17" cy="12" r="1.5"/><path d="M4 10h8M4 14h8"/></svg>`
+        },
+        {
+          name: 'All Components', slug: null,
+          count: components.length,
+          icon: `<svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><rect x="8" y="8" width="8" height="8" rx="1"/><path d="M5 8H2M5 12H2M5 16H2M19 8h3M19 12h3M19 16h3"/></svg>`,
+          isComponent: true
+        },
+      ].map(({ name, slug, count, icon, isComponent }) => (
         <a
-          href={slug ? `${BASE}/en/devices/?category=${slug}` : `${BASE}/en/components/`}
+          href={slug ? (isComponent ? `${BASE}/en/components/?category=${slug}` : `${BASE}/en/devices/?category=${slug}`) : `${BASE}/en/components/`}
           class="tp-card p-4 flex items-center gap-3 group"
         >
-          <span class="text-2xl">{icon}</span>
+          <div class="w-9 h-9 rounded-lg bg-blue-950/50 border border-blue-800/30 flex items-center justify-center text-blue-400 flex-shrink-0">
+            <Fragment set:html={icon} />
+          </div>
           <div class="min-w-0">
-            <div class="text-sm font-medium text-slate-100 group-hover:text-tp-cyan transition-colors truncate">{name}</div>
+            <div class="text-sm font-medium text-slate-200 group-hover:text-blue-300 transition-colors truncate">{name}</div>
             <div class="text-xs text-slate-500">{count} items</div>
           </div>
         </a>
@@ -132,9 +184,7 @@ const categories = [
         <h2 class="tp-section-title">Featured Devices</h2>
         <p class="tp-section-subtitle">Latest and most referenced devices</p>
       </div>
-      <a href={`${BASE}/en/devices/`} class="tp-btn-ghost text-sm">
-        View all →
-      </a>
+      <a href={`${BASE}/en/devices/`} class="tp-btn-ghost text-sm">View all →</a>
     </div>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
       {featuredDevices.map(device => (
@@ -151,9 +201,7 @@ const categories = [
           <h2 class="tp-section-title">Component Encyclopedia</h2>
           <p class="tp-section-subtitle">CPUs, GPUs, microcontrollers and electronic components</p>
         </div>
-        <a href={`${BASE}/en/components/`} class="tp-btn-ghost text-sm">
-          View all →
-        </a>
+        <a href={`${BASE}/en/components/`} class="tp-btn-ghost text-sm">View all →</a>
       </div>
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {featuredComponents.map(comp => (
@@ -166,7 +214,7 @@ const categories = [
   <!-- Compare CTA -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
     <div class="relative rounded-2xl bg-gradient-to-br from-navy-700 to-navy-800 border border-tp-border overflow-hidden p-8 sm:p-12">
-      <div class="absolute right-0 top-0 w-64 h-64 bg-tp-blue/10 blur-3xl rounded-full pointer-events-none" />
+      <div class="absolute right-0 top-0 w-64 h-64 bg-tp-blue/8 blur-3xl rounded-full pointer-events-none" />
       <div class="relative max-w-2xl">
         <h2 class="text-2xl sm:text-3xl font-bold text-slate-100 mb-3">
           Compare Devices & Components
@@ -185,7 +233,7 @@ const categories = [
     </div>
   </section>
 
-  <!-- Brand Directory preview -->
+  <!-- Brand Directory -->
   <section class="bg-navy-800/30 py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6">
       <div class="flex items-end justify-between mb-8">
@@ -196,18 +244,18 @@ const categories = [
         <a href={`${BASE}/en/brands/`} class="tp-btn-ghost text-sm">View all →</a>
       </div>
       <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
-        {featuredBrands.map(brand => (
+        {featuredBrands.map((brand, idx) => (
           <a
             href={`${BASE}/en/brands/${brand.slug}/`}
             class="tp-card p-4 flex flex-col items-center text-center group"
           >
-            <div class="w-12 h-12 rounded-full bg-navy-700 flex items-center justify-center mb-2 text-xl">
-              🏢
+            <div class={`w-12 h-12 rounded-xl border flex items-center justify-center mb-2 text-base font-bold ${brandColorClasses[idx % brandColorClasses.length]}`}>
+              {brand.name[0]}
             </div>
-            <div class="text-sm font-medium text-slate-200 group-hover:text-tp-cyan transition-colors">
+            <div class="text-sm font-medium text-slate-200 group-hover:text-blue-300 transition-colors">
               {brand.name}
             </div>
-            <div class="text-xs text-slate-500 mt-0.5">{brand.productCategories[0]}</div>
+            <div class="text-xs text-slate-500 mt-0.5 capitalize">{brand.productCategories[0]?.replace(/-/g, ' ')}</div>
           </a>
         ))}
       </div>
@@ -217,11 +265,13 @@ const categories = [
   <!-- Learn + Troubleshoot -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 py-16">
     <div class="grid sm:grid-cols-2 gap-6">
-      <!-- Learning Centre -->
       <div class="tp-card p-6">
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-violet-900/40 border border-violet-700/30 flex items-center justify-center text-xl">
-            📚
+          <div class="w-10 h-10 rounded-lg bg-violet-900/30 border border-violet-700/30 flex items-center justify-center text-violet-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+            </svg>
           </div>
           <div>
             <h3 class="font-semibold text-slate-100">Learning Centre</h3>
@@ -232,16 +282,15 @@ const categories = [
           From beginner electronics to advanced semiconductor topics. Structured learning paths
           for every knowledge level.
         </p>
-        <a href={`${BASE}/en/learn/`} class="tp-btn-secondary text-sm">
-          Explore Guides
-        </a>
+        <a href={`${BASE}/en/learn/`} class="tp-btn-secondary text-sm">Explore Guides</a>
       </div>
 
-      <!-- Troubleshoot -->
       <div class="tp-card p-6">
         <div class="flex items-center gap-3 mb-4">
-          <div class="w-10 h-10 rounded-lg bg-amber-900/40 border border-amber-700/30 flex items-center justify-center text-xl">
-            🔧
+          <div class="w-10 h-10 rounded-lg bg-amber-900/30 border border-amber-700/30 flex items-center justify-center text-amber-400">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+              <path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/>
+            </svg>
           </div>
           <div>
             <h3 class="font-semibold text-slate-100">Troubleshooting</h3>
@@ -252,9 +301,7 @@ const categories = [
           Step-by-step troubleshooting for smartphones, laptops, desktops, circuits and components.
           Interactive decision trees.
         </p>
-        <a href={`${BASE}/en/troubleshoot/`} class="tp-btn-secondary text-sm">
-          Troubleshoot Now
-        </a>
+        <a href={`${BASE}/en/troubleshoot/`} class="tp-btn-secondary text-sm">Troubleshoot Now</a>
       </div>
     </div>
   </section>
@@ -262,7 +309,12 @@ const categories = [
   <!-- Data quality notice -->
   <section class="max-w-7xl mx-auto px-4 sm:px-6 pb-16">
     <div class="rounded-xl bg-navy-800/40 border border-tp-border p-5 flex items-start gap-4">
-      <div class="text-2xl flex-shrink-0">🛡️</div>
+      <div class="text-slate-500 flex-shrink-0 mt-0.5">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+          <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          <path d="M9 12l2 2 4-4"/>
+        </svg>
+      </div>
       <div>
         <h4 class="text-sm font-semibold text-slate-200 mb-1">Verified, Sourced Data</h4>
         <p class="text-xs text-slate-400 leading-relaxed">

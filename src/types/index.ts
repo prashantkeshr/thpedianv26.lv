@@ -93,6 +93,7 @@ export interface Device {
   id: string;             // dev-000001
   slug: string;
   name: string;
+  wikiTitle?: string;     // Wikipedia article title (if different from name)
   brand: string;          // brand id
   brandName: string;
   category: DeviceCategory;

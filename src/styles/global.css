@@ -136,7 +136,7 @@
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-tp-blue via-tp-cyan to-tp-violet bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-white to-blue-300 bg-clip-text text-transparent;
   }
 }
 

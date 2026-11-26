@@ -205,7 +205,8 @@
         "text": "No base storage increase from previous gen",
         "type": "con"
       }
-    ]
+    ],
+    "wikiTitle": "iPhone 16 Pro"
   },
   {
     "id": "dev-000002",
@@ -408,7 +409,8 @@
         "text": "218 g weight is heavier than similarly-sized phones",
         "type": "con"
       }
-    ]
+    ],
+    "wikiTitle": "Samsung Galaxy S24 Ultra"
   },
   {
     "id": "dev-000003",
@@ -582,7 +584,8 @@
         "text": "Limited global availability",
         "type": "con"
       }
-    ]
+    ],
+    "wikiTitle": "MacBook Pro"
   },
   {
     "id": "dev-000004",
@@ -948,7 +951,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-01",
     "updatedAt": "2026-11-01",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Google Pixel 9 Pro"
   },
   {
     "id": "dev-000007",
@@ -1173,7 +1177,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Dell XPS 15"
   },
   {
     "id": "dev-000009",
@@ -1276,7 +1281,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "iPad Pro (M4)"
   },
   {
     "id": "dev-000010",
@@ -1695,7 +1701,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "MacBook Air (M3)"
   },
   {
     "id": "dev-000014",
@@ -1797,7 +1804,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "OnePlus 12"
   },
   {
     "id": "dev-000016",
@@ -1914,7 +1922,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Xiaomi 14 Ultra"
   },
   {
     "id": "dev-000017",
@@ -2129,7 +2138,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "iPad mini"
   },
   {
     "id": "dev-000019",
@@ -2452,7 +2462,8 @@
     "verificationLevel": "multiple-sources",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "LG OLED C3"
   },
   {
     "id": "dev-000022",
@@ -2558,7 +2569,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Samsung Galaxy Tab S9"
   },
   {
     "id": "dev-000023",
@@ -2663,7 +2675,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-17",
     "updatedAt": "2026-11-17",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Nintendo Switch"
   },
   {
     "id": "dev-000024",
@@ -2990,7 +3003,8 @@
         "text": "Global updates and availability lag behind Samsung/Apple",
         "type": "con"
       }
-    ]
+    ],
+    "wikiTitle": "Sony WH-1000XM5"
   },
   {
     "id": "dev-000026",
@@ -3152,7 +3166,8 @@
         "text": "Niche appeal beyond core mobile gamers",
         "type": "con"
       }
-    ]
+    ],
+    "wikiTitle": "iPad Pro (M4)"
   },
   {
     "id": "dev-000027",
@@ -3314,7 +3329,8 @@
         "text": "No microSD expansion in some markets",
         "type": "con"
       }
-    ]
+    ],
+    "wikiTitle": "Xiaomi 15 Pro"
   },
   {
     "id": "dev-000028",
@@ -3617,7 +3633,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Sony Xperia 1 VI"
   },
   {
     "id": "dev-000030",
@@ -3760,7 +3777,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Samsung Galaxy Z Fold 6"
   },
   {
     "id": "dev-000031",
@@ -3901,7 +3919,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Xbox Series X"
   },
   {
     "id": "dev-000032",
@@ -4040,7 +4059,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Apple Watch Ultra 2"
   },
   {
     "id": "dev-000033",
@@ -4201,7 +4221,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Samsung Galaxy Watch 7"
   },
   {
     "id": "dev-000034",
@@ -4355,7 +4376,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "GeForce RTX 4090"
   },
   {
     "id": "dev-000035",
@@ -4501,7 +4523,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "iPhone 16"
   },
   {
     "id": "dev-000036",
@@ -4650,7 +4673,8 @@
     "verificationLevel": "official",
     "createdAt": "2026-11-18",
     "updatedAt": "2026-11-18",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Google Pixel Tablet"
   },
   {
     "id": "dev-000037",
@@ -4936,7 +4960,8 @@
     "verificationLevel": "verified",
     "createdAt": "2026-11-18T00:00:00Z",
     "updatedAt": "2026-11-18T00:00:00Z",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Meta Quest 3"
   },
   {
     "id": "dev-000040",
@@ -5033,7 +5058,8 @@
     "verificationLevel": "verified",
     "createdAt": "2026-11-18T00:00:00Z",
     "updatedAt": "2026-11-18T00:00:00Z",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "AirPods Pro"
   },
   {
     "id": "dev-000041",
@@ -5129,7 +5155,8 @@
     "verificationLevel": "verified",
     "createdAt": "2026-11-18T00:00:00Z",
     "updatedAt": "2026-11-18T00:00:00Z",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Mac mini"
   },
   {
     "id": "dev-000042",
@@ -5223,6 +5250,7 @@
     "verificationLevel": "verified",
     "createdAt": "2026-11-18T00:00:00Z",
     "updatedAt": "2026-11-18T00:00:00Z",
-    "schemaVersion": 1
+    "schemaVersion": 1,
+    "wikiTitle": "Radeon RX 7900 XTX"
   }
 ]
